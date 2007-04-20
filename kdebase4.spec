@@ -290,6 +290,7 @@ BuildRequires:	strigi-devel
 #For next snapshot
 BuildRequires:	libnetworkmanager-util-devel
 BuildRequires:	networkmanager-devel
+BuildRequires:	bluez-devel
 
 Requires:	%name-progs = %epoch:%version-%release
 Requires:	%name-konsole = %epoch:%version-%release
@@ -934,6 +935,7 @@ Libraries for the K Desktop Environment.
 
 %files -n %lib_name
 %defattr(-,root,root)
+%_libdir/strigi/strigita_trash.so
 %_libdir/kde4/kded_kpasswdserver.so
 %_libdir/kde4/solid_bluez.so
 %_libdir/kde4/solid_networkmanager.so
@@ -1288,15 +1290,6 @@ This packages contains all icons, config file etc...
 %_datadir/apps/kcmusb/*
 %dir %_datadir/apps/systemview
 %_datadir/apps/systemview/*
-%dir %_datadir/mimelnk/
-%dir %_datadir/mimelnk/application
-%_datadir/mimelnk/application/*
-%dir %_datadir/mimelnk/media
-%_datadir/mimelnk/media/*
-%dir %_datadir/mimelnk/print/
-%_datadir/mimelnk/print/*
-%dir %_datadir/mimelnk/inode/
-%_datadir/mimelnk/inode/system_directory.desktop
 %dir %_datadir/kde4/services
 %_datadir/kde4/services/*
 %dir %_datadir/kde4/servicetypes/
@@ -1651,11 +1644,6 @@ install -m 0644 %SOURCE427 %buildroot/%_datadir/mdk/kde/MandrivaClub.desktop
 install -m 0644 %SOURCE428 %buildroot/%_datadir/mdk/kde/removable_media.directory
 
 
-install -d -m 0755 %buildroot/%_datadir/mimelnk/
-install -d -m 0755 %buildroot/%_datadir/mimelnk/media/
-install -m 0644 %SOURCE200022 %buildroot/%_datadir/mimelnk/media/hdd_win_mounted.desktop
-install -m 0644 %SOURCE200023 %buildroot/%_datadir/mimelnk/media/hdd_win_unmounted.desktop
-
 
 # David - 3.0.3-67mdk - Make FB happy - Icon for MDK documentation in kicker
 install -m 0755 %SOURCE3100 %buildroot/%_bindir/mdkdoc-kicker
@@ -1956,5 +1944,4 @@ rm -f %buildroot/%_datadir/applications/kde/konquerorsu.desktop
 
 %clean
 rm -fr %buildroot
-
 
