@@ -291,6 +291,7 @@ BuildRequires:	strigi-devel
 BuildRequires:	libnetworkmanager-util-devel
 BuildRequires:	networkmanager-devel
 BuildRequires:	bluez-devel
+BuildRequires:  soprano-devel
 
 Requires:	%name-progs = %epoch:%version-%release
 Requires:	%name-konsole = %epoch:%version-%release
