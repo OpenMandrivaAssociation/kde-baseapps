@@ -526,6 +526,9 @@ Here is an overview of the directories:
 %_bindir/ksplashx
 %_bindir/ksplashx_scale
 
+%_bindir/knepcoreservices
+%_bindir/knepdaemon
+
 %_bindir/kde-cp
 %_bindir/kde-mv
 %_bindir/kde-open
@@ -936,7 +939,6 @@ Libraries for the K Desktop Environment.
 
 %files -n %lib_name
 %defattr(-,root,root)
-%_libdir/strigi/strigita_trash.so
 %_libdir/kde4/kded_kpasswdserver.so
 %_libdir/kde4/solid_bluez.so
 %_libdir/kde4/solid_networkmanager.so
@@ -944,7 +946,9 @@ Libraries for the K Desktop Environment.
 %_libdir/libkdeinit_knotify.so
 %_libdir/libprocesscore.so.*
 %_libdir/strigi/strigita_font.so
-
+%_libdir/libsolidcontrol.so.*
+%_libdir/libsolidcontrolifaces.so.*
+%_libdir/libkwineffects.so
 %_libdir/libprocessui.so.*
 %_libdir/kde4/krunner_calculatorrunner.so
 %_libdir/kde4/libfixhosturifilter.so
@@ -957,10 +961,14 @@ Libraries for the K Desktop Environment.
 %_libdir/kde4/libexec/test_kcm_xinerama
 %_libdir/kde4/libkcminit_nsplugin.so
 %_libdir/kde4/libkfindpart.so
-%_libdir/kde4/solid_hal_discovery.so
 %_libdir/kde4/solid_hal_power.so
 %_libdir/kde4/svgthumbnail.so
 %_libdir/kde4/taskbar_panelapplet.so
+%_libdir/kde4/kded_ktimezoned.so
+%_libdir/kde4/kwin4_effect_builtins.so
+%_libdir/kde4/kwin4_effect_tests.so
+%_libdir/kde4/solid_fakebluetooth.so
+%_libdir/kde4/solid_fakenet.so
 %_libdir/libkdeinit_ksysguard.so
 %_libdir/libkdeinit_kwin_rules_dialog.so
 %_libdir/kde4/kio_*
@@ -1310,6 +1318,10 @@ This packages contains all icons, config file etc...
 # Not on desktop
 %exclude %_datadir/apps/kdesktop/DesktopLinks/System.desktop
 
+%_datadir/apps/solidfakebluetoothbackend/fakebluetooth.xml
+%_datadir/apps/solidfakenetbackend/fakenetworking.xml
+%_datadir/dbus-1/services/org.semanticdesktop.nepomuk.ServiceRegistry.service
+
 #-----------------------------------------------------------------------------
 
 %package  -n %lib_name-devel
@@ -1351,6 +1363,8 @@ based on kdebase.
 %_libdir/libkscreensaver.so
 %_libdir/libkworkspace.so
 
+%_libdir/libsolidcontrol.so
+%_libdir/libsolidcontrolifaces.so
 
 %_datadir/apps/cmake/modules/*.cmake
 %dir %_includedir/libworkspace/
@@ -1359,6 +1373,12 @@ based on kdebase.
 %_includedir/plasma/*.h
 
 %_datadir/dbus-1/interfaces/*.xml
+
+%dir %_includedir/solid/
+%dir %_includedir/solid/control/
+%_includedir/solid/control/*.h
+%dir %_includedir/solid/control/ifaces/
+%_includedir/solid/control/ifaces/*.h
 
 #-----------------------------------------------------------------------------
 
