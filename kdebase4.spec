@@ -15,7 +15,7 @@
 %define use_enable_pie 1
 %{?_no_enable_pie: %{expand: %%global use_enable_pie 0}}
 
-%define use_enable_final 0
+%define use_enable_final 1
 %{?_no_enable_final: %{expand: %%global use_enable_final 0}}
 
 %define unstable 1
