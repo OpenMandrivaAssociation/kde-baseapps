@@ -15,7 +15,7 @@
 %define use_enable_pie 1
 %{?_no_enable_pie: %{expand: %%global use_enable_pie 0}}
 
-%define use_enable_final 1
+%define use_enable_final 0
 %{?_no_enable_final: %{expand: %%global use_enable_final 0}}
 
 %define unstable 1
@@ -875,7 +875,7 @@ A shell program similar to xterm for KDE
 %_bindir/konsole
 %dir %_datadir/apps/konsole/
 %_datadir/apps/konsole/*
-%_libdir/kde4/kcm_konsole.*
+#%_libdir/kde4/kcm_konsole.*
 %_libdir/kde4/kickermenu_konsole.*
 %_bindir/konsole-migrate.pl
 %_libdir/kde4/libkonsolepart.*
@@ -899,7 +899,7 @@ Libraries for konsole program
 
 %files -n %lib_name-konsole
 %defattr(-,root,root)
-%_libdir/libkdeinit_konsole.*
+%_libdir/libkdeinit4_konsole.*
 
 #-----------------------------------------------------------------------------
 
@@ -943,17 +943,17 @@ Libraries for the K Desktop Environment.
 %_libdir/kde4/solid_bluez.so
 %_libdir/kde4/solid_networkmanager.so
 %_libdir/libdolphinprivate.so.*
-%_libdir/libkdeinit_knotify.so
+%_libdir/libkdeinit4_knotify.so
 %_libdir/libprocesscore.so.*
 %_libdir/strigi/strigita_font.so
 %_libdir/libsolidcontrol.so.*
 %_libdir/libsolidcontrolifaces.so.*
-%_libdir/libkwineffects.so
+%_libdir/libkwineffects.so.*
 %_libdir/libprocessui.so.*
 %_libdir/kde4/krunner_calculatorrunner.so
 %_libdir/kde4/libfixhosturifilter.so
 %_libdir/libkfontinstui.so.*
-%_libdir/libkdeinit_kuiserver.so
+%_libdir/libkdeinit4_kuiserver.so
 %_libdir/libplasma.so.*
 %_libdir/libkscreensaver.so.*
 %_libdir/libkworkspace.so.*
@@ -969,39 +969,39 @@ Libraries for the K Desktop Environment.
 %_libdir/kde4/kwin4_effect_tests.so
 %_libdir/kde4/solid_fakebluetooth.so
 %_libdir/kde4/solid_fakenet.so
-%_libdir/libkdeinit_ksysguard.so
-%_libdir/libkdeinit_kwin_rules_dialog.so
+%_libdir/libkdeinit4_ksysguard.so
+%_libdir/libkdeinit4_kwin_rules_dialog.so
 %_libdir/kde4/kio_*
-%_libdir/libkdeinit_kprinter.so
+%_libdir/libkdeinit4_kprinter.so
 %_libdir/libkickermain.so.*
 %_libdir/libkonqsidebarplugin.so.*
 %_libdir/libkonq.so.*
 %_libdir/libksgrd.so.*
 %_libdir/libtaskbar.so.*
 %_libdir/libtaskmanager.so.*
-%_libdir/libkdeinit_khelpcenter.so
-%_libdir/libkdeinit_kinfocenter.so
-%_libdir/libkdeinit_appletproxy.so
-%_libdir/libkdeinit_kdesktop.so
-%_libdir/libkdeinit_keditbookmarks.so
-%_libdir/libkdeinit_kfmclient.so
-%_libdir/libkdeinit_khotkeys.so
-%_libdir/libkdeinit_kicker.so
-%_libdir/libkdeinit_kjobviewer.so
-%_libdir/libkdeinit_klipper.so
-%_libdir/libkdeinit_konqueror.so
-%_libdir/libkdeinit_ksmserver.so
-%_libdir/libkdeinit_kwin.so
-%_libdir/libkdeinit_kwrite.so
-%_libdir/libkdeinit_kxkb.so
-%_libdir/libkdeinit_kcontrol.so
-%_libdir/libkdeinit_kcminit.so
-%_libdir/libkdeinit_kaccess.so
+%_libdir/libkdeinit4_khelpcenter.so
+%_libdir/libkdeinit4_kinfocenter.so
+%_libdir/libkdeinit4_appletproxy.so
+%_libdir/libkdeinit4_kdesktop.so
+%_libdir/libkdeinit4_keditbookmarks.so
+%_libdir/libkdeinit4_kfmclient.so
+%_libdir/libkdeinit4_khotkeys.so
+%_libdir/libkdeinit4_kicker.so
+%_libdir/libkdeinit4_kjobviewer.so
+%_libdir/libkdeinit4_klipper.so
+%_libdir/libkdeinit4_konqueror.so
+%_libdir/libkdeinit4_ksmserver.so
+%_libdir/libkdeinit4_kwin.so
+%_libdir/libkdeinit4_kwrite.so
+%_libdir/libkdeinit4_kxkb.so
+%_libdir/libkdeinit4_kcontrol.so
+%_libdir/libkdeinit4_kcminit.so
+%_libdir/libkdeinit4_kaccess.so
 %_libdir/libkdecorations.so.*
-%_libdir/libkdeinit_kcontroledit.so
+%_libdir/libkdeinit4_kcontroledit.so
 %_libdir/libkfontinst.so.*
-%_libdir/libkdeinit_kcminit_startup.so
-%_libdir/libkdeinit_kcmshell.so
+%_libdir/libkdeinit4_kcminit_startup.so
+%_libdir/libkdeinit4_kcmshell.so
 %_libdir/kde4/krunner_searchrunner.so
 %_libdir/kde4/kxkb_panelapplet.so
 %_libdir/kde4/kded_homedirnotify.so
@@ -1049,7 +1049,7 @@ Libraries for the K Desktop Environment.
 %_libdir/kde4/menu_panelapplet.so
 %_libdir/kde4/kstyle_keramik_config.so
 %_libdir/kde4/kcm_*
-%exclude %_libdir/kde4/kcm_konsole.*
+#%exclude %_libdir/kde4/kcm_konsole.*
 %exclude %_libdir/kde4/kcm_nsplugins.*
 %_libdir/kde4/kded_kwrited.so
 %_libdir/kde4/kickermenu_konqueror.so
@@ -1339,6 +1339,7 @@ based on kdebase.
 %defattr(-,root,root)
 %_libdir/libplasma.so
 %_libdir/libkfontinstui.so
+%_libdir/libkwineffects.so
 %dir %_includedir/Plasma/
 %_includedir/Plasma/*
 %_includedir/*.h
@@ -1484,7 +1485,7 @@ Library for Kmenuedit for kdebase
 
 %files -n %lib_name-kmenuedit
 %defattr(-,root,root)
-%_libdir/libkdeinit_kmenuedit.*
+%_libdir/libkdeinit4_kmenuedit.*
 
 #-----------------------------------------------------------------------------
 
