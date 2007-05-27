@@ -10,7 +10,7 @@
 %define _sysconfdir %_prefix/etc/
 %define _docdir %_datadir/doc/
 
-%define branch_date 20070502
+%define branch_date 20070527
 
 %define use_enable_pie 1
 %{?_no_enable_pie: %{expand: %%global use_enable_pie 0}}
@@ -1490,7 +1490,11 @@ Library for Kmenuedit for kdebase
 #-----------------------------------------------------------------------------
 
 %prep
+%if %branch
 %setup -q -nkdebase-%version-%branch_date 
+%else
+%setup -q -nkdebase-%version
+%endif
 #(
 #cd workspace/ksplashml/
 #tar -xvf %SOURCE30000
@@ -1553,7 +1557,11 @@ Library for Kmenuedit for kdebase
 #%patch163 -p1 -b .fix_dbus_kmediamanager
 
 %build
+%if %branch
 cd $RPM_BUILD_DIR/kdebase-%version-%branch_date
+%else
+cd $RPM_BUILD_DIR/kdebase-%version
+%endif
 mkdir build
 cd build
 export QTDIR=/usr/lib/qt4/
