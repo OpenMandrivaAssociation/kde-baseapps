@@ -542,8 +542,10 @@ Here is an overview of the directories:
 %_bindir/kups
 %_bindir/krunner_lock
 %_bindir/kuiserver
-%_bindir/plasma-qgv
-
+%_bindir/imagetops
+%_bindir/kfontprint
+%_bindir/plasma
+%_bindir/plasmaengineexplorer
 
 %_datadir/apps/desktoptheme/default/background/shutdowndlg.svg
 %_datadir/apps/kfontinst/bin/kio_fonts_helper
@@ -1002,6 +1004,8 @@ Libraries for the K Desktop Environment.
 %_libdir/libkfontinst.so.*
 %_libdir/libkdeinit4_kcminit_startup.so
 %_libdir/libkdeinit4_kcmshell.so
+%_libdir/kde4/plasma_applet_clock.so
+%_libdir/kde4/plasma_engine_time.so
 %_libdir/kde4/krunner_searchrunner.so
 %_libdir/kde4/kxkb_panelapplet.so
 %_libdir/kde4/kded_homedirnotify.so
@@ -1163,7 +1167,7 @@ This packages contains all icons, config file etc...
 
 %_datadir/apps/desktoptheme/default/background/shutdowndlgbuttonglow.svg
 %_datadir/apps/kde/kde.notifyrc
-%_datadir/apps/kfontinst/bin/kfontprint
+#%_datadir/apps/kfontinst/bin/kfontprint
 %_datadir/apps/kfontinst/icons/oxygen/scalable/actions/disablefont.svgz
 %_datadir/apps/kfontinst/icons/oxygen/scalable/actions/enablefont.svgz
 %_iconsdir/oxygen/scalable/mimetypes/fonts-folder.svgz
@@ -1340,8 +1344,8 @@ based on kdebase.
 %_libdir/libplasma.so
 %_libdir/libkfontinstui.so
 %_libdir/libkwineffects.so
-%dir %_includedir/Plasma/
-%_includedir/Plasma/*
+%dir %_includedir/KDE/Plasma/
+%_includedir/KDE/Plasma/*
 %_includedir/*.h
 %dir %_includedir/ksysguard/
 %_includedir/ksysguard/*.h
@@ -1355,7 +1359,6 @@ based on kdebase.
 %_libdir/libtaskmanager.so
 %_libdir/libkdecorations.so
 %_libdir/libkfontinst.so
-
 %_libdir/libdolphinprivate.so
 %_libdir/libprocesscore.so
 %_libdir/libprocessui.so
@@ -1459,11 +1462,11 @@ Kmenuedit for kdebase
 %dir %_datadir/apps/kmenuedit/
 %_datadir/apps/kmenuedit/*
 
-%_datadir/apps/kmenuedit/icons/crystalsvg/22x22/actions/menu_new.png
-%_datadir/apps/kmenuedit/icons/crystalsvg/22x22/actions/menu_new_sep.png
-%_datadir/apps/kmenuedit/icons/crystalsvg/32x32/actions/menu_new.png
-%_datadir/apps/kmenuedit/icons/crystalsvg/32x32/actions/menu_new_sep.png
-%_datadir/apps/kmenuedit/icons/locolor/16x16/actions/menu_new.png
+#%_datadir/apps/kmenuedit/icons/crystalsvg/22x22/actions/menu_new.png
+#%_datadir/apps/kmenuedit/icons/crystalsvg/22x22/actions/menu_new_sep.png
+#%_datadir/apps/kmenuedit/icons/crystalsvg/32x32/actions/menu_new.png
+#%_datadir/apps/kmenuedit/icons/crystalsvg/32x32/actions/menu_new_sep.png
+#%_datadir/apps/kmenuedit/icons/locolor/16x16/actions/menu_new.png
 %_datadir/apps/kmenuedit/kmenueditui.rc
 
 %dir %_docdir/HTML/en/kmenuedit/
