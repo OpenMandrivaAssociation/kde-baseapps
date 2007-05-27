@@ -582,7 +582,7 @@ Here is an overview of the directories:
 %_datadir/apps/hicolor/64x64/apps/khelpcenter.png
 %_datadir/apps/hicolor/scalable/apps/khelpcenter.svgz
 
-%_datadir/desktoptheme/default/widgets/clock.svg
+%_datadir/apps/desktoptheme/default/widgets/clock.svg
 
 %dir %_docdir/HTML/en/quickstart/
 %doc %_docdir/HTML/en/quickstart/*.bz2
@@ -1986,4 +1986,3 @@ rm -f %buildroot/%_datadir/applications/kde/konquerorsu.desktop
 
 %clean
 rm -fr %buildroot
-
