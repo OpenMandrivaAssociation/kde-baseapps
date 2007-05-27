@@ -574,6 +574,16 @@ Here is an overview of the directories:
 %_datadir/apps/dolphin/icons/hicolor/64x64/actions/preview.png
 %_datadir/apps/dolphin/servicemenus/*.desktop
 
+%_datadir/apps/hicolor/128x128/apps/khelpcenter.png
+%_datadir/apps/hicolor/16x16/apps/khelpcenter.png
+%_datadir/apps/hicolor/22x22/apps/khelpcenter.png
+%_datadir/apps/hicolor/32x32/apps/khelpcenter.png
+%_datadir/apps/hicolor/48x48/apps/khelpcenter.png
+%_datadir/apps/hicolor/64x64/apps/khelpcenter.png
+%_datadir/apps/hicolor/scalable/apps/khelpcenter.svgz
+
+%_datadir/desktoptheme/default/widgets/clock.svg
+
 %dir %_docdir/HTML/en/quickstart/
 %doc %_docdir/HTML/en/quickstart/*.bz2
 %doc %_docdir/HTML/en/quickstart/*.docbook
@@ -1133,12 +1143,10 @@ This packages contains all icons, config file etc...
 %_sysconfdir/xdg/menus/*.menu
 
 
-%if %mdkversion > 200600
 #%dir %_sysconfdir/xdg/kde
 #%_sysconfdir/xdg/kde/menus/*.menu
 #%dir %_sysconfdir/xdg/kde/menus/applications-merged/
 #%_sysconfdir/xdg/kde/menus/applications-merged/*.menu
-%endif
 
 %config(noreplace) /etc/pam.d/kde4
 %config(noreplace) /etc/pam.d/kscreensaver4
@@ -1205,6 +1213,7 @@ This packages contains all icons, config file etc...
 #
 %dir %_datadir/config.kcfg/
 %_datadir/config.kcfg/*.kcfg
+%_datadir/config/kdm.knsrc
 %dir %_datadir/apps/
 %dir %_datadir/apps/kthememanager/themes/
 %_datadir/apps/kthememanager/themes/*
