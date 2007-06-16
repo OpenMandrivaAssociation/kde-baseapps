@@ -1,4 +1,4 @@
-%define revision 676032
+%define revision 676117
 
 %define use_enable_pie 1
 %{?_no_enable_pie: %{expand: %%global use_enable_pie 0}}
@@ -101,7 +101,7 @@ KDE 4 application runtime components.
 
 %files runtime
 %defattr(-,root,root)
-%_iconsdir/*/*/*/*
+%_datadir/dbus-1/services/*
 %_kde_datadir/icons/*/*/*/*
 %_kde_appsdir/drkonqi
 %_kde_appsdir/kcm_componentchooser
@@ -184,7 +184,6 @@ KDE 4 application runtime components.
 %_kde_datadir/applications/kde4/knetattach.desktop
 %_kde_datadir/config/khotnewstuffrc
 %_kde_datadir/config/kshorturifilterrc
-%_kde_datadir/dbus-1/services/*
 %_kde_datadir/desktop-directories
 %_kde_datadir/kde4/services/about.protocol
 %_kde_datadir/kde4/services/applications.protocol
@@ -1456,11 +1455,6 @@ cd build
 
 make DESTDIR=%buildroot install
 
-# Old legacy icons moved for kde_prefix/share/icons
-mkdir -p %buildroot/%_kde_prefix/share/icons
-mv %buildroot%_iconsdir/hicolor %buildroot/%_kde_prefix/share/icons/hicolor
-mv %buildroot%_iconsdir/crystalsvg %buildroot/%_kde_prefix/share/icons/crystalsvg
-
 #install -d -m 0755 %buildroot/etc/pam.d/
 #install -m 0644 %SOURCE11 %buildroot/etc/pam.d/kde4
 #install -m 0644 %SOURCE1002 %buildroot/etc/pam.d/kde4-np
@@ -1478,3 +1472,4 @@ EOF
 
 %clean
 rm -fr %buildroot
+
