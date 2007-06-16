@@ -64,6 +64,7 @@ BuildRequires: resmgr-devel
 BuildRequires: libnetworkmanager-util-devel
 BuildRequires: networkmanager-devel
 BuildRequires: bluez-devel
+BuildRequires: boost-devel
 Requires: kdebase4-runtime
 Requires: kdebase4-workspace
 Requires: kde4-kdeprintfax
