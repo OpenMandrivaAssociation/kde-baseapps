@@ -1,4 +1,4 @@
-%define revision 676117
+%define revision 676742
 
 %define use_enable_pie 1
 %{?_no_enable_pie: %{expand: %%global use_enable_pie 0}}
@@ -25,11 +25,13 @@ Group: Graphical desktop/KDE
 License: GPL
 URL: http://www.kde.org
 %if %branch
-Source: 	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.%revision.tar.bz2
+Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.%revision.tar.bz2
 %else
-Source: 	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
+Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 %endif
 Patch0:	kdebase-4.0-startkde.patch
+Source1: kde4.sh
+Source2: dmkde4start
 BuildConflicts: lm_utils
 BuildConflicts: lm_utils-devel
 BuildConflicts: liblm_sensors1
@@ -102,6 +104,7 @@ KDE 4 application runtime components.
 
 %files runtime
 %defattr(-,root,root)
+%_sysconfdir/profile.d/*
 %_datadir/dbus-1/services/*
 %_kde_datadir/icons/*/*/*/*
 %_kde_appsdir/drkonqi
@@ -624,14 +627,22 @@ Summary: KDE 4 application runtime components
 Group: Graphical Desktop/KDE and Qt
 Requires: kdebase4-runtime
 Requires: strigi
+Requires: desktop-common-data
 Obsoletes: kdebase4-progs
 
 %description workspace
 KDE 4 application workspace components.
 
+%post workspace
+if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
+
+%postun workspace
+if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
+
 %files workspace
 %defattr(-,root,root)
 %_sysconfdir/X11/wmsession.d/10KDE4
+%_kde_bindir/dmkde4start
 %_kde_bindir/appletproxy
 %_kde_bindir/kaccess
 %_kde_bindir/kapplymousetheme
@@ -1456,20 +1467,27 @@ cd build
 
 make DESTDIR=%buildroot install
 
-#install -d -m 0755 %buildroot/etc/pam.d/
-#install -m 0644 %SOURCE11 %buildroot/etc/pam.d/kde4
-#install -m 0644 %SOURCE1002 %buildroot/etc/pam.d/kde4-np
+# Env entry for kde4 
+install -d -m 0755 %buildroot/etc/profile.d
+install -m 0755 %SOURCE1 %buildroot/etc/profile.d
+
+# Startup script ( no more patch startkde )
+install -m 0755 %SOURCE2 %buildroot/%_kde_bindir/dmkde4start
 
 install -d -m 0775 %buildroot/etc/X11/wmsession.d/
 cat << EOF > %buildroot/etc/X11/wmsession.d/10KDE4
 NAME=KDE4
 ICON=kde-wmsession.xpm
 DESC=The K Desktop Environment
-EXEC=%_bindir/startkde
+EXEC=%_kde_bindir/dmkde4start
 SCRIPT:
-exec %_bindir/startkde
+exec %_kde_bindir/dmkde4start
 EOF
 
+# KDM PAM Login
+#install -d -m 0755 %buildroot/etc/pam.d/
+#install -m 0644 %SOURCE3 %buildroot/etc/pam.d/kde4
+#install -m 0644 %SOURCE4 %buildroot/etc/pam.d/kde4-np
 
 %clean
 rm -fr %buildroot
