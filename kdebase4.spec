@@ -1,4 +1,4 @@
-%define revision 676742
+%define revision 677187
 
 %define use_enable_pie 1
 %{?_no_enable_pie: %{expand: %%global use_enable_pie 0}}
@@ -29,7 +29,6 @@ Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.%revision
 %else
 Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 %endif
-Patch0:	kdebase-4.0-startkde.patch
 Source1: kde4.sh
 Source2: dmkde4start
 BuildConflicts: lm_utils
@@ -110,7 +109,6 @@ KDE 4 application runtime components.
 %_kde_appsdir/drkonqi
 %_kde_appsdir/kcm_componentchooser
 %_kde_appsdir/kcmlocale
-%_kde_appsdir/kconf_update
 %_kde_appsdir/kde
 %_kde_appsdir/kdeprint
 %_kde_appsdir/kdeprint_part
@@ -180,6 +178,34 @@ KDE 4 application runtime components.
 %_kde_bindir/kuiserver
 %_kde_bindir/kwriteconfig
 %_kde_bindir/solidshell
+%_kde_libdir/kconf_update_bin/khotkeys_update
+%_kde_libdir/kconf_update_bin/kicker-3.4-reverseLayout
+%_kde_libdir/kconf_update_bin/kwin_update_default_rules
+%_kde_libdir/kconf_update_bin/kwin_update_window_settings
+%_kde_appsdir/kconf_update/convertShortcuts.pl
+%_kde_appsdir/kconf_update/kaccel.upd
+%_kde_appsdir/kconf_update/kcmdisplayrc.upd
+%_kde_appsdir/kconf_update/khotkeys_32b1_update.upd
+%_kde_appsdir/kconf_update/kicker-3.1-properSizeSetting.pl
+%_kde_appsdir/kconf_update/kicker-3.5-kconfigXTize.pl
+%_kde_appsdir/kconf_update/kicker-3.5-taskbarEnums.pl
+%_kde_appsdir/kconf_update/kickerrc.upd
+%_kde_appsdir/kconf_update/klipper-1-2.pl
+%_kde_appsdir/kconf_update/klipper-kde31.sh
+%_kde_appsdir/kconf_update/klipperrc.upd
+%_kde_appsdir/kconf_update/klippershortcuts.upd
+%_kde_appsdir/kconf_update/konqueror_gestures_kde321_update.upd
+%_kde_appsdir/kconf_update/ksmserver.upd
+%_kde_appsdir/kconf_update/kwin.upd
+%_kde_appsdir/kconf_update/kwin3_plugin.pl
+%_kde_appsdir/kconf_update/kwin3_plugin.upd
+%_kde_appsdir/kconf_update/kwin_*
+%_kde_appsdir/kconf_update/kwiniconify.upd
+%_kde_appsdir/kconf_update/kwinsticky.upd
+%_kde_appsdir/kconf_update/kwinupdatewindowsettings.upd
+%_kde_appsdir/kconf_update/mouse_cursor_theme.upd
+%_kde_appsdir/kconf_update/move_session_config.sh
+%_kde_appsdir/kconf_update/pluginlibFix.pl
 %_kde_configdir/xdg/menus/kde-information.menu
 %_kde_configdir/xdg/menus/kde-kcontrol.menu
 %_kde_configdir/xdg/menus/kde-settings.menu
@@ -634,10 +660,10 @@ Obsoletes: kdebase4-progs
 KDE 4 application workspace components.
 
 %post workspace
-if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
+%make_session
 
 %postun workspace
-if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
+%make_session
 
 %files workspace
 %defattr(-,root,root)
@@ -687,10 +713,6 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 %_kde_bindir/plasmaengineexplorer
 %_kde_bindir/startkde
 %_kde_configdir/ksysguarddrc
-%_kde_libdir/kconf_update_bin/khotkeys_update
-%_kde_libdir/kconf_update_bin/kicker-3.4-reverseLayout
-%_kde_libdir/kconf_update_bin/kwin_update_default_rules
-%_kde_libdir/kconf_update_bin/kwin_update_window_settings
 %_kde_libdir/kde4/dockbar_panelextension.so
 %_kde_libdir/kde4/fontthumbnail.so
 %_kde_libdir/kde4/kcm_access.so
@@ -800,30 +822,6 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 %_kde_appsdir/kcmkeys/wm3.kksrc
 %_kde_appsdir/kcmusb/usb.ids
 %_kde_appsdir/kcmview1394/oui.db
-%_kde_appsdir/kconf_update/convertShortcuts.pl
-%_kde_appsdir/kconf_update/kaccel.upd
-%_kde_appsdir/kconf_update/kcmdisplayrc.upd
-%_kde_appsdir/kconf_update/khotkeys_32b1_update.upd
-%_kde_appsdir/kconf_update/kicker-3.1-properSizeSetting.pl
-%_kde_appsdir/kconf_update/kicker-3.5-kconfigXTize.pl
-%_kde_appsdir/kconf_update/kicker-3.5-taskbarEnums.pl
-%_kde_appsdir/kconf_update/kickerrc.upd
-%_kde_appsdir/kconf_update/klipper-1-2.pl
-%_kde_appsdir/kconf_update/klipper-kde31.sh
-%_kde_appsdir/kconf_update/klipperrc.upd
-%_kde_appsdir/kconf_update/klippershortcuts.upd
-%_kde_appsdir/kconf_update/konqueror_gestures_kde321_update.upd
-%_kde_appsdir/kconf_update/ksmserver.upd
-%_kde_appsdir/kconf_update/kwin.upd
-%_kde_appsdir/kconf_update/kwin3_plugin.pl
-%_kde_appsdir/kconf_update/kwin3_plugin.upd
-%_kde_appsdir/kconf_update/kwin_*
-%_kde_appsdir/kconf_update/kwiniconify.upd
-%_kde_appsdir/kconf_update/kwinsticky.upd
-%_kde_appsdir/kconf_update/kwinupdatewindowsettings.upd
-%_kde_appsdir/kconf_update/mouse_cursor_theme.upd
-%_kde_appsdir/kconf_update/move_session_config.sh
-%_kde_appsdir/kconf_update/pluginlibFix.pl
 %_kde_appsdir/kdesktop
 %_kde_appsdir/kdewizard/pics/wizard_small.png
 %_kde_appsdir/kdewizard/tips
@@ -975,6 +973,7 @@ if [ -x /usr/sbin/fndSession ]; then /usr/sbin/fndSession || true ; fi
 %_kde_datadir/sounds/pop.wav
 %_kde_datadir/templates
 %_kde_datadir/wallpapers
+%_kde_appsdir/desktoptheme/default/widgets/wallpaper.svg
 %_kde_docdir/*/*/khelpcenter
 %_kde_docdir/*/*/kinfocenter
 %_kde_docdir/*/*/kicker
@@ -1245,6 +1244,7 @@ KDE Browser
 %_kde_appsdir/kconf_update/konqsidebartng.upd
 %_kde_appsdir/kconf_update/move_konqsidebartng_entries.sh
 %_kde_appsdir/kconf_update/socks.upd
+%_kde_appsdir/kconf_update/kuriikwsfilter.upd
 %_kde_appsdir/khtml/kpartplugins/khtmlkttsd.desktop
 %_kde_appsdir/khtml/kpartplugins/khtmlkttsd.rc
 %_kde_appsdir/konqiconview/kpartplugins/kremoteencodingplugin.desktop
@@ -1443,10 +1443,8 @@ This package contains header files needed if you wish to build applications base
 
 %prep
 %setup -q -n kdebase-%version
-%patch0 -p1 -b .startkde
 
 %build
-
 %cmake_kde4 \
 %if %use_enable_final
       -DKDE4_ENABLE_FINAL=ON \
@@ -1455,7 +1453,7 @@ This package contains header files needed if you wish to build applications base
       -DKDE4_ENABLE_FPIE=ON \
 %endif
 %if %unstable
-      -DCMAKE_BUILD_TYPE=debugfull
+      -DCMAKE_BUILD_TYPE=debug
 %endif
 
 %make
