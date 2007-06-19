@@ -1,4 +1,4 @@
-%define revision 677187
+%define revision 677668
 
 %define use_enable_pie 1
 %{?_no_enable_pie: %{expand: %%global use_enable_pie 0}}
@@ -712,6 +712,8 @@ KDE 4 application workspace components.
 %_kde_bindir/plasma
 %_kde_bindir/plasmaengineexplorer
 %_kde_bindir/startkde
+%_kde_prefix/env
+%_kde_prefix/shutdown
 %_kde_configdir/ksysguarddrc
 %_kde_libdir/kde4/dockbar_panelextension.so
 %_kde_libdir/kde4/fontthumbnail.so
@@ -1456,7 +1458,7 @@ This package contains header files needed if you wish to build applications base
       -DCMAKE_BUILD_TYPE=debug
 %endif
 
-%make
+make VERBOSE=1
 
 
 %install
@@ -1486,6 +1488,22 @@ EOF
 #install -d -m 0755 %buildroot/etc/pam.d/
 #install -m 0644 %SOURCE3 %buildroot/etc/pam.d/kde4
 #install -m 0644 %SOURCE4 %buildroot/etc/pam.d/kde4-np
+
+# Nepomuk
+install -d  -m 0755 %buildroot%_kde_prefix/env
+install -d  -m 0755 %buildroot%_kde_prefix/shutdown
+cat << EOF > %buildroot%_kde_prefix/env/nepomuk.sh
+# start Nepomuk-KDE
+%_kde_bindir/nepomukdaemon
+%_kde_bindir/nepomukcoreservices
+EOF
+cat << EOF > %buildroot%_kde_prefix/shutdown/nepomuk.sh
+# start Nepomuk-KDE
+killall nepomukdaemon
+killall nepomukcoreservices
+EOF
+chmod +x %buildroot%_kde_prefix/env/nepomuk.sh
+chmod +x %buildroot%_kde_prefix/shutdown/nepomuk.sh
 
 %clean
 rm -fr %buildroot
