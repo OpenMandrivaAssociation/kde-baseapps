@@ -92,7 +92,7 @@ Meta package that requires all base kdebase 4 files
 
 %package runtime
 Summary: KDE 4 application runtime components
-Group: Graphical Desktop/KDE and Qt
+Group: Graphical desktop/KDE
 Requires: kdelibs4-core
 Requires: oxygen-icon-theme
 Obsoletes: kdebase4-progs
@@ -650,7 +650,7 @@ KDE 4 core library.
 
 %package workspace
 Summary: KDE 4 application runtime components
-Group: Graphical Desktop/KDE and Qt
+Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
 Requires: strigi
 Requires: desktop-common-data
