@@ -1499,7 +1499,7 @@ This package contains header files needed if you wish to build applications base
       -DCMAKE_BUILD_TYPE=debug
 %endif
 
-make 
+%make 
 
 
 %install
