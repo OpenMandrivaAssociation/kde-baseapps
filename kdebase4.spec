@@ -1,4 +1,3 @@
-%define revision 678468
 
 %define use_enable_pie 1
 %{?_no_enable_pie: %{expand: %%global use_enable_pie 0}}
@@ -11,6 +10,7 @@
 
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
+%define revision 680516
 
 %if %unstable
 %define dont_strip 1
@@ -288,6 +288,7 @@ KDE 4 application runtime components.
 %_kde_datadir/kde4/services/thumbnail.protocol
 %_kde_datadir/kde4/services/trash.protocol
 %_kde_datadir/kde4/services/zip.protocol
+%_kde_datadir/kde4/services/kded/networkstatus.desktop
 %_kde_datadir/kde4/servicetypes/searchprovider.desktop
 %_kde_datadir/kde4/servicetypes/solidbluetoothmanager.desktop
 %_kde_datadir/kde4/servicetypes/solidnetworkmanager.desktop
@@ -315,6 +316,7 @@ KDE 4 application runtime components.
 %_kde_libdir/kde4/kcm_solid.so
 %_kde_libdir/kde4/kded_homedirnotify.so
 %_kde_libdir/kde4/kded_kpasswdserver.so
+%_kde_libdir/kde4/kded_networkstatus.so
 %_kde_libdir/kde4/kded_ktimezoned.so
 %_kde_libdir/kde4/kded_mediamanager.so
 %_kde_libdir/kde4/kded_medianotifier.so
@@ -712,6 +714,8 @@ KDE 4 application workspace components.
 %_kde_bindir/plasma
 %_kde_bindir/plasmaengineexplorer
 %_kde_bindir/startkde
+%_kde_bindir/systemsettings
+%_kde_configdir/systemsettingsrc
 %_kde_prefix/env
 %_kde_prefix/shutdown
 %_kde_configdir/ksysguarddrc
@@ -754,14 +758,12 @@ KDE 4 application workspace components.
 %_kde_libdir/kde4/kgreet_winbind.so
 %_kde_libdir/kde4/kickermenu_*
 %_kde_libdir/kde4/kio_fonts.so
-%_kde_libdir/kde4/klipper_panelapplet.so
 %_kde_libdir/kde4/krunner_calculatorrunner.so
 %_kde_libdir/kde4/krunner_searchrunner.so
 %_kde_libdir/kde4/kstyle_keramik_config.so
 %_kde_libdir/kde4/kwin3_*
 %_kde_libdir/kde4/kwin4_*
 %_kde_libdir/kde4/kwin_*
-%_kde_libdir/kde4/kxkb_panelapplet.so
 %_kde_libdir/kde4/launcher_panelapplet.so
 %_kde_libdir/kde4/libexec/test_kcm_xinerama
 %_kde_libdir/kde4/libkfontviewpart.so
@@ -772,7 +774,6 @@ KDE 4 application workspace components.
 %_kde_libdir/kde4/plasma_*
 %_kde_libdir/kde4/run_panelapplet.so
 %_kde_libdir/kde4/sidebar_panelextension.so
-%_kde_libdir/kde4/sysguard_panelapplet.so
 %_kde_libdir/kde4/systemtray_panelapplet.so
 %_kde_libdir/kde4/taskbar_panelapplet.so
 %_kde_libdir/kde4/trash_panelapplet.so
@@ -875,6 +876,29 @@ KDE 4 application workspace components.
 %_kde_datadir/config/background.knsrc
 %_kde_datadir/config/kdesktop_custom_menu1
 %_kde_datadir/config/kdesktop_custom_menu2
+%_kde_datadir/applications/kde4/systemsettings.desktop
+%_kde_datadir/apps/desktoptheme/default/widgets/background.svg
+%_kde_datadir/apps/systemsettings/systemsettingsui.rc
+%_kde_datadir/kde4/services/settings-about-me.desktop
+%_kde_datadir/kde4/services/settings-accessibility.desktop
+%_kde_datadir/kde4/services/settings-advanced-user-settings.desktop
+%_kde_datadir/kde4/services/settings-advanced.desktop
+%_kde_datadir/kde4/services/settings-appearance.desktop
+%_kde_datadir/kde4/services/settings-bluetooth.desktop
+%_kde_datadir/kde4/services/settings-computer-administration.desktop
+%_kde_datadir/kde4/services/settings-desktop.desktop
+%_kde_datadir/kde4/services/settings-general.desktop
+%_kde_datadir/kde4/services/settings-keyboard-and-mouse.desktop
+%_kde_datadir/kde4/services/settings-look-and-feel.desktop
+%_kde_datadir/kde4/services/settings-network-and-connectivity.desktop
+%_kde_datadir/kde4/services/settings-network-settings.desktop
+%_kde_datadir/kde4/services/settings-notifications.desktop
+%_kde_datadir/kde4/services/settings-personal.desktop
+%_kde_datadir/kde4/services/settings-regional-and-language.desktop
+%_kde_datadir/kde4/services/settings-sharing.desktop
+%_kde_datadir/kde4/services/settings-system.desktop
+%_kde_datadir/kde4/services/settings-window-behaviour.desktop
+%_kde_datadir/kde4/servicetypes/systemsettingscategory.desktop
 %_kde_datadir/kde4/services/ScreenSavers/kblank.desktop
 %_kde_datadir/kde4/services/ScreenSavers/krandom.desktop
 %_kde_datadir/kde4/services/accessibility.desktop
@@ -1018,6 +1042,24 @@ A shell program similar to xterm for KDE
 %_kde_datadir/kde4/services/konsolepart.desktop
 %_kde_datadir/kde4/servicetypes/terminalemulator.desktop
 %_kde_docdir/*/*/konsole
+
+#------------------------------------------------	
+
+%define libkonquerorprivate %mklibname konquerorprivate 1
+
+%package -n %libkonquerorprivate
+Summary: KDE 4 core library
+Group: System/Libraries
+
+%description -n %libkonquerorprivate
+KDE 4 core library.
+
+%post -n %libkonquerorprivate -p /sbin/ldconfig
+%postun -n %libkonquerorprivate -p /sbin/ldconfig
+
+%files -n %libkonquerorprivate
+%defattr(-,root,root)
+%_kde_libdir/libkonquerorprivate.so.*
 
 #------------------------------------------------	
 
@@ -1289,8 +1331,6 @@ KDE Browser
 %_kde_datadir/config/konqsidebartng.rc
 %_kde_datadir/kde4/services/cache.desktop
 %_kde_datadir/kde4/services/cookies.desktop
-%_kde_datadir/kde4/services/desktop.desktop
-%_kde_datadir/kde4/services/desktopbehavior.desktop
 %_kde_datadir/kde4/services/desktoppath.desktop
 %_kde_datadir/kde4/services/ebrowsing.desktop
 %_kde_datadir/kde4/services/fileappearance.desktop
@@ -1424,6 +1464,7 @@ Requires: %libprocessui = %epoch:%version
 Requires: %libtaskbar = %epoch:%version
 Requires: %libtaskmanager = %epoch:%version
 Requires: %libdolphinprivate = %epoch:%version
+Requires: %libkonquerorprivate = %epoch:%version
 Requires: %libkonq = %epoch:%version
 Requires: %libkonqsidebarplugin = %epoch:%version
 Obsoletes: %{_lib}kdebase4-devel
@@ -1458,7 +1499,7 @@ This package contains header files needed if you wish to build applications base
       -DCMAKE_BUILD_TYPE=debug
 %endif
 
-make VERBOSE=1
+make 
 
 
 %install
@@ -1494,8 +1535,8 @@ install -d  -m 0755 %buildroot%_kde_prefix/env
 install -d  -m 0755 %buildroot%_kde_prefix/shutdown
 cat << EOF > %buildroot%_kde_prefix/env/nepomuk.sh
 # start Nepomuk-KDE
-%_kde_bindir/nepomukdaemon
-%_kde_bindir/nepomukcoreservices
+%_kde_bindir/nepomukdaemon &
+%_kde_bindir/nepomukcoreservices &
 EOF
 cat << EOF > %buildroot%_kde_prefix/shutdown/nepomuk.sh
 # start Nepomuk-KDE
