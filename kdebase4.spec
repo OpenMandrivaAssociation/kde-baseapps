@@ -10,7 +10,7 @@
 
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 680876
+%define revision 681089
 
 %if %unstable
 %define dont_strip 1
@@ -18,8 +18,8 @@
 
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 3.90.2
-Release: %mkrel 0.%revision
+Version: 3.91
+Release: %mkrel 0.%revision.1
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
