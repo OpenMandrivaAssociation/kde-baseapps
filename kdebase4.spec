@@ -1045,24 +1045,6 @@ A shell program similar to xterm for KDE
 
 #------------------------------------------------	
 
-%define libkonquerorprivate %mklibname konquerorprivate 1
-
-%package -n %libkonquerorprivate
-Summary: KDE 4 core library
-Group: System/Libraries
-
-%description -n %libkonquerorprivate
-KDE 4 core library.
-
-%post -n %libkonquerorprivate -p /sbin/ldconfig
-%postun -n %libkonquerorprivate -p /sbin/ldconfig
-
-%files -n %libkonquerorprivate
-%defattr(-,root,root)
-%_kde_libdir/libkonquerorprivate.so.*
-
-#------------------------------------------------	
-
 %define libdolphinprivate %mklibname dolphinprivate 5
 
 %package -n %libdolphinprivate
@@ -1464,7 +1446,6 @@ Requires: %libprocessui = %epoch:%version
 Requires: %libtaskbar = %epoch:%version
 Requires: %libtaskmanager = %epoch:%version
 Requires: %libdolphinprivate = %epoch:%version
-Requires: %libkonquerorprivate = %epoch:%version
 Requires: %libkonq = %epoch:%version
 Requires: %libkonqsidebarplugin = %epoch:%version
 Obsoletes: %{_lib}kdebase4-devel
