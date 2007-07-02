@@ -1077,8 +1077,10 @@ A shell program similar to xterm for KDE
 %defattr(-,root,root)
 %_kde_bindir/dolphin
 %_kde_datadir/applications/kde4/dolphin.desktop
+%_kde_datadir/kde4/services/dolphinpart.desktop
+%_kde_libdir/kde4/dolphinpart.so
+%_kde_appsdir/dolphinpart/dolphinpart.rc
 %_kde_appsdir/dolphin
-
 #-----------------------------------------------------------------------------
 
 %package -n kde4-kappfinder
@@ -1256,7 +1258,6 @@ KDE Browser
 %_kde_libdir/kde4/libkhtmlkttsdplugin.so
 %_kde_libdir/libkdeinit4_kfmclient.so
 %_kde_libdir/libkdeinit4_konqueror.so
-%_kde_libdir/kde4/dolphinpart.so
 %_kde_datadir/applications/kde4/Home.desktop
 %_kde_datadir/applications/kde4/kfmclient.desktop
 %_kde_datadir/applications/kde4/kfmclient_dir.desktop
@@ -1281,7 +1282,6 @@ KDE Browser
 %_kde_appsdir/konqlistview/kpartplugins/kremoteencodingplugin.rc
 %_kde_appsdir/konqlistview/kpartplugins/kshellcmdplugin.desktop
 %_kde_appsdir/konqlistview/kpartplugins/kshellcmdplugin.rc
-%_kde_appsdir/dolphinpart/dolphinpart.rc
 %_kde_appsdir/konqsidebartng
 %_kde_appsdir/konqueror/about
 %_kde_appsdir/konqueror/icons
@@ -1330,7 +1330,6 @@ KDE Browser
 %_kde_datadir/kde4/services/khtml_general.desktop
 %_kde_datadir/kde4/services/khtml_java_js.desktop
 %_kde_datadir/kde4/services/konq_aboutpage.desktop
-%_kde_datadir/kde4/services/dolphinpart.desktop
 %_kde_datadir/kde4/services/konq_sidebartng.desktop
 %_kde_datadir/kde4/services/konqfilemgr.desktop
 %_kde_datadir/kde4/services/konqueror.desktop
