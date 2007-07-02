@@ -10,7 +10,7 @@
 
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 681089
+%define revision 682449
 
 %if %unstable
 %define dont_strip 1
@@ -1245,7 +1245,6 @@ KDE Browser
 %_kde_libdir/kde4/kcm_kurifilt.so
 %_kde_libdir/kde4/kcm_performance.so
 %_kde_libdir/kde4/konq_aboutpage.so
-%_kde_libdir/kde4/konq_part.so
 %_kde_libdir/kde4/konq_remoteencoding.so
 %_kde_libdir/kde4/konq_shellcmdplugin.so
 %_kde_libdir/kde4/konq_sidebar.so
@@ -1257,6 +1256,7 @@ KDE Browser
 %_kde_libdir/kde4/libkhtmlkttsdplugin.so
 %_kde_libdir/libkdeinit4_kfmclient.so
 %_kde_libdir/libkdeinit4_konqueror.so
+%_kde_libdir/kde4/dolphinpart.so
 %_kde_datadir/applications/kde4/Home.desktop
 %_kde_datadir/applications/kde4/kfmclient.desktop
 %_kde_datadir/applications/kde4/kfmclient_dir.desktop
@@ -1281,8 +1281,7 @@ KDE Browser
 %_kde_appsdir/konqlistview/kpartplugins/kremoteencodingplugin.rc
 %_kde_appsdir/konqlistview/kpartplugins/kshellcmdplugin.desktop
 %_kde_appsdir/konqlistview/kpartplugins/kshellcmdplugin.rc
-%_kde_appsdir/konqpart/konq_iconview.rc
-%_kde_appsdir/konqpart/konq_listview.rc
+%_kde_appsdir/dolphinpart/dolphinpart.rc
 %_kde_appsdir/konqsidebartng
 %_kde_appsdir/konqueror/about
 %_kde_appsdir/konqueror/icons
@@ -1331,8 +1330,7 @@ KDE Browser
 %_kde_datadir/kde4/services/khtml_general.desktop
 %_kde_datadir/kde4/services/khtml_java_js.desktop
 %_kde_datadir/kde4/services/konq_aboutpage.desktop
-%_kde_datadir/kde4/services/konq_iconview4.desktop
-%_kde_datadir/kde4/services/konq_listview.desktop
+%_kde_datadir/kde4/services/dolphinpart.desktop
 %_kde_datadir/kde4/services/konq_sidebartng.desktop
 %_kde_datadir/kde4/services/konqfilemgr.desktop
 %_kde_datadir/kde4/services/konqueror.desktop
