@@ -1033,8 +1033,6 @@ A shell program similar to xterm for KDE
 %_kde_datadir/applications/kde4/konsole.desktop
 %_kde_datadir/applications/kde4/konsolesu.desktop
 %_kde_datadir/applications/kde4/quick-access-konsole.desktop
-%_kde_appsdir/kconf_update/konsole.upd
-%_kde_appsdir/kconf_update/schemaStrip.pl
 %_kde_appsdir/konqueror/servicemenus/konsolehere.desktop
 %_kde_appsdir/konsole
 %_kde_datadir/kde4/services/kded/kwrited.desktop
