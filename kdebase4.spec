@@ -1222,11 +1222,11 @@ KDE 4 core library.
 #-----------------------------------------------------------------------------
 
 %package -n kde4-konqueror
-Summary: konqueror
-Group: Graphical desktop/KDE
-Requires: kdebase4-runtime
-Obsoletes: kdebase4-konqueror
-
+Summary:    konqueror
+Group:      Graphical desktop/KDE
+Requires:   kdebase4-runtime
+Obsoletes:  kdebase4-konqueror
+Conflicts:  kdebase4-workspace < 3.91
 %description -n kde4-konqueror
 KDE Browser
 
