@@ -10,7 +10,7 @@
 
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 682706
+%define revision 683926
 
 %if %unstable
 %define dont_strip 1
@@ -66,6 +66,7 @@ BuildRequires: libnetworkmanager-util-devel
 BuildRequires: networkmanager-devel
 BuildRequires: bluez-devel
 BuildRequires: boost-devel
+BuildRequires: xrdb
 Requires: kdebase4-runtime
 Requires: kdebase4-workspace
 Requires: kde4-kdeprintfax
@@ -800,7 +801,6 @@ KDE 4 application workspace components.
 %_kde_datadir/applications/kde4/krandrtray.desktop
 %_kde_datadir/applications/kde4/ksysguard.desktop
 %_kde_datadir/applications/kde4/ktip.desktop
-%_kde_datadir/applications/kde4/kxkb.desktop
 %_kde_appsdir/desktoptheme/default/dialogs/background.svg
 %_kde_appsdir/desktoptheme/default/dialogs/shutdowndlg.svg
 %_kde_appsdir/desktoptheme/default/dialogs/shutdowndlgbuttonglow.svg
@@ -959,15 +959,17 @@ KDE 4 application workspace components.
 %_kde_datadir/kde4/services/kwin/scalein.desktop
 %_kde_datadir/kde4/services/kwin/shadow.desktop
 %_kde_datadir/kde4/services/kwin/shadow_config.desktop
-%_kde_datadir/kde4/services/kwin/shakymove.desktop
 %_kde_datadir/kde4/services/kwin/showfps.desktop
 %_kde_datadir/kde4/services/kwin/test_fbo.desktop
 %_kde_datadir/kde4/services/kwin/test_input.desktop
 %_kde_datadir/kde4/services/kwin/test_thumbnail.desktop
 %_kde_datadir/kde4/services/kwin/thumbnailaside.desktop
 %_kde_datadir/kde4/services/kwin/trackmouse.desktop
-%_kde_datadir/kde4/services/kwin/wavywindows.desktop
 %_kde_datadir/kde4/services/kwin/zoom.desktop
+%_kde_datadir/kde4/services/kwin/demo_shakymove.desktop
+%_kde_datadir/kde4/services/kwin/demo_wavywindows.desktop
+%_kde_datadir/kde4/services/kwin/invert.desktop
+%_kde_datadir/kde4/services/kwin/sharpen.desktop
 %_kde_datadir/kde4/services/kwinactions.desktop
 %_kde_datadir/kde4/services/kwinadvanced.desktop
 %_kde_datadir/kde4/services/kwindecoration.desktop
@@ -1475,7 +1477,7 @@ This package contains header files needed if you wish to build applications base
       -DCMAKE_BUILD_TYPE=debug
 %endif
 
-make 
+%make 
 
 
 %install
