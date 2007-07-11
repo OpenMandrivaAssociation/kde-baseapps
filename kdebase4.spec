@@ -10,7 +10,7 @@
 
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 683926
+%define revision 686593
 
 %if %unstable
 %define dont_strip 1
@@ -31,6 +31,7 @@ Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 %endif
 Source1: kde4.sh
 Source2: dmkde4start
+Source3: kde4-wallpaper-mandriva.svg
 BuildConflicts: lm_utils
 BuildConflicts: lm_utils-devel
 BuildConflicts: liblm_sensors1
@@ -108,6 +109,7 @@ KDE 4 application runtime components.
 %_datadir/dbus-1/services/*
 %_kde_datadir/icons/*/*/*/*
 %_kde_appsdir/drkonqi
+%_kde_appsdir/solid
 %_kde_appsdir/kcm_componentchooser
 %_kde_appsdir/kcmlocale
 %_kde_appsdir/kde
@@ -132,12 +134,6 @@ KDE 4 application runtime components.
 %_kde_appsdir/Settingsmenu
 %_kde_appsdir/solidfakebluetoothbackend
 %_kde_appsdir/solidfakenetbackend
-%_kde_appsdir/systemview/documents.desktop
-%_kde_appsdir/systemview/home.desktop
-%_kde_appsdir/systemview/media.desktop
-%_kde_appsdir/systemview/remote.desktop
-%_kde_appsdir/systemview/trash.desktop
-%_kde_appsdir/systemview/users.desktop
 %_kde_datadir/kde4/services/nepomuk/nepomuk-coreservices.desktop
 %_kde_bindir/drkonqi
 %_kde_bindir/imagetops
@@ -164,7 +160,6 @@ KDE 4 application runtime components.
 %_kde_bindir/kioclient
 %_kde_bindir/kioexec
 %_kde_bindir/kio_media_mounthelper
-%_kde_bindir/kio_system_documenthelper
 %_kde_bindir/kjobviewer
 %_kde_bindir/klocaldomainurifilterhelper
 %_kde_bindir/kmimetypefinder
@@ -231,7 +226,6 @@ KDE 4 application runtime components.
 %_kde_datadir/kde4/services/fixhosturifilter.desktop
 %_kde_datadir/kde4/services/floppy.protocol
 %_kde_datadir/kde4/services/gzip.protocol
-%_kde_datadir/kde4/services/home.protocol
 %_kde_datadir/kde4/services/htmlthumbnail.desktop
 %_kde_datadir/kde4/services/icons.desktop
 %_kde_datadir/kde4/services/imagethumbnail.desktop
@@ -242,12 +236,10 @@ KDE 4 application runtime components.
 %_kde_datadir/kde4/services/kcmnotify.desktop
 %_kde_datadir/kde4/services/kcm_solid.desktop
 %_kde_datadir/kde4/services/KControl.desktop
-%_kde_datadir/kde4/services/kded/homedirnotify.desktop
 %_kde_datadir/kde4/services/kded/ktimezoned.desktop
 %_kde_datadir/kde4/services/kded/mediamanager.desktop
 %_kde_datadir/kde4/services/kded/medianotifier.desktop
 %_kde_datadir/kde4/services/kded/remotedirnotify.desktop
-%_kde_datadir/kde4/services/kded/systemdirnotify.desktop
 %_kde_datadir/kde4/services/kdeprint_part.desktop
 %_kde_datadir/kde4/services/khelpcenter.desktop
 %_kde_datadir/kde4/services/kinfocenter.desktop
@@ -283,7 +275,6 @@ KDE 4 application runtime components.
 %_kde_datadir/kde4/services/smtps.protocol
 %_kde_datadir/kde4/services/solidbackends
 %_kde_datadir/kde4/services/svgthumbnail.desktop
-%_kde_datadir/kde4/services/system.protocol
 %_kde_datadir/kde4/services/tar.protocol
 %_kde_datadir/kde4/services/textthumbnail.desktop
 %_kde_datadir/kde4/services/thumbnail.protocol
@@ -315,21 +306,18 @@ KDE 4 application runtime components.
 %_kde_libdir/kde4/kcm_printmgr.so
 %_kde_libdir/kde4/kcm_samba.so
 %_kde_libdir/kde4/kcm_solid.so
-%_kde_libdir/kde4/kded_homedirnotify.so
 %_kde_libdir/kde4/kded_kpasswdserver.so
 %_kde_libdir/kde4/kded_networkstatus.so
 %_kde_libdir/kde4/kded_ktimezoned.so
 %_kde_libdir/kde4/kded_mediamanager.so
 %_kde_libdir/kde4/kded_medianotifier.so
 %_kde_libdir/kde4/kded_remotedirnotify.so
-%_kde_libdir/kde4/kded_systemdirnotify.so
 %_kde_libdir/kde4/kio_about.so
 %_kde_libdir/kde4/kio_cgi.so
 %_kde_libdir/kde4/kio_filter.so
 %_kde_libdir/kde4/kio_finger.so
 %_kde_libdir/kde4/kio_fish.so
 %_kde_libdir/kde4/kio_floppy.so
-%_kde_libdir/kde4/kio_home.so
 %_kde_libdir/kde4/kio_info.so
 %_kde_libdir/kde4/kio_ldap.so
 %_kde_libdir/kde4/kio_man.so
@@ -343,7 +331,6 @@ KDE 4 application runtime components.
 %_kde_libdir/kde4/kio_sftp.so
 %_kde_libdir/kde4/kio_smb.so
 %_kde_libdir/kde4/kio_smtp.so
-%_kde_libdir/kde4/kio_system.so
 %_kde_libdir/kde4/kio_tar.so
 %_kde_libdir/kde4/kio_thumbnail.so
 %_kde_libdir/kde4/kio_trash.so
@@ -677,12 +664,10 @@ KDE 4 application workspace components.
 %_kde_bindir/kapplymousetheme
 %_kde_bindir/kblankscrn.kss
 %_kde_bindir/kcheckpass
-%_kde_bindir/kcheckrunning
 %_kde_bindir/kcminit
 %_kde_bindir/kcminit_startup
 %_kde_bindir/kcontroledit
 %_kde_bindir/kdeinstallktheme
-%_kde_bindir/kdesktop
 %_kde_bindir/kdostartupconfig
 %_kde_bindir/kfontinst
 %_kde_bindir/kfontprint
@@ -707,7 +692,6 @@ KDE 4 application workspace components.
 %_kde_bindir/ksysguardd
 %_kde_bindir/ksystraycmd
 %_kde_bindir/ktip
-%_kde_bindir/kwebdesktop
 %_kde_bindir/kwin
 %_kde_bindir/kwin_killer_helper
 %_kde_bindir/kwin_rules_dialog
@@ -783,7 +767,6 @@ KDE 4 application workspace components.
 %_kde_libdir/libkdeinit4_kcminit.so
 %_kde_libdir/libkdeinit4_kcminit_startup.so
 %_kde_libdir/libkdeinit4_kcontroledit.so
-%_kde_libdir/libkdeinit4_kdesktop.so
 %_kde_libdir/libkdeinit4_khotkeys.so
 %_kde_libdir/libkdeinit4_kicker.so
 %_kde_libdir/libkdeinit4_klipper.so
@@ -801,14 +784,7 @@ KDE 4 application workspace components.
 %_kde_datadir/applications/kde4/krandrtray.desktop
 %_kde_datadir/applications/kde4/ksysguard.desktop
 %_kde_datadir/applications/kde4/ktip.desktop
-%_kde_appsdir/desktoptheme/default/dialogs/background.svg
-%_kde_appsdir/desktoptheme/default/dialogs/shutdowndlg.svg
-%_kde_appsdir/desktoptheme/default/dialogs/shutdowndlgbuttonglow.svg
-%_kde_appsdir/desktoptheme/default/widgets/clock.svg
-%_kde_appsdir/desktoptheme/default/widgets/iconbutton.svg
-%_kde_appsdir/desktoptheme/default/widgets/plot-background.svg
-%_kde_appsdir/desktoptheme/default/widgets/toolbox-button.svg
-%_kde_appsdir/desktoptheme/desktoptheme-default.desktop
+%_kde_appsdir/desktoptheme
 %_kde_appsdir/kcontroledit
 %_kde_appsdir/kaccess/kaccess.notifyrc
 %_kde_appsdir/kcminput/cursor_large_black.pcf.gz
@@ -825,7 +801,6 @@ KDE 4 application workspace components.
 %_kde_appsdir/kcmkeys/wm3.kksrc
 %_kde_appsdir/kcmusb/usb.ids
 %_kde_appsdir/kcmview1394/oui.db
-%_kde_appsdir/kdesktop
 %_kde_appsdir/kdewizard/pics/wizard_small.png
 %_kde_appsdir/kdewizard/tips
 %_kde_appsdir/kdisplay
@@ -854,7 +829,6 @@ KDE 4 application workspace components.
 %_kde_appsdir/kmenuedit/kmenueditui.rc
 %_kde_appsdir/konqsidebartng/virtual_folders/services/fonts.desktop
 %_kde_appsdir/konqueror/servicemenus/installfont.desktop
-%_kde_appsdir/konqueror/servicemenus/kdesktopSetAsBackground.desktop
 %_kde_appsdir/ksmserver/pics/shutdownkonq.png
 %_kde_appsdir/ksplash
 %_kde_appsdir/ksysguard/KSysGuardApplet.xml
@@ -874,10 +848,7 @@ KDE 4 application workspace components.
 %_kde_datadir/autostart/panel.desktop
 %_kde_datadir/autostart/plasma.desktop
 %_kde_datadir/config/background.knsrc
-%_kde_datadir/config/kdesktop_custom_menu1
-%_kde_datadir/config/kdesktop_custom_menu2
 %_kde_datadir/applications/kde4/systemsettings.desktop
-%_kde_datadir/apps/desktoptheme/default/widgets/background.svg
 %_kde_datadir/apps/systemsettings/systemsettingsui.rc
 %_kde_datadir/kde4/services/settings-about-me.desktop
 %_kde_datadir/kde4/services/settings-accessibility.desktop
@@ -999,9 +970,7 @@ KDE 4 application workspace components.
 %_kde_datadir/kde4/servicetypes/plasma_*
 %_kde_datadir/kde4/servicetypes/screensaver.desktop
 %_kde_datadir/sounds/pop.wav
-%_kde_datadir/templates
 %_kde_datadir/wallpapers
-%_kde_appsdir/desktoptheme/default/widgets/wallpaper.svg
 %_kde_docdir/*/*/khelpcenter
 %_kde_docdir/*/*/kinfocenter
 %_kde_docdir/*/*/kicker
@@ -1486,7 +1455,10 @@ cd build
 
 make DESTDIR=%buildroot install
 
-# Env entry for kde4 
+# Install temporary mandriva wallpaper
+install -m 0644 %SOURCE1 %buildroot/%_kde_appsdir/desktoptheme/default/widgets/wallpaper.svg
+
+# Env entry for start kde4 
 install -d -m 0755 %buildroot/etc/profile.d
 install -m 0755 %SOURCE1 %buildroot/etc/profile.d
 
