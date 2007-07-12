@@ -10,7 +10,7 @@
 
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 686593
+%define revision 686880
 
 %if %unstable
 %define dont_strip 1
@@ -1456,7 +1456,7 @@ cd build
 make DESTDIR=%buildroot install
 
 # Install temporary mandriva wallpaper
-install -m 0644 %SOURCE1 %buildroot/%_kde_appsdir/desktoptheme/default/widgets/wallpaper.svg
+cp -f %SOURCE1 %buildroot/%_kde_appsdir/desktoptheme/default/widgets/wallpaper.svg
 
 # Env entry for start kde4 
 install -d -m 0755 %buildroot/etc/profile.d
