@@ -644,6 +644,8 @@ Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
 Requires: strigi
 Requires: desktop-common-data
+Requires: xprop
+Requires: xset
 Obsoletes: kdebase4-progs
 
 %description workspace
