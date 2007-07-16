@@ -19,7 +19,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 3.91
-Release: %mkrel 0.%revision.2
+Release: %mkrel 0.%revision.3
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -644,6 +644,7 @@ Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
 Requires: strigi
 Requires: desktop-common-data
+Requires: xmessage
 Requires: xprop
 Requires: xset
 Obsoletes: kdebase4-progs
