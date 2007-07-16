@@ -10,7 +10,7 @@
 
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 686880
+%define revision 688743
 
 %if %unstable
 %define dont_strip 1
