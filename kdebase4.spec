@@ -19,7 +19,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 3.91
-Release: %mkrel 0.%revision.1
+Release: %mkrel 0.%revision.2
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -1433,7 +1433,7 @@ cd build
 make DESTDIR=%buildroot install
 
 # Install temporary mandriva wallpaper
-cp -f %SOURCE1 %buildroot/%_kde_appsdir/desktoptheme/default/widgets/wallpaper.svg
+cp -f %SOURCE3 %buildroot/%_kde_appsdir/desktoptheme/default/widgets/wallpaper.svg
 
 # Env entry for start kde4 
 install -d -m 0755 %buildroot/etc/profile.d
