@@ -10,7 +10,7 @@
 
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 688743
+%define revision 689200
 
 %if %unstable
 %define dont_strip 1
@@ -19,7 +19,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 3.91
-Release: %mkrel 0.%revision.3
+Release: %mkrel 0.%revision.1
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -109,7 +109,6 @@ KDE 4 application runtime components.
 %_datadir/dbus-1/services/*
 %_kde_datadir/icons/*/*/*/*
 %_kde_appsdir/drkonqi
-%_kde_appsdir/solid
 %_kde_appsdir/kcm_componentchooser
 %_kde_appsdir/kcmlocale
 %_kde_appsdir/kde
@@ -134,6 +133,15 @@ KDE 4 application runtime components.
 %_kde_appsdir/Settingsmenu
 %_kde_appsdir/solidfakebluetoothbackend
 %_kde_appsdir/solidfakenetbackend
+%_kde_bindir/solidshell
+%_kde_appsdir/solid
+%_kde_datadir/kde4/services/kcm_solid.desktop
+%_kde_datadir/kde4/services/solidbackends
+%_kde_datadir/kde4/servicetypes/solid*
+%_kde_libdir/kde4/kcm_solid.so
+%_kde_libdir/kde4/solid_*
+%_kde_libdir/kde4/kded_solid*
+%_kde_datadir/kde4/services/kded/solid*
 %_kde_datadir/kde4/services/nepomuk/nepomuk-coreservices.desktop
 %_kde_bindir/drkonqi
 %_kde_bindir/imagetops
@@ -173,7 +181,6 @@ KDE 4 application runtime components.
 %_kde_bindir/ktrash
 %_kde_bindir/kuiserver
 %_kde_bindir/kwriteconfig
-%_kde_bindir/solidshell
 %_kde_libdir/kconf_update_bin/khotkeys_update
 %_kde_libdir/kconf_update_bin/kicker-3.4-reverseLayout
 %_kde_libdir/kconf_update_bin/kwin_update_default_rules
@@ -234,7 +241,6 @@ KDE 4 application runtime components.
 %_kde_datadir/kde4/services/kcmkded.desktop
 %_kde_datadir/kde4/services/kcm_kdnssd.desktop
 %_kde_datadir/kde4/services/kcmnotify.desktop
-%_kde_datadir/kde4/services/kcm_solid.desktop
 %_kde_datadir/kde4/services/KControl.desktop
 %_kde_datadir/kde4/services/kded/ktimezoned.desktop
 %_kde_datadir/kde4/services/kded/mediamanager.desktop
@@ -273,7 +279,6 @@ KDE 4 application runtime components.
 %_kde_datadir/kde4/services/smbstatus.desktop
 %_kde_datadir/kde4/services/smtp.protocol
 %_kde_datadir/kde4/services/smtps.protocol
-%_kde_datadir/kde4/services/solidbackends
 %_kde_datadir/kde4/services/svgthumbnail.desktop
 %_kde_datadir/kde4/services/tar.protocol
 %_kde_datadir/kde4/services/textthumbnail.desktop
@@ -282,9 +287,6 @@ KDE 4 application runtime components.
 %_kde_datadir/kde4/services/zip.protocol
 %_kde_datadir/kde4/services/kded/networkstatus.desktop
 %_kde_datadir/kde4/servicetypes/searchprovider.desktop
-%_kde_datadir/kde4/servicetypes/solidbluetoothmanager.desktop
-%_kde_datadir/kde4/servicetypes/solidnetworkmanager.desktop
-%_kde_datadir/kde4/servicetypes/solidpowermanager.desktop
 %_kde_datadir/kde4/servicetypes/thumbcreator.desktop
 %_kde_datadir/locale/l10n/*/*
 %_kde_datadir/locale/l10n/*.desktop
@@ -305,7 +307,6 @@ KDE 4 application runtime components.
 %_kde_libdir/kde4/kcm_media.so
 %_kde_libdir/kde4/kcm_printmgr.so
 %_kde_libdir/kde4/kcm_samba.so
-%_kde_libdir/kde4/kcm_solid.so
 %_kde_libdir/kde4/kded_kpasswdserver.so
 %_kde_libdir/kde4/kded_networkstatus.so
 %_kde_libdir/kde4/kded_ktimezoned.so
@@ -343,7 +344,6 @@ KDE 4 application runtime components.
 %_kde_libdir/kde4/liblocaldomainurifilter.so
 %_kde_libdir/kde4/svgthumbnail.so
 %_kde_libdir/kde4/textthumbnail.so
-%_kde_libdir/kde4/solid_*
 %_kde_bindir/nepomukcoreservices
 %_kde_bindir/nepomukdaemon
 %_kde_libdir/libkdeinit4_kcmshell.so
@@ -364,14 +364,17 @@ KDE 4 application runtime components.
 %_kde_docdir/*/*/visualdict
 %_kde_docdir/*/*/quickstart
 %_kde_docdir/*/*/kdebugdialog
+%exclude %_kde_datadir/icons/*/*/*/wine*
+%exclude %_kde_datadir/icons/*/*/*/acroread*
 
 #------------------------------------------------	
 
-%define libsolidcontrolifaces %mklibname solidcontrolifaces 5
+%define libsolidcontrolifaces %mklibname solidcontrolifaces 4
 
 %package -n %libsolidcontrolifaces
 Summary: KDE 4 core library
 Group: System/Libraries
+Obsoletes: %{_lib}solidcontrolifaces5
 
 %description -n %libsolidcontrolifaces
 KDE 4 core library.
@@ -385,11 +388,12 @@ KDE 4 core library.
 
 #------------------------------------------------	
 
-%define libsolidcontrol %mklibname solidcontrol 5
+%define libsolidcontrol %mklibname solidcontrol 4
 
 %package -n %libsolidcontrol
 Summary: KDE 4 core library
 Group: System/Libraries
+Obsoletes: %{_lib}solidcontrol5
 
 %description -n %libsolidcontrol
 KDE 4 core library.
@@ -403,11 +407,12 @@ KDE 4 core library.
 
 #------------------------------------------------
 
-%define libkdecorations %mklibname kdecorations 5
+%define libkdecorations %mklibname kdecorations 4
 
 %package -n %libkdecorations
 Summary: KDE 4 core library
 Group: System/Libraries
+Obsoletes: %{_lib}kdecorations5
 
 %description -n %libkdecorations
 KDE 4 core library.
@@ -421,11 +426,12 @@ KDE 4 core library.
 
 #------------------------------------------------
 
-%define libkfontinst %mklibname kfontinst 5
+%define libkfontinst %mklibname kfontinst 4
 
 %package -n %libkfontinst
 Summary: KDE 4 core library
 Group: System/Libraries
+Obsoletes: %{_lib}kfontinst5
 
 %description -n %libkfontinst
 KDE 4 core library.
@@ -439,11 +445,12 @@ KDE 4 core library.
 
 #------------------------------------------------
 
-%define libkfontinstui %mklibname kfontinstui 5
+%define libkfontinstui %mklibname kfontinstui 4
 
 %package -n %libkfontinstui
 Summary: KDE 4 core library
 Group: System/Libraries
+Obsoletes: %{_lib}kfontinstui5
 
 %description -n %libkfontinstui
 KDE 4 core library.
@@ -529,11 +536,12 @@ KDE 4 core library.
 
 #------------------------------------------------
 
-%define libkworkspace %mklibname kworkspace 1
+%define libkworkspace %mklibname kworkspace 4
 
 %package -n %libkworkspace
 Summary: KDE 4 core library
 Group: System/Libraries
+Obsoletes: %{_lib}kworkspace1
 
 %description -n %libkworkspace
 KDE 4 core library.
@@ -565,11 +573,12 @@ KDE 4 core library.
 
 #------------------------------------------------
 
-%define libprocesscore %mklibname processcore 5
+%define libprocesscore %mklibname processcore 4
 
 %package -n %libprocesscore
 Summary: KDE 4 core library
 Group: System/Libraries
+Obsoletes: %{_lib}processcore5
 
 %description -n %libprocesscore
 KDE 4 core library.
@@ -583,11 +592,12 @@ KDE 4 core library.
 
 #------------------------------------------------
 
-%define libprocessui %mklibname processui 5
+%define libprocessui %mklibname processui 4
 
 %package -n %libprocessui
 Summary: KDE 4 core library
 Group: System/Libraries
+Obsoletes: %{_lib}processui5
 
 %description -n %libprocessui
 KDE 4 core library.
@@ -601,11 +611,12 @@ KDE 4 core library.
 
 #------------------------------------------------
 
-%define libtaskbar %mklibname taskbar 5
+%define libtaskbar %mklibname taskbar 4
 
 %package -n %libtaskbar
 Summary: KDE 4 core library
 Group: System/Libraries
+Obsoletes: %{_lib}taskbar5
 
 %description -n %libtaskbar
 KDE 4 core library.
@@ -619,11 +630,12 @@ KDE 4 core library.
 
 #------------------------------------------------
 
-%define libtaskmanager %mklibname taskmanager 5
+%define libtaskmanager %mklibname taskmanager 4
 
 %package -n %libtaskmanager
 Summary: KDE 4 core library
 Group: System/Libraries
+Obsoletes: %{_lib}taskmanager5
 
 %description -n %libtaskmanager
 KDE 4 core library.
@@ -684,8 +696,6 @@ KDE 4 application workspace components.
 %_kde_bindir/krandrtray
 %_kde_bindir/krdb
 %_kde_bindir/krootimage
-%_kde_bindir/krunner
-%_kde_bindir/krunner_lock
 %_kde_bindir/ksmserver
 %_kde_bindir/ksplashsimple
 %_kde_bindir/ksplashx
@@ -746,8 +756,6 @@ KDE 4 application workspace components.
 %_kde_libdir/kde4/kgreet_winbind.so
 %_kde_libdir/kde4/kickermenu_*
 %_kde_libdir/kde4/kio_fonts.so
-%_kde_libdir/kde4/krunner_calculatorrunner.so
-%_kde_libdir/kde4/krunner_searchrunner.so
 %_kde_libdir/kde4/kstyle_keramik_config.so
 %_kde_libdir/kde4/kwin3_*
 %_kde_libdir/kde4/kwin4_*
@@ -846,7 +854,6 @@ KDE 4 application workspace components.
 %_kde_appsdir/naughtyapplet/pics/naughty-sad.png
 %_kde_datadir/autostart/khotkeys.desktop
 %_kde_datadir/autostart/klipper.desktop
-%_kde_datadir/autostart/krunner.desktop
 %_kde_datadir/autostart/ktip.desktop
 %_kde_datadir/autostart/panel.desktop
 %_kde_datadir/autostart/plasma.desktop
@@ -905,45 +912,9 @@ KDE 4 application workspace components.
 %_kde_datadir/kde4/services/keys.desktop
 %_kde_datadir/kde4/services/kfontviewpart.desktop
 %_kde_datadir/kde4/services/khotkeys.desktop
-%_kde_datadir/kde4/services/krunner_calculatorrunner.desktop
-%_kde_datadir/kde4/services/krunner_searchrunner.desktop
 %_kde_datadir/kde4/services/ksplashthememgr.desktop
 %_kde_datadir/kde4/services/kthememanager.desktop
-%_kde_datadir/kde4/services/kwin/blur.desktop
-%_kde_datadir/kde4/services/kwin/boxswitch.desktop
-%_kde_datadir/kde4/services/kwin/demo_liquid.desktop
-%_kde_datadir/kde4/services/kwin/demo_shiftworkspaceup.desktop
-%_kde_datadir/kde4/services/kwin/demo_showpicture.desktop
-%_kde_datadir/kde4/services/kwin/demo_taskbarthumbnail.desktop
-%_kde_datadir/kde4/services/kwin/desktopgrid.desktop
-%_kde_datadir/kde4/services/kwin/dialogparent.desktop
-%_kde_datadir/kde4/services/kwin/diminactive.desktop
-%_kde_datadir/kde4/services/kwin/drunken.desktop
-%_kde_datadir/kde4/services/kwin/explosion.desktop
-%_kde_datadir/kde4/services/kwin/fade.desktop
-%_kde_datadir/kde4/services/kwin/fallapart.desktop
-%_kde_datadir/kde4/services/kwin/flame.desktop
-%_kde_datadir/kde4/services/kwin/howto.desktop
-%_kde_datadir/kde4/services/kwin/magnifier.desktop
-%_kde_datadir/kde4/services/kwin/maketransparent.desktop
-%_kde_datadir/kde4/services/kwin/minimizeanimation.desktop
-%_kde_datadir/kde4/services/kwin/mousemark.desktop
-%_kde_datadir/kde4/services/kwin/presentwindows.desktop
-%_kde_datadir/kde4/services/kwin/presentwindows_config.desktop
-%_kde_datadir/kde4/services/kwin/scalein.desktop
-%_kde_datadir/kde4/services/kwin/shadow.desktop
-%_kde_datadir/kde4/services/kwin/shadow_config.desktop
-%_kde_datadir/kde4/services/kwin/showfps.desktop
-%_kde_datadir/kde4/services/kwin/test_fbo.desktop
-%_kde_datadir/kde4/services/kwin/test_input.desktop
-%_kde_datadir/kde4/services/kwin/test_thumbnail.desktop
-%_kde_datadir/kde4/services/kwin/thumbnailaside.desktop
-%_kde_datadir/kde4/services/kwin/trackmouse.desktop
-%_kde_datadir/kde4/services/kwin/zoom.desktop
-%_kde_datadir/kde4/services/kwin/demo_shakymove.desktop
-%_kde_datadir/kde4/services/kwin/demo_wavywindows.desktop
-%_kde_datadir/kde4/services/kwin/invert.desktop
-%_kde_datadir/kde4/services/kwin/sharpen.desktop
+%_kde_datadir/kde4/services/kwin
 %_kde_datadir/kde4/services/kwinactions.desktop
 %_kde_datadir/kde4/services/kwinadvanced.desktop
 %_kde_datadir/kde4/services/kwindecoration.desktop
@@ -968,7 +939,6 @@ KDE 4 application workspace components.
 %_kde_datadir/kde4/services/style.desktop
 %_kde_datadir/kde4/services/xinerama.desktop
 %_kde_datadir/kde4/services/xserver.desktop
-%_kde_datadir/kde4/servicetypes/krunnerrunner.desktop
 %_kde_datadir/kde4/servicetypes/kwineffect.desktop
 %_kde_datadir/kde4/servicetypes/plasma_*
 %_kde_datadir/kde4/servicetypes/screensaver.desktop
@@ -1017,11 +987,12 @@ A shell program similar to xterm for KDE
 
 #------------------------------------------------	
 
-%define libdolphinprivate %mklibname dolphinprivate 5
+%define libdolphinprivate %mklibname dolphinprivate 1
 
 %package -n %libdolphinprivate
 Summary: KDE 4 core library
 Group: System/Libraries
+Obsoletes: %{_lib}dolphinprivate5
 
 %description -n %libdolphinprivate
 KDE 4 core library.
@@ -1032,7 +1003,6 @@ KDE 4 core library.
 %files -n %libdolphinprivate
 %defattr(-,root,root)
 %_kde_libdir/libdolphinprivate.so.*
-%_kde_docdir/*/*/dolphin
 
 #-----------------------------------------------------------------------------
 
@@ -1053,6 +1023,8 @@ A shell program similar to xterm for KDE
 %_kde_libdir/kde4/dolphinpart.so
 %_kde_appsdir/dolphinpart/dolphinpart.rc
 %_kde_appsdir/dolphin
+%_kde_docdir/*/*/dolphin
+
 #-----------------------------------------------------------------------------
 
 %package -n kde4-kappfinder
@@ -1177,11 +1149,12 @@ KDE 4 core library.
 
 #------------------------------------------------	
 
-%define libkonqsidebarplugin %mklibname konqsidebarplugin 5
+%define libkonqsidebarplugin %mklibname konqsidebarplugin 4
 
 %package -n %libkonqsidebarplugin
 Summary: KDE 4 core library
 Group: System/Libraries
+Obsoletes: %{_lib}konqsidebarplugin5
 
 %description -n %libkonqsidebarplugin
 KDE 4 core library.
@@ -1391,6 +1364,7 @@ KDE Desktop Login Manager.
 %_kde_datadir/config/kdm.knsrc
 %_kde_datadir/kde4/services/kdm.desktop
 %_kde_docdir/*/*/kdm
+%_kde_datadir/config/kdm
 
 #-----------------------------------------------------------------------------
 
