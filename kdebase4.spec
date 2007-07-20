@@ -1,20 +1,6 @@
-
-%define use_enable_pie 1
-%{?_no_enable_pie: %{expand: %%global use_enable_pie 0}}
-
-%define use_enable_final 0
-%{?_no_enable_final: %{expand: %%global use_enable_final 0}}
-
-%define unstable 1
-%{?_unstable: %{expand: %%global unstable 1}}
-
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 689200
-
-%if %unstable
-%define dont_strip 1
-%endif
+%define revision 690341
 
 Name: kdebase4
 Summary: K Desktop Environment
@@ -274,7 +260,6 @@ KDE 4 application runtime components.
 %_kde_datadir/kde4/services/remote.protocol
 %_kde_datadir/kde4/services/searchproviders
 %_kde_datadir/kde4/services/settings.protocol
-%_kde_datadir/kde4/services/sftp.protocol
 %_kde_datadir/kde4/services/smb.protocol
 %_kde_datadir/kde4/services/smbstatus.desktop
 %_kde_datadir/kde4/services/smtp.protocol
@@ -329,7 +314,6 @@ KDE 4 application runtime components.
 %_kde_libdir/kde4/kio_print.so
 %_kde_libdir/kde4/kio_remote.so
 %_kde_libdir/kde4/kio_settings.so
-%_kde_libdir/kde4/kio_sftp.so
 %_kde_libdir/kde4/kio_smb.so
 %_kde_libdir/kde4/kio_smtp.so
 %_kde_libdir/kde4/kio_tar.so
@@ -713,10 +697,14 @@ KDE 4 application workspace components.
 %_kde_bindir/plasmaengineexplorer
 %_kde_bindir/startkde
 %_kde_bindir/systemsettings
+%_kde_bindir/krunner
+%_kde_bindir/krunner_lock
 %_kde_configdir/systemsettingsrc
 %_kde_prefix/env
 %_kde_prefix/shutdown
 %_kde_configdir/ksysguarddrc
+%_kde_libdir/kde4/kcm_kwincompositing.so
+%_kde_libdir/kde4/krunner_*
 %_kde_libdir/kde4/dockbar_panelextension.so
 %_kde_libdir/kde4/fontthumbnail.so
 %_kde_libdir/kde4/kcm_access.so
@@ -853,10 +841,15 @@ KDE 4 application workspace components.
 %_kde_appsdir/naughtyapplet/pics/naughty-happy.png
 %_kde_appsdir/naughtyapplet/pics/naughty-sad.png
 %_kde_datadir/autostart/khotkeys.desktop
-%_kde_datadir/autostart/klipper.desktop
+# No clipper for now
+%exclude %_kde_datadir/autostart/klipper.desktop
 %_kde_datadir/autostart/ktip.desktop
 %_kde_datadir/autostart/panel.desktop
 %_kde_datadir/autostart/plasma.desktop
+%_kde_datadir/autostart/krunner.desktop
+%_kde_datadir/kde4/services/krunner_*
+%_kde_datadir/kde4/services/kwincompositing.desktop
+%_kde_datadir/kde4/servicetypes/krunnerrunner.desktop
 %_kde_datadir/config/background.knsrc
 %_kde_datadir/applications/kde4/systemsettings.desktop
 %_kde_datadir/apps/systemsettings/systemsettingsui.rc
@@ -1412,16 +1405,7 @@ This package contains header files needed if you wish to build applications base
 %setup -q -n kdebase-%version
 
 %build
-%cmake_kde4 \
-%if %use_enable_final
-      -DKDE4_ENABLE_FINAL=ON \
-%endif
-%if %use_enable_pie
-      -DKDE4_ENABLE_FPIE=ON \
-%endif
-%if %unstable
-      -DCMAKE_BUILD_TYPE=debug
-%endif
+%cmake_kde4 
 
 %make 
 
