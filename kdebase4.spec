@@ -1,10 +1,10 @@
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 690341
+%define revision 693361
 
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 3.91
+Version: 3.92
 Release: %mkrel 0.%revision.2
 Epoch: 1
 Group: Graphical desktop/KDE
@@ -120,7 +120,6 @@ KDE 4 application runtime components.
 %_kde_appsdir/solidfakebluetoothbackend
 %_kde_appsdir/solidfakenetbackend
 %_kde_bindir/solidshell
-%_kde_appsdir/solid
 %_kde_datadir/kde4/services/kcm_solid.desktop
 %_kde_datadir/kde4/services/solidbackends
 %_kde_datadir/kde4/servicetypes/solid*
@@ -748,7 +747,6 @@ KDE 4 application workspace components.
 %_kde_libdir/kde4/kwin3_*
 %_kde_libdir/kde4/kwin4_*
 %_kde_libdir/kde4/kwin_*
-%_kde_libdir/kde4/launcher_panelapplet.so
 %_kde_libdir/kde4/libexec/test_kcm_xinerama
 %_kde_libdir/kde4/libkfontviewpart.so
 %_kde_libdir/kde4/lockout_panelapplet.so
@@ -916,7 +914,6 @@ KDE 4 application workspace components.
 %_kde_datadir/kde4/services/kwinmoving.desktop
 %_kde_datadir/kde4/services/kwinoptions.desktop
 %_kde_datadir/kde4/services/kwinrules.desktop
-%_kde_datadir/kde4/services/kwintranslucency.desktop
 %_kde_datadir/kde4/services/memory.desktop
 %_kde_datadir/kde4/services/mouse.desktop
 %_kde_datadir/kde4/services/nic.desktop
@@ -933,7 +930,7 @@ KDE 4 application workspace components.
 %_kde_datadir/kde4/services/xinerama.desktop
 %_kde_datadir/kde4/services/xserver.desktop
 %_kde_datadir/kde4/servicetypes/kwineffect.desktop
-%_kde_datadir/kde4/servicetypes/plasma_*
+%_kde_datadir/kde4/servicetypes/plasma-*
 %_kde_datadir/kde4/servicetypes/screensaver.desktop
 %_kde_datadir/sounds/pop.wav
 %_kde_datadir/wallpapers
