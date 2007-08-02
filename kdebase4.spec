@@ -1,6 +1,6 @@
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 695647
+%define revision 695685
 
 Name: kdebase4
 Summary: K Desktop Environment
@@ -347,8 +347,6 @@ KDE 4 application runtime components.
 %_kde_docdir/*/*/visualdict
 %_kde_docdir/*/*/quickstart
 %_kde_docdir/*/*/kdebugdialog
-%exclude %_kde_datadir/icons/*/*/*/wine*
-%exclude %_kde_datadir/icons/*/*/*/acroread*
 
 #------------------------------------------------	
 
