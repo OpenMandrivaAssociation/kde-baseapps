@@ -1,11 +1,11 @@
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 695685
+%define revision 700912
 
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 3.92.0
-Release: %mkrel 0.%revision.1
+Release: %mkrel 0.%revision.2
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -68,6 +68,7 @@ Requires: kde4-keditbookmarks
 Requires: kde4-kfind
 Requires: kde4-kdialog
 Requires: kde4-kdm
+Requires: phonon-xine
 BuildRoot: %_tmppath/%name-%version-%release-root
 
 %description
@@ -75,6 +76,24 @@ Meta package that requires all base kdebase 4 files
 
 %files
 %doc README
+
+#--------------------------------------------------------------
+
+%package -n oxygen-icon-theme
+Group: Graphical desktop/KDE
+Summary: Oxygen icon theme
+Provides: kde4-icon-theme
+Obsoletes: kdelibs4-common >= 30000000:3.80.3
+
+%description -n oxygen-icon-theme
+Oxygen KDE 4 icon theme. Complains with FreeDesktop.org naming schema
+
+%files -n oxygen-icon-theme
+%defattr(-,root,root,-)
+%dir %_kde_iconsdir/oxygen
+%_kde_iconsdir/*/index.theme
+%_kde_iconsdir/*/*/*/*
+%_kde_datadir/emoticons/*
 
 #-----------------------------------------------------------------------------
 
@@ -85,6 +104,7 @@ Requires: kdelibs4-core
 Requires: oxygen-icon-theme
 Obsoletes: kdebase4-progs
 Obsoletes: kdebase4-core 
+Obsoletes: kdebase4-common <= 1:3.80.3
 
 %description runtime
 KDE 4 application runtime components.
@@ -110,10 +130,7 @@ KDE 4 application runtime components.
 %_kde_appsdir/kio_man/kio_man.css
 %_kde_appsdir/kjobviewer
 %_kde_appsdir/konqueror/dirtree/remote/smb-network.desktop
-%_kde_appsdir/konqueror/servicemenus/media_eject.desktop
-%_kde_appsdir/konqueror/servicemenus/media_mount.desktop
-%_kde_appsdir/konqueror/servicemenus/media_safelyremove.desktop
-%_kde_appsdir/konqueror/servicemenus/media_unmount.desktop
+%_kde_appsdir/konqueror/servicemenus/media_*
 %_kde_appsdir/kuiserver/icons/crystalsvg/16x16/apps/kio_uiserver.png
 %_kde_appsdir/remoteview/smb-network.desktop
 %_kde_appsdir/Settingsmenu
@@ -129,6 +146,7 @@ KDE 4 application runtime components.
 %_kde_datadir/kde4/services/kded/solid*
 %_kde_datadir/kde4/services/nepomuk/nepomuk-coreservices.desktop
 %_kde_bindir/drkonqi
+%_kde_bindir/ksvgtopng
 %_kde_bindir/imagetops
 %_kde_bindir/kcmshell
 %_kde_bindir/kcontrol
@@ -394,6 +412,7 @@ KDE 4 core library.
 Summary: KDE 4 core library
 Group: System/Libraries
 Obsoletes: %{_lib}kdecorations5
+Obsoletes: %{_lib}kdebase46 <= 1:3.80.3
 
 %description -n %libkdecorations
 KDE 4 core library.
@@ -413,6 +432,7 @@ KDE 4 core library.
 Summary: KDE 4 core library
 Group: System/Libraries
 Obsoletes: %{_lib}kfontinst5
+Obsoletes: kdebase4-common <= 1:3.80.3
 
 %description -n %libkfontinst
 KDE 4 core library.
@@ -541,6 +561,7 @@ KDE 4 core library.
 %package -n %libplasma
 Summary: KDE 4 core library
 Group: System/Libraries
+Obsoletes: %{_lib}kdebase46 <= 1:3.80.3
 
 %description -n %libplasma
 KDE 4 core library.
@@ -598,6 +619,7 @@ KDE 4 core library.
 Summary: KDE 4 core library
 Group: System/Libraries
 Obsoletes: %{_lib}taskbar5
+Obsoletes: %{_lib}kdebase46 <= 1:3.80.3
 
 %description -n %libtaskbar
 KDE 4 core library.
@@ -641,6 +663,7 @@ Requires: xmessage
 Requires: xprop
 Requires: xset
 Obsoletes: kdebase4-progs
+Obsoletes: kdebase4-common <= 1:3.80.3
 
 %description workspace
 KDE 4 application workspace components.
@@ -779,6 +802,7 @@ KDE 4 application workspace components.
 %_kde_datadir/applications/kde4/krandrtray.desktop
 %_kde_datadir/applications/kde4/ksysguard.desktop
 %_kde_datadir/applications/kde4/ktip.desktop
+%_kde_appsdir/kfontinst
 %_kde_appsdir/desktoptheme
 %_kde_appsdir/kcontroledit
 %_kde_appsdir/kaccess/kaccess.notifyrc
@@ -799,19 +823,6 @@ KDE 4 application workspace components.
 %_kde_appsdir/kdewizard/pics/wizard_small.png
 %_kde_appsdir/kdewizard/tips
 %_kde_appsdir/kdisplay
-%_kde_appsdir/kfontinst/bin/kio_fonts_helper
-%_kde_appsdir/kfontinst/icons/crystalsvg/16x16/actions/disablefont.png
-%_kde_appsdir/kfontinst/icons/crystalsvg/16x16/actions/enablefont.png
-%_kde_appsdir/kfontinst/icons/crystalsvg/16x16/actions/newfont.png
-%_kde_appsdir/kfontinst/icons/crystalsvg/22x22/actions/disablefont.png
-%_kde_appsdir/kfontinst/icons/crystalsvg/22x22/actions/enablefont.png
-%_kde_appsdir/kfontinst/icons/crystalsvg/22x22/actions/newfont.png
-%_kde_appsdir/kfontinst/icons/crystalsvg/32x32/actions/disablefont.png
-%_kde_appsdir/kfontinst/icons/crystalsvg/32x32/actions/enablefont.png
-%_kde_appsdir/kfontinst/icons/crystalsvg/32x32/actions/newfont.png
-%_kde_appsdir/kfontinst/icons/oxygen/scalable/actions/disablefont.svgz
-%_kde_appsdir/kfontinst/icons/oxygen/scalable/actions/enablefont.svgz
-%_kde_appsdir/kfontinst/kfontviewpart.rc
 %_kde_appsdir/kfontview/kfontviewui.rc
 %_kde_appsdir/khotkeys/kde32b1.khotkeys
 %_kde_appsdir/khotkeys/konqueror_gestures_kde321.khotkeys
@@ -1127,11 +1138,6 @@ KDE 4 core library.
 %_kde_appsdir/kbookmark/directory_bookmarkbar.desktop
 %_kde_appsdir/kconf_update/favicons.upd
 %_kde_appsdir/kconf_update/move_favicons.sh
-%_kde_appsdir/konqueror/pics/arrow_bottomleft.png
-%_kde_appsdir/konqueror/pics/arrow_bottomright.png
-%_kde_appsdir/konqueror/pics/arrow_topleft.png
-%_kde_appsdir/konqueror/pics/arrow_topright.png
-%_kde_appsdir/konqueror/pics/thumbnailfont_7x4.png
 %_kde_datadir/kde4/services/kded/favicons.desktop
 %_kde_datadir/kde4/servicetypes/konqpopupmenuplugin.desktop
 
@@ -1143,6 +1149,7 @@ KDE 4 core library.
 Summary: KDE 4 core library
 Group: System/Libraries
 Obsoletes: %{_lib}konqsidebarplugin5
+Obsoletes: %{_lib}kdebase46 <= 1:3.80.3
 
 %description -n %libkonqsidebarplugin
 KDE 4 core library.
@@ -1216,31 +1223,6 @@ KDE Browser
 %_kde_appsdir/konqlistview/kpartplugins/kshellcmdplugin.desktop
 %_kde_appsdir/konqlistview/kpartplugins/kshellcmdplugin.rc
 %_kde_appsdir/konqsidebartng
-%_kde_appsdir/konqueror/about
-%_kde_appsdir/konqueror/icons
-%_kde_appsdir/konqueror/konq-simplebrowser.rc
-%_kde_appsdir/konqueror/konqueror.rc
-%_kde_appsdir/konqueror/pics
-%_kde_appsdir/konqueror/profiles
-%_kde_appsdir/konqueror/servicemenus/text-ada-print.desktop
-%_kde_appsdir/konqueror/servicemenus/text-c++-print.desktop
-%_kde_appsdir/konqueror/servicemenus/text-c++h-print.desktop
-%_kde_appsdir/konqueror/servicemenus/text-ch-print.desktop
-%_kde_appsdir/konqueror/servicemenus/text-css-print.desktop
-%_kde_appsdir/konqueror/servicemenus/text-diff-print.desktop
-%_kde_appsdir/konqueror/servicemenus/text-html-print.desktop
-%_kde_appsdir/konqueror/servicemenus/text-java-print.desktop
-%_kde_appsdir/konqueror/servicemenus/text-log-print.desktop
-%_kde_appsdir/konqueror/servicemenus/text-makefile-print.desktop
-%_kde_appsdir/konqueror/servicemenus/text-pas-print.desktop
-%_kde_appsdir/konqueror/servicemenus/text-perl-print.desktop
-%_kde_appsdir/konqueror/servicemenus/text-print.desktop
-%_kde_appsdir/konqueror/servicemenus/text-python-print.desktop
-%_kde_appsdir/konqueror/servicemenus/text-tcl-print.desktop
-%_kde_appsdir/konqueror/servicemenus/text-tex-print.desktop
-%_kde_appsdir/konqueror/servicemenus/text-xml-print.desktop
-%_kde_appsdir/konqueror/servicemenus/text-xslt-print.desktop
-%_kde_appsdir/konqueror/tiles
 %_kde_datadir/autostart/konqy_preload.desktop
 %_kde_datadir/config/konqsidebartng.rc
 %_kde_datadir/kde4/services/cache.desktop
@@ -1275,6 +1257,11 @@ KDE Browser
 %_kde_datadir/kde4/servicetypes/konqaboutpage.desktop
 %_kde_datadir/kde4/servicetypes/uasprovider.desktop
 %_kde_docdir/*/*/konqueror
+%_kde_appsdir/konqueror
+%exclude %_kde_appsdir/konqueror/dirtree/remote/smb-network.desktop
+%exclude %_kde_appsdir/konqueror/servicemenus/media_*
+%exclude %_kde_appsdir/konqueror/servicemenus/installfont.desktop
+%exclude %_kde_appsdir/konqueror/servicemenus/konsolehere.desktop
 
 #-----------------------------------------------------------------------------
 
@@ -1327,6 +1314,24 @@ Dialog KDE base widgets
 %files -n kde4-kdialog
 %defattr(-,root,root)
 %_kde_bindir/kdialog
+
+#-----------------------------------------------------------------------------
+
+%package -n phonon-xine
+Summary: Xine backend to Phonon
+Group: Sound
+BuildRequires: libxine-devel
+Obsoletes: kde4-phonon-xine
+
+%description -n phonon-xine
+Xine backend to Phonon.
+
+%files -n phonon-xine
+%defattr(-,root,root)
+%_kde_libdir/kde4/kcm_phononxine.so
+%_kde_libdir/kde4/phonon_xine.so
+%_kde_datadir/kde4/services/kcm_phononxine.desktop
+%_kde_datadir/kde4/services/phononbackends/xine.desktop
 
 #-----------------------------------------------------------------------------
 
