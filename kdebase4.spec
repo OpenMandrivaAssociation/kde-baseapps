@@ -1,6 +1,6 @@
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 700912
+%define revision 702959
 
 Name: kdebase4
 Summary: K Desktop Environment
@@ -54,6 +54,7 @@ BuildRequires: networkmanager-devel
 BuildRequires: bluez-devel
 BuildRequires: boost-devel
 BuildRequires: xrdb
+BuildRequires: blitz-devel
 Requires: kdebase4-runtime
 Requires: kdebase4-workspace
 Requires: kde4-kdeprintfax
