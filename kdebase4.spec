@@ -1,6 +1,6 @@
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 702959
+%define revision 704399
 
 Name: kdebase4
 Summary: K Desktop Environment
@@ -427,45 +427,6 @@ KDE 4 core library.
 
 #------------------------------------------------
 
-%define libkfontinst %mklibname kfontinst 4
-
-%package -n %libkfontinst
-Summary: KDE 4 core library
-Group: System/Libraries
-Obsoletes: %{_lib}kfontinst5
-Obsoletes: kdebase4-common <= 1:3.80.3
-
-%description -n %libkfontinst
-KDE 4 core library.
-
-%post -n %libkfontinst -p /sbin/ldconfig
-%postun -n %libkfontinst -p /sbin/ldconfig
-
-%files -n %libkfontinst
-%defattr(-,root,root)
-%_kde_libdir/libkfontinst.so.*
-
-#------------------------------------------------
-
-%define libkfontinstui %mklibname kfontinstui 4
-
-%package -n %libkfontinstui
-Summary: KDE 4 core library
-Group: System/Libraries
-Obsoletes: %{_lib}kfontinstui5
-
-%description -n %libkfontinstui
-KDE 4 core library.
-
-%post -n %libkfontinstui -p /sbin/ldconfig
-%postun -n %libkfontinstui -p /sbin/ldconfig
-
-%files -n %libkfontinstui
-%defattr(-,root,root)
-%_kde_libdir/libkfontinstui.so.*
-
-#------------------------------------------------
-
 %define libkickermain %mklibname kickermain 2
 
 %package -n %libkickermain
@@ -689,9 +650,6 @@ KDE 4 application workspace components.
 %_kde_bindir/kcontroledit
 %_kde_bindir/kdeinstallktheme
 %_kde_bindir/kdostartupconfig
-%_kde_bindir/kfontinst
-%_kde_bindir/kfontprint
-%_kde_bindir/kfontview
 %_kde_bindir/khotkeys
 %_kde_bindir/kicker
 %_kde_bindir/klipper
@@ -727,7 +685,6 @@ KDE 4 application workspace components.
 %_kde_libdir/kde4/kcm_kwincompositing.so
 %_kde_libdir/kde4/krunner_*
 %_kde_libdir/kde4/dockbar_panelextension.so
-%_kde_libdir/kde4/fontthumbnail.so
 %_kde_libdir/kde4/kcm_access.so
 %_kde_libdir/kde4/kcm_accessibility.so
 %_kde_libdir/kde4/kcm_background.so
@@ -736,8 +693,6 @@ KDE 4 application workspace components.
 %_kde_libdir/kde4/kcm_colors.so
 %_kde_libdir/kde4/kcm_display.so
 %_kde_libdir/kde4/kcm_energy.so
-%_kde_libdir/kde4/kcm_fontinst.so
-%_kde_libdir/kde4/kcm_fonts.so
 %_kde_libdir/kde4/kcm_info.so
 %_kde_libdir/kde4/kcm_input.so
 %_kde_libdir/kde4/kcm_joystick.so
@@ -764,13 +719,11 @@ KDE 4 application workspace components.
 %_kde_libdir/kde4/kgreet_classic.so
 %_kde_libdir/kde4/kgreet_winbind.so
 %_kde_libdir/kde4/kickermenu_*
-%_kde_libdir/kde4/kio_fonts.so
 %_kde_libdir/kde4/kstyle_keramik_config.so
 %_kde_libdir/kde4/kwin3_*
 %_kde_libdir/kde4/kwin4_*
 %_kde_libdir/kde4/kwin_*
 %_kde_libdir/kde4/libexec/test_kcm_xinerama
-%_kde_libdir/kde4/libkfontviewpart.so
 %_kde_libdir/kde4/lockout_panelapplet.so
 %_kde_libdir/kde4/media_panelapplet.so
 %_kde_libdir/kde4/menu_panelapplet.so
@@ -795,15 +748,15 @@ KDE 4 application workspace components.
 %_kde_libdir/libkdeinit4_kwin.so
 %_kde_libdir/libkdeinit4_kwin_rules_dialog.so
 %_kde_libdir/libkdeinit4_kxkb.so
-%_kde_libdir/strigi/strigita_font.so
-%_kde_datadir/applications/kde4/kfontview.desktop
+%_kde_libdir/kde4/kcm_fonts.so
+%_kde_datadir/kde4/services/fonts.desktop
+%_kde_datadir/kde4/services/khtml_fonts.desktop
 %_kde_datadir/applications/kde4/klipper.desktop
 %_kde_datadir/applications/kde4/kmenuedit.desktop
 %_kde_datadir/applications/kde4/kpager.desktop
 %_kde_datadir/applications/kde4/krandrtray.desktop
 %_kde_datadir/applications/kde4/ksysguard.desktop
 %_kde_datadir/applications/kde4/ktip.desktop
-%_kde_appsdir/kfontinst
 %_kde_appsdir/desktoptheme
 %_kde_appsdir/kcontroledit
 %_kde_appsdir/kaccess/kaccess.notifyrc
@@ -824,7 +777,6 @@ KDE 4 application workspace components.
 %_kde_appsdir/kdewizard/pics/wizard_small.png
 %_kde_appsdir/kdewizard/tips
 %_kde_appsdir/kdisplay
-%_kde_appsdir/kfontview/kfontviewui.rc
 %_kde_appsdir/khotkeys/kde32b1.khotkeys
 %_kde_appsdir/khotkeys/konqueror_gestures_kde321.khotkeys
 %_kde_appsdir/kicker
@@ -834,8 +786,6 @@ KDE 4 application workspace components.
 %_kde_appsdir/kmenuedit/icons/crystalsvg/32x32/actions/menu_new_sep.png
 %_kde_appsdir/kmenuedit/icons/locolor/16x16/actions/menu_new.png
 %_kde_appsdir/kmenuedit/kmenueditui.rc
-%_kde_appsdir/konqsidebartng/virtual_folders/services/fonts.desktop
-%_kde_appsdir/konqueror/servicemenus/installfont.desktop
 %_kde_appsdir/ksmserver/pics/shutdownkonq.png
 %_kde_appsdir/ksplash
 %_kde_appsdir/ksysguard/KSysGuardApplet.xml
@@ -892,10 +842,6 @@ KDE 4 application workspace components.
 %_kde_datadir/kde4/services/display.desktop
 %_kde_datadir/kde4/services/dma.desktop
 %_kde_datadir/kde4/services/energy.desktop
-%_kde_datadir/kde4/services/fontinst.desktop
-%_kde_datadir/kde4/services/fonts.desktop
-%_kde_datadir/kde4/services/fonts.protocol
-%_kde_datadir/kde4/services/fontthumbnail.desktop
 %_kde_datadir/kde4/services/installktheme.desktop
 %_kde_datadir/kde4/services/interrupts.desktop
 %_kde_datadir/kde4/services/ioports.desktop
@@ -911,7 +857,6 @@ KDE 4 application workspace components.
 %_kde_datadir/kde4/services/keyboard.desktop
 %_kde_datadir/kde4/services/keyboard_layout.desktop
 %_kde_datadir/kde4/services/keys.desktop
-%_kde_datadir/kde4/services/kfontviewpart.desktop
 %_kde_datadir/kde4/services/khotkeys.desktop
 %_kde_datadir/kde4/services/ksplashthememgr.desktop
 %_kde_datadir/kde4/services/kthememanager.desktop
@@ -1242,7 +1187,6 @@ KDE Browser
 %_kde_datadir/kde4/services/kded/konqy_preloader.desktop
 %_kde_datadir/kde4/services/khtml_behavior.desktop
 %_kde_datadir/kde4/services/khtml_filter.desktop
-%_kde_datadir/kde4/services/khtml_fonts.desktop
 %_kde_datadir/kde4/services/khtml_general.desktop
 %_kde_datadir/kde4/services/khtml_java_js.desktop
 %_kde_datadir/kde4/services/konq_aboutpage.desktop
@@ -1261,7 +1205,6 @@ KDE Browser
 %_kde_appsdir/konqueror
 %exclude %_kde_appsdir/konqueror/dirtree/remote/smb-network.desktop
 %exclude %_kde_appsdir/konqueror/servicemenus/media_*
-%exclude %_kde_appsdir/konqueror/servicemenus/installfont.desktop
 %exclude %_kde_appsdir/konqueror/servicemenus/konsolehere.desktop
 
 #-----------------------------------------------------------------------------
@@ -1370,8 +1313,6 @@ Requires: kdelibs4-devel
 Requires: %libsolidcontrolifaces = %epoch:%version
 Requires: %libsolidcontrol = %epoch:%version
 Requires: %libkdecorations = %epoch:%version
-Requires: %libkfontinst = %epoch:%version
-Requires: %libkfontinstui = %epoch:%version
 Requires: %libkickermain = %epoch:%version
 Requires: %libkscreensaver = %epoch:%version
 Requires: %libksgrd = %epoch:%version
