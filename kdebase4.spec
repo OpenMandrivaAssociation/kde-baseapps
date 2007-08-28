@@ -1,6 +1,6 @@
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 704399
+%define revision 705487
 
 Name: kdebase4
 Summary: K Desktop Environment
@@ -54,7 +54,7 @@ BuildRequires: networkmanager-devel
 BuildRequires: bluez-devel
 BuildRequires: boost-devel
 BuildRequires: xrdb
-BuildRequires: blitz-devel
+BuildRequires: qimageblitz-devel
 Requires: kdebase4-runtime
 Requires: kdebase4-workspace
 Requires: kde4-kdeprintfax
@@ -144,6 +144,9 @@ KDE 4 application runtime components.
 %_kde_libdir/kde4/kcm_solid.so
 %_kde_libdir/kde4/solid_*
 %_kde_libdir/kde4/kded_solid*
+%_kde_libdir/kde4/kstyle_*
+%_kde_appsdir/kstyle
+%_kde_libdir/kde4/plugins/styles
 %_kde_datadir/kde4/services/kded/solid*
 %_kde_datadir/kde4/services/nepomuk/nepomuk-coreservices.desktop
 %_kde_bindir/drkonqi
@@ -316,6 +319,8 @@ KDE 4 application runtime components.
 %_kde_libdir/kde4/kded_mediamanager.so
 %_kde_libdir/kde4/kded_medianotifier.so
 %_kde_libdir/kde4/kded_remotedirnotify.so
+%_kde_libdir/kde4/kio_sftp.so
+%_kde_datadir/kde4/services/sftp* 
 %_kde_libdir/kde4/kio_about.so
 %_kde_libdir/kde4/kio_cgi.so
 %_kde_libdir/kde4/kio_filter.so
@@ -575,6 +580,46 @@ KDE 4 core library.
 
 #------------------------------------------------
 
+%define libkfontinstui %mklibname kfontinstui 4
+
+%package -n %libkfontinstui
+Summary: KDE 4 core library
+Group: System/Libraries
+Obsoletes: %{_lib}kfontinstui5
+Obsoletes: %{_lib}kdebase46 <= 1:3.80.3
+
+%description -n %libkfontinstui
+KDE 4 core library.
+
+%post -n %libkfontinstui -p /sbin/ldconfig
+%postun -n %libkfontinstui -p /sbin/ldconfig
+
+%files -n %libkfontinstui
+%defattr(-,root,root)
+%_kde_libdir/libkfontinstui.so.*
+
+#------------------------------------------------
+
+%define libkfontinst %mklibname kfontinst 4
+
+%package -n %libkfontinst
+Summary: KDE 4 core library
+Group: System/Libraries
+Obsoletes: %{_lib}kfontinst5
+Obsoletes: %{_lib}kdebase46 <= 1:3.80.3
+
+%description -n %libkfontinst
+KDE 4 core library.
+
+%post -n %libkfontinst -p /sbin/ldconfig
+%postun -n %libkfontinst -p /sbin/ldconfig
+
+%files -n %libkfontinst
+%defattr(-,root,root)
+%_kde_libdir/libkfontinst.so.*
+
+#------------------------------------------------
+
 %define libtaskbar %mklibname taskbar 4
 
 %package -n %libtaskbar
@@ -672,6 +717,15 @@ KDE 4 application workspace components.
 %_kde_bindir/kwin_killer_helper
 %_kde_bindir/kwin_rules_dialog
 %_kde_bindir/kxkb
+%_kde_bindir/kfontinst
+%_kde_bindir/kfontprint
+%_kde_bindir/kfontview
+%_kde_datadir/applications/kde4/kfontview.desktop
+%_kde_appsdir/kfontinst
+%_kde_appsdir/kfontview
+%_kde_libdir/strigi/strigita_font.*
+%_kde_datadir/kde4/services/*font*
+%_kde_bindir/kio_fonts_helper
 %_kde_bindir/plasma
 %_kde_bindir/plasmaengineexplorer
 %_kde_bindir/startkde
@@ -682,9 +736,9 @@ KDE 4 application workspace components.
 %_kde_prefix/env
 %_kde_prefix/shutdown
 %_kde_configdir/ksysguarddrc
+%_kde_libdir/kde4/libkfontviewpart.so
 %_kde_libdir/kde4/kcm_kwincompositing.so
 %_kde_libdir/kde4/krunner_*
-%_kde_libdir/kde4/dockbar_panelextension.so
 %_kde_libdir/kde4/kcm_access.so
 %_kde_libdir/kde4/kcm_accessibility.so
 %_kde_libdir/kde4/kcm_background.so
@@ -719,21 +773,16 @@ KDE 4 application workspace components.
 %_kde_libdir/kde4/kgreet_classic.so
 %_kde_libdir/kde4/kgreet_winbind.so
 %_kde_libdir/kde4/kickermenu_*
-%_kde_libdir/kde4/kstyle_keramik_config.so
 %_kde_libdir/kde4/kwin3_*
 %_kde_libdir/kde4/kwin4_*
 %_kde_libdir/kde4/kwin_*
-%_kde_libdir/kde4/libexec/test_kcm_xinerama
-%_kde_libdir/kde4/lockout_panelapplet.so
-%_kde_libdir/kde4/media_panelapplet.so
-%_kde_libdir/kde4/menu_panelapplet.so
-%_kde_libdir/kde4/naughty_panelapplet.so
+%_kde_libdir/kde4/fontthumbnail.so
+%_kde_libdir/kde4/kcm_fontinst.so
+%_kde_libdir/kde4/kio_fonts.so
+%_kde_libdir/kde4/*_panelapplet.so
 %_kde_libdir/kde4/plasma_*
-%_kde_libdir/kde4/run_panelapplet.so
-%_kde_libdir/kde4/sidebar_panelextension.so
-%_kde_libdir/kde4/systemtray_panelapplet.so
-%_kde_libdir/kde4/taskbar_panelapplet.so
-%_kde_libdir/kde4/trash_panelapplet.so
+%_kde_libdir/kde4/*_panelextension.so
+%_kde_libdir/kde4/libexec/test_kcm_xinerama
 %_kde_libdir/libkdeinit4_appletproxy.so
 %_kde_libdir/libkdeinit4_kaccess.so
 %_kde_libdir/libkdeinit4_kcminit.so
@@ -749,8 +798,6 @@ KDE 4 application workspace components.
 %_kde_libdir/libkdeinit4_kwin_rules_dialog.so
 %_kde_libdir/libkdeinit4_kxkb.so
 %_kde_libdir/kde4/kcm_fonts.so
-%_kde_datadir/kde4/services/fonts.desktop
-%_kde_datadir/kde4/services/khtml_fonts.desktop
 %_kde_datadir/applications/kde4/klipper.desktop
 %_kde_datadir/applications/kde4/kmenuedit.desktop
 %_kde_datadir/applications/kde4/kpager.desktop
