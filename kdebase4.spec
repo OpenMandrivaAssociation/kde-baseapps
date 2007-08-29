@@ -1,11 +1,11 @@
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 705487
+%define revision 706306
 
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 3.92.0
-Release: %mkrel 0.%revision.2
+Release: %mkrel 0.%revision.1
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -114,7 +114,6 @@ KDE 4 application runtime components.
 %defattr(-,root,root)
 %_sysconfdir/profile.d/*
 %_datadir/dbus-1/services/*
-%_kde_datadir/icons/*/*/*/*
 %_kde_appsdir/drkonqi
 %_kde_appsdir/kcm_componentchooser
 %_kde_appsdir/kcmlocale
@@ -132,7 +131,10 @@ KDE 4 application runtime components.
 %_kde_appsdir/kjobviewer
 %_kde_appsdir/konqueror/dirtree/remote/smb-network.desktop
 %_kde_appsdir/konqueror/servicemenus/media_*
-%_kde_appsdir/kuiserver/icons/crystalsvg/16x16/apps/kio_uiserver.png
+%_kde_bindir/kuiserver
+%_kde_appsdir/kuiserver
+%_kde_datadir/kde4/services/kuiserver.desktop
+%_kde_libdir/libkdeinit4_kuiserver.so
 %_kde_appsdir/remoteview/smb-network.desktop
 %_kde_appsdir/Settingsmenu
 %_kde_appsdir/solidfakebluetoothbackend
@@ -153,7 +155,6 @@ KDE 4 application runtime components.
 %_kde_bindir/ksvgtopng
 %_kde_bindir/imagetops
 %_kde_bindir/kcmshell
-%_kde_bindir/kcontrol
 %_kde_bindir/kde4-menu
 %_kde_bindir/kdebugdialog
 %_kde_bindir/kde-cp
@@ -186,7 +187,6 @@ KDE 4 application runtime components.
 %_kde_bindir/kstart
 %_kde_bindir/ktraderclient
 %_kde_bindir/ktrash
-%_kde_bindir/kuiserver
 %_kde_bindir/kwriteconfig
 %_kde_libdir/kconf_update_bin/khotkeys_update
 %_kde_libdir/kconf_update_bin/kicker-3.4-reverseLayout
@@ -248,7 +248,6 @@ KDE 4 application runtime components.
 %_kde_datadir/kde4/services/kcmkded.desktop
 %_kde_datadir/kde4/services/kcm_kdnssd.desktop
 %_kde_datadir/kde4/services/kcmnotify.desktop
-%_kde_datadir/kde4/services/KControl.desktop
 %_kde_datadir/kde4/services/kded/ktimezoned.desktop
 %_kde_datadir/kde4/services/kded/mediamanager.desktop
 %_kde_datadir/kde4/services/kded/medianotifier.desktop
@@ -259,7 +258,6 @@ KDE 4 application runtime components.
 %_kde_datadir/kde4/services/kmanpart.desktop
 %_kde_datadir/kde4/services/knotify4.desktop
 %_kde_datadir/kde4/services/kshorturifilter.desktop
-%_kde_datadir/kde4/services/kuiserver.desktop
 %_kde_datadir/kde4/services/kuriikwsfilter.desktop
 %_kde_datadir/kde4/services/kurisearchfilter.desktop
 %_kde_datadir/kde4/services/language.desktop
@@ -354,12 +352,10 @@ KDE 4 application runtime components.
 %_kde_bindir/nepomukcoreservices
 %_kde_bindir/nepomukdaemon
 %_kde_libdir/libkdeinit4_kcmshell.so
-%_kde_libdir/libkdeinit4_kcontrol.so
 %_kde_libdir/libkdeinit4_khelpcenter.so
 %_kde_libdir/libkdeinit4_kinfocenter.so
 %_kde_libdir/libkdeinit4_kjobviewer.so
 %_kde_libdir/libkdeinit4_kprinter.so
-%_kde_libdir/libkdeinit4_kuiserver.so
 %_kde_docdir/*/*/faq
 %_kde_docdir/*/*/kcontrol
 %_kde_docdir/*/*/glossary
