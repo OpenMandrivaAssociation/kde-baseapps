@@ -1,10 +1,10 @@
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 706867
+%define revision 707020
 
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 3.92.0
+Version: 3.93.0
 Release: %mkrel 0.%revision.1
 Epoch: 1
 Group: Graphical desktop/KDE
@@ -15,9 +15,6 @@ Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.%revision
 %else
 Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 %endif
-Source1: kde4.sh
-Source2: dmkde4start
-Source3: kde4-wallpaper-mandriva.svg
 BuildConflicts: lm_utils
 BuildConflicts: lm_utils-devel
 BuildConflicts: liblm_sensors1
@@ -56,7 +53,6 @@ BuildRequires: boost-devel
 BuildRequires: xrdb
 BuildRequires: qimageblitz-devel
 Requires: kdebase4-runtime
-Requires: kdebase4-workspace
 Requires: kde4-kdeprintfax
 Requires: kde4-kappfinder
 Requires: kde4-konsole
@@ -68,7 +64,6 @@ Requires: kde4-konqueror
 Requires: kde4-keditbookmarks
 Requires: kde4-kfind
 Requires: kde4-kdialog
-Requires: kde4-kdm
 Requires: phonon-xine
 BuildRoot: %_tmppath/%name-%version-%release-root
 
@@ -106,21 +101,21 @@ Requires: oxygen-icon-theme
 Obsoletes: kdebase4-progs
 Obsoletes: kdebase4-core 
 Obsoletes: kdebase4-common <= 1:3.80.3
+Conflicts: kdebase4-workspace < 1:3.93.0 
 
 %description runtime
 KDE 4 application runtime components.
 
 %files runtime
 %defattr(-,root,root)
-%_sysconfdir/profile.d/*
 %_datadir/dbus-1/services/*
+%_kde_prefix/env/nepomuk.sh
 %_kde_appsdir/drkonqi
 %_kde_appsdir/kcm_componentchooser
 %_kde_appsdir/kcmlocale
 %_kde_appsdir/kde
 %_kde_appsdir/kdeprint
 %_kde_appsdir/kdeprint_part
-%_kde_appsdir/khelpcenter
 %_kde_appsdir/kinfocenter
 %_kde_appsdir/kcontrol
 %_kde_appsdir/kio_finger/kio_finger.css
@@ -137,20 +132,13 @@ KDE 4 application runtime components.
 %_kde_libdir/libkdeinit4_kuiserver.so
 %_kde_appsdir/remoteview/smb-network.desktop
 %_kde_appsdir/Settingsmenu
-%_kde_appsdir/solidfakebluetoothbackend
-%_kde_appsdir/solidfakenetbackend
-%_kde_bindir/solidshell
-%_kde_datadir/kde4/services/kcm_solid.desktop
-%_kde_datadir/kde4/services/solidbackends
-%_kde_datadir/kde4/servicetypes/solid*
-%_kde_libdir/kde4/kcm_solid.so
-%_kde_libdir/kde4/solid_*
-%_kde_libdir/kde4/kded_solid*
 %_kde_libdir/kde4/kstyle_*
 %_kde_appsdir/kstyle
 %_kde_libdir/kde4/plugins/styles
-%_kde_datadir/kde4/services/kded/solid*
-%_kde_datadir/kde4/services/nepomuk/nepomuk-coreservices.desktop
+%_kde_datadir/kde4/services/kded/soliduiserver.desktop
+%_kde_libdir/kde4/kded_soliduiserver.so
+%_kde_datadir/apps/kdm
+%_kde_datadir/kde4/services/khtml_fonts.desktop
 %_kde_bindir/drkonqi
 %_kde_bindir/ksvgtopng
 %_kde_bindir/imagetops
@@ -169,7 +157,6 @@ KDE 4 application runtime components.
 %_kde_bindir/khc_htsearch.pl
 %_kde_bindir/khc_indexbuilder
 %_kde_bindir/khc_mansearch.pl
-%_kde_bindir/khelpcenter
 %_kde_bindir/khotnewstuff
 %_kde_bindir/kinfocenter
 %_kde_bindir/kinstalltheme
@@ -180,6 +167,8 @@ KDE 4 application runtime components.
 %_kde_bindir/klocaldomainurifilterhelper
 %_kde_bindir/kmimetypefinder
 %_kde_bindir/knetattach
+%_kde_datadir/applications/kde4/knetattach.desktop
+%_kde_docdir/*/*/knetattach
 %_kde_bindir/knotify4
 %_kde_bindir/kprinter
 %_kde_bindir/kquitapp
@@ -188,40 +177,11 @@ KDE 4 application runtime components.
 %_kde_bindir/ktraderclient
 %_kde_bindir/ktrash
 %_kde_bindir/kwriteconfig
-%_kde_libdir/kconf_update_bin/khotkeys_update
-%_kde_libdir/kconf_update_bin/kicker-3.4-reverseLayout
-%_kde_libdir/kconf_update_bin/kwin_update_default_rules
-%_kde_libdir/kconf_update_bin/kwin_update_window_settings
-%_kde_appsdir/kconf_update/convertShortcuts.pl
-%_kde_appsdir/kconf_update/kaccel.upd
-%_kde_appsdir/kconf_update/kcmdisplayrc.upd
-%_kde_appsdir/kconf_update/khotkeys_32b1_update.upd
-%_kde_appsdir/kconf_update/kicker-3.1-properSizeSetting.pl
-%_kde_appsdir/kconf_update/kicker-3.5-kconfigXTize.pl
-%_kde_appsdir/kconf_update/kicker-3.5-taskbarEnums.pl
-%_kde_appsdir/kconf_update/kickerrc.upd
-%_kde_appsdir/kconf_update/klipper-1-2.pl
-%_kde_appsdir/kconf_update/klipper-kde31.sh
-%_kde_appsdir/kconf_update/klipperrc.upd
-%_kde_appsdir/kconf_update/klippershortcuts.upd
-%_kde_appsdir/kconf_update/konqueror_gestures_kde321_update.upd
-%_kde_appsdir/kconf_update/ksmserver.upd
-%_kde_appsdir/kconf_update/kwin.upd
-%_kde_appsdir/kconf_update/kwin3_plugin.pl
-%_kde_appsdir/kconf_update/kwin3_plugin.upd
-%_kde_appsdir/kconf_update/kwin_*
-%_kde_appsdir/kconf_update/kwiniconify.upd
-%_kde_appsdir/kconf_update/kwinsticky.upd
-%_kde_appsdir/kconf_update/kwinupdatewindowsettings.upd
-%_kde_appsdir/kconf_update/mouse_cursor_theme.upd
-%_kde_appsdir/kconf_update/move_session_config.sh
-%_kde_appsdir/kconf_update/pluginlibFix.pl
 %_kde_configdir/xdg/menus/kde-information.menu
 %_kde_configdir/xdg/menus/kde-kcontrol.menu
 %_kde_configdir/xdg/menus/kde-settings.menu
 %_kde_datadir/applications/kde4/Help.desktop
 %_kde_datadir/applications/kde4/kjobviewer.desktop
-%_kde_datadir/applications/kde4/knetattach.desktop
 %_kde_datadir/config/khotnewstuffrc
 %_kde_datadir/config/kshorturifilterrc
 %_kde_datadir/desktop-directories
@@ -253,7 +213,6 @@ KDE 4 application runtime components.
 %_kde_datadir/kde4/services/kded/medianotifier.desktop
 %_kde_datadir/kde4/services/kded/remotedirnotify.desktop
 %_kde_datadir/kde4/services/kdeprint_part.desktop
-%_kde_datadir/kde4/services/khelpcenter.desktop
 %_kde_datadir/kde4/services/kinfocenter.desktop
 %_kde_datadir/kde4/services/kmanpart.desktop
 %_kde_datadir/kde4/services/knotify4.desktop
@@ -289,7 +248,6 @@ KDE 4 application runtime components.
 %_kde_datadir/kde4/services/thumbnail.protocol
 %_kde_datadir/kde4/services/trash.protocol
 %_kde_datadir/kde4/services/zip.protocol
-%_kde_datadir/kde4/services/kded/networkstatus.desktop
 %_kde_datadir/kde4/servicetypes/searchprovider.desktop
 %_kde_datadir/kde4/servicetypes/thumbcreator.desktop
 %_kde_datadir/locale/l10n/*/*
@@ -312,7 +270,6 @@ KDE 4 application runtime components.
 %_kde_libdir/kde4/kcm_printmgr.so
 %_kde_libdir/kde4/kcm_samba.so
 %_kde_libdir/kde4/kded_kpasswdserver.so
-%_kde_libdir/kde4/kded_networkstatus.so
 %_kde_libdir/kde4/kded_ktimezoned.so
 %_kde_libdir/kde4/kded_mediamanager.so
 %_kde_libdir/kde4/kded_medianotifier.so
@@ -351,8 +308,14 @@ KDE 4 application runtime components.
 %_kde_libdir/kde4/textthumbnail.so
 %_kde_bindir/nepomukcoreservices
 %_kde_bindir/nepomukdaemon
+%_kde_datadir/kde4/services/nepomuk/nepomuk-coreservices.desktop
+%_kde_prefix/shutdown/nepomuk.sh
 %_kde_libdir/libkdeinit4_kcmshell.so
 %_kde_libdir/libkdeinit4_khelpcenter.so
+%_kde_datadir/kde4/services/khelpcenter.desktop
+%_kde_bindir/khelpcenter
+%_kde_appsdir/khelpcenter
+%_kde_docdir/*/*/khelpcenter
 %_kde_libdir/libkdeinit4_kinfocenter.so
 %_kde_libdir/libkdeinit4_kjobviewer.so
 %_kde_libdir/libkdeinit4_kprinter.so
@@ -367,581 +330,6 @@ KDE 4 application runtime components.
 %_kde_docdir/*/*/visualdict
 %_kde_docdir/*/*/quickstart
 %_kde_docdir/*/*/kdebugdialog
-
-#------------------------------------------------	
-
-%define libsolidcontrolifaces %mklibname solidcontrolifaces 4
-
-%package -n %libsolidcontrolifaces
-Summary: KDE 4 core library
-Group: System/Libraries
-Obsoletes: %{_lib}solidcontrolifaces5
-
-%description -n %libsolidcontrolifaces
-KDE 4 core library.
-
-%post -n %libsolidcontrolifaces -p /sbin/ldconfig
-%postun -n %libsolidcontrolifaces -p /sbin/ldconfig
-
-%files -n %libsolidcontrolifaces
-%defattr(-,root,root)
-%_kde_libdir/libsolidcontrolifaces.so.*
-
-#------------------------------------------------	
-
-%define libsolidcontrol %mklibname solidcontrol 4
-
-%package -n %libsolidcontrol
-Summary: KDE 4 core library
-Group: System/Libraries
-Obsoletes: %{_lib}solidcontrol5
-
-%description -n %libsolidcontrol
-KDE 4 core library.
-
-%post -n %libsolidcontrol -p /sbin/ldconfig
-%postun -n %libsolidcontrol -p /sbin/ldconfig
-
-%files -n %libsolidcontrol
-%defattr(-,root,root)
-%_kde_libdir/libsolidcontrol.so.*
-
-#------------------------------------------------
-
-%define libkdecorations %mklibname kdecorations 4
-
-%package -n %libkdecorations
-Summary: KDE 4 core library
-Group: System/Libraries
-Obsoletes: %{_lib}kdecorations5
-Obsoletes: %{_lib}kdebase46 <= 1:3.80.3
-
-%description -n %libkdecorations
-KDE 4 core library.
-
-%post -n %libkdecorations -p /sbin/ldconfig
-%postun -n %libkdecorations -p /sbin/ldconfig
-
-%files -n %libkdecorations
-%defattr(-,root,root)
-%_kde_libdir/libkdecorations.so.*
-
-#------------------------------------------------
-
-%define libkickermain %mklibname kickermain 2
-
-%package -n %libkickermain
-Summary: KDE 4 core library
-Group: System/Libraries
-
-%description -n %libkickermain
-KDE 4 core library.
-
-%post -n %libkickermain -p /sbin/ldconfig
-%postun -n %libkickermain -p /sbin/ldconfig
-
-%files -n %libkickermain
-%defattr(-,root,root)
-%_kde_libdir/libkickermain.so.*
-
-#------------------------------------------------
-
-%define libkscreensaver %mklibname kscreensaver 5
-
-%package -n %libkscreensaver
-Summary: KDE 4 core library
-Group: System/Libraries
-
-%description -n %libkscreensaver
-KDE 4 core library.
-
-%post -n %libkscreensaver -p /sbin/ldconfig
-%postun -n %libkscreensaver -p /sbin/ldconfig
-
-%files -n %libkscreensaver
-%defattr(-,root,root)
-%_kde_libdir/libkscreensaver.so.*
-
-#------------------------------------------------
-
-%define libksgrd %mklibname ksgrd 4
-
-%package -n %libksgrd
-Summary: KDE 4 core library
-Group: System/Libraries
-
-%description -n %libksgrd
-KDE 4 core library.
-
-%post -n %libksgrd -p /sbin/ldconfig
-%postun -n %libksgrd -p /sbin/ldconfig
-
-%files -n %libksgrd
-%defattr(-,root,root)
-%_kde_libdir/libksgrd.so.*
-
-#------------------------------------------------
-
-%define libkwineffects %mklibname kwineffects 1
-
-%package -n %libkwineffects
-Summary: KDE 4 core library
-Group: System/Libraries
-
-%description -n %libkwineffects
-KDE 4 core library.
-
-%post -n %libkwineffects -p /sbin/ldconfig
-%postun -n %libkwineffects -p /sbin/ldconfig
-
-%files -n %libkwineffects
-%defattr(-,root,root)
-%_kde_libdir/libkwineffects.so.*
-
-#------------------------------------------------
-
-%define libkworkspace %mklibname kworkspace 4
-
-%package -n %libkworkspace
-Summary: KDE 4 core library
-Group: System/Libraries
-Obsoletes: %{_lib}kworkspace1
-
-%description -n %libkworkspace
-KDE 4 core library.
-
-%post -n %libkworkspace -p /sbin/ldconfig
-%postun -n %libkworkspace -p /sbin/ldconfig
-
-%files -n %libkworkspace
-%defattr(-,root,root)
-%_kde_libdir/libkworkspace.so.*
-
-#------------------------------------------------
-
-%define libplasma %mklibname plasma 1
-
-%package -n %libplasma
-Summary: KDE 4 core library
-Group: System/Libraries
-Obsoletes: %{_lib}kdebase46 <= 1:3.80.3
-
-%description -n %libplasma
-KDE 4 core library.
-
-%post -n %libplasma -p /sbin/ldconfig
-%postun -n %libplasma -p /sbin/ldconfig
-
-%files -n %libplasma
-%defattr(-,root,root)
-%_kde_libdir/libplasma.so.*
-
-#------------------------------------------------
-
-%define libprocesscore %mklibname processcore 4
-
-%package -n %libprocesscore
-Summary: KDE 4 core library
-Group: System/Libraries
-Obsoletes: %{_lib}processcore5
-
-%description -n %libprocesscore
-KDE 4 core library.
-
-%post -n %libprocesscore -p /sbin/ldconfig
-%postun -n %libprocesscore -p /sbin/ldconfig
-
-%files -n %libprocesscore
-%defattr(-,root,root)
-%_kde_libdir/libprocesscore.so.*
-
-#------------------------------------------------
-
-%define libprocessui %mklibname processui 4
-
-%package -n %libprocessui
-Summary: KDE 4 core library
-Group: System/Libraries
-Obsoletes: %{_lib}processui5
-
-%description -n %libprocessui
-KDE 4 core library.
-
-%post -n %libprocessui -p /sbin/ldconfig
-%postun -n %libprocessui -p /sbin/ldconfig
-
-%files -n %libprocessui
-%defattr(-,root,root)
-%_kde_libdir/libprocessui.so.*
-
-#------------------------------------------------
-
-%define libkfontinstui %mklibname kfontinstui 4
-
-%package -n %libkfontinstui
-Summary: KDE 4 core library
-Group: System/Libraries
-Obsoletes: %{_lib}kfontinstui5
-Obsoletes: %{_lib}kdebase46 <= 1:3.80.3
-
-%description -n %libkfontinstui
-KDE 4 core library.
-
-%post -n %libkfontinstui -p /sbin/ldconfig
-%postun -n %libkfontinstui -p /sbin/ldconfig
-
-%files -n %libkfontinstui
-%defattr(-,root,root)
-%_kde_libdir/libkfontinstui.so.*
-
-#------------------------------------------------
-
-%define libkfontinst %mklibname kfontinst 4
-
-%package -n %libkfontinst
-Summary: KDE 4 core library
-Group: System/Libraries
-Obsoletes: %{_lib}kfontinst5
-Obsoletes: %{_lib}kdebase46 <= 1:3.80.3
-
-%description -n %libkfontinst
-KDE 4 core library.
-
-%post -n %libkfontinst -p /sbin/ldconfig
-%postun -n %libkfontinst -p /sbin/ldconfig
-
-%files -n %libkfontinst
-%defattr(-,root,root)
-%_kde_libdir/libkfontinst.so.*
-
-#------------------------------------------------
-
-%define libtaskbar %mklibname taskbar 4
-
-%package -n %libtaskbar
-Summary: KDE 4 core library
-Group: System/Libraries
-Obsoletes: %{_lib}taskbar5
-Obsoletes: %{_lib}kdebase46 <= 1:3.80.3
-
-%description -n %libtaskbar
-KDE 4 core library.
-
-%post -n %libtaskbar -p /sbin/ldconfig
-%postun -n %libtaskbar -p /sbin/ldconfig
-
-%files -n %libtaskbar
-%defattr(-,root,root)
-%_kde_libdir/libtaskbar.so.*
-
-#------------------------------------------------
-
-%define libtaskmanager %mklibname taskmanager 4
-
-%package -n %libtaskmanager
-Summary: KDE 4 core library
-Group: System/Libraries
-Obsoletes: %{_lib}taskmanager5
-
-%description -n %libtaskmanager
-KDE 4 core library.
-
-%post -n %libtaskmanager -p /sbin/ldconfig
-%postun -n %libtaskmanager -p /sbin/ldconfig
-
-%files -n %libtaskmanager
-%defattr(-,root,root)
-%_kde_libdir/libtaskmanager.so.*
-
-
-#-----------------------------------------------------------------------------
-
-%package workspace
-Summary: KDE 4 application runtime components
-Group: Graphical desktop/KDE
-Requires: kdebase4-runtime
-Requires: strigi
-Requires: desktop-common-data
-Requires: xmessage
-Requires: xprop
-Requires: xset
-Obsoletes: kdebase4-progs
-Obsoletes: kdebase4-common <= 1:3.80.3
-
-%description workspace
-KDE 4 application workspace components.
-
-%post workspace
-%make_session
-
-%postun workspace
-%make_session
-
-%files workspace
-%defattr(-,root,root)
-%_sysconfdir/X11/wmsession.d/10KDE4
-%_kde_bindir/dmkde4start
-%_kde_bindir/appletproxy
-%_kde_bindir/kaccess
-%_kde_bindir/kapplymousetheme
-%_kde_bindir/kblankscrn.kss
-%_kde_bindir/kcheckpass
-%_kde_bindir/kcminit
-%_kde_bindir/kcminit_startup
-%_kde_bindir/kcontroledit
-%_kde_bindir/kdeinstallktheme
-%_kde_bindir/kdostartupconfig
-%_kde_bindir/khotkeys
-%_kde_bindir/kicker
-%_kde_bindir/klipper
-%_kde_bindir/kmenuedit
-%_kde_bindir/kpager
-%_kde_bindir/krandom.kss
-%_kde_bindir/krandrtray
-%_kde_bindir/krdb
-%_kde_bindir/krootimage
-%_kde_bindir/ksmserver
-%_kde_bindir/ksplashsimple
-%_kde_bindir/ksplashx
-%_kde_bindir/ksplashx_scale
-%_kde_bindir/kstartupconfig
-%_kde_bindir/ksysguard
-%_kde_bindir/ksysguardd
-%_kde_bindir/ksystraycmd
-%_kde_bindir/ktip
-%_kde_bindir/kwin
-%_kde_bindir/kwin_killer_helper
-%_kde_bindir/kwin_rules_dialog
-%_kde_bindir/kxkb
-%_kde_bindir/kfontinst
-%_kde_bindir/kfontprint
-%_kde_bindir/kfontview
-%_kde_datadir/applications/kde4/kfontview.desktop
-%_kde_appsdir/kfontinst
-%_kde_appsdir/kfontview
-%_kde_libdir/strigi/strigita_font.*
-%_kde_datadir/kde4/services/*font*
-%_kde_bindir/kio_fonts_helper
-%_kde_bindir/plasma
-%_kde_bindir/plasmaengineexplorer
-%_kde_bindir/startkde
-%_kde_bindir/systemsettings
-%_kde_bindir/krunner
-%_kde_bindir/krunner_lock
-%_kde_configdir/systemsettingsrc
-%_kde_prefix/env
-%_kde_prefix/shutdown
-%_kde_configdir/ksysguarddrc
-%_kde_libdir/kde4/libkfontviewpart.so
-%_kde_libdir/kde4/kcm_kwincompositing.so
-%_kde_libdir/kde4/krunner_*
-%_kde_libdir/kde4/kcm_access.so
-%_kde_libdir/kde4/kcm_accessibility.so
-%_kde_libdir/kde4/kcm_background.so
-%_kde_libdir/kde4/kcm_bell.so
-%_kde_libdir/kde4/kcm_clock.so
-%_kde_libdir/kde4/kcm_colors.so
-%_kde_libdir/kde4/kcm_display.so
-%_kde_libdir/kde4/kcm_energy.so
-%_kde_libdir/kde4/kcm_info.so
-%_kde_libdir/kde4/kcm_input.so
-%_kde_libdir/kde4/kcm_joystick.so
-%_kde_libdir/kde4/kcm_keyboard.so
-%_kde_libdir/kde4/kcm_keys.so
-%_kde_libdir/kde4/kcm_khotkeys.so
-%_kde_libdir/kde4/kcm_ksplashthemes.so
-%_kde_libdir/kde4/kcm_kthememanager.so
-%_kde_libdir/kde4/kcm_kwin4_effect_builtins.so
-%_kde_libdir/kde4/kcm_kwindecoration.so
-%_kde_libdir/kde4/kcm_kwineffects.so
-%_kde_libdir/kde4/kcm_kwinoptions.so
-%_kde_libdir/kde4/kcm_kwinrules.so
-%_kde_libdir/kde4/kcm_launch.so
-%_kde_libdir/kde4/kcm_nic.so
-%_kde_libdir/kde4/kcm_randr.so
-%_kde_libdir/kde4/kcm_screensaver.so
-%_kde_libdir/kde4/kcm_smserver.so
-%_kde_libdir/kde4/kcm_style.so
-%_kde_libdir/kde4/kcm_usb.so
-%_kde_libdir/kde4/kcm_view1394.so
-%_kde_libdir/kde4/kcm_xinerama.so
-%_kde_libdir/kde4/kded_khotkeys.so
-%_kde_libdir/kde4/kgreet_classic.so
-%_kde_libdir/kde4/kgreet_winbind.so
-%_kde_libdir/kde4/kickermenu_*
-%_kde_libdir/kde4/kwin3_*
-%_kde_libdir/kde4/kwin4_*
-%_kde_libdir/kde4/kwin_*
-%_kde_libdir/kde4/fontthumbnail.so
-%_kde_libdir/kde4/kcm_fontinst.so
-%_kde_libdir/kde4/kio_fonts.so
-%_kde_libdir/kde4/*_panelapplet.so
-%_kde_libdir/kde4/plasma_*
-%_kde_libdir/kde4/*_panelextension.so
-%_kde_libdir/kde4/libexec/test_kcm_xinerama
-%_kde_libdir/libkdeinit4_appletproxy.so
-%_kde_libdir/libkdeinit4_kaccess.so
-%_kde_libdir/libkdeinit4_kcminit.so
-%_kde_libdir/libkdeinit4_kcminit_startup.so
-%_kde_libdir/libkdeinit4_kcontroledit.so
-%_kde_libdir/libkdeinit4_khotkeys.so
-%_kde_libdir/libkdeinit4_kicker.so
-%_kde_libdir/libkdeinit4_klipper.so
-%_kde_libdir/libkdeinit4_kmenuedit.so
-%_kde_libdir/libkdeinit4_ksmserver.so
-%_kde_libdir/libkdeinit4_ksysguard.so
-%_kde_libdir/libkdeinit4_kwin.so
-%_kde_libdir/libkdeinit4_kwin_rules_dialog.so
-%_kde_libdir/libkdeinit4_kxkb.so
-%_kde_libdir/kde4/kcm_fonts.so
-%_kde_datadir/applications/kde4/klipper.desktop
-%_kde_datadir/applications/kde4/kmenuedit.desktop
-%_kde_datadir/applications/kde4/kpager.desktop
-%_kde_datadir/applications/kde4/krandrtray.desktop
-%_kde_datadir/applications/kde4/ksysguard.desktop
-%_kde_datadir/applications/kde4/ktip.desktop
-%_kde_appsdir/desktoptheme
-%_kde_appsdir/kcontroledit
-%_kde_appsdir/kaccess/kaccess.notifyrc
-%_kde_appsdir/kcminput/cursor_large_black.pcf.gz
-%_kde_appsdir/kcminput/cursor_large_white.pcf.gz
-%_kde_appsdir/kcminput/cursor_small_white.pcf.gz
-%_kde_appsdir/kcminput/pics/mouse_lh.png
-%_kde_appsdir/kcminput/pics/mouse_rh.png
-%_kde_appsdir/kcmkeys/kde3.kksrc
-%_kde_appsdir/kcmkeys/kde4.kksrc
-%_kde_appsdir/kcmkeys/mac4.kksrc
-%_kde_appsdir/kcmkeys/unix3.kksrc
-%_kde_appsdir/kcmkeys/win3.kksrc
-%_kde_appsdir/kcmkeys/win4.kksrc
-%_kde_appsdir/kcmkeys/wm3.kksrc
-%_kde_appsdir/kcmusb/usb.ids
-%_kde_appsdir/kcmview1394/oui.db
-%_kde_appsdir/kdewizard/pics/wizard_small.png
-%_kde_appsdir/kdewizard/tips
-%_kde_appsdir/kdisplay
-%_kde_appsdir/khotkeys/kde32b1.khotkeys
-%_kde_appsdir/khotkeys/konqueror_gestures_kde321.khotkeys
-%_kde_appsdir/kicker
-%_kde_appsdir/kmenuedit/icons/crystalsvg/22x22/actions/menu_new.png
-%_kde_appsdir/kmenuedit/icons/crystalsvg/22x22/actions/menu_new_sep.png
-%_kde_appsdir/kmenuedit/icons/crystalsvg/32x32/actions/menu_new.png
-%_kde_appsdir/kmenuedit/icons/crystalsvg/32x32/actions/menu_new_sep.png
-%_kde_appsdir/kmenuedit/icons/locolor/16x16/actions/menu_new.png
-%_kde_appsdir/kmenuedit/kmenueditui.rc
-%_kde_appsdir/ksmserver/pics/shutdownkonq.png
-%_kde_appsdir/ksplash
-%_kde_appsdir/ksysguard/KSysGuardApplet.xml
-%_kde_appsdir/ksysguard/ProcessTable.sgrd
-%_kde_appsdir/ksysguard/SystemLoad.sgrd
-%_kde_appsdir/ksysguard/default_theme.svg
-%_kde_appsdir/ksysguard/ksysguard.notifyrc
-%_kde_appsdir/ksysguard/ksysguardui.rc
-%_kde_appsdir/kthememanager
-%_kde_appsdir/kwin
-%_kde_appsdir/naughtyapplet/pics/naughty-happy.png
-%_kde_appsdir/naughtyapplet/pics/naughty-sad.png
-%_kde_datadir/autostart/khotkeys.desktop
-# No clipper for now
-%exclude %_kde_datadir/autostart/klipper.desktop
-%_kde_datadir/autostart/ktip.desktop
-%_kde_datadir/autostart/panel.desktop
-%_kde_datadir/autostart/plasma.desktop
-%_kde_datadir/autostart/krunner.desktop
-%_kde_datadir/kde4/services/krunner_*
-%_kde_datadir/kde4/services/kwincompositing.desktop
-%_kde_datadir/kde4/servicetypes/krunnerrunner.desktop
-%_kde_datadir/config/background.knsrc
-%_kde_datadir/applications/kde4/systemsettings.desktop
-%_kde_datadir/apps/systemsettings/systemsettingsui.rc
-%_kde_datadir/kde4/services/settings-about-me.desktop
-%_kde_datadir/kde4/services/settings-accessibility.desktop
-%_kde_datadir/kde4/services/settings-advanced-user-settings.desktop
-%_kde_datadir/kde4/services/settings-advanced.desktop
-%_kde_datadir/kde4/services/settings-appearance.desktop
-%_kde_datadir/kde4/services/settings-bluetooth.desktop
-%_kde_datadir/kde4/services/settings-computer-administration.desktop
-%_kde_datadir/kde4/services/settings-desktop.desktop
-%_kde_datadir/kde4/services/settings-general.desktop
-%_kde_datadir/kde4/services/settings-keyboard-and-mouse.desktop
-%_kde_datadir/kde4/services/settings-look-and-feel.desktop
-%_kde_datadir/kde4/services/settings-network-and-connectivity.desktop
-%_kde_datadir/kde4/services/settings-network-settings.desktop
-%_kde_datadir/kde4/services/settings-notifications.desktop
-%_kde_datadir/kde4/services/settings-personal.desktop
-%_kde_datadir/kde4/services/settings-regional-and-language.desktop
-%_kde_datadir/kde4/services/settings-sharing.desktop
-%_kde_datadir/kde4/services/settings-system.desktop
-%_kde_datadir/kde4/services/settings-window-behaviour.desktop
-%_kde_datadir/kde4/servicetypes/systemsettingscategory.desktop
-%_kde_datadir/kde4/services/ScreenSavers/kblank.desktop
-%_kde_datadir/kde4/services/ScreenSavers/krandom.desktop
-%_kde_datadir/kde4/services/accessibility.desktop
-%_kde_datadir/kde4/services/background.desktop
-%_kde_datadir/kde4/services/bell.desktop
-%_kde_datadir/kde4/services/clock.desktop
-%_kde_datadir/kde4/services/colors.desktop
-%_kde_datadir/kde4/services/devices.desktop
-%_kde_datadir/kde4/services/display.desktop
-%_kde_datadir/kde4/services/dma.desktop
-%_kde_datadir/kde4/services/energy.desktop
-%_kde_datadir/kde4/services/installktheme.desktop
-%_kde_datadir/kde4/services/interrupts.desktop
-%_kde_datadir/kde4/services/ioports.desktop
-%_kde_datadir/kde4/services/joystick.desktop
-%_kde_datadir/kde4/services/kaccess.desktop
-%_kde_datadir/kde4/services/kcmaccess.desktop
-%_kde_datadir/kde4/services/kcmkicker.desktop
-%_kde_datadir/kde4/services/kcmlaunch.desktop
-%_kde_datadir/kde4/services/kcmsmserver.desktop
-%_kde_datadir/kde4/services/kcmusb.desktop
-%_kde_datadir/kde4/services/kcmview1394.desktop
-%_kde_datadir/kde4/services/kded/khotkeys.desktop
-%_kde_datadir/kde4/services/keyboard.desktop
-%_kde_datadir/kde4/services/keyboard_layout.desktop
-%_kde_datadir/kde4/services/keys.desktop
-%_kde_datadir/kde4/services/khotkeys.desktop
-%_kde_datadir/kde4/services/ksplashthememgr.desktop
-%_kde_datadir/kde4/services/kthememanager.desktop
-%_kde_datadir/kde4/services/kwin
-%_kde_datadir/kde4/services/kwinactions.desktop
-%_kde_datadir/kde4/services/kwinadvanced.desktop
-%_kde_datadir/kde4/services/kwindecoration.desktop
-%_kde_datadir/kde4/services/kwineffects.desktop
-%_kde_datadir/kde4/services/kwinfocus.desktop
-%_kde_datadir/kde4/services/kwinmoving.desktop
-%_kde_datadir/kde4/services/kwinoptions.desktop
-%_kde_datadir/kde4/services/kwinrules.desktop
-%_kde_datadir/kde4/services/memory.desktop
-%_kde_datadir/kde4/services/mouse.desktop
-%_kde_datadir/kde4/services/nic.desktop
-%_kde_datadir/kde4/services/opengl.desktop
-%_kde_datadir/kde4/services/partitions.desktop
-%_kde_datadir/kde4/services/pci.desktop
-%_kde_datadir/kde4/services/plasma-*
-%_kde_datadir/kde4/services/processor.desktop
-%_kde_datadir/kde4/services/randr.desktop
-%_kde_datadir/kde4/services/screensaver.desktop
-%_kde_datadir/kde4/services/scsi.desktop
-%_kde_datadir/kde4/services/sound.desktop
-%_kde_datadir/kde4/services/style.desktop
-%_kde_datadir/kde4/services/xinerama.desktop
-%_kde_datadir/kde4/services/xserver.desktop
-%_kde_datadir/kde4/servicetypes/kwineffect.desktop
-%_kde_datadir/kde4/servicetypes/plasma-*
-%_kde_datadir/kde4/servicetypes/screensaver.desktop
-%_kde_datadir/sounds/pop.wav
-%_kde_datadir/wallpapers
-%_kde_docdir/*/*/khelpcenter
-%_kde_docdir/*/*/kinfocenter
-%_kde_docdir/*/*/kicker
-%_kde_docdir/*/*/kmenuedit
-%_kde_docdir/*/*/klipper
-%_kde_docdir/*/*/knetattach
-%_kde_docdir/*/*/kompmgr
-%_kde_docdir/*/*/kpager
-%_kde_docdir/*/*/kxkb
-%_kde_docdir/*/*/ksysguard
 
 #-----------------------------------------------------------------------------
 
@@ -1322,50 +710,11 @@ Xine backend to Phonon.
 
 #-----------------------------------------------------------------------------
 
-%package -n kde4-kdm
-Summary: KDE Desktop Login Manager
-Group: Graphical desktop/KDE
-Requires: kdebase4-runtime
-Obsoletes: kdebase4-kdm
-
-%description -n kde4-kdm
-KDE Desktop Login Manager.
-
-%files -n kde4-kdm
-%defattr(-,root,root)
-%_kde_bindir/kdm
-%_kde_bindir/kdm_config
-%_kde_bindir/kdm_greet
-%_kde_bindir/kdmctl
-%_kde_bindir/genkdmconf
-%_kde_libdir/kde4/kcm_kdm.so
-%_kde_appsdir/doc/kdm/README
-%_kde_appsdir/kdm
-%_kde_datadir/config/kdm.knsrc
-%_kde_datadir/kde4/services/kdm.desktop
-%_kde_docdir/*/*/kdm
-%_kde_datadir/config/kdm
-
-#-----------------------------------------------------------------------------
-
 %package devel
 Summary: Devel stuff for kdebase 4
 Group: Development/KDE and Qt
 Requires: kde4-macros
 Requires: kdelibs4-devel
-Requires: %libsolidcontrolifaces = %epoch:%version
-Requires: %libsolidcontrol = %epoch:%version
-Requires: %libkdecorations = %epoch:%version
-Requires: %libkickermain = %epoch:%version
-Requires: %libkscreensaver = %epoch:%version
-Requires: %libksgrd = %epoch:%version
-Requires: %libkwineffects = %epoch:%version
-Requires: %libkworkspace = %epoch:%version
-Requires: %libplasma = %epoch:%version
-Requires: %libprocesscore = %epoch:%version
-Requires: %libprocessui = %epoch:%version
-Requires: %libtaskbar = %epoch:%version
-Requires: %libtaskmanager = %epoch:%version
 Requires: %libdolphinprivate = %epoch:%version
 Requires: %libkonq = %epoch:%version
 Requires: %libkonqsidebarplugin = %epoch:%version
@@ -1378,7 +727,6 @@ This package contains header files needed if you wish to build applications base
 %defattr(-,root,root)
 %_kde_libdir/*.so
 %_kde_prefix/include/*
-%_kde_libdir/kde4/plugins/designer/*
 %_kde_datadir/apps/cmake/*/*
 %_kde_datadir/config.kcfg
 %_datadir/dbus-1/interfaces/*
@@ -1400,31 +748,6 @@ rm -fr %buildroot
 cd build
 
 make DESTDIR=%buildroot install
-
-# Install temporary mandriva wallpaper
-cp -f %SOURCE3 %buildroot/%_kde_appsdir/desktoptheme/default/widgets/wallpaper.svg
-
-# Env entry for start kde4 
-install -d -m 0755 %buildroot/etc/profile.d
-install -m 0755 %SOURCE1 %buildroot/etc/profile.d
-
-# Startup script ( no more patch startkde )
-install -m 0755 %SOURCE2 %buildroot/%_kde_bindir/dmkde4start
-
-install -d -m 0775 %buildroot/etc/X11/wmsession.d/
-cat << EOF > %buildroot/etc/X11/wmsession.d/10KDE4
-NAME=KDE4
-ICON=kde-wmsession.xpm
-DESC=The K Desktop Environment
-EXEC=%_kde_bindir/dmkde4start
-SCRIPT:
-exec %_kde_bindir/dmkde4start
-EOF
-
-# KDM PAM Login
-#install -d -m 0755 %buildroot/etc/pam.d/
-#install -m 0644 %SOURCE3 %buildroot/etc/pam.d/kde4
-#install -m 0644 %SOURCE4 %buildroot/etc/pam.d/kde4-np
 
 # Nepomuk
 install -d  -m 0755 %buildroot%_kde_prefix/env
