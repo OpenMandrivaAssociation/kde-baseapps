@@ -1,6 +1,6 @@
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 707020
+%define revision 708142
 
 Name: kdebase4
 Summary: K Desktop Environment
@@ -124,13 +124,11 @@ KDE 4 application runtime components.
 %_kde_appsdir/kio_info/kde-info2html.conf
 %_kde_appsdir/kio_man/kio_man.css
 %_kde_appsdir/kjobviewer
-%_kde_appsdir/konqueror/dirtree/remote/smb-network.desktop
 %_kde_appsdir/konqueror/servicemenus/media_*
 %_kde_bindir/kuiserver
 %_kde_appsdir/kuiserver
 %_kde_datadir/kde4/services/kuiserver.desktop
 %_kde_libdir/libkdeinit4_kuiserver.so
-%_kde_appsdir/remoteview/smb-network.desktop
 %_kde_appsdir/Settingsmenu
 %_kde_libdir/kde4/kstyle_*
 %_kde_appsdir/kstyle
@@ -238,7 +236,6 @@ KDE 4 application runtime components.
 %_kde_datadir/kde4/services/remote.protocol
 %_kde_datadir/kde4/services/searchproviders
 %_kde_datadir/kde4/services/settings.protocol
-%_kde_datadir/kde4/services/smb.protocol
 %_kde_datadir/kde4/services/smbstatus.desktop
 %_kde_datadir/kde4/services/smtp.protocol
 %_kde_datadir/kde4/services/smtps.protocol
@@ -292,7 +289,6 @@ KDE 4 application runtime components.
 %_kde_libdir/kde4/kio_print.so
 %_kde_libdir/kde4/kio_remote.so
 %_kde_libdir/kde4/kio_settings.so
-%_kde_libdir/kde4/kio_smb.so
 %_kde_libdir/kde4/kio_smtp.so
 %_kde_libdir/kde4/kio_tar.so
 %_kde_libdir/kde4/kio_thumbnail.so
@@ -634,7 +630,6 @@ KDE Browser
 %_kde_datadir/kde4/servicetypes/uasprovider.desktop
 %_kde_docdir/*/*/konqueror
 %_kde_appsdir/konqueror
-%exclude %_kde_appsdir/konqueror/dirtree/remote/smb-network.desktop
 %exclude %_kde_appsdir/konqueror/servicemenus/media_*
 %exclude %_kde_appsdir/konqueror/servicemenus/konsolehere.desktop
 
