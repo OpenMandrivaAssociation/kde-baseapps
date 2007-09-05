@@ -1,6 +1,6 @@
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 708282
+%define revision 708844
 
 Name: kdebase4
 Summary: K Desktop Environment
@@ -137,6 +137,7 @@ KDE 4 application runtime components.
 %_kde_libdir/kde4/kded_soliduiserver.so
 %_kde_datadir/apps/kdm
 %_kde_datadir/kde4/services/khtml_fonts.desktop
+%_kde_libdir/kde4/libexec/kioexec
 %_kde_bindir/drkonqi
 %_kde_bindir/ksvgtopng
 %_kde_bindir/imagetops
@@ -159,7 +160,6 @@ KDE 4 application runtime components.
 %_kde_bindir/kinfocenter
 %_kde_bindir/kinstalltheme
 %_kde_bindir/kioclient
-%_kde_bindir/kioexec
 %_kde_bindir/kio_media_mounthelper
 %_kde_bindir/kjobviewer
 %_kde_bindir/klocaldomainurifilterhelper
@@ -237,6 +237,9 @@ KDE 4 application runtime components.
 %_kde_datadir/kde4/services/searchproviders
 %_kde_datadir/kde4/services/settings.protocol
 %_kde_datadir/kde4/services/smbstatus.desktop
+%_kde_datadir/kde4/services/smb.protocol
+%_kde_appsdir/remoteview/smb-network.desktop
+%_kde_libdir/kde4/kio_smb.so
 %_kde_datadir/kde4/services/smtp.protocol
 %_kde_datadir/kde4/services/smtps.protocol
 %_kde_datadir/kde4/services/svgthumbnail.desktop
