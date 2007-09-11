@@ -386,6 +386,7 @@ Summary: dolphin
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
 Provides: dolphin4
+Conflicts: kdebase4-workspace < 1:3.93.0
 
 %description -n kde4-dolphin
 A shell program similar to xterm for KDE
