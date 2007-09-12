@@ -1,6 +1,6 @@
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 708844
+%define revision 711798
 
 Name: kdebase4
 Summary: K Desktop Environment
@@ -218,17 +218,11 @@ KDE 4 application runtime components.
 %_kde_datadir/kde4/services/kuriikwsfilter.desktop
 %_kde_datadir/kde4/services/kurisearchfilter.desktop
 %_kde_datadir/kde4/services/language.desktop
-%_kde_datadir/kde4/services/ldap.protocol
-%_kde_datadir/kde4/services/ldaps.protocol
 %_kde_datadir/kde4/services/localdomainurifilter.desktop
 %_kde_datadir/kde4/services/man.protocol
 %_kde_datadir/kde4/services/media.desktop
 %_kde_datadir/kde4/services/media.protocol
 %_kde_datadir/kde4/services/nfs.protocol
-%_kde_datadir/kde4/services/nntp.protocol
-%_kde_datadir/kde4/services/nntps.protocol
-%_kde_datadir/kde4/services/pop3.protocol
-%_kde_datadir/kde4/services/pop3s.protocol
 %_kde_datadir/kde4/services/printdb.protocol
 %_kde_datadir/kde4/services/printers.desktop
 %_kde_datadir/kde4/services/print.protocol
@@ -240,8 +234,6 @@ KDE 4 application runtime components.
 %_kde_datadir/kde4/services/smb.protocol
 %_kde_appsdir/remoteview/smb-network.desktop
 %_kde_libdir/kde4/kio_smb.so
-%_kde_datadir/kde4/services/smtp.protocol
-%_kde_datadir/kde4/services/smtps.protocol
 %_kde_datadir/kde4/services/svgthumbnail.desktop
 %_kde_datadir/kde4/services/tar.protocol
 %_kde_datadir/kde4/services/textthumbnail.desktop
@@ -283,16 +275,12 @@ KDE 4 application runtime components.
 %_kde_libdir/kde4/kio_fish.so
 %_kde_libdir/kde4/kio_floppy.so
 %_kde_libdir/kde4/kio_info.so
-%_kde_libdir/kde4/kio_ldap.so
 %_kde_libdir/kde4/kio_man.so
 %_kde_libdir/kde4/kio_media.so
 %_kde_libdir/kde4/kio_nfs.so
-%_kde_libdir/kde4/kio_nntp.so
-%_kde_libdir/kde4/kio_pop3.so
 %_kde_libdir/kde4/kio_print.so
 %_kde_libdir/kde4/kio_remote.so
 %_kde_libdir/kde4/kio_settings.so
-%_kde_libdir/kde4/kio_smtp.so
 %_kde_libdir/kde4/kio_tar.so
 %_kde_libdir/kde4/kio_thumbnail.so
 %_kde_libdir/kde4/kio_trash.so
