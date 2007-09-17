@@ -5,7 +5,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 3.93.0
-Release: %mkrel 0.%revision.1
+Release: %mkrel 0.%revision.2
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -705,7 +705,7 @@ Requires: kdelibs4-devel
 Requires: %libdolphinprivate = %epoch:%version
 Requires: %libkonq = %epoch:%version
 Requires: %libkonqsidebarplugin = %epoch:%version
-Obsoletes: %{_lib}kdebase4-devel
+Obsoletes: %{_lib}kdebase46-devel
 
 %description  devel
 This package contains header files needed if you wish to build applications based on kdebase.
