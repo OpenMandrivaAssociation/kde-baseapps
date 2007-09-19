@@ -1,6 +1,6 @@
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 712549
+%define revision 714129
 
 Name: kdebase4
 Summary: K Desktop Environment
@@ -98,8 +98,8 @@ Summary: KDE 4 application runtime components
 Group: Graphical desktop/KDE
 Requires: kdelibs4-core
 Requires: oxygen-icon-theme
-Obsoletes: kdebase4-progs
-Obsoletes: kdebase4-core 
+Obsoletes: kdebase4-progs < 1:3.93.0-0.714129.2mdv2008.0
+Obsoletes: kdebase4-core  < 1:3.93.0-0.714129.2mdv2008.0
 Obsoletes: kdebase4-common <= 1:3.80.3
 Conflicts: kdebase4-workspace < 1:3.93.0 
 
@@ -325,7 +325,7 @@ Summary: Konsole
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
 Provides: konsole4
-Obsoletes: kdebase4-konsole
+Obsoletes: kdebase4-konsole < 1:3.93.0-0.714129.2mdv2008.0
 
 %description -n kde4-konsole
 A shell program similar to xterm for KDE
@@ -355,7 +355,7 @@ A shell program similar to xterm for KDE
 %package -n %libdolphinprivate
 Summary: KDE 4 core library
 Group: System/Libraries
-Obsoletes: %{_lib}dolphinprivate5
+Obsoletes: %{_lib}dolphinprivate5 < 1:3.93.0-0.714129.2mdv2008.0
 
 %description -n %libdolphinprivate
 KDE 4 core library.
@@ -413,7 +413,7 @@ Summary: kdeprintfax
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
 Requires: enscript
-Obsoletes: kdebase4-kdeprintfax
+Obsoletes: kdebase4-kdeprintfax < 1:3.93.0-0.714129.2mdv2008.0
 
 %description -n kde4-kdeprintfax
 Programm to send fax
@@ -430,7 +430,7 @@ Programm to send fax
 Summary: kdepasswd
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
-Obsoletes: kdebase4-kdepasswd
+Obsoletes: kdebase4-kdepasswd < 1:3.93.0-0.714129.2mdv2008.0
 
 %description -n kde4-kdepasswd
 User password management
@@ -448,7 +448,7 @@ User password management
 Summary: Netscape plugins wrapper for kde
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
-Obsoletes: kdebase4-nsplugins
+Obsoletes: kdebase4-nsplugins < 1:3.93.0-0.714129.2mdv2008.0
 
 %description -n kde4-nsplugins
 Netscape plugins wrapper for kde.
@@ -468,7 +468,7 @@ Netscape plugins wrapper for kde.
 Summary: kwrite
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
-Obsoletes: kdebase4-kwrite
+Obsoletes: kdebase4-kwrite < 1:3.93.0-0.714129.2mdv2008.0
 
 %description -n kde4-kwrite
 User password management
@@ -513,7 +513,7 @@ KDE 4 core library.
 %package -n %libkonqsidebarplugin
 Summary: KDE 4 core library
 Group: System/Libraries
-Obsoletes: %{_lib}konqsidebarplugin5
+Obsoletes: %{_lib}konqsidebarplugin5 < 1:3.93.0-0.714129.2mdv2008.0
 Obsoletes: %{_lib}kdebase46 <= 1:3.80.3
 
 %description -n %libkonqsidebarplugin
@@ -532,7 +532,7 @@ KDE 4 core library.
 Summary:    konqueror
 Group:      Graphical desktop/KDE
 Requires:   kdebase4-runtime
-Obsoletes:  kdebase4-konqueror
+Obsoletes:  kdebase4-konqueror < 1:3.93.0-0.714129.2mdv2008.0
 Conflicts:  kdebase4-workspace < 3.91
 %description -n kde4-konqueror
 KDE Browser
@@ -631,7 +631,7 @@ KDE Browser
 Summary: Bookmark editor
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
-Obsoletes: kdebase4-keditbookmarks
+Obsoletes: kdebase4-keditbookmarks < 1:3.93.0-0.714129.2mdv2008.0
 
 %description -n kde4-keditbookmarks
 Bookmar editor
@@ -649,7 +649,7 @@ Bookmar editor
 Summary: Application finder
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
-Obsoletes: kdebase4-kfind
+Obsoletes: kdebase4-kfind < 1:3.93.0-0.714129.2mdv2008.0
 
 %description -n kde4-kfind
 Application finder
@@ -668,7 +668,7 @@ Application finder
 Summary: Dialog KDE base widgets
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
-Obsoletes: kdebase4-kdialog
+Obsoletes: kdebase4-kdialog < 1:3.93.0-0.714129.2mdv2008.0
 
 %description -n kde4-kdialog
 Dialog KDE base widgets
@@ -683,7 +683,7 @@ Dialog KDE base widgets
 Summary: Xine backend to Phonon
 Group: Sound
 BuildRequires: libxine-devel
-Obsoletes: kde4-phonon-xine
+Obsoletes: kde4-phonon-xine < 1:3.93.0-0.714129.2mdv2008.0
 
 %description -n phonon-xine
 Xine backend to Phonon.
@@ -705,7 +705,7 @@ Requires: kdelibs4-devel
 Requires: %libdolphinprivate = %epoch:%version
 Requires: %libkonq = %epoch:%version
 Requires: %libkonqsidebarplugin = %epoch:%version
-Obsoletes: %{_lib}kdebase46-devel
+Obsoletes: %{_lib}kdebase46-devel < 1:3.93.0-0.714129.2mdv2008.0
 
 %description  devel
 This package contains header files needed if you wish to build applications based on kdebase.
