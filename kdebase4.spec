@@ -5,7 +5,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 3.93.0
-Release: %mkrel 0.%revision.3
+Release: %mkrel 0.%revision.4
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -759,6 +759,8 @@ for i in 128x128 16x16 22x22 32x32 48x48 64x64; do
 done
 ln -sf %_kde_iconsdir/oxygen/scalable/actions/about-kde.svgz scalable/apps/kmenu.svgz
 popd
+# kcalc.svgz crashes kicker
+rm -rf %buildroot/%_kde_iconsdir/oxygen/scalable/apps/small/16x16/kcalc.svgz
 
 %clean
 rm -fr %buildroot
