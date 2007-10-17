@@ -156,7 +156,7 @@ KDE 4 application runtime components.
 %_kde_bindir/khc_htsearch.pl
 %_kde_bindir/khc_indexbuilder
 %_kde_bindir/khc_mansearch.pl
-#%_kde_bindir/khotnewstuff
+%_kde_bindir/khotnewstuff4
 %_kde_bindir/kinfocenter
 #%_kde_bindir/kinstalltheme
 %_kde_bindir/kioclient
