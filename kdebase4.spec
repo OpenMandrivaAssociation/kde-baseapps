@@ -1,6 +1,6 @@
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 726385
+%define revision 726654
 
 Name: kdebase4
 Summary: K Desktop Environment
@@ -304,7 +304,7 @@ KDE 4 application runtime components.
 %_kde_datadir/kde4/services/renaudiodlg.desktop
 %_kde_datadir/kde4/services/renimagedlg.desktop
 %_kde_prefix/shutdown/nepomuk.sh
-#%_kde_libdir/libkdeinit4_kcmshell.so
+%_kde_libdir/libkdeinit4_kcmshell4.so
 %_kde_libdir/libkdeinit4_khelpcenter.so
 %_kde_datadir/kde4/services/khelpcenter.desktop
 %_kde_bindir/khelpcenter
