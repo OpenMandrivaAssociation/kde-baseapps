@@ -1,11 +1,11 @@
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 726654
+%define revision 727635
 
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 3.94.0
-Release: %mkrel 0.%revision.2
+Release: %mkrel 0.%revision.1
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -752,7 +752,7 @@ cat << EOF > %buildroot%_kde_prefix/env/nepomuk.sh
 %_kde_bindir/nepomukcoreservices &
 EOF
 cat << EOF > %buildroot%_kde_prefix/shutdown/nepomuk.sh
-# start Nepomuk-KDE
+# stop Nepomuk-KDE
 killall nepomukdaemon
 killall nepomukcoreservices
 EOF
