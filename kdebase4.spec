@@ -124,7 +124,6 @@ KDE 4 application runtime components.
 %_kde_appsdir/kio_info/kde-info2html.conf
 %_kde_appsdir/kio_man/kio_man.css
 %_kde_appsdir/kjobviewer
-#%_kde_appsdir/konqueror/servicemenus/media_*
 %_kde_bindir/kuiserver
 %_kde_appsdir/kuiserver
 %_kde_datadir/kde4/services/kuiserver.desktop
@@ -158,9 +157,7 @@ KDE 4 application runtime components.
 %_kde_bindir/khc_mansearch.pl
 %_kde_bindir/khotnewstuff4
 %_kde_bindir/kinfocenter
-#%_kde_bindir/kinstalltheme
 %_kde_bindir/kioclient
-#%_kde_bindir/kio_media_mounthelper
 %_kde_bindir/kjobviewer
 %_kde_bindir/klocaldomainurifilterhelper
 %_kde_bindir/kmimetypefinder
@@ -207,8 +204,6 @@ KDE 4 application runtime components.
 %_kde_datadir/kde4/services/kcm_kdnssd.desktop
 %_kde_datadir/kde4/services/kcmnotify.desktop
 %_kde_datadir/kde4/services/kded/ktimezoned.desktop
-#%_kde_datadir/kde4/services/kded/mediamanager.desktop
-#%_kde_datadir/kde4/services/kded/medianotifier.desktop
 %_kde_datadir/kde4/services/kded/remotedirnotify.desktop
 %_kde_datadir/kde4/services/kdeprint_part.desktop
 %_kde_datadir/kde4/services/kinfocenter.desktop
@@ -220,8 +215,6 @@ KDE 4 application runtime components.
 %_kde_datadir/kde4/services/language.desktop
 %_kde_datadir/kde4/services/localdomainurifilter.desktop
 %_kde_datadir/kde4/services/man.protocol
-#%_kde_datadir/kde4/services/media.desktop
-#%_kde_datadir/kde4/services/media.protocol
 %_kde_datadir/kde4/services/nfs.protocol
 %_kde_datadir/kde4/services/printdb.protocol
 %_kde_datadir/kde4/services/printers.desktop
@@ -258,13 +251,10 @@ KDE 4 application runtime components.
 %_kde_libdir/kde4/kcm_kdnssd.so
 %_kde_libdir/kde4/kcm_knotify.so
 %_kde_libdir/kde4/kcm_locale.so
-#%_kde_libdir/kde4/kcm_media.so
 %_kde_libdir/kde4/kcm_printmgr.so
 %_kde_libdir/kde4/kcm_samba.so
 %_kde_libdir/kde4/kded_kpasswdserver.so
 %_kde_libdir/kde4/kded_ktimezoned.so
-#%_kde_libdir/kde4/kded_mediamanager.so
-#%_kde_libdir/kde4/kded_medianotifier.so
 %_kde_libdir/kde4/librenaudioplugin.so
 %_kde_libdir/kde4/librenimageplugin.so
 %_kde_libdir/kde4/kded_remotedirnotify.so
@@ -278,12 +268,10 @@ KDE 4 application runtime components.
 %_kde_libdir/kde4/kio_floppy.so
 %_kde_libdir/kde4/kio_info.so
 %_kde_libdir/kde4/kio_man.so
-#%_kde_libdir/kde4/kio_media.so
 %_kde_libdir/kde4/kio_nfs.so
 %_kde_libdir/kde4/kio_print.so
 %_kde_libdir/kde4/kio_remote.so
 %_kde_libdir/kde4/kio_settings.so
-#%_kde_libdir/kde4/kio_tar.so
 %_kde_libdir/kde4/kcm_ioslaveinfo.so
 %_kde_libdir/kde4/kio_archive.so
 %_kde_libdir/kde4/kio_thumbnail.so
@@ -629,7 +617,6 @@ KDE Browser
 %_kde_datadir/kde4/servicetypes/uasprovider.desktop
 %_kde_docdir/*/*/konqueror
 %_kde_appsdir/konqueror
-#%exclude %_kde_appsdir/konqueror/servicemenus/media_*
 %exclude %_kde_appsdir/konqueror/servicemenus/konsolehere.desktop
 
 #-----------------------------------------------------------------------------
