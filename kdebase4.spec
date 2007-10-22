@@ -1,10 +1,10 @@
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 727635
+%define revision 728287
 
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 3.94.0
+Version: 3.94.1
 Release: %mkrel 0.%revision.1
 Epoch: 1
 Group: Graphical desktop/KDE
