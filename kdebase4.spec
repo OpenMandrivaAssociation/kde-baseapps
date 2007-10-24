@@ -53,7 +53,6 @@ BuildRequires: boost-devel
 BuildRequires: xrdb
 BuildRequires: qimageblitz-devel
 Requires: kdebase4-runtime
-Requires: kde4-kdeprintfax
 Requires: kde4-kappfinder
 Requires: kde4-konsole
 Requires: kde4-dolphin
@@ -115,8 +114,6 @@ KDE 4 application runtime components.
 %_kde_appsdir/kcm_componentchooser
 %_kde_appsdir/kcmlocale
 %_kde_appsdir/kde
-%_kde_appsdir/kdeprint
-%_kde_appsdir/kdeprint_part
 %_kde_appsdir/kinfocenter
 %_kde_appsdir/kcontrol
 %_kde_appsdir/kio_finger/kio_finger.css
@@ -124,12 +121,10 @@ KDE 4 application runtime components.
 %_kde_appsdir/kio_info/kde-info2html
 %_kde_appsdir/kio_info/kde-info2html.conf
 %_kde_appsdir/kio_man/kio_man.css
-%_kde_appsdir/kjobviewer
 %_kde_bindir/kuiserver
 %_kde_appsdir/kuiserver
 %_kde_datadir/kde4/services/kuiserver.desktop
 %_kde_libdir/libkdeinit4_kuiserver.so
-%_kde_appsdir/Settingsmenu
 %_kde_libdir/kde4/kstyle_*
 %_kde_appsdir/kstyle
 %_kde_libdir/kde4/plugins/styles
@@ -138,9 +133,9 @@ KDE 4 application runtime components.
 %_kde_datadir/apps/kdm
 %_kde_datadir/kde4/services/khtml_fonts.desktop
 %_kde_libdir/kde4/libexec/kioexec
-%_kde_bindir/drkonqi
+%_kde_libdir/kde4/libexec/drkonqi
+%_kde_libdir/kde4/libexec/klocaldomainurifilterhelper
 %_kde_bindir/ksvgtopng
-%_kde_bindir/imagetops
 %_kde_bindir/kcmshell4
 %_kde_bindir/kde4-menu
 %_kde_bindir/kdebugdialog
@@ -159,14 +154,11 @@ KDE 4 application runtime components.
 %_kde_bindir/khotnewstuff4
 %_kde_bindir/kinfocenter
 %_kde_bindir/kioclient
-%_kde_bindir/kjobviewer
-%_kde_bindir/klocaldomainurifilterhelper
 %_kde_bindir/kmimetypefinder
 %_kde_bindir/knetattach
 %_kde_datadir/applications/kde4/knetattach.desktop
 %_kde_docdir/*/*/knetattach
 %_kde_bindir/knotify4
-%_kde_bindir/kprinter
 %_kde_bindir/kquitapp
 %_kde_bindir/kreadconfig
 %_kde_bindir/kstart
@@ -174,10 +166,7 @@ KDE 4 application runtime components.
 %_kde_bindir/ktrash
 %_kde_bindir/kwriteconfig
 %_kde_configdir/xdg/menus/kde-information.menu
-%_kde_configdir/xdg/menus/kde-kcontrol.menu
-%_kde_configdir/xdg/menus/kde-settings.menu
 %_kde_datadir/applications/kde4/Help.desktop
-%_kde_datadir/applications/kde4/kjobviewer.desktop
 %_kde_datadir/config/khotnewstuffrc
 %_kde_datadir/config/kshorturifilterrc
 %_kde_datadir/desktop-directories
@@ -206,7 +195,6 @@ KDE 4 application runtime components.
 %_kde_datadir/kde4/services/kcmnotify.desktop
 %_kde_datadir/kde4/services/kded/ktimezoned.desktop
 %_kde_datadir/kde4/services/kded/remotedirnotify.desktop
-%_kde_datadir/kde4/services/kdeprint_part.desktop
 %_kde_datadir/kde4/services/kinfocenter.desktop
 %_kde_datadir/kde4/services/kmanpart.desktop
 %_kde_datadir/kde4/services/knotify4.desktop
@@ -217,9 +205,6 @@ KDE 4 application runtime components.
 %_kde_datadir/kde4/services/localdomainurifilter.desktop
 %_kde_datadir/kde4/services/man.protocol
 %_kde_datadir/kde4/services/nfs.protocol
-%_kde_datadir/kde4/services/printdb.protocol
-%_kde_datadir/kde4/services/printers.desktop
-%_kde_datadir/kde4/services/print.protocol
 %_kde_datadir/kde4/services/programs.protocol
 %_kde_datadir/kde4/services/remote.protocol
 %_kde_datadir/kde4/services/searchproviders
@@ -252,7 +237,6 @@ KDE 4 application runtime components.
 %_kde_libdir/kde4/kcm_kdnssd.so
 %_kde_libdir/kde4/kcm_knotify.so
 %_kde_libdir/kde4/kcm_locale.so
-%_kde_libdir/kde4/kcm_printmgr.so
 %_kde_libdir/kde4/kcm_samba.so
 %_kde_libdir/kde4/kded_kpasswdserver.so
 %_kde_libdir/kde4/kded_ktimezoned.so
@@ -270,7 +254,6 @@ KDE 4 application runtime components.
 %_kde_libdir/kde4/kio_info.so
 %_kde_libdir/kde4/kio_man.so
 %_kde_libdir/kde4/kio_nfs.so
-%_kde_libdir/kde4/kio_print.so
 %_kde_libdir/kde4/kio_remote.so
 %_kde_libdir/kde4/kio_settings.so
 %_kde_libdir/kde4/kcm_ioslaveinfo.so
@@ -278,7 +261,6 @@ KDE 4 application runtime components.
 %_kde_libdir/kde4/kio_thumbnail.so
 %_kde_libdir/kde4/kio_trash.so
 %_kde_libdir/kde4/libfixhosturifilter.so
-%_kde_libdir/kde4/libkdeprint_part.so
 %_kde_libdir/kde4/libkmanpart.so
 %_kde_libdir/kde4/libkshorturifilter.so
 %_kde_libdir/kde4/libkuriikwsfilter.so
@@ -286,9 +268,6 @@ KDE 4 application runtime components.
 %_kde_libdir/kde4/liblocaldomainurifilter.so
 %_kde_libdir/kde4/svgthumbnail.so
 %_kde_libdir/kde4/textthumbnail.so
-#%_kde_bindir/nepomukcoreservices
-#%_kde_bindir/nepomukdaemon
-#%_kde_datadir/kde4/services/nepomuk/nepomuk-coreservices.desktop
 %_kde_datadir/kde4/services/ioslaveinfo.desktop
 %_kde_datadir/kde4/services/renaudiodlg.desktop
 %_kde_datadir/kde4/services/renimagedlg.desktop
@@ -300,18 +279,10 @@ KDE 4 application runtime components.
 %_kde_appsdir/khelpcenter
 %_kde_docdir/*/*/khelpcenter
 %_kde_libdir/libkdeinit4_kinfocenter.so
-%_kde_libdir/libkdeinit4_kjobviewer.so
-%_kde_libdir/libkdeinit4_kprinter.so
-%_kde_docdir/*/*/faq
 %_kde_docdir/*/*/kcontrol
-%_kde_docdir/*/*/glossary
-%_kde_docdir/*/*/kdeprint
 %_kde_docdir/*/*/kdesu
 %_kde_docdir/*/*/kfind
 %_kde_docdir/*/*/kioslave
-%_kde_docdir/*/*/userguide
-%_kde_docdir/*/*/visualdict
-%_kde_docdir/*/*/quickstart
 %_kde_docdir/*/*/kdebugdialog
 
 #-----------------------------------------------------------------------------
@@ -401,24 +372,6 @@ A shell program similar to xterm for KDE
 %_kde_bindir/kappfinder
 %_kde_datadir/applications/kde4/kappfinder.desktop
 %_kde_appsdir/kappfinder
-
-#-----------------------------------------------------------------------------
-
-%package -n kde4-kdeprintfax
-Summary: kdeprintfax
-Group: Graphical desktop/KDE
-Requires: kdebase4-runtime
-Requires: enscript
-Obsoletes: kdebase4-kdeprintfax < 1:3.93.0-0.714129.2
-
-%description -n kde4-kdeprintfax
-Programm to send fax
-
-%files -n kde4-kdeprintfax
-%defattr(-,root,root)
-%_kde_appsdir/kdeprintfax
-%_kde_bindir/kdeprintfax
-%_kde_datadir/applications/kde4/kdeprintfax.desktop
 
 #-----------------------------------------------------------------------------
 
@@ -747,8 +700,6 @@ EOF
 chmod +x %buildroot%_kde_prefix/env/nepomuk.sh
 chmod +x %buildroot%_kde_prefix/shutdown/nepomuk.sh
 
-ln -sf %_kde_iconsdir/oxygen/scalable/actions/about-kde.svgz scalable/apps/kmenu.svgz
-popd
 # kcalc.svgz crashes kicker
 rm -rf %buildroot/%_kde_iconsdir/oxygen/scalable/apps/small/16x16/kcalc.svgz
 
