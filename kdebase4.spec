@@ -89,6 +89,7 @@ Oxygen KDE 4 icon theme. Complains with FreeDesktop.org naming schema
 %_kde_iconsdir/*/index.theme
 %_kde_iconsdir/*/*/*/*
 %_kde_datadir/emoticons/*
+%_kde_iconsdir/oxygen/scalable/export_pngs.sh
 
 #-----------------------------------------------------------------------------
 
@@ -140,22 +141,22 @@ KDE 4 application runtime components.
 %_kde_bindir/kde4-menu
 %_kde_bindir/kdebugdialog
 %_kde_bindir/kde-cp
-%_kde_bindir/kdeeject
+%_kde_libdir/kde4/libexec/kdeeject
 %_kde_bindir/kde-mv
 %_kde_bindir/kde-open
-%_kde_bindir/kdesu
-%_kde_bindir/kdesud
+%_kde_libdir/kde4/libexec/kdesu
+%_kde_libdir/kde4/libexec/kdesud
 %_kde_bindir/kfile4
-%_kde_bindir/khc_docbookdig.pl
-%_kde_bindir/khc_htdig.pl
-%_kde_bindir/khc_htsearch.pl
-%_kde_bindir/khc_indexbuilder
-%_kde_bindir/khc_mansearch.pl
+%_kde_libdir/kde4/libexec/khc_docbookdig.pl
+%_kde_libdir/kde4/libexec/khc_htdig.pl
+%_kde_libdir/kde4/libexec/khc_htsearch.pl
+%_kde_libdir/kde4/libexec/khc_indexbuilder
+%_kde_libdir/kde4/libexec/khc_mansearch.pl
 %_kde_bindir/khotnewstuff4
 %_kde_bindir/kinfocenter
 %_kde_bindir/kioclient
 %_kde_bindir/kmimetypefinder
-%_kde_bindir/knetattach
+%_kde_libdir/kde4/libexec/knetattach
 %_kde_datadir/applications/kde4/knetattach.desktop
 %_kde_docdir/*/*/knetattach
 %_kde_bindir/knotify4
