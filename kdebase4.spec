@@ -1,10 +1,10 @@
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 730896
+%define revision 731791
 
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 3.94.1
+Version: 3.95.1
 Release: %mkrel 0.%revision.1
 Epoch: 1
 Group: Graphical desktop/KDE
@@ -272,6 +272,12 @@ KDE 4 application runtime components.
 %_kde_datadir/kde4/services/ioslaveinfo.desktop
 %_kde_datadir/kde4/services/renaudiodlg.desktop
 %_kde_datadir/kde4/services/renimagedlg.desktop
+%dir %_kde_datadir/templates
+%_kde_datadir/templates/*.desktop
+%dir %_kde_datadir/templates/.source
+%_kde_datadir/templates/.source/*.desktop
+%_kde_datadir/templates/.source/*.txt
+%_kde_datadir/templates/.source/*.html
 %_kde_prefix/shutdown/nepomuk.sh
 %_kde_libdir/libkdeinit4_kcmshell4.so
 %_kde_libdir/libkdeinit4_khelpcenter.so
