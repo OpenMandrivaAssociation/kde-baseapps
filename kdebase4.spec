@@ -1,10 +1,10 @@
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 731791
+%define revision 734018
 
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 3.95.1
+Version: 3.95.2
 Release: %mkrel 0.%revision.1
 Epoch: 1
 Group: Graphical desktop/KDE
@@ -110,7 +110,6 @@ KDE 4 application runtime components.
 %files runtime
 %defattr(-,root,root)
 %_datadir/dbus-1/services/*
-%_kde_prefix/env/nepomuk.sh
 %_kde_appsdir/drkonqi
 %_kde_appsdir/kcm_componentchooser
 %_kde_appsdir/kcmlocale
@@ -131,6 +130,8 @@ KDE 4 application runtime components.
 %_kde_libdir/kde4/plugins/styles
 %_kde_datadir/kde4/services/kded/soliduiserver.desktop
 %_kde_libdir/kde4/kded_soliduiserver.so
+%_kde_libdir/kde4/kcm_nepomuk.so
+%_kde_libdir/kde4/kded_nepomukserver.so
 %_kde_datadir/apps/kdm
 %_kde_datadir/kde4/services/khtml_fonts.desktop
 %_kde_libdir/kde4/libexec/kioexec
@@ -157,6 +158,7 @@ KDE 4 application runtime components.
 %_kde_bindir/kioclient
 %_kde_bindir/kmimetypefinder
 %_kde_libdir/kde4/libexec/knetattach
+%_kde_libdir/strigi/strigiindex_sopranobackend.so
 %_kde_datadir/applications/kde4/knetattach.desktop
 %_kde_docdir/*/*/knetattach
 %_kde_bindir/knotify4
@@ -212,6 +214,10 @@ KDE 4 application runtime components.
 %_kde_datadir/kde4/services/settings.protocol
 %_kde_datadir/kde4/services/smbstatus.desktop
 %_kde_datadir/kde4/services/smb.protocol
+%_kde_datadir/kde4/services/kded/kpasswdserver.desktop
+%_kde_datadir/kde4/services/kded/nepomukserver.desktop
+%_kde_datadir/kde4/services/ServiceMenus/konsolehere.desktop
+%_kde_datadir/kde4/services/kcm_nepomuk.desktop
 %_kde_appsdir/remoteview/smb-network.desktop
 %_kde_libdir/kde4/kio_smb.so
 %_kde_datadir/kde4/services/svgthumbnail.desktop
@@ -278,7 +284,6 @@ KDE 4 application runtime components.
 %_kde_datadir/templates/.source/*.desktop
 %_kde_datadir/templates/.source/*.txt
 %_kde_datadir/templates/.source/*.html
-%_kde_prefix/shutdown/nepomuk.sh
 %_kde_libdir/libkdeinit4_kcmshell4.so
 %_kde_libdir/libkdeinit4_khelpcenter.so
 %_kde_datadir/kde4/services/khelpcenter.desktop
@@ -314,7 +319,6 @@ A shell program similar to xterm for KDE
 %_kde_datadir/applications/kde4/konsole.desktop
 %_kde_datadir/applications/kde4/konsolesu.desktop
 %_kde_datadir/applications/kde4/quick-access-konsole.desktop
-%_kde_appsdir/konqueror/servicemenus/konsolehere.desktop
 %_kde_appsdir/konsole
 %_kde_datadir/kde4/services/kded/kwrited.desktop
 %_kde_datadir/kde4/services/konsole-script.desktop
@@ -550,7 +554,6 @@ KDE Browser
 %_kde_datadir/kde4/services/cookies.desktop
 %_kde_datadir/kde4/services/desktoppath.desktop
 %_kde_datadir/kde4/services/ebrowsing.desktop
-%_kde_datadir/kde4/services/fileappearance.desktop
 %_kde_datadir/kde4/services/filebehavior.desktop
 %_kde_datadir/kde4/services/filebrowser.desktop
 %_kde_datadir/kde4/services/filepreviews.desktop
@@ -578,7 +581,6 @@ KDE Browser
 %_kde_datadir/kde4/servicetypes/uasprovider.desktop
 %_kde_docdir/*/*/konqueror
 %_kde_appsdir/konqueror
-%exclude %_kde_appsdir/konqueror/servicemenus/konsolehere.desktop
 
 #-----------------------------------------------------------------------------
 
@@ -690,22 +692,6 @@ rm -fr %buildroot
 cd build
 
 make DESTDIR=%buildroot install
-
-# Nepomuk
-install -d  -m 0755 %buildroot%_kde_prefix/env
-install -d  -m 0755 %buildroot%_kde_prefix/shutdown
-cat << EOF > %buildroot%_kde_prefix/env/nepomuk.sh
-# start Nepomuk-KDE
-%_kde_bindir/nepomukdaemon &
-%_kde_bindir/nepomukcoreservices &
-EOF
-cat << EOF > %buildroot%_kde_prefix/shutdown/nepomuk.sh
-# stop Nepomuk-KDE
-killall nepomukdaemon
-killall nepomukcoreservices
-EOF
-chmod +x %buildroot%_kde_prefix/env/nepomuk.sh
-chmod +x %buildroot%_kde_prefix/shutdown/nepomuk.sh
 
 # kcalc.svgz crashes kicker
 rm -rf %buildroot/%_kde_iconsdir/oxygen/scalable/apps/small/16x16/kcalc.svgz
