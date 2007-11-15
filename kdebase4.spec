@@ -1,10 +1,10 @@
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 734846
+%define revision 737290
 
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 3.95.2
+Version: 3.96.0
 Release: %mkrel 0.%revision.1
 Epoch: 1
 Group: Graphical desktop/KDE
@@ -122,7 +122,6 @@ KDE 4 application runtime components.
 %_kde_appsdir/kio_info/kde-info2html.conf
 %_kde_appsdir/kio_man/kio_man.css
 %_kde_bindir/kuiserver
-%_kde_appsdir/kuiserver
 %_kde_datadir/kde4/services/kuiserver.desktop
 %_kde_libdir/libkdeinit4_kuiserver.so
 %_kde_libdir/kde4/kstyle_*
@@ -293,6 +292,7 @@ KDE 4 application runtime components.
 %_kde_libdir/libkdeinit4_kinfocenter.so
 %_kde_docdir/*/*/kcontrol
 %_kde_docdir/*/*/kdesu
+%_kde_datadir/man/man1/kdesu.1
 %_kde_docdir/*/*/kfind
 %_kde_docdir/*/*/kioslave
 %_kde_docdir/*/*/kdebugdialog
