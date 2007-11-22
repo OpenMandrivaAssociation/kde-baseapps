@@ -1,10 +1,10 @@
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 737290
+%define revision 740034
 
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 3.96.0
+Version: 3.96.1
 Release: %mkrel 0.%revision.1
 Epoch: 1
 Group: Graphical desktop/KDE
@@ -486,6 +486,24 @@ KDE 4 core library.
 %defattr(-,root,root)
 %_kde_libdir/libkonqsidebarplugin.so.*
 
+#------------------------------------------------
+
+%define libkonquerorprivate %mklibname konquerorprivate 1
+
+%package -n %libkonquerorprivate
+Summary: KDE 4 core library
+Group: System/Libraries
+
+%description -n %libkonquerorprivate
+KDE 4 core library.
+
+%post -n %libkonquerorprivate -p /sbin/ldconfig
+%postun -n %libkonquerorprivate -p /sbin/ldconfig
+
+%files -n %libkonquerorprivate
+%defattr(-,root,root)
+%_kde_libdir/libkonquerorprivate.so.*
+
 #-----------------------------------------------------------------------------
 
 %package -n kde4-konqueror
@@ -662,6 +680,7 @@ Requires: kdelibs4-devel
 Requires: %libdolphinprivate = %epoch:%version
 Requires: %libkonq = %epoch:%version
 Requires: %libkonqsidebarplugin = %epoch:%version
+Requires: %libkonquerorprivate = %epoch:%version
 Obsoletes: %{_lib}kdebase46-devel < 1:3.93.0-0.714129.2
 
 %description  devel
