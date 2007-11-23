@@ -67,7 +67,7 @@ Requires: phonon-xine
 BuildRoot: %_tmppath/%name-%version-%release-root
 
 %description
-Meta package that requires all base kdebase 4 files
+This meta package requires all base kdebase 4 packages.
 
 %files
 %doc README
