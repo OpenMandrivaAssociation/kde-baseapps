@@ -1,6 +1,6 @@
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 740034
+%define revision 741587
 
 Name: kdebase4
 Summary: K Desktop Environment
@@ -15,10 +15,6 @@ Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.%revision
 %else
 Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 %endif
-BuildConflicts: lm_utils
-BuildConflicts: lm_utils-devel
-BuildConflicts: liblm_sensors1
-BuildConflicts: liblm_sensors1-devel
 BuildRequires: kde4-macros
 BuildRequires: cmake
 BuildRequires: kdelibs4-devel
