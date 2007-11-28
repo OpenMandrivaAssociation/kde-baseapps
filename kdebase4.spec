@@ -1,6 +1,6 @@
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 741587
+%define revision 742711
 
 Name: kdebase4
 Summary: K Desktop Environment
@@ -117,6 +117,7 @@ KDE 4 application runtime components.
 %_kde_appsdir/kio_info/kde-info2html
 %_kde_appsdir/kio_info/kde-info2html.conf
 %_kde_appsdir/kio_man/kio_man.css
+%_kde_appsdir/kio_thumbnail/pics/thumbnailfont_7x4.png
 %_kde_bindir/kuiserver
 %_kde_datadir/kde4/services/kuiserver.desktop
 %_kde_libdir/libkdeinit4_kuiserver.so
