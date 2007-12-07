@@ -1,11 +1,11 @@
-%define branch 1
+%define branch 0
 %{?_branch: %{expand: %%global branch 1}}
 %define revision 745416
 
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 3.97.0
-Release: %mkrel 0.%revision.1
+Release: %mkrel 1
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -18,6 +18,7 @@ Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 BuildRequires: kde4-macros
 BuildRequires: cmake
 BuildRequires: kdelibs4-devel
+BuildRequires: kdebase4-workspace-devel
 BuildRequires: kdepimlibs4-devel
 BuildRequires: strigi-devel
 BuildRequires: soprano-devel
@@ -68,232 +69,6 @@ This meta package requires all base kdebase 4 packages.
 %files
 %doc README
 
-#--------------------------------------------------------------
-
-%package -n oxygen-icon-theme
-Group: Graphical desktop/KDE
-Summary: Oxygen icon theme
-Provides: kde4-icon-theme
-Obsoletes: kdelibs4-common >= 30000000:3.80.3
-
-%description -n oxygen-icon-theme
-Oxygen KDE 4 icon theme. Complains with FreeDesktop.org naming schema
-
-%files -n oxygen-icon-theme
-%defattr(-,root,root,-)
-%dir %_kde_iconsdir/oxygen
-%_kde_iconsdir/*/index.theme
-%_kde_iconsdir/*/*/*/*
-%_kde_datadir/emoticons/*
-%_kde_iconsdir/oxygen/scalable/export_pngs.sh
-
-#-----------------------------------------------------------------------------
-
-%package runtime
-Summary: KDE 4 application runtime components
-Group: Graphical desktop/KDE
-Requires: kdelibs4-core
-Requires: oxygen-icon-theme
-Obsoletes: kdebase4-progs < 1:3.93.0-0.714129.2
-Obsoletes: kdebase4-core  < 1:3.93.0-0.714129.2
-Obsoletes: kdebase4-common <= 1:3.80.3
-Conflicts: kdebase4-workspace < 1:3.94.1-0.728613.1
-
-
-%description runtime
-KDE 4 application runtime components.
-
-%files runtime
-%defattr(-,root,root)
-%_datadir/dbus-1/services/*
-%_kde_appsdir/drkonqi
-%_kde_appsdir/kcm_componentchooser
-%_kde_appsdir/kcmlocale
-%_kde_appsdir/kde
-%_kde_appsdir/kinfocenter
-%_kde_appsdir/kcontrol
-%_kde_appsdir/kio_finger/kio_finger.css
-%_kde_appsdir/kio_finger/kio_finger.pl
-%_kde_appsdir/kio_info/kde-info2html
-%_kde_appsdir/kio_info/kde-info2html.conf
-%_kde_appsdir/kio_man/kio_man.css
-%_kde_appsdir/kio_thumbnail/pics/thumbnailfont_7x4.png
-%_kde_bindir/kuiserver
-%_kde_datadir/kde4/services/kuiserver.desktop
-%_kde_libdir/libkdeinit4_kuiserver.so
-%_kde_libdir/kde4/kstyle_*
-%_kde_appsdir/kstyle
-%_kde_libdir/kde4/plugins/styles
-%_kde_datadir/kde4/services/kded/soliduiserver.desktop
-%_kde_libdir/kde4/kded_soliduiserver.so
-%_kde_libdir/kde4/kcm_nepomuk.so
-%_kde_libdir/kde4/kded_nepomukserver.so
-%_kde_datadir/apps/kdm
-%_kde_datadir/kde4/services/khtml_fonts.desktop
-%_kde_libdir/kde4/libexec/kioexec
-%_kde_libdir/kde4/libexec/drkonqi
-%_kde_libdir/kde4/libexec/klocaldomainurifilterhelper
-%_kde_bindir/ksvgtopng
-%_kde_bindir/kcmshell4
-%_kde_bindir/kde4-menu
-%_kde_bindir/kdebugdialog
-%_kde_bindir/kde-cp
-%_kde_libdir/kde4/libexec/kdeeject
-%_kde_bindir/kde-mv
-%_kde_bindir/kde-open
-%_kde_libdir/kde4/libexec/kdesu
-%_kde_libdir/kde4/libexec/kdesud
-%_kde_bindir/kfile4
-%_kde_libdir/kde4/libexec/khc_docbookdig.pl
-%_kde_libdir/kde4/libexec/khc_htdig.pl
-%_kde_libdir/kde4/libexec/khc_htsearch.pl
-%_kde_libdir/kde4/libexec/khc_indexbuilder
-%_kde_libdir/kde4/libexec/khc_mansearch.pl
-%_kde_bindir/khotnewstuff4
-%_kde_bindir/kinfocenter
-%_kde_bindir/kioclient
-%_kde_bindir/kmimetypefinder
-%_kde_libdir/kde4/libexec/knetattach
-%_kde_libdir/strigi/strigiindex_sopranobackend.so
-%_kde_datadir/applications/kde4/knetattach.desktop
-%_kde_docdir/*/*/knetattach
-%_kde_bindir/knotify4
-%_kde_bindir/kquitapp
-%_kde_bindir/kreadconfig
-%_kde_bindir/kstart
-%_kde_bindir/ktraderclient
-%_kde_bindir/ktrash
-%_kde_bindir/kwriteconfig
-%_kde_configdir/xdg/menus/kde-information.menu
-%_kde_datadir/applications/kde4/Help.desktop
-%_kde_datadir/config/khotnewstuffrc
-%_kde_datadir/config/kshorturifilterrc
-%_kde_datadir/desktop-directories
-%_kde_datadir/kde4/services/about.protocol
-%_kde_datadir/kde4/services/applications.protocol
-%_kde_datadir/kde4/services/ar.protocol
-%_kde_datadir/kde4/services/bzip2.protocol
-%_kde_datadir/kde4/services/bzip.protocol
-%_kde_datadir/kde4/services/cgi.protocol
-%_kde_datadir/kde4/services/componentchooser.desktop
-%_kde_datadir/kde4/services/cursorthumbnail.desktop
-%_kde_datadir/kde4/services/djvuthumbnail.desktop
-%_kde_datadir/kde4/services/exrthumbnail.desktop
-%_kde_datadir/kde4/services/finger.protocol
-%_kde_datadir/kde4/services/fish.protocol
-%_kde_datadir/kde4/services/fixhosturifilter.desktop
-%_kde_datadir/kde4/services/floppy.protocol
-%_kde_datadir/kde4/services/gzip.protocol
-%_kde_datadir/kde4/services/htmlthumbnail.desktop
-%_kde_datadir/kde4/services/icons.desktop
-%_kde_datadir/kde4/services/imagethumbnail.desktop
-%_kde_datadir/kde4/services/info.protocol
-%_kde_datadir/kde4/services/kcmcgi.desktop
-%_kde_datadir/kde4/services/kcmkded.desktop
-%_kde_datadir/kde4/services/kcm_kdnssd.desktop
-%_kde_datadir/kde4/services/kcmnotify.desktop
-%_kde_datadir/kde4/services/kded/ktimezoned.desktop
-%_kde_datadir/kde4/services/kded/remotedirnotify.desktop
-%_kde_datadir/kde4/services/kinfocenter.desktop
-%_kde_datadir/kde4/services/kmanpart.desktop
-%_kde_datadir/kde4/services/knotify4.desktop
-%_kde_datadir/kde4/services/kshorturifilter.desktop
-%_kde_datadir/kde4/services/kuriikwsfilter.desktop
-%_kde_datadir/kde4/services/kurisearchfilter.desktop
-%_kde_datadir/kde4/services/language.desktop
-%_kde_datadir/kde4/services/localdomainurifilter.desktop
-%_kde_datadir/kde4/services/man.protocol
-%_kde_datadir/kde4/services/nfs.protocol
-%_kde_datadir/kde4/services/programs.protocol
-%_kde_datadir/kde4/services/remote.protocol
-%_kde_datadir/kde4/services/searchproviders
-%_kde_datadir/kde4/services/settings.protocol
-%_kde_datadir/kde4/services/smbstatus.desktop
-%_kde_datadir/kde4/services/smb.protocol
-%_kde_datadir/kde4/services/kded/kpasswdserver.desktop
-%_kde_datadir/kde4/services/kded/nepomukserver.desktop
-%_kde_datadir/kde4/services/ServiceMenus/konsolehere.desktop
-%_kde_datadir/kde4/services/kcm_nepomuk.desktop
-%_kde_appsdir/remoteview/smb-network.desktop
-%_kde_libdir/kde4/kio_smb.so
-%_kde_datadir/kde4/services/svgthumbnail.desktop
-%_kde_datadir/kde4/services/tar.protocol
-%_kde_datadir/kde4/services/textthumbnail.desktop
-%_kde_datadir/kde4/services/thumbnail.protocol
-%_kde_datadir/kde4/services/trash.protocol
-%_kde_datadir/kde4/services/zip.protocol
-%_kde_datadir/kde4/servicetypes/searchprovider.desktop
-%_kde_datadir/kde4/servicetypes/thumbcreator.desktop
-%_kde_datadir/locale/l10n/*/*
-%_kde_datadir/locale/l10n/*.desktop
-%_kde_datadir/locale/en_US
-%_kde_datadir/sounds
-%_kde_libdir/kde4/cursorthumbnail.so
-%_kde_libdir/kde4/djvuthumbnail.so
-%_kde_libdir/kde4/exrthumbnail.so
-%_kde_libdir/kde4/htmlthumbnail.so
-%_kde_libdir/kde4/imagethumbnail.so
-%_kde_libdir/kde4/kcm_cgi.so
-%_kde_libdir/kde4/kcm_componentchooser.so
-%_kde_libdir/kde4/kcm_icons.so
-%_kde_libdir/kde4/kcm_kded.so
-%_kde_libdir/kde4/kcm_kdnssd.so
-%_kde_libdir/kde4/kcm_knotify.so
-%_kde_libdir/kde4/kcm_locale.so
-%_kde_libdir/kde4/kcm_samba.so
-%_kde_libdir/kde4/kded_kpasswdserver.so
-%_kde_libdir/kde4/kded_ktimezoned.so
-%_kde_libdir/kde4/librenaudioplugin.so
-%_kde_libdir/kde4/librenimageplugin.so
-%_kde_libdir/kde4/kded_remotedirnotify.so
-%_kde_libdir/kde4/kio_sftp.so
-%_kde_datadir/kde4/services/sftp* 
-%_kde_libdir/kde4/kio_about.so
-%_kde_libdir/kde4/kio_cgi.so
-%_kde_libdir/kde4/kio_filter.so
-%_kde_libdir/kde4/kio_finger.so
-%_kde_libdir/kde4/kio_fish.so
-%_kde_libdir/kde4/kio_floppy.so
-%_kde_libdir/kde4/kio_info.so
-%_kde_libdir/kde4/kio_man.so
-%_kde_libdir/kde4/kio_nfs.so
-%_kde_libdir/kde4/kio_remote.so
-%_kde_libdir/kde4/kio_settings.so
-%_kde_libdir/kde4/kcm_ioslaveinfo.so
-%_kde_libdir/kde4/kio_archive.so
-%_kde_libdir/kde4/kio_thumbnail.so
-%_kde_libdir/kde4/kio_trash.so
-%_kde_libdir/kde4/libfixhosturifilter.so
-%_kde_libdir/kde4/libkmanpart.so
-%_kde_libdir/kde4/libkshorturifilter.so
-%_kde_libdir/kde4/libkuriikwsfilter.so
-%_kde_libdir/kde4/libkurisearchfilter.so
-%_kde_libdir/kde4/liblocaldomainurifilter.so
-%_kde_libdir/kde4/svgthumbnail.so
-%_kde_libdir/kde4/textthumbnail.so
-%_kde_datadir/kde4/services/ioslaveinfo.desktop
-%_kde_datadir/kde4/services/renaudiodlg.desktop
-%_kde_datadir/kde4/services/renimagedlg.desktop
-%dir %_kde_datadir/templates
-%_kde_datadir/templates/*.desktop
-%dir %_kde_datadir/templates/.source
-%_kde_datadir/templates/.source/*.desktop
-%_kde_datadir/templates/.source/*.txt
-%_kde_datadir/templates/.source/*.html
-%_kde_libdir/libkdeinit4_kcmshell4.so
-%_kde_libdir/libkdeinit4_khelpcenter.so
-%_kde_datadir/kde4/services/khelpcenter.desktop
-%_kde_bindir/khelpcenter
-%_kde_appsdir/khelpcenter
-%_kde_docdir/*/*/khelpcenter
-%_kde_libdir/libkdeinit4_kinfocenter.so
-%_kde_docdir/*/*/kcontrol
-%_kde_docdir/*/*/kdesu
-%_kde_datadir/man/man1/kdesu.1
-%_kde_docdir/*/*/kfind
-%_kde_docdir/*/*/kioslave
-%_kde_docdir/*/*/kdebugdialog
-
 #-----------------------------------------------------------------------------
 
 %package -n kde4-konsole
@@ -322,6 +97,9 @@ A shell program similar to xterm for KDE
 %_kde_datadir/kde4/services/konsolepart.desktop
 %_kde_datadir/kde4/servicetypes/terminalemulator.desktop
 %_kde_docdir/*/*/konsole
+%_kde_datadir/kde4/services/ServiceMenus/konsolehere.desktop
+%exclude %_kde_iconsdir/*/*/*/konsole.*
+#%_datadir/dbus-1/interfaces/org.kde.konsole*
 
 #------------------------------------------------	
 
@@ -359,10 +137,12 @@ A shell program similar to xterm for KDE
 %_kde_bindir/dolphin
 %_kde_datadir/applications/kde4/dolphin.desktop
 %_kde_datadir/kde4/services/dolphinpart.desktop
+%_kde_datadir/config.kcfg/dolphin_*
 %_kde_libdir/kde4/dolphinpart.so
 %_kde_appsdir/dolphinpart/dolphinpart.rc
 %_kde_appsdir/dolphin
 %_kde_docdir/*/*/dolphin
+#%_datadir/dbus-1/interfaces/org.kde.dolphin*
 
 #-----------------------------------------------------------------------------
 
@@ -380,6 +160,11 @@ A shell program similar to xterm for KDE
 %_kde_bindir/kappfinder
 %_kde_datadir/applications/kde4/kappfinder.desktop
 %_kde_appsdir/kappfinder
+%_kde_iconsdir/*/*/*/*
+%exclude %_kde_iconsdir/*/*/*/konqueror.*
+%exclude %_kde_iconsdir/*/*/*/kfm.*
+%exclude %_kde_iconsdir/*/*/*/konsole.*
+%exclude %_kde_iconsdir/*/*/*/kfind.*
 
 #-----------------------------------------------------------------------------
 
@@ -398,6 +183,8 @@ User password management
 %_kde_libdir/kde4/kcm_useraccount.so
 %_kde_datadir/applications/kde4/kdepasswd.desktop
 %_kde_datadir/kde4/services/kcm_useraccount.desktop
+%_kde_datadir/config.kcfg/kcm_useracc*
+%_kde_datadir/apps/kdm/*
 
 #-----------------------------------------------------------------------------
 
@@ -418,6 +205,7 @@ Netscape plugins wrapper for kde.
 %_kde_libdir/kde4/libnsplugin.so
 %_kde_appsdir/plugin/nspluginpart.rc
 %_kde_datadir/kde4/services/khtml_plugins.desktop
+%_datadir/dbus-1/interfaces/org.kde.nsplug*
 
 #-----------------------------------------------------------------------------
 
@@ -462,6 +250,8 @@ KDE 4 core library.
 %_kde_appsdir/kconf_update/move_favicons.sh
 %_kde_datadir/kde4/services/kded/favicons.desktop
 %_kde_datadir/kde4/servicetypes/konqpopupmenuplugin.desktop
+%_kde_datadir/templates
+%_datadir/dbus-1/interfaces/org.kde.libkonq*
 
 #------------------------------------------------	
 
@@ -538,6 +328,8 @@ KDE Browser
 %_kde_libdir/kde4/libkhtmlkttsdplugin.so
 %_kde_libdir/libkdeinit4_kfmclient.so
 %_kde_libdir/libkdeinit4_konqueror.so
+%_kde_datadir/apps/kcontrol/*
+%_kde_datadir/config.kcfg/konqueror*
 %_kde_datadir/applications/kde4/Home.desktop
 %_kde_datadir/applications/kde4/kfmclient.desktop
 %_kde_datadir/applications/kde4/kfmclient_dir.desktop
@@ -551,7 +343,6 @@ KDE Browser
 %_kde_appsdir/kconf_update/konqsidebartng.upd
 %_kde_appsdir/kconf_update/move_konqsidebartng_entries.sh
 %_kde_appsdir/kconf_update/socks.upd
-%_kde_appsdir/kconf_update/kuriikwsfilter.upd
 %_kde_appsdir/khtml/kpartplugins/khtmlkttsd.desktop
 %_kde_appsdir/khtml/kpartplugins/khtmlkttsd.rc
 %_kde_appsdir/konqiconview/kpartplugins/kremoteencodingplugin.desktop
@@ -594,8 +385,14 @@ KDE Browser
 %_kde_datadir/kde4/services/useragentstrings
 %_kde_datadir/kde4/servicetypes/konqaboutpage.desktop
 %_kde_datadir/kde4/servicetypes/uasprovider.desktop
+%_kde_datadir/kde4/services/khtml_fonts.desktop
 %_kde_docdir/*/*/konqueror
 %_kde_appsdir/konqueror
+%exclude %_kde_iconsdir/*/*/*/konqueror.*
+%exclude %_kde_iconsdir/*/*/*/kfm.*
+%_datadir/dbus-1/interfaces/org.kde.Konq*
+%_datadir/dbus-1/interfaces/org.kde.konq*
+%_datadir/dbus-1/interfaces/org.kde.FavIcon*
 
 #-----------------------------------------------------------------------------
 
@@ -614,6 +411,8 @@ Bookmar editor
 %_kde_bindir/keditbookmarks
 %_kde_libdir/libkdeinit4_keditbookmarks.so
 %_kde_appsdir/keditbookmarks
+%_kde_datadir/config.kcfg/keditbook*
+#%_datadir/dbus-1/interfaces/org.kde.kedit*
 
 #-----------------------------------------------------------------------------
 
@@ -633,6 +432,8 @@ Application finder
 %_kde_datadir/applications/kde4/kfind.desktop
 %_kde_datadir/kde4/services/kfindpart.desktop
 %_kde_datadir/kde4/servicetypes/findpart.desktop
+%exclude %_kde_iconsdir/*/*/*/kfind.*
+%_kde_docdir/*/*/kfind
 
 #-----------------------------------------------------------------------------
 
@@ -648,24 +449,7 @@ Dialog KDE base widgets
 %files -n kde4-kdialog
 %defattr(-,root,root)
 %_kde_bindir/kdialog
-
-#-----------------------------------------------------------------------------
-
-%package -n phonon-xine
-Summary: Xine backend to Phonon
-Group: Sound
-BuildRequires: libxine-devel
-Obsoletes: kde4-phonon-xine < 1:3.93.0-0.714129.2
-
-%description -n phonon-xine
-Xine backend to Phonon.
-
-%files -n phonon-xine
-%defattr(-,root,root)
-%_kde_libdir/kde4/kcm_phononxine.so
-%_kde_libdir/kde4/phonon_xine.so
-%_kde_datadir/kde4/services/kcm_phononxine.desktop
-%_kde_datadir/kde4/services/phononbackends/xine.desktop
+%_datadir/dbus-1/interfaces/org.kde.kdialog*
 
 #-----------------------------------------------------------------------------
 
@@ -687,9 +471,6 @@ This package contains header files needed if you wish to build applications base
 %defattr(-,root,root)
 %_kde_libdir/*.so
 %_kde_prefix/include/*
-%_kde_datadir/apps/cmake/*/*
-%_kde_datadir/config.kcfg
-%_datadir/dbus-1/interfaces/*
 %exclude %_kde_libdir/libkdeinit*
 
 #-----------------------------------------------------------------------------
