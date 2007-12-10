@@ -1,10 +1,10 @@
-%define branch 0
+%define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 745416
+%define revision 746973
 
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 3.97.0
+Version: 3.97.1
 Release: %mkrel 1
 Epoch: 1
 Group: Graphical desktop/KDE
@@ -60,6 +60,7 @@ Requires: kde4-konqueror
 Requires: kde4-keditbookmarks
 Requires: kde4-kfind
 Requires: kde4-kdialog
+Requires: kde4-kinfocenter
 Requires: phonon-xine
 BuildRoot: %_tmppath/%name-%version-%release-root
 
@@ -162,9 +163,32 @@ A shell program similar to xterm for KDE
 %_kde_appsdir/kappfinder
 %_kde_iconsdir/*/*/*/*
 %exclude %_kde_iconsdir/*/*/*/konqueror.*
-%exclude %_kde_iconsdir/*/*/*/kfm.*
 %exclude %_kde_iconsdir/*/*/*/konsole.*
 %exclude %_kde_iconsdir/*/*/*/kfind.*
+
+#-----------------------------------------------------------------------------
+
+%package -n kde4-kinfocenter
+Summary:    kinfocenter
+Group:      Graphical desktop/KDE
+Requires:   kdebase4-runtime
+Provides:   kinfocenter4
+Conflicts:  kdebase4-runtime < 3.97.1
+
+%description -n kde4-kinfocenter
+Kinfocenter is a utility in KDE that provides information 
+about a computer system.
+
+%files -n kde4-kinfocenter
+%defattr(-,root,root)
+%_kde_bindir/kinfocenter
+%dir %_kde_appsdir/kinfocenter
+%dir %_kde_appsdir/kinfocenter/about
+%_kde_appsdir/kinfocenter/about/kinfocenter.css
+%_kde_appsdir/kinfocenter/about/main.html
+%_kde_appsdir/kinfocenter/about/top-right-kinfocenter.png
+%_kde_appsdir/kinfocenter/kinfocenterui.rc
+%_kde_datadir/kde4/services/kinfocenter.desktop
 
 #-----------------------------------------------------------------------------
 
@@ -389,7 +413,6 @@ KDE Browser
 %_kde_docdir/*/*/konqueror
 %_kde_appsdir/konqueror
 %exclude %_kde_iconsdir/*/*/*/konqueror.*
-%exclude %_kde_iconsdir/*/*/*/kfm.*
 %_datadir/dbus-1/interfaces/org.kde.Konq*
 %_datadir/dbus-1/interfaces/org.kde.konq*
 %_datadir/dbus-1/interfaces/org.kde.FavIcon*
@@ -412,7 +435,6 @@ Bookmar editor
 %_kde_libdir/libkdeinit4_keditbookmarks.so
 %_kde_appsdir/keditbookmarks
 %_kde_datadir/config.kcfg/keditbook*
-#%_datadir/dbus-1/interfaces/org.kde.kedit*
 
 #-----------------------------------------------------------------------------
 
