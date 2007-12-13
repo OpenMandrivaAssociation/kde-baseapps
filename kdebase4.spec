@@ -5,7 +5,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 3.97.1
-Release: %mkrel 1
+Release: %mkrel 2
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -100,7 +100,6 @@ A shell program similar to xterm for KDE
 %_kde_docdir/*/*/konsole
 %_kde_datadir/kde4/services/ServiceMenus/konsolehere.desktop
 %exclude %_kde_iconsdir/*/*/*/konsole.*
-#%_datadir/dbus-1/interfaces/org.kde.konsole*
 
 #------------------------------------------------	
 
@@ -182,6 +181,7 @@ about a computer system.
 %files -n kde4-kinfocenter
 %defattr(-,root,root)
 %_kde_bindir/kinfocenter
+%_kde_libdir/libkdeinit4_kinfocenter.so
 %dir %_kde_appsdir/kinfocenter
 %dir %_kde_appsdir/kinfocenter/about
 %_kde_appsdir/kinfocenter/about/kinfocenter.css
@@ -491,9 +491,11 @@ This package contains header files needed if you wish to build applications base
 
 %files devel
 %defattr(-,root,root)
-%_kde_libdir/*.so
-%_kde_prefix/include/*
-%exclude %_kde_libdir/libkdeinit*
+%_kde_libdir/libdolphinprivate.so
+%_kde_libdir/libkonq.so
+%_kde_libdir/libkonqsidebarplugin.so
+%_kde_libdir/libkonquerorprivate.so
+%_kde_includedir/*.h
 
 #-----------------------------------------------------------------------------
 
