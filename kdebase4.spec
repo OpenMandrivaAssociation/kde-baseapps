@@ -97,9 +97,12 @@ A shell program similar to xterm for KDE
 %_kde_datadir/kde4/services/konsole-script.desktop
 %_kde_datadir/kde4/services/konsolepart.desktop
 %_kde_datadir/kde4/servicetypes/terminalemulator.desktop
-%_kde_docdir/*/*/konsole
 %_kde_datadir/kde4/services/ServiceMenus/konsolehere.desktop
 %exclude %_kde_iconsdir/*/*/*/konsole.*
+%dir %_kde_docdir/HTML/en/konsole
+%doc %_kde_docdir/HTML/en/konsole/index.cache.bz2
+%doc %_kde_docdir/HTML/en/konsole/index.docbook
+%doc %_kde_docdir/HTML/en/konsole/*.png
 
 #------------------------------------------------	
 
@@ -141,8 +144,11 @@ A shell program similar to xterm for KDE
 %_kde_libdir/kde4/dolphinpart.so
 %_kde_appsdir/dolphinpart/dolphinpart.rc
 %_kde_appsdir/dolphin
-%_kde_docdir/*/*/dolphin
-#%_datadir/dbus-1/interfaces/org.kde.dolphin*
+
+%dir %_kde_docdir/HTML/en/dolphin
+%doc %_kde_docdir/HTML/en/dolphin/index.cache.bz2
+%doc %_kde_docdir/HTML/en/dolphin/index.docbook
+%doc %_kde_docdir/HTML/en/dolphin/*.png
 
 #-----------------------------------------------------------------------------
 
@@ -248,7 +254,10 @@ User password management
 %_kde_libdir/libkdeinit4_kwrite.so
 %_kde_datadir/applications/kde4/kwrite.desktop
 %_kde_appsdir/kwrite
-%_kde_docdir/*/*/kwrite
+
+%dir %_kde_docdir/HTML/en/kwrite
+%doc %_kde_docdir/HTML/en/kwrite/index.cache.bz2
+%doc %_kde_docdir/HTML/en/kwrite/index.docbook
 
 #------------------------------------------------	
 
@@ -410,12 +419,16 @@ KDE Browser
 %_kde_datadir/kde4/servicetypes/konqaboutpage.desktop
 %_kde_datadir/kde4/servicetypes/uasprovider.desktop
 %_kde_datadir/kde4/services/khtml_fonts.desktop
-%_kde_docdir/*/*/konqueror
 %_kde_appsdir/konqueror
-%exclude %_kde_iconsdir/*/*/*/konqueror.*
 %_datadir/dbus-1/interfaces/org.kde.Konq*
 %_datadir/dbus-1/interfaces/org.kde.konq*
 %_datadir/dbus-1/interfaces/org.kde.FavIcon*
+%exclude %_kde_iconsdir/*/*/*/konqueror.*
+
+%dir %_kde_docdir/HTML/en/konqueror
+%doc %_kde_docdir/HTML/en/konqueror/*.png
+%doc %_kde_docdir/HTML/en/konqueror/*.docbook
+%doc %_kde_docdir/HTML/en/konqueror/*.bz2
 
 #-----------------------------------------------------------------------------
 
@@ -455,7 +468,10 @@ Application finder
 %_kde_datadir/kde4/services/kfindpart.desktop
 %_kde_datadir/kde4/servicetypes/findpart.desktop
 %exclude %_kde_iconsdir/*/*/*/kfind.*
-%_kde_docdir/*/*/kfind
+
+%dir %_kde_docdir/HTML/en/kfind
+%doc %_kde_docdir/HTML/en/kfind/index.cache.bz2
+%doc %_kde_docdir/HTML/en/kfind/*.docbook
 
 #-----------------------------------------------------------------------------
 
