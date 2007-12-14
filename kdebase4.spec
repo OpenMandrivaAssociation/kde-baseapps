@@ -98,7 +98,7 @@ A shell program similar to xterm for KDE
 %_kde_datadir/kde4/services/konsolepart.desktop
 %_kde_datadir/kde4/servicetypes/terminalemulator.desktop
 %_kde_datadir/kde4/services/ServiceMenus/konsolehere.desktop
-%exclude %_kde_iconsdir/*/*/*/konsole.*
+%_kde_iconsdir/*/*/*/konsole.*
 %dir %_kde_docdir/HTML/en/konsole
 %doc %_kde_docdir/HTML/en/konsole/index.cache.bz2
 %doc %_kde_docdir/HTML/en/konsole/index.docbook
@@ -423,7 +423,7 @@ KDE Browser
 %_datadir/dbus-1/interfaces/org.kde.Konq*
 %_datadir/dbus-1/interfaces/org.kde.konq*
 %_datadir/dbus-1/interfaces/org.kde.FavIcon*
-%exclude %_kde_iconsdir/*/*/*/konqueror.*
+%_kde_iconsdir/*/*/*/konqueror.*
 
 %dir %_kde_docdir/HTML/en/konqueror
 %doc %_kde_docdir/HTML/en/konqueror/*.png
@@ -467,7 +467,7 @@ Application finder
 %_kde_datadir/applications/kde4/kfind.desktop
 %_kde_datadir/kde4/services/kfindpart.desktop
 %_kde_datadir/kde4/servicetypes/findpart.desktop
-%exclude %_kde_iconsdir/*/*/*/kfind.*
+%_kde_iconsdir/*/*/*/kfind.*
 
 %dir %_kde_docdir/HTML/en/kfind
 %doc %_kde_docdir/HTML/en/kfind/index.cache.bz2
