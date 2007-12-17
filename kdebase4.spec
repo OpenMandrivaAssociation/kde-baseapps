@@ -62,7 +62,6 @@ Requires: kde4-kfind
 Requires: kde4-kdialog
 Requires: kde4-kinfocenter
 Requires: phonon-xine
-BuildRoot: %_tmppath/%name-%version-%release-root
 
 %description
 This meta package requires all base kdebase 4 packages.
