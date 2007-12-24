@@ -1,18 +1,19 @@
 %define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 746973
+%define revision 752228
 
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 3.97.1
-Release: %mkrel 2
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
 URL: http://www.kde.org
 %if %branch
+Release: %mkrel 2.%revision.1
 Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.%revision.tar.bz2
 %else
+Release: %mkrel 2
 Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 %endif
 BuildRequires: kde4-macros
@@ -89,7 +90,6 @@ A shell program similar to xterm for KDE
 %_kde_libdir/kde4/libkonsolepart.so
 %_kde_libdir/libkdeinit4_konsole.so
 %_kde_datadir/applications/kde4/konsole.desktop
-%_kde_datadir/applications/kde4/konsolesu.desktop
 %_kde_datadir/applications/kde4/quick-access-konsole.desktop
 %_kde_appsdir/konsole
 %_kde_datadir/kde4/services/kded/kwrited.desktop
