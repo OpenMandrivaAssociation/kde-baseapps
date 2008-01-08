@@ -1,19 +1,19 @@
-%define branch 1
+%define branch 0
 %{?_branch: %{expand: %%global branch 1}}
 %define revision 752228
 
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 3.97.1
+Version: 4.0.0
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
 URL: http://www.kde.org
 %if %branch
-Release: %mkrel 2.%revision.1
+Release: %mkrel 1.%revision.1
 Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.%revision.tar.bz2
 %else
-Release: %mkrel 2
+Release: %mkrel 1
 Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 %endif
 BuildRequires: kde4-macros
@@ -50,6 +50,7 @@ BuildRequires: bluez-devel
 BuildRequires: boost-devel
 BuildRequires: xrdb
 BuildRequires: qimageblitz-devel
+BuildRequires: libxine-devel >= 1.1.9
 Requires: kdebase4-runtime
 Requires: kde4-kappfinder
 Requires: kde4-konsole
@@ -91,7 +92,6 @@ A shell program similar to xterm for KDE
 %_kde_libdir/kde4/libkonsolepart.so
 %_kde_libdir/libkdeinit4_konsole.so
 %_kde_datadir/applications/kde4/konsole.desktop
-%_kde_datadir/applications/kde4/quick-access-konsole.desktop
 %_kde_appsdir/konsole
 %_kde_datadir/kde4/services/kded/kwrited.desktop
 %_kde_datadir/kde4/services/konsole-script.desktop
@@ -178,7 +178,7 @@ Summary:    kinfocenter
 Group:      Graphical desktop/KDE
 Requires:   kdebase4-runtime
 Provides:   kinfocenter4
-Conflicts:  kdebase4-runtime < 3.97.1
+Conflicts:  kdebase4-runtime < 1:4.0.0
 
 %description -n kde4-kinfocenter
 Kinfocenter is a utility in KDE that provides information 
@@ -194,7 +194,7 @@ about a computer system.
 %_kde_appsdir/kinfocenter/about/main.html
 %_kde_appsdir/kinfocenter/about/top-right-kinfocenter.png
 %_kde_appsdir/kinfocenter/kinfocenterui.rc
-%_kde_datadir/kde4/services/kinfocenter.desktop
+%_kde_datadir/applications/kde4/kinfocenter.desktop
 
 #-----------------------------------------------------------------------------
 
