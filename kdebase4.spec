@@ -1,6 +1,6 @@
-%define branch 0
+%define branch 1
 %{?_branch: %{expand: %%global branch 1}}
-%define revision 752228
+%define revision 765555
 
 Name: kdebase4
 Summary: K Desktop Environment
