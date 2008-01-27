@@ -10,7 +10,7 @@ Group: Graphical desktop/KDE
 License: GPL
 URL: http://www.kde.org
 %if %branch
-Release: %mkrel 1.%revision.1
+Release: %mkrel 1.%revision.2
 Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.%revision.tar.bz2
 %else
 Release: %mkrel 1
