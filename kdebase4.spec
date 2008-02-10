@@ -1,21 +1,12 @@
-%define branch 1
-%{?_branch: %{expand: %%global branch 1}}
-%define revision 765555
-
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 4.0.0
+Version: 4.0.1
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
 URL: http://www.kde.org
-%if %branch
-Release: %mkrel 1.%revision.2
-Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.%revision.tar.bz2
-%else
 Release: %mkrel 1
 Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
-%endif
 BuildRequires: kde4-macros
 BuildRequires: cmake
 BuildRequires: kdelibs4-devel
@@ -44,7 +35,7 @@ BuildRequires: libraw1394-devel
 BuildRequires: libxklavier-devel
 BuildRequires: lua-devel
 BuildRequires: resmgr-devel
-BuildRequires: libnetworkmanager-util-devel
+BuildRequires: networkmanager-util-devel
 BuildRequires: networkmanager-devel
 BuildRequires: bluez-devel
 BuildRequires: boost-devel
