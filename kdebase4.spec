@@ -90,10 +90,7 @@ A shell program similar to xterm for KDE
 %_kde_datadir/kde4/servicetypes/terminalemulator.desktop
 %_kde_datadir/kde4/services/ServiceMenus/konsolehere.desktop
 %_kde_iconsdir/*/*/*/konsole.*
-%dir %_kde_docdir/HTML/en/konsole
-%doc %_kde_docdir/HTML/en/konsole/index.cache.bz2
-%doc %_kde_docdir/HTML/en/konsole/index.docbook
-%doc %_kde_docdir/HTML/en/konsole/*.png
+%_kde_docdir/*/*/konsole
 
 #------------------------------------------------	
 
@@ -135,11 +132,7 @@ A shell program similar to xterm for KDE
 %_kde_libdir/kde4/dolphinpart.so
 %_kde_appsdir/dolphinpart/dolphinpart.rc
 %_kde_appsdir/dolphin
-
-%dir %_kde_docdir/HTML/en/dolphin
-%doc %_kde_docdir/HTML/en/dolphin/index.cache.bz2
-%doc %_kde_docdir/HTML/en/dolphin/index.docbook
-%doc %_kde_docdir/HTML/en/dolphin/*.png
+%_kde_docdir/*/*/dolphin
 
 #-----------------------------------------------------------------------------
 
@@ -245,10 +238,7 @@ User password management
 %_kde_libdir/libkdeinit4_kwrite.so
 %_kde_datadir/applications/kde4/kwrite.desktop
 %_kde_appsdir/kwrite
-
-%dir %_kde_docdir/HTML/en/kwrite
-%doc %_kde_docdir/HTML/en/kwrite/index.cache.bz2
-%doc %_kde_docdir/HTML/en/kwrite/index.docbook
+%_kde_docdir/*/*/kwrite
 
 #------------------------------------------------	
 
@@ -415,11 +405,7 @@ KDE Browser
 %_datadir/dbus-1/interfaces/org.kde.konq*
 %_datadir/dbus-1/interfaces/org.kde.FavIcon*
 %_kde_iconsdir/*/*/*/konqueror.*
-
-%dir %_kde_docdir/HTML/en/konqueror
-%doc %_kde_docdir/HTML/en/konqueror/*.png
-%doc %_kde_docdir/HTML/en/konqueror/*.docbook
-%doc %_kde_docdir/HTML/en/konqueror/*.bz2
+%_kde_docdir/*/*/konqueror
 
 #-----------------------------------------------------------------------------
 
@@ -459,10 +445,7 @@ Application finder
 %_kde_datadir/kde4/services/kfindpart.desktop
 %_kde_datadir/kde4/servicetypes/findpart.desktop
 %_kde_iconsdir/*/*/*/kfind.*
-
-%dir %_kde_docdir/HTML/en/kfind
-%doc %_kde_docdir/HTML/en/kfind/index.cache.bz2
-%doc %_kde_docdir/HTML/en/kfind/*.docbook
+%_kde_docdir/*/*/kfind
 
 #-----------------------------------------------------------------------------
 
