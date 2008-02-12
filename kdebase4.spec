@@ -477,7 +477,8 @@ Requires: %libkonquerorprivate = %epoch:%version
 Obsoletes: %{_lib}kdebase46-devel < 1:3.93.0-0.714129.2
 
 %description  devel
-This package contains header files needed if you wish to build applications based on kdebase.
+This package contains header files needed if you wish to build applications
+based on kdebase.
 
 %files devel
 %defattr(-,root,root)
