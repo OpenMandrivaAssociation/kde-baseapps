@@ -114,7 +114,7 @@ KDE 4 core library.
 #-----------------------------------------------------------------------------
 
 %package -n kde4-dolphin
-Summary: dolphin
+Summary: Dolphin
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
 Provides: dolphin4
@@ -137,7 +137,7 @@ A shell program similar to xterm for KDE
 #-----------------------------------------------------------------------------
 
 %package -n kde4-kappfinder
-Summary: kappfinder
+Summary: Kappfinder
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
 Provides: kappfinder4
@@ -158,7 +158,7 @@ A shell program similar to xterm for KDE
 #-----------------------------------------------------------------------------
 
 %package -n kde4-kinfocenter
-Summary:    kinfocenter
+Summary:    Kinfocenter
 Group:      Graphical desktop/KDE
 Requires:   kdebase4-runtime
 Provides:   kinfocenter4
@@ -183,7 +183,7 @@ about a computer system.
 #-----------------------------------------------------------------------------
 
 %package -n kde4-kdepasswd
-Summary: kdepasswd
+Summary: Kdepasswd
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
 Obsoletes: kdebase4-kdepasswd < 1:3.93.0-0.714129.2
@@ -224,7 +224,7 @@ Netscape plugins wrapper for kde.
 #-----------------------------------------------------------------------------
 
 %package -n kde4-kwrite
-Summary: kwrite
+Summary: Kwrite
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
 Obsoletes: kdebase4-kwrite < 1:3.93.0-0.714129.2
@@ -308,7 +308,7 @@ KDE 4 core library.
 #-----------------------------------------------------------------------------
 
 %package -n kde4-konqueror
-Summary:    konqueror
+Summary:    Konqueror
 Group:      Graphical desktop/KDE
 Requires:   kdebase4-runtime
 Obsoletes:  kdebase4-konqueror < 1:3.93.0-0.714129.2
