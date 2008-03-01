@@ -178,12 +178,30 @@ about a computer system.
 %_kde_libdir/libkdeinit4_kinfocenter.so
 %dir %_kde_appsdir/kinfocenter
 %dir %_kde_appsdir/kinfocenter/about
-%_kde_appsdir/kinfocenter/about/kinfocenter.css
-%_kde_appsdir/kinfocenter/about/main.html
-%_kde_appsdir/kinfocenter/about/top-right-kinfocenter.png
-%_kde_appsdir/kinfocenter/kinfocenterui.rc
+%_kde_appsdir/kinfocenter
+%_kde_appsdir/kcmusb
+%_kde_appsdir/kcmview1394
+%_kde_libdir/kde4/kcm_info.so
+%_kde_libdir/kde4/kcm_nic.so
+%_kde_libdir/kde4/kcm_usb.so
+%_kde_libdir/kde4/kcm_view1394.so
 %_kde_datadir/applications/kde4/kinfocenter.desktop
-
+%_kde_docdir/*/*/kinfocenter
+%_kde_datadir/kde4/services/devices.desktop
+%_kde_datadir/kde4/services/dma.desktop
+%_kde_datadir/kde4/services/interrupts.desktop
+%_kde_datadir/kde4/services/ioports.desktop
+%_kde_datadir/kde4/services/kcmusb.desktop
+%_kde_datadir/kde4/services/kcmview1394.desktop
+%_kde_datadir/kde4/services/memory.desktop
+%_kde_datadir/kde4/services/nic.desktop
+%_kde_datadir/kde4/services/opengl.desktop
+%_kde_datadir/kde4/services/partitions.desktop
+%_kde_datadir/kde4/services/pci.desktop
+%_kde_datadir/kde4/services/processor.desktop
+%_kde_datadir/kde4/services/scsi.desktop
+%_kde_datadir/kde4/services/sound.desktop
+%_kde_datadir/kde4/services/xserver.desktop
 #-----------------------------------------------------------------------------
 
 %package -n kde4-kdepasswd
