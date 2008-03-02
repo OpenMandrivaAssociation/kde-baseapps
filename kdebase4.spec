@@ -5,7 +5,7 @@ Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
 URL: http://www.kde.org
-Release: %mkrel 1
+Release: %mkrel 2
 Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 BuildRequires: kde4-macros
 BuildRequires: cmake
@@ -167,6 +167,7 @@ Group:      Graphical desktop/KDE
 Requires:   kdebase4-runtime
 Provides:   kinfocenter4
 Conflicts:  kdebase4-runtime < 1:4.0.0
+Conflicts:  kdebase4-workspace < 1:4.0.2-1
 
 %description -n kde4-kinfocenter
 Kinfocenter is a utility in KDE that provides information 
