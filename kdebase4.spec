@@ -7,8 +7,6 @@ License: GPL
 URL: http://www.kde.org
 Release: %mkrel 1
 Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
-patch0: kdebase-workspace-4.0.0-781544-fix-wrong-size-dolphin.patch
-patch1: kdebase-workspace-4.0.0-781543-fix-dolphin-crash.patch
 BuildRequires: kde4-macros
 BuildRequires: cmake
 BuildRequires: kdelibs4-devel
@@ -517,8 +515,6 @@ based on kdebase.
 
 %prep
 %setup -q -n kdebase-%version
-%patch0 -p0
-%patch1 -p0
 
 %build
 %cmake_kde4 
