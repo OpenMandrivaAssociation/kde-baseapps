@@ -1,11 +1,11 @@
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 4.0.2
+Version: 4.0.3
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
 URL: http://www.kde.org
-Release: %mkrel 4
+Release: %mkrel 1
 Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 patch0: kdebase-workspace-4.0.0-781544-fix-wrong-size-dolphin.patch
 patch1: kdebase-workspace-4.0.0-781543-fix-dolphin-crash.patch
