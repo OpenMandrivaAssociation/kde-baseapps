@@ -1,6 +1,6 @@
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 4.0.3
+Version: 4.0.68
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -47,17 +47,17 @@ BuildRequires: xrdb
 BuildRequires: qimageblitz-devel
 BuildRequires: libxine-devel >= 1.1.9
 Requires: kdebase4-runtime
-Requires: kde4-kappfinder
-Requires: kde4-konsole
-Requires: kde4-dolphin
-Requires: kde4-kdepasswd
+Requires: kappfinder
+Requires: konsole
+Requires: dolphin
+Requires: kdepasswd
 Requires: kde4-nsplugins
-Requires: kde4-kwrite
-Requires: kde4-konqueror
-Requires: kde4-keditbookmarks
-Requires: kde4-kfind
-Requires: kde4-kdialog
-Requires: kde4-kinfocenter
+Requires: kwrite
+Requires: konqueror
+Requires: keditbookmarks
+Requires: kfind
+Requires: kdialog
+Requires: kinfocenter
 Requires: phonon-xine
 BuildRoot: %_tmppath/%name-%version-%release-root
 
@@ -69,17 +69,19 @@ This meta package requires all base kdebase 4 packages.
 
 #-----------------------------------------------------------------------------
 
-%package -n kde4-konsole
+%package -n konsole
 Summary: Konsole
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
 Provides: konsole4
 Obsoletes: kdebase4-konsole < 1:3.93.0-0.714129.2
+Obsoletes: kde4-konsole < 1:4.0.68
+Provides: kde4-konsole = %epoch:%version
 
-%description -n kde4-konsole
+%description -n konsole
 A shell program similar to xterm for KDE
 
-%files -n kde4-konsole
+%files -n konsole
 %defattr(-,root,root)
 %_kde_bindir/konsole
 %_kde_bindir/konsoleprofile
@@ -89,11 +91,9 @@ A shell program similar to xterm for KDE
 %_kde_datadir/applications/kde4/konsole.desktop
 %_kde_appsdir/konsole
 %_kde_datadir/kde4/services/kded/kwrited.desktop
-%_kde_datadir/kde4/services/konsole-script.desktop
 %_kde_datadir/kde4/services/konsolepart.desktop
 %_kde_datadir/kde4/servicetypes/terminalemulator.desktop
 %_kde_datadir/kde4/services/ServiceMenus/konsolehere.desktop
-%_kde_iconsdir/*/*/*/konsole.*
 %_kde_docdir/*/*/konsole
 
 #------------------------------------------------	
@@ -117,72 +117,79 @@ KDE 4 core library.
 
 #-----------------------------------------------------------------------------
 
-%package -n kde4-dolphin
+%package -n dolphin
 Summary: Dolphin
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
 Provides: dolphin4
 Conflicts: kdebase4-workspace < 1:3.93.0
+Obsoletes: kde4-dolphin < 1:4.0.68
+Provides: kde4-dolphin = %epoch:%version
 
-%description -n kde4-dolphin
+%description -n dolphin
 A shell program similar to xterm for KDE
 
-%files -n kde4-dolphin
+%files -n dolphin
 %defattr(-,root,root)
 %_kde_bindir/dolphin
 %_kde_datadir/applications/kde4/dolphin.desktop
 %_kde_datadir/kde4/services/dolphinpart.desktop
+%_kde_datadir/kde4/services/kcmdolphin.desktop
 %_kde_datadir/config.kcfg/dolphin_*
 %_kde_libdir/kde4/dolphinpart.so
+%_kde_libdir/kde4/kcm_dolphin.so
 %_kde_appsdir/dolphinpart/dolphinpart.rc
 %_kde_appsdir/dolphin
 %_kde_docdir/*/*/dolphin
 
 #-----------------------------------------------------------------------------
 
-%package -n kde4-kappfinder
+%package -n kappfinder
 Summary: Kappfinder
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
-Provides: kappfinder4
+Obsoletes: kde4-kappfinder < 1:4.0.68
+Provides: kde4-kappfinder = %epoch:%version
 
-%description -n kde4-kappfinder
+%description -n kappfinder
 A shell program similar to xterm for KDE
 
-%files -n kde4-kappfinder
+%files -n kappfinder
 %defattr(-,root,root)
 %_kde_bindir/kappfinder
 %_kde_datadir/applications/kde4/kappfinder.desktop
 %_kde_appsdir/kappfinder
 %_kde_iconsdir/*/*/*/*
 %exclude %_kde_iconsdir/*/*/*/konqueror.*
-%exclude %_kde_iconsdir/*/*/*/konsole.*
 %exclude %_kde_iconsdir/*/*/*/kfind.*
 
 #-----------------------------------------------------------------------------
 
-%package -n kde4-kinfocenter
+%package -n kinfocenter
 Summary:    Kinfocenter
 Group:      Graphical desktop/KDE
 Requires:   kdebase4-runtime
 Provides:   kinfocenter4
 Conflicts:  kdebase4-runtime < 1:4.0.0
 Conflicts:  kdebase4-workspace < 1:4.0.2-1
+Obsoletes: kde4-kinfocenter < 1:4.0.68
+Provides: kde4-kinfocenter = %epoch:%version
 
-%description -n kde4-kinfocenter
+%description -n kinfocenter
 Kinfocenter is a utility in KDE that provides information 
 about a computer system.
 
-%files -n kde4-kinfocenter
+%files -n kinfocenter
 %defattr(-,root,root)
 %_kde_bindir/kinfocenter
 %_kde_libdir/libkdeinit4_kinfocenter.so
 %dir %_kde_appsdir/kinfocenter
-%dir %_kde_appsdir/kinfocenter/about
-%_kde_appsdir/kinfocenter
+%_kde_appsdir/kinfocenter/*
 %_kde_appsdir/kcmusb
 %_kde_appsdir/kcmview1394
 %_kde_libdir/kde4/kcm_info.so
+%_kde_libdir/kde4/kcm_opengl.so
+%_kde_libdir/kde4/kcm_solidproc.so
 %_kde_libdir/kde4/kcm_nic.so
 %_kde_libdir/kde4/kcm_usb.so
 %_kde_libdir/kde4/kcm_view1394.so
@@ -193,28 +200,30 @@ about a computer system.
 %_kde_datadir/kde4/services/interrupts.desktop
 %_kde_datadir/kde4/services/ioports.desktop
 %_kde_datadir/kde4/services/kcmusb.desktop
+%_kde_datadir/kde4/services/kcmsolidproc.desktop
 %_kde_datadir/kde4/services/kcmview1394.desktop
 %_kde_datadir/kde4/services/memory.desktop
 %_kde_datadir/kde4/services/nic.desktop
 %_kde_datadir/kde4/services/opengl.desktop
 %_kde_datadir/kde4/services/partitions.desktop
 %_kde_datadir/kde4/services/pci.desktop
-%_kde_datadir/kde4/services/processor.desktop
 %_kde_datadir/kde4/services/scsi.desktop
 %_kde_datadir/kde4/services/sound.desktop
 %_kde_datadir/kde4/services/xserver.desktop
 #-----------------------------------------------------------------------------
 
-%package -n kde4-kdepasswd
+%package -n kdepasswd
 Summary: Kdepasswd
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
 Obsoletes: kdebase4-kdepasswd < 1:3.93.0-0.714129.2
+Obsoletes: kde4-kdepasswd < 1:4.0.68
+Provides: kde4-kdepasswd = %epoch:%version
 
-%description -n kde4-kdepasswd
+%description -n kdepasswd
 User password management
 
-%files -n kde4-kdepasswd
+%files -n kdepasswd
 %defattr(-,root,root)
 %_kde_bindir/kdepasswd
 %_kde_libdir/kde4/kcm_useraccount.so
@@ -230,6 +239,7 @@ Summary: Netscape plugins wrapper for kde
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
 Obsoletes: kdebase4-nsplugins < 1:3.93.0-0.714129.2
+Conflicts: kdebase-nsplugins
 
 %description -n kde4-nsplugins
 Netscape plugins wrapper for kde.
@@ -246,16 +256,18 @@ Netscape plugins wrapper for kde.
 
 #-----------------------------------------------------------------------------
 
-%package -n kde4-kwrite
+%package -n kwrite
 Summary: Kwrite
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
 Obsoletes: kdebase4-kwrite < 1:3.93.0-0.714129.2
+Obsoletes: kde4-kwrite < 1:4.0.68
+Provides: kde4-kwrite = %epoch:%version
 
-%description -n kde4-kwrite
+%description -n kwrite
 User password management
 
-%files -n kde4-kwrite
+%files -n kwrite
 %defattr(-,root,root)
 %_kde_bindir/kwrite
 %_kde_libdir/libkdeinit4_kwrite.so
@@ -330,16 +342,19 @@ KDE 4 core library.
 
 #-----------------------------------------------------------------------------
 
-%package -n kde4-konqueror
+%package -n konqueror
 Summary:    Konqueror
 Group:      Graphical desktop/KDE
 Requires:   kdebase4-runtime
 Obsoletes:  kdebase4-konqueror < 1:3.93.0-0.714129.2
 Conflicts:  kdebase4-workspace < 3.91
-%description -n kde4-konqueror
+Obsoletes: kde4-konqueror < 1:4.0.68
+Provides: kde4-konqueror = %epoch:%version
+
+%description -n konqueror
 KDE Browser
 
-%files -n kde4-konqueror
+%files -n konqueror
 %defattr(-,root,root)
 %_kde_bindir/keditfiletype
 %_kde_bindir/kfmclient
@@ -362,7 +377,7 @@ KDE Browser
 %_kde_libdir/kde4/konq_sidebartree_history.so
 %_kde_libdir/kde4/konqsidebar_tree.so
 %_kde_libdir/kde4/konqsidebar_web.so
-%_kde_libdir/kde4/libkhtmlkttsdplugin.so
+%_kde_libdir/kde4/khtmlkttsdplugin.so
 %_kde_libdir/libkdeinit4_kfmclient.so
 %_kde_libdir/libkdeinit4_konqueror.so
 %_kde_datadir/apps/kcontrol/*
@@ -432,16 +447,18 @@ KDE Browser
 
 #-----------------------------------------------------------------------------
 
-%package -n kde4-keditbookmarks
+%package -n keditbookmarks
 Summary: Bookmark editor
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
 Obsoletes: kdebase4-keditbookmarks < 1:3.93.0-0.714129.2
+Obsoletes: kde4-keditbookmarks < 1:4.0.68
+Provides: kde4-keditbookmarks = %epoch:%version
 
-%description -n kde4-keditbookmarks
-Bookmar editor
+%description -n keditbookmarks
+Bookmark editor.
 
-%files -n kde4-keditbookmarks
+%files -n keditbookmarks
 %defattr(-,root,root)
 %_kde_bindir/kbookmarkmerger
 %_kde_bindir/keditbookmarks
@@ -451,16 +468,18 @@ Bookmar editor
 
 #-----------------------------------------------------------------------------
 
-%package -n kde4-kfind
+%package -n kfind
 Summary: Application finder
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
 Obsoletes: kdebase4-kfind < 1:3.93.0-0.714129.2
+Obsoletes: kde4-kfind < 1:4.0.68
+Provides: kde4-kfind = %epoch:%version
 
-%description -n kde4-kfind
+%description -n kfind
 Application finder
 
-%files -n kde4-kfind
+%files -n kfind
 %defattr(-,root,root)
 %_kde_bindir/kfind
 %_kde_libdir/kde4/libkfindpart.so
@@ -472,16 +491,18 @@ Application finder
 
 #-----------------------------------------------------------------------------
 
-%package -n kde4-kdialog
+%package -n kdialog
 Summary: Dialog KDE base widgets
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
 Obsoletes: kdebase4-kdialog < 1:3.93.0-0.714129.2
+Obsoletes: kde4-kdialog < 1:4.0.68
+Provides: kde4-kdialog = %epoch:%version
 
-%description -n kde4-kdialog
+%description -n kdialog
 Dialog KDE base widgets
 
-%files -n kde4-kdialog
+%files -n kdialog
 %defattr(-,root,root)
 %_kde_bindir/kdialog
 %_datadir/dbus-1/interfaces/org.kde.kdialog*
