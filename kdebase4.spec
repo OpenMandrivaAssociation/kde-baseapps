@@ -1,6 +1,6 @@
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 4.0.68
+Version: 4.0.69
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -35,11 +35,7 @@ BuildRequires: libraw1394-devel
 BuildRequires: libxklavier-devel
 BuildRequires: lua-devel
 BuildRequires: resmgr-devel
-%if %mdkversion < 200810
-BuildRequires: libnetworkmanager-util-devel
-%else
 BuildRequires: networkmanager-util-devel
-%endif
 BuildRequires: networkmanager-devel
 BuildRequires: bluez-devel
 BuildRequires: boost-devel
@@ -397,14 +393,10 @@ KDE Browser
 %_kde_appsdir/kconf_update/socks.upd
 %_kde_appsdir/khtml/kpartplugins/khtmlkttsd.desktop
 %_kde_appsdir/khtml/kpartplugins/khtmlkttsd.rc
-%_kde_appsdir/konqiconview/kpartplugins/kremoteencodingplugin.desktop
-%_kde_appsdir/konqiconview/kpartplugins/kremoteencodingplugin.rc
-%_kde_appsdir/konqiconview/kpartplugins/kshellcmdplugin.desktop
-%_kde_appsdir/konqiconview/kpartplugins/kshellcmdplugin.rc
-%_kde_appsdir/konqlistview/kpartplugins/kremoteencodingplugin.desktop
-%_kde_appsdir/konqlistview/kpartplugins/kremoteencodingplugin.rc
-%_kde_appsdir/konqlistview/kpartplugins/kshellcmdplugin.desktop
-%_kde_appsdir/konqlistview/kpartplugins/kshellcmdplugin.rc
+%_kde_appsdir/dolphinpart/kpartplugins/kremoteencodingplugin.desktop
+%_kde_appsdir/dolphinpart/kpartplugins/kremoteencodingplugin.rc
+%_kde_appsdir/dolphinpart/kpartplugins/kshellcmdplugin.desktop
+%_kde_appsdir/dolphinpart/kpartplugins/kshellcmdplugin.rc
 %_kde_appsdir/konqsidebartng
 %_kde_datadir/autostart/konqy_preload.desktop
 %_kde_datadir/config/konqsidebartng.rc
@@ -427,7 +419,6 @@ KDE Browser
 %_kde_datadir/kde4/services/khtml_java_js.desktop
 %_kde_datadir/kde4/services/konq_aboutpage.desktop
 %_kde_datadir/kde4/services/konq_sidebartng.desktop
-%_kde_datadir/kde4/services/konqfilemgr.desktop
 %_kde_datadir/kde4/services/konqueror.desktop
 %_kde_datadir/kde4/services/lanbrowser.desktop
 %_kde_datadir/kde4/services/netpref.desktop
