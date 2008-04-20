@@ -1,6 +1,6 @@
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 4.0.69
+Version: 4.0.70
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -13,7 +13,7 @@ BuildRequires: kdelibs4-devel
 BuildRequires: kdebase4-workspace-devel
 BuildRequires: kdepimlibs4-devel
 BuildRequires: strigi-devel
-BuildRequires: soprano-devel
+BuildRequires: soprano-devel >= 2.0.98
 BuildRequires: fontconfig-devel >= 2.1-9mdk
 BuildRequires: pam-devel
 BuildRequires: freetype2-devel
@@ -42,6 +42,7 @@ BuildRequires: boost-devel
 BuildRequires: xrdb
 BuildRequires: qimageblitz-devel
 BuildRequires: libxine-devel >= 1.1.9
+BuildRequires: pciutils-devel
 Requires: kdebase4-runtime
 Requires: kappfinder
 Requires: konsole
@@ -189,6 +190,10 @@ about a computer system.
 %_kde_libdir/kde4/kcm_nic.so
 %_kde_libdir/kde4/kcm_usb.so
 %_kde_libdir/kde4/kcm_view1394.so
+%_kde_libdir/kde4/kcm_ioslaveinfo.so
+%_kde_libdir/kde4/kcm_memory.so
+%_kde_libdir/kde4/kcm_pci.so
+%_kde_libdir/kde4/kcm_samba.so
 %_kde_datadir/applications/kde4/kinfocenter.desktop
 %_kde_docdir/*/*/kinfocenter
 %_kde_datadir/kde4/services/devices.desktop
@@ -198,14 +203,17 @@ about a computer system.
 %_kde_datadir/kde4/services/kcmusb.desktop
 %_kde_datadir/kde4/services/kcmsolidproc.desktop
 %_kde_datadir/kde4/services/kcmview1394.desktop
-%_kde_datadir/kde4/services/memory.desktop
 %_kde_datadir/kde4/services/nic.desktop
 %_kde_datadir/kde4/services/opengl.desktop
 %_kde_datadir/kde4/services/partitions.desktop
-%_kde_datadir/kde4/services/pci.desktop
 %_kde_datadir/kde4/services/scsi.desktop
 %_kde_datadir/kde4/services/sound.desktop
 %_kde_datadir/kde4/services/xserver.desktop
+%_kde_datadir/kde4/services/ioslaveinfo.desktop
+%_kde_datadir/kde4/services/kcm_memory.desktop
+%_kde_datadir/kde4/services/kcm_pci.desktop
+%_kde_datadir/kde4/services/smbstatus.desktop
+
 #-----------------------------------------------------------------------------
 
 %package -n kdepasswd
