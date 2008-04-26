@@ -194,6 +194,7 @@ about a computer system.
 %_kde_libdir/kde4/kcm_memory.so
 %_kde_libdir/kde4/kcm_pci.so
 %_kde_libdir/kde4/kcm_samba.so
+%_kde_libdir/kde4/kcm_partition.so
 %_kde_datadir/applications/kde4/kinfocenter.desktop
 %_kde_docdir/*/*/kinfocenter
 %_kde_datadir/kde4/services/devices.desktop
@@ -205,7 +206,6 @@ about a computer system.
 %_kde_datadir/kde4/services/kcmview1394.desktop
 %_kde_datadir/kde4/services/nic.desktop
 %_kde_datadir/kde4/services/opengl.desktop
-%_kde_datadir/kde4/services/partitions.desktop
 %_kde_datadir/kde4/services/scsi.desktop
 %_kde_datadir/kde4/services/sound.desktop
 %_kde_datadir/kde4/services/xserver.desktop
@@ -213,6 +213,7 @@ about a computer system.
 %_kde_datadir/kde4/services/kcm_memory.desktop
 %_kde_datadir/kde4/services/kcm_pci.desktop
 %_kde_datadir/kde4/services/smbstatus.desktop
+%_kde_datadir/kde4/services/kcm_partition.desktop
 
 #-----------------------------------------------------------------------------
 
@@ -256,6 +257,8 @@ Netscape plugins wrapper for kde.
 %_kde_libdir/kde4/libnsplugin.so
 %_kde_appsdir/plugin/nspluginpart.rc
 %_kde_datadir/kde4/services/khtml_plugins.desktop
+%_kde_appsdir/webkitpart/kpartplugins/khtmlkttsd.desktop
+%_kde_appsdir/webkitpart/kpartplugins/khtmlkttsd.rc
 %_datadir/dbus-1/interfaces/org.kde.nsplug*
 
 #-----------------------------------------------------------------------------
