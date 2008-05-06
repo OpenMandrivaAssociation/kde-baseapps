@@ -245,7 +245,6 @@ Summary: Netscape plugins wrapper for kde
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
 Obsoletes: kdebase4-nsplugins < 1:3.93.0-0.714129.2
-Conflicts: kdebase-nsplugins
 
 %description -n kde4-nsplugins
 Netscape plugins wrapper for kde.
