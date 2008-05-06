@@ -43,6 +43,7 @@ BuildRequires: xrdb
 BuildRequires: qimageblitz-devel
 BuildRequires: libxine-devel >= 1.1.9
 BuildRequires: pciutils-devel
+BuildRequires: webkitkde-devel
 Requires: kdebase4-runtime
 Requires: kappfinder
 Requires: konsole
