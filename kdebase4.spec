@@ -5,7 +5,7 @@ Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
 URL: http://www.kde.org
-Release: %mkrel 2
+Release: %mkrel 3
 Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 BuildRequires: kde4-macros
 BuildRequires: cmake
@@ -143,11 +143,12 @@ A shell program similar to xterm for KDE
 #-----------------------------------------------------------------------------
 
 %package -n kappfinder
-Summary: Kappfinder
-Group: Graphical desktop/KDE
-Requires: kdebase4-runtime
-Obsoletes: kde4-kappfinder < 1:4.0.68
-Provides: kde4-kappfinder = %epoch:%version
+Summary:    Kappfinder
+Group:      Graphical desktop/KDE
+Requires:   kdebase4-runtime
+Obsoletes:  kde4-kappfinder < 1:4.0.68
+Provides:   kde4-kappfinder = %epoch:%version
+Conflicts:  kdemultimedia-common < 1:3.5.9-4
 
 %description -n kappfinder
 A shell program similar to xterm for KDE
