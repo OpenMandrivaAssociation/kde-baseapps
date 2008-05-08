@@ -1,6 +1,6 @@
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 4.0.72
+Version: 4.0.73
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -260,8 +260,7 @@ Netscape plugins wrapper for kde.
 %_kde_datadir/kde4/services/khtml_plugins.desktop
 %_kde_appsdir/webkitpart/kpartplugins/khtmlkttsd.desktop
 %_kde_appsdir/webkitpart/kpartplugins/khtmlkttsd.rc
-%_datadir/dbus-1/interfaces/org.kde.nsplug*
-
+%_datadir/dbus-1/interfaces/org.kde.nsplugins.*
 #-----------------------------------------------------------------------------
 
 %package -n kwrite
@@ -308,7 +307,6 @@ KDE 4 core library.
 %_kde_datadir/kde4/services/kded/favicons.desktop
 %_kde_datadir/kde4/servicetypes/konqpopupmenuplugin.desktop
 %_kde_datadir/templates
-%_datadir/dbus-1/interfaces/org.kde.libkonq*
 
 #------------------------------------------------	
 
