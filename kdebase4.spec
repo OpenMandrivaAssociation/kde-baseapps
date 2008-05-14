@@ -5,7 +5,7 @@ Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
 URL: http://www.kde.org
-Release: %mkrel 3
+Release: %mkrel 4
 Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 BuildRequires: kde4-macros
 BuildRequires: cmake
@@ -226,6 +226,8 @@ Requires: kdebase4-runtime
 Obsoletes: kdebase4-kdepasswd < 1:3.93.0-0.714129.2
 Obsoletes: kde4-kdepasswd < 1:4.0.68
 Provides: kde4-kdepasswd = %epoch:%version
+# (Anssi 05/2008) KDE3 before move to /opt/kde3:
+Conflicts: kdebase-kdm < 1:3.5.9-38
 
 %description -n kdepasswd
 User password management
