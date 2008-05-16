@@ -5,13 +5,13 @@ Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
 URL: http://www.kde.org
-Release: %mkrel 1
+Release: %mkrel 2
 Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 BuildRequires: kde4-macros
 BuildRequires: cmake
-BuildRequires: kdelibs4-devel
-BuildRequires: kdebase4-workspace-devel
-BuildRequires: kdepimlibs4-devel
+BuildRequires: kdelibs4-devel >= %version
+BuildRequires: kdebase4-workspace-devel >= %version
+BuildRequires: kdepimlibs4-devel >= %version
 BuildRequires: strigi-devel
 BuildRequires: soprano-devel >= 2.0.98
 BuildRequires: fontconfig-devel >= 2.1-9mdk
