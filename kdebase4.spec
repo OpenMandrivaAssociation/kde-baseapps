@@ -1,11 +1,11 @@
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 4.0.74
+Version: 4.0.80
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
 URL: http://www.kde.org
-Release: %mkrel 4
+Release: %mkrel 1
 Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 BuildRequires: kde4-macros
 BuildRequires: cmake
