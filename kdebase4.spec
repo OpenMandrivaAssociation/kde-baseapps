@@ -224,7 +224,6 @@ Requires: kdebase4-runtime
 Obsoletes: kdebase4-kdepasswd < 1:3.93.0-0.714129.2
 Obsoletes: kde4-kdepasswd < 1:4.0.68
 Provides: kde4-kdepasswd = %epoch:%version
-# (Anssi 05/2008) KDE3 before move to /opt/kde3:
 Conflicts: kdebase-kdm < 1:3.5.9-38
 
 %description -n kdepasswd
@@ -238,6 +237,7 @@ User password management
 %_kde_datadir/kde4/services/kcm_useraccount.desktop
 %_kde_datadir/config.kcfg/kcm_useracc*
 %_kde_datadir/apps/kdm/*
+%_kde_docdir/*/*/kdepasswd
 
 #-----------------------------------------------------------------------------
 
