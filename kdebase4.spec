@@ -104,8 +104,12 @@ Obsoletes: %{_lib}dolphinprivate5 < 1:3.93.0-0.714129.2
 %description -n %libdolphinprivate
 KDE 4 core library.
 
+%if %mdkversion < 200900
 %post -n %libdolphinprivate -p /sbin/ldconfig
+%endif
+%if %mdkversion < 200900
 %postun -n %libdolphinprivate -p /sbin/ldconfig
+%endif
 
 %files -n %libdolphinprivate
 %defattr(-,root,root)
@@ -293,8 +297,12 @@ Group: System/Libraries
 %description -n %libkonq
 KDE 4 core library.
 
+%if %mdkversion < 200900
 %post -n %libkonq -p /sbin/ldconfig
+%endif
+%if %mdkversion < 200900
 %postun -n %libkonq -p /sbin/ldconfig
+%endif
 
 %files -n %libkonq
 %defattr(-,root,root)
@@ -321,8 +329,12 @@ Obsoletes: %{_lib}kdebase46 <= 1:3.80.3
 %description -n %libkonqsidebarplugin
 KDE 4 core library.
 
+%if %mdkversion < 200900
 %post -n %libkonqsidebarplugin -p /sbin/ldconfig
+%endif
+%if %mdkversion < 200900
 %postun -n %libkonqsidebarplugin -p /sbin/ldconfig
+%endif
 
 %files -n %libkonqsidebarplugin
 %defattr(-,root,root)
@@ -339,8 +351,12 @@ Group: System/Libraries
 %description -n %libkonquerorprivate
 KDE 4 core library.
 
+%if %mdkversion < 200900
 %post -n %libkonquerorprivate -p /sbin/ldconfig
+%endif
+%if %mdkversion < 200900
 %postun -n %libkonquerorprivate -p /sbin/ldconfig
+%endif
 
 %files -n %libkonquerorprivate
 %defattr(-,root,root)
