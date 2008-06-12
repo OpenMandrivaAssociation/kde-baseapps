@@ -1,12 +1,12 @@
-Name:          kdebase4
-Summary:       K Desktop Environment
+Name: kdebase4
+Summary: K Desktop Environment
 Version: 4.0.82
-Epoch:         1
-Group:         Graphical desktop/KDE
-License:       GPL
-URL:           http://www.kde.org
-Release: %mkrel 2
-Source:	       ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
+Epoch: 1
+Group: Graphical desktop/KDE
+License: GPL
+URL: http://www.kde.org
+Release: %mkrel 3
+Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 BuildRequires: kde4-macros
 BuildRequires: cmake
 BuildRequires: kdelibs4-devel >= %version
@@ -55,7 +55,7 @@ Requires: kfind
 Requires: kdialog
 Requires: kinfocenter
 Requires: phonon-xine
-Requires: plasma-applets-folderview
+Requires: plasma-applet-folderview
 BuildRoot:     %_tmppath/%name-%version-%release-root
 
 %description
@@ -526,16 +526,17 @@ Dialog KDE base widgets
 
 #-----------------------------------------------------------------------------
 
-%package -n plasma-applets-folderview
+%package -n plasma-applet-folderview
 Summary: Plasma folder view applet
 Group: Graphical desktop/KDE
 Requires: kdebase4-workspace
-Provides: plasma-applets
+Provides: plasma-applet
+Obsoletes: plasma-applets-folderview
 
-%description -n plasma-applets-folderview
+%description -n plasma-applet-folderview
 Plasma applet folder view applet.
 
-%files -n plasma-applets-folderview
+%files -n plasma-applet-folderview
 %defattr(-,root,root)
 %_kde_libdir/kde4/plasma_applet_folderview.so
 %_kde_datadir/kde4/services/plasma-applet-folderview.desktop
