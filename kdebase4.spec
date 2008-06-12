@@ -42,19 +42,20 @@ BuildRequires: qimageblitz-devel
 BuildRequires: libxine-devel >= 1.1.9
 BuildRequires: pciutils-devel
 BuildRequires: webkitkde-devel
-Requires:      kdebase4-runtime
-Requires:      kappfinder
-Requires:      konsole
-Requires:      dolphin
-Requires:      kdepasswd
-Requires:      kde4-nsplugins
-Requires:      kwrite
-Requires:      konqueror
-Requires:      keditbookmarks
-Requires:      kfind
-Requires:      kdialog
-Requires:      kinfocenter
-Requires:      phonon-xine
+Requires: kdebase4-runtime
+Requires: kappfinder
+Requires: konsole
+Requires: dolphin
+Requires: kdepasswd
+Requires: kde4-nsplugins
+Requires: kwrite
+Requires: konqueror
+Requires: keditbookmarks
+Requires: kfind
+Requires: kdialog
+Requires: kinfocenter
+Requires: phonon-xine
+Requires: plasma-folderview
 BuildRoot:     %_tmppath/%name-%version-%release-root
 
 %description
@@ -150,7 +151,9 @@ Group:      Graphical desktop/KDE
 Requires:   kdebase4-runtime
 Obsoletes:  kde4-kappfinder < 1:4.0.68
 Provides:   kde4-kappfinder = %epoch:%version
+%if %mdkversion > 200810
 Conflicts:  kdemultimedia-common < 1:3.5.9-4
+%endif
 
 %description -n kappfinder
 A shell program similar to xterm for KDE
@@ -228,7 +231,9 @@ Requires: kdebase4-runtime
 Obsoletes: kdebase4-kdepasswd < 1:3.93.0-0.714129.2
 Obsoletes: kde4-kdepasswd < 1:4.0.68
 Provides: kde4-kdepasswd = %epoch:%version
+%if %mdkversion > 200810
 Conflicts: kdebase-kdm < 1:3.5.9-38
+%endif
 
 %description -n kdepasswd
 User password management
@@ -264,7 +269,6 @@ Netscape plugins wrapper for kde.
 %_kde_datadir/kde4/services/khtml_plugins.desktop
 %_kde_appsdir/webkitpart/kpartplugins/khtmlkttsd.desktop
 %_kde_appsdir/webkitpart/kpartplugins/khtmlkttsd.rc
-%_datadir/dbus-1/interfaces/org.kde.nsplugins.*
 #-----------------------------------------------------------------------------
 
 %package -n kwrite
@@ -456,9 +460,6 @@ KDE Browser
 %_kde_datadir/kde4/servicetypes/uasprovider.desktop
 %_kde_datadir/kde4/services/khtml_fonts.desktop
 %_kde_appsdir/konqueror
-%_datadir/dbus-1/interfaces/org.kde.Konq*
-%_datadir/dbus-1/interfaces/org.kde.konq*
-%_datadir/dbus-1/interfaces/org.kde.FavIcon*
 %_kde_iconsdir/*/*/*/konqueror.*
 %_kde_docdir/*/*/konqueror
 
@@ -522,7 +523,22 @@ Dialog KDE base widgets
 %files -n kdialog
 %defattr(-,root,root)
 %_kde_bindir/kdialog
-%_datadir/dbus-1/interfaces/org.kde.kdialog*
+
+#-----------------------------------------------------------------------------
+
+%package -n plasma-applets-folderview
+Summary: Plasma folder view applet
+Group: Graphical desktop/KDE
+Requires: kdebase4-workspace
+Provides: plasma-applets
+
+%description -n plasma-applets-folderview
+Plasma applet folder view applet.
+
+%files -n plasma-applets-folderview
+%defattr(-,root,root)
+%_kde_libdir/kde4/plasma_applet_folderview.so
+%_kde_datadir/kde4/services/plasma-applet-folderview.desktop
 
 #-----------------------------------------------------------------------------
 
@@ -548,6 +564,7 @@ based on kdebase.
 %_kde_libdir/libkonqsidebarplugin.so
 %_kde_libdir/libkonquerorprivate.so
 %_kde_includedir/*.h
+%_kde_datadir/dbus-1/interfaces/*
 
 #-----------------------------------------------------------------------------
 
