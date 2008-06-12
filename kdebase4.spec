@@ -5,7 +5,7 @@ Epoch:         1
 Group:         Graphical desktop/KDE
 License:       GPL
 URL:           http://www.kde.org
-Release: %mkrel 1
+Release: %mkrel 2
 Source:	       ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 BuildRequires: kde4-macros
 BuildRequires: cmake
@@ -55,7 +55,7 @@ Requires: kfind
 Requires: kdialog
 Requires: kinfocenter
 Requires: phonon-xine
-Requires: plasma-folderview
+Requires: plasma-applets-folderview
 BuildRoot:     %_tmppath/%name-%version-%release-root
 
 %description
