@@ -177,6 +177,7 @@ Provides:   kinfocenter4
 Conflicts:  kdebase4-runtime < 1:4.0.0
 Conflicts:  kdebase4-workspace < 1:4.0.2-1
 Obsoletes: kde4-kinfocenter < 1:4.0.68
+Obsoletes: kdebase4-runtime < 1:4.0.68
 Provides: kde4-kinfocenter = %epoch:%version
 
 %description -n kinfocenter
