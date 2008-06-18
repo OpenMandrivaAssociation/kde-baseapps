@@ -5,7 +5,7 @@ Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
 URL: http://www.kde.org
-Release: %mkrel 3
+Release: %mkrel 5
 Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 BuildRequires: kde4-macros
 BuildRequires: cmake
@@ -315,6 +315,7 @@ User password management
 %package -n %libkonq
 Summary: KDE 4 core library
 Group: System/Libraries
+Conflicts: konqueror <  1:4.0.82-5
 
 %description -n %libkonq
 KDE 4 core library.
@@ -328,15 +329,7 @@ KDE 4 core library.
 
 %files -n %libkonq
 %defattr(-,root,root)
-%_kde_libdir/kde4/kded_favicons.so
-%_kde_libdir/kde4/konq_sound.so
 %_kde_libdir/libkonq.so.*
-%_kde_appsdir/kbookmark/directory_bookmarkbar.desktop
-%_kde_appsdir/kconf_update/favicons.upd
-%_kde_appsdir/kconf_update/move_favicons.sh
-%_kde_datadir/kde4/services/kded/favicons.desktop
-%_kde_datadir/kde4/servicetypes/konqpopupmenuplugin.desktop
-%_kde_datadir/templates
 
 #------------------------------------------------	
 
@@ -391,9 +384,9 @@ Summary:    Konqueror
 Group:      Graphical desktop/KDE
 Requires:   kdebase4-runtime
 Obsoletes:  kdebase4-konqueror < 1:3.93.0-0.714129.2
-Conflicts:  kdebase4-workspace < 3.91
 Obsoletes: kde4-konqueror < 1:4.0.68
 Provides: kde4-konqueror = %epoch:%version
+Conflicts: %{libkonq} <  1:4.0.82-5
 %if %mdkversion > 200810
 Conflicts: kdebase-common < 1:3.5.9-38
 Conflicts: kdebase-progs < 1:3.5.9-38
@@ -428,6 +421,8 @@ KDE Browser
 %_kde_libdir/kde4/khtmlkttsdplugin.so
 %_kde_libdir/libkdeinit4_kfmclient.so
 %_kde_libdir/libkdeinit4_konqueror.so
+%_kde_libdir/kde4/kded_favicons.so
+%_kde_libdir/kde4/konq_sound.so
 %_kde_datadir/apps/kcontrol/*
 %_kde_datadir/config.kcfg/konqueror*
 %_kde_datadir/applications/kde4/Home.desktop
@@ -450,6 +445,9 @@ KDE Browser
 %_kde_appsdir/dolphinpart/kpartplugins/kshellcmdplugin.desktop
 %_kde_appsdir/dolphinpart/kpartplugins/kshellcmdplugin.rc
 %_kde_appsdir/konqsidebartng
+%_kde_appsdir/kbookmark/directory_bookmarkbar.desktop
+%_kde_appsdir/kconf_update/favicons.upd
+%_kde_appsdir/kconf_update/move_favicons.sh
 %_kde_datadir/autostart/konqy_preload.desktop
 %_kde_datadir/config/konqsidebartng.rc
 %_kde_datadir/kde4/services/cache.desktop
@@ -484,6 +482,9 @@ KDE Browser
 %_kde_appsdir/konqueror
 %_kde_iconsdir/*/*/*/konqueror.*
 %_kde_docdir/*/*/konqueror
+%_kde_datadir/kde4/services/kded/favicons.desktop
+%_kde_datadir/kde4/servicetypes/konqpopupmenuplugin.desktop
+%_kde_datadir/templates
 
 #-----------------------------------------------------------------------------
 
