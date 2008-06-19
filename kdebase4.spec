@@ -1,6 +1,6 @@
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 4.0.82
+Version: 4.0.83
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
