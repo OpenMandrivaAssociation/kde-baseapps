@@ -522,6 +522,7 @@ Obsoletes: kde4-kfind < 1:4.0.68
 Provides: kde4-kfind = %epoch:%version
 %if %mdkversion > 200810
 Conflicts: kdebase-common < 1:3.5.9-38
+Conflicts: kdebase-progs < 1:3.5.9-38
 %endif
 
 %description -n kfind
