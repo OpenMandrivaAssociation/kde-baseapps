@@ -98,12 +98,15 @@ A shell program similar to xterm for KDE
 
 #------------------------------------------------	
 
-%define libdolphinprivate %mklibname dolphinprivate 1
+%define dolphinprivate_major 4
+%define libdolphinprivate %mklibname dolphinprivate %dolphinprivate_major
 
 %package -n %libdolphinprivate
 Summary: KDE 4 core library
 Group: System/Libraries
 Obsoletes: %{_lib}dolphinprivate5 < 1:3.93.0-0.714129.2
+# (Anssi 06/2008) wrong major:
+Obsoletes: %{_lib}dolphinprivate1 < 1:4.0.83-6
 
 %description -n %libdolphinprivate
 KDE 4 core library.
@@ -117,7 +120,7 @@ KDE 4 core library.
 
 %files -n %libdolphinprivate
 %defattr(-,root,root)
-%_kde_libdir/libdolphinprivate.so.*
+%_kde_libdir/libdolphinprivate.so.%{dolphinprivate_major}*
 
 #-----------------------------------------------------------------------------
 
@@ -310,7 +313,8 @@ User password management
 
 #------------------------------------------------	
 
-%define libkonq %mklibname konq 5
+%define konq_major 5
+%define libkonq %mklibname konq %konq_major
 
 %package -n %libkonq
 Summary: KDE 4 core library
@@ -329,11 +333,12 @@ KDE 4 core library.
 
 %files -n %libkonq
 %defattr(-,root,root)
-%_kde_libdir/libkonq.so.*
+%_kde_libdir/libkonq.so.%{konq_major}*
 
 #------------------------------------------------	
 
-%define libkonqsidebarplugin %mklibname konqsidebarplugin 4
+%define konqsidebarplugin_major 4
+%define libkonqsidebarplugin %mklibname konqsidebarplugin %konqsidebarplugin_major
 
 %package -n %libkonqsidebarplugin
 Summary: KDE 4 core library
@@ -353,15 +358,18 @@ KDE 4 core library.
 
 %files -n %libkonqsidebarplugin
 %defattr(-,root,root)
-%_kde_libdir/libkonqsidebarplugin.so.*
+%_kde_libdir/libkonqsidebarplugin.so.%{konqsidebarplugin_major}*
 
 #------------------------------------------------
 
-%define libkonquerorprivate %mklibname konquerorprivate 1
+%define konquerorprivate_major 4
+%define libkonquerorprivate %mklibname konquerorprivate %konquerorprivate_major
 
 %package -n %libkonquerorprivate
 Summary: KDE 4 core library
 Group: System/Libraries
+# (Anssi 06/2008) wrong major:
+Obsoletes: %{_lib}konquerorprivate1 < 1:4.0.83-6
 
 %description -n %libkonquerorprivate
 KDE 4 core library.
@@ -375,7 +383,7 @@ KDE 4 core library.
 
 %files -n %libkonquerorprivate
 %defattr(-,root,root)
-%_kde_libdir/libkonquerorprivate.so.*
+%_kde_libdir/libkonquerorprivate.so.%{konquerorprivate_major}*
 
 #-----------------------------------------------------------------------------
 
