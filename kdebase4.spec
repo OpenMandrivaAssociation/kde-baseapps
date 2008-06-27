@@ -9,9 +9,9 @@ Release: %mkrel 1
 Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 BuildRequires: kde4-macros
 BuildRequires: cmake
-BuildRequires: kdelibs4-devel >= %version
-BuildRequires: kdebase4-workspace-devel >= %version
-BuildRequires: kdepimlibs4-devel >= %version
+BuildRequires: kdelibs4-devel >= 4.0.83
+BuildRequires: kdebase4-workspace-devel >= 4.0.83
+BuildRequires: kdepimlibs4-devel >= 4.0.83
 BuildRequires: strigi-devel
 BuildRequires: soprano-devel >= 2.0.98
 BuildRequires: fontconfig-devel >= 2.1-9mdk
