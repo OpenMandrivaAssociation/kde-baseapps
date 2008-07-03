@@ -5,8 +5,9 @@ Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
 URL: http://www.kde.org
-Release: %mkrel 2
+Release: %mkrel 3
 Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
+Patch0:        kdebase-4.0.84-fix-menu-entries.patch
 BuildRequires: kde4-macros
 BuildRequires: cmake
 BuildRequires: kdelibs4-devel >= 4.0.83
@@ -619,6 +620,7 @@ based on kdebase.
 
 %prep
 %setup -q -n kdebase-%version
+%patch0 -p0
 
 %build
 %cmake_kde4 
