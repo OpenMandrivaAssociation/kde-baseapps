@@ -1,11 +1,11 @@
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 4.0.98
+Version: 4.1.0
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
 URL: http://www.kde.org
-Release: %mkrel 3
+Release: %mkrel 1
 Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 Patch0:        kdebase-4.0.84-fix-menu-entries.patch
 BuildRequires: kde4-macros
