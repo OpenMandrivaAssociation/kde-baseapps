@@ -57,6 +57,7 @@ Requires:      kdialog
 Requires:      kinfocenter
 Requires:      phonon-xine
 Requires:      plasma-applet-folderview
+Requires:      plasma-applet-showdesktop
 BuildRoot:     %_tmppath/%name-%version-%release-root
 
 %description
