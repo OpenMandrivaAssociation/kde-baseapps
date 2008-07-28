@@ -1,13 +1,13 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.1.0
+Release: %mkrel 2
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
 URL: http://www.kde.org
-Release: %mkrel 1
-Source:	ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
-Patch0:        kdebase-4.0.84-fix-menu-entries.patch
+Source: ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
+Patch0: kdebase-4.0.84-fix-menu-entries.patch
 BuildRequires: kde4-macros
 BuildRequires: cmake
 BuildRequires: kdelibs4-devel >= 4.0.85
@@ -43,22 +43,21 @@ BuildRequires: qimageblitz-devel
 BuildRequires: libxine-devel >= 1.1.9
 BuildRequires: pciutils-devel
 BuildRequires: webkitkde-devel
-Requires:      kdebase4-runtime
-Requires:      kappfinder
-Requires:      konsole
-Requires:      dolphin
-Requires:      kdepasswd
-Requires:      kde4-nsplugins
-Requires:      kwrite
-Requires:      konqueror
-Requires:      keditbookmarks
-Requires:      kfind
-Requires:      kdialog
-Requires:      kinfocenter
-Requires:      phonon-xine
-Requires:      plasma-applet-folderview
-Requires:      plasma-applet-showdesktop
-BuildRoot:     %_tmppath/%name-%version-%release-root
+Requires: kdebase4-runtime
+Requires: kappfinder
+Requires: konsole
+Requires: dolphin
+Requires: kdepasswd
+Requires: kde4-nsplugins
+Requires: kwrite
+Requires: konqueror
+Requires: keditbookmarks
+Requires: kfind
+Requires: kdialog
+Requires: kinfocenter
+Requires: phonon-xine
+Requires: plasma-applet-folderview
+BuildRoot: %_tmppath/%name-%version-%release-root
 
 %description
 This meta package requires all base kdebase 4 packages.
