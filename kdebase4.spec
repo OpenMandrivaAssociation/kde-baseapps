@@ -1,13 +1,21 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.1.0
-Release: %mkrel 2
+Release: %mkrel 3
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
 URL: http://www.kde.org
 Source: ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 Patch0: kdebase-4.0.84-fix-menu-entries.patch
+# Post 4.1 patches
+Patch100: kdebase-apps-post-4.1.0-rev837487.patch
+Patch101: kdebase-apps-post-4.1.0-rev838042.patch
+Patch102: kdebase-apps-post-4.1.0-rev839878.patch
+Patch103: kdebase-apps-post-4.1.0-rev840477.patch
+Patch104: kdebase-apps-post-4.1.0-rev841420.patch
+Patch105: kdebase-apps-post-4.1.0-rev841475.patch
+Patch106: kdebase-apps-post-4.1.0-rev841477.patch
 BuildRequires: kde4-macros
 BuildRequires: cmake
 BuildRequires: kdelibs4-devel >= 4.0.85
@@ -106,7 +114,6 @@ A shell program similar to xterm for KDE
 Summary: KDE 4 core library
 Group: System/Libraries
 Obsoletes: %{_lib}dolphinprivate5 < 1:3.93.0-0.714129.2
-# (Anssi 06/2008) wrong major:
 Obsoletes: %{_lib}dolphinprivate1 < 1:4.0.83-6
 
 %description -n %libdolphinprivate
@@ -369,7 +376,6 @@ KDE 4 core library.
 %package -n %libkonquerorprivate
 Summary: KDE 4 core library
 Group: System/Libraries
-# (Anssi 06/2008) wrong major:
 Obsoletes: %{_lib}konquerorprivate1 < 1:4.0.83-6
 
 %description -n %libkonquerorprivate
@@ -622,6 +628,14 @@ based on kdebase.
 %prep
 %setup -q -n kdebase-%version
 %patch0 -p0
+# Post 4.1
+%patch100 -p0 -b .post410
+%patch101 -p0 -b .post410
+%patch102 -p0 -b .post410
+%patch103 -p0 -b .post410
+%patch104 -p0 -b .post410
+%patch105 -p0 -b .post410
+%patch106 -p0 -b .post410
 
 %build
 %cmake_kde4 
