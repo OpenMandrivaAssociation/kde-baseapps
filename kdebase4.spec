@@ -1,7 +1,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.1.0
-Release: %mkrel 3
+Release: %mkrel 4
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -138,6 +138,7 @@ Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
 Provides: dolphin4
 Conflicts: kdebase4-workspace < 1:3.93.0
+Conflicts: kdebase4 < 1:4.1.0-4
 Obsoletes: kde4-dolphin < 1:4.0.68
 Provides: kde4-dolphin = %epoch:%version
 
@@ -147,12 +148,15 @@ A shell program similar to xterm for KDE
 %files -n dolphin
 %defattr(-,root,root)
 %_kde_bindir/dolphin
+%_kde_bindir/keditfiletype
 %_kde_datadir/applications/kde4/dolphin.desktop
 %_kde_datadir/kde4/services/dolphinpart.desktop
 %_kde_datadir/kde4/services/kcmdolphin.desktop
+%_kde_datadir/kde4/services/filetypes.desktop
 %_kde_datadir/config.kcfg/dolphin_*
 %_kde_libdir/kde4/dolphinpart.so
 %_kde_libdir/kde4/kcm_dolphin.so
+%_kde_libdir/kde4/kcm_filetypes.so
 %_kde_appsdir/dolphinpart/dolphinpart.rc
 %_kde_appsdir/dolphin
 %_kde_docdir/*/*/dolphin
@@ -413,12 +417,10 @@ KDE Browser
 
 %files -n konqueror
 %defattr(-,root,root)
-%_kde_bindir/keditfiletype
 %_kde_bindir/kfmclient
 %_kde_bindir/konqueror
 %_kde_libdir/kde4/kded_konqy_preloader.so
 %_kde_libdir/kde4/kcm_css.so
-%_kde_libdir/kde4/kcm_filetypes.so
 %_kde_libdir/kde4/kcm_history.so
 %_kde_libdir/kde4/kcm_kio.so
 %_kde_libdir/kde4/kcm_konq.so
@@ -473,7 +475,6 @@ KDE Browser
 %_kde_datadir/kde4/services/filebehavior.desktop
 %_kde_datadir/kde4/services/filebrowser.desktop
 %_kde_datadir/kde4/services/filepreviews.desktop
-%_kde_datadir/kde4/services/filetypes.desktop
 %_kde_datadir/kde4/services/kcmcss.desktop
 %_kde_datadir/kde4/services/kcmhistory.desktop
 %_kde_datadir/kde4/services/kcmkonqyperformance.desktop
