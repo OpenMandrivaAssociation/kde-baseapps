@@ -136,6 +136,7 @@ KDE 4 core library.
 Summary: Dolphin
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
+Requires: kfind
 Provides: dolphin4
 Conflicts: kdebase4-workspace < 1:3.93.0
 Conflicts: kdebase4 < 1:4.1.0-4
