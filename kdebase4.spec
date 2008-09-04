@@ -1,7 +1,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.1.1
-Release: %mkrel 1
+Release: %mkrel 2
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -597,6 +597,7 @@ Requires: %libdolphinprivate = %epoch:%version
 Requires: %libkonq = %epoch:%version
 Requires: %libkonqsidebarplugin = %epoch:%version
 Requires: %libkonquerorprivate = %epoch:%version
+Requires: kdebase4-workspace-devel
 Obsoletes: %{_lib}kdebase46-devel < 1:3.93.0-0.714129.2
 Conflicts: kde4-kdialog < 1:4.0.68
 Conflicts: kde4-konqueror < 1:4.0.68
