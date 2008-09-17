@@ -20,12 +20,12 @@ BuildRequires: pam-devel
 BuildRequires: freetype2-devel
 BuildRequires: libsasl-devel
 BuildRequires: openldap-devel
-BuildRequires: avahi-compat-libdns_sd-devel 
+BuildRequires: avahi-compat-libdns_sd-devel
 BuildRequires: avahi-client-devel
 BuildRequires: libsmbclient-devel > 3.0
 BuildRequires: libieee1284-devel
 BuildRequires: OpenEXR-devel
-BuildRequires: hal-devel 
+BuildRequires: hal-devel
 BuildRequires: libusb-devel
 BuildRequires: libxml2-utils
 BuildRequires: X11-devel
@@ -97,7 +97,7 @@ A shell program similar to xterm for KDE
 %_kde_datadir/kde4/services/ServiceMenus/konsolehere.desktop
 %_kde_docdir/*/*/konsole
 
-#------------------------------------------------	
+#------------------------------------------------
 
 %define dolphinprivate_major 4
 %define libdolphinprivate %mklibname dolphinprivate %dolphinprivate_major
@@ -125,7 +125,7 @@ KDE 4 core library.
 #-----------------------------------------------------------------------------
 
 %package -n dolphin
-Summary: Dolphin
+Summary: File manager for KDE focusing on usability
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
 Requires: kfind
@@ -136,7 +136,21 @@ Obsoletes: kde4-dolphin < 1:4.0.68
 Provides: kde4-dolphin = %epoch:%version
 
 %description -n dolphin
-A shell program similar to xterm for KDE
+Dolphin is a file manager for KDE focusing on usability.
+The main features of Dolphin are:
+- Navigation bar for URLs, which allows to navigate quickly
+     through the file hierarchy.
+- View properties are remembered for each folder.
+- Split of views is supported.
+- Network transparency.
+- Undo/redo functionality.
+- Renaming of a variable number of selected items in one step.
+
+Dolphin is not intended to be a competitor to Konqueror: Konqueror
+acts as universal viewer being able to show HTML pages, text documents,
+directories and a lot more, whereas Dolphin focuses on being only a file
+manager. This approach allows to optimize the user interface for the task
+of file management.
 
 %files -n dolphin
 %defattr(-,root,root)
@@ -197,7 +211,7 @@ Conflicts: kdebase-progs < 1:3.5.9-38
 %endif
 
 %description -n kinfocenter
-Kinfocenter is a utility in KDE that provides information 
+Kinfocenter is a utility in KDE that provides information
 about a computer system.
 
 %files -n kinfocenter
@@ -294,7 +308,7 @@ Netscape plugins wrapper for kde.
 #-----------------------------------------------------------------------------
 
 %package -n kwrite
-Summary: Kwrite
+Summary: Simple text editor for KDE
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
 Obsoletes: kdebase4-kwrite < 1:3.93.0-0.714129.2
@@ -306,7 +320,7 @@ Conflicts: kdebase-progs < 1:3.5.9-38
 %endif
 
 %description -n kwrite
-User password management
+Simple text editor for KDE
 
 %files -n kwrite
 %defattr(-,root,root)
@@ -316,7 +330,7 @@ User password management
 %_kde_appsdir/kwrite
 %_kde_docdir/*/*/kwrite
 
-#------------------------------------------------	
+#------------------------------------------------
 
 %define konq_major 5
 %define libkonq %mklibname konq %konq_major
@@ -340,7 +354,7 @@ KDE 4 core library.
 %defattr(-,root,root)
 %_kde_libdir/libkonq.so.%{konq_major}*
 
-#------------------------------------------------	
+#------------------------------------------------
 
 %define konqsidebarplugin_major 4
 %define libkonqsidebarplugin %mklibname konqsidebarplugin %konqsidebarplugin_major
@@ -625,9 +639,9 @@ based on kdebase.
 %patch0 -p0
 
 %build
-%cmake_kde4 
+%cmake_kde4
 
-%make 
+%make
 
 
 %install
