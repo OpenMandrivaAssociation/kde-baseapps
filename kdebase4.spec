@@ -1,7 +1,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.1.1
-Release: %mkrel 3
+Release: %mkrel 4
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -67,7 +67,7 @@ This meta package requires all base kdebase 4 packages.
 #-----------------------------------------------------------------------------
 
 %package -n konsole
-Summary: Konsole
+Summary: A shell program similar to xterm for KDE
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
 Provides: konsole4
@@ -171,7 +171,7 @@ of file management.
 #-----------------------------------------------------------------------------
 
 %package -n kappfinder
-Summary:    Kappfinder
+Summary:    Utility to search and update the list of installed applications
 Group:      Graphical desktop/KDE
 Requires:   kdebase4-runtime
 Obsoletes:  kde4-kappfinder < 1:4.0.68
@@ -183,7 +183,7 @@ Conflicts:  kdebase-progs < 1:3.5.9-38
 %endif
 
 %description -n kappfinder
-A shell program similar to xterm for KDE
+Utility to search and update the list of installed applications
 
 %files -n kappfinder
 %defattr(-,root,root)
@@ -406,7 +406,7 @@ KDE 4 core library.
 #-----------------------------------------------------------------------------
 
 %package -n konqueror
-Summary:    Konqueror
+Summary:    KDE file and web browser
 Group:      Graphical desktop/KDE
 Requires:   kdebase4-runtime
 Obsoletes:  kdebase4-konqueror < 1:3.93.0-0.714129.2
@@ -420,7 +420,7 @@ Conflicts: kdebase-progs < 1:3.5.9-38
 Suggests:  keditbookmarks
 
 %description -n konqueror
-KDE Browser
+KDE file and web browser
 
 %files -n konqueror
 %defattr(-,root,root)
