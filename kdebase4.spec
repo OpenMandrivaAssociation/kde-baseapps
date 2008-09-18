@@ -8,6 +8,7 @@ License: GPL
 URL: http://www.kde.org
 Source: ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 Patch0: kdebase-4.0.84-fix-menu-entries.patch
+Patch1: kdebase-post-4.1.1-rev862160.patch
 BuildRequires: kde4-macros
 BuildRequires: cmake
 BuildRequires: kdelibs4-devel >= 4.0.85
@@ -40,7 +41,6 @@ BuildRequires: bluez-devel
 BuildRequires: boost-devel
 BuildRequires: xrdb
 BuildRequires: qimageblitz-devel
-BuildRequires: libxine-devel >= 1.1.9
 BuildRequires: pciutils-devel
 BuildRequires: webkitkde-devel
 Requires: kdebase4-runtime
@@ -637,6 +637,7 @@ based on kdebase.
 %prep
 %setup -q -n kdebase-%version
 %patch0 -p0
+%patch1 -p1
 
 %build
 %cmake_kde4
