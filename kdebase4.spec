@@ -1,14 +1,13 @@
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 4.1.1
-Release: %mkrel 5
+Version: 4.1.2
+Release: %mkrel 1
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
 URL: http://www.kde.org
 Source: ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 Patch0: kdebase-4.0.84-fix-menu-entries.patch
-Patch1: kdebase-post-4.1.1-rev862160.patch
 BuildRequires: kde4-macros
 BuildRequires: cmake
 BuildRequires: kdelibs4-devel >= 4.0.85
@@ -637,7 +636,6 @@ based on kdebase.
 %prep
 %setup -q -n kdebase-%version
 %patch0 -p0
-%patch1 -p1
 
 %build
 %cmake_kde4
