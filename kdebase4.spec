@@ -1,7 +1,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.1.2
-Release: %mkrel 3
+Release: %mkrel 4
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -10,6 +10,8 @@ Source: ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 Patch0: kdebase-4.0.84-fix-menu-entries.patch
 Patch1: kdebase-4.1.1-konqueror_dnd_fix.patch
 Patch2: kdebase-testing-4.1.1-fix-konqueror-sidebar-rename.patch
+# Patch from Trunk
+Patch100: kdebase-backport-4.2-fix-konsole-command-quotes.patch
 BuildRequires: kde4-macros
 BuildRequires: cmake
 BuildRequires: kdelibs4-devel >= 4.0.85
@@ -641,6 +643,7 @@ based on kdebase.
 %patch1 -p1 -b .dnd_fix
 %patch2 -p1 -b .sidebar_allow_rename
 
+%patch100 -p1 
 %build
 %cmake_kde4
 
