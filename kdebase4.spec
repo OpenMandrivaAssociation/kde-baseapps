@@ -1,7 +1,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 4.1.2
-Release: %mkrel 4
+Version: 4.1.70
+Release: %mkrel 2 
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -9,13 +9,11 @@ URL: http://www.kde.org
 Source: ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 Patch0: kdebase-4.0.84-fix-menu-entries.patch
 Patch1: kdebase-4.1.1-konqueror_dnd_fix.patch
-Patch2: kdebase-testing-4.1.1-fix-konqueror-sidebar-rename.patch
 # Patch from Trunk
-Patch100: kdebase-backport-4.2-fix-konsole-command-quotes.patch
 BuildRequires: kde4-macros
 BuildRequires: cmake
-BuildRequires: kdelibs4-devel >= 4.0.85
-BuildRequires: kdebase4-workspace-devel >= 4.0.85
+BuildRequires: kdelibs4-devel >= 4.1.70
+BuildRequires: kdebase4-workspace-devel >= 4.1.70
 BuildRequires: kdepimlibs4-devel >= 4.0.85
 BuildRequires: strigi-devel
 BuildRequires: soprano-devel >= 2.0.98
@@ -535,6 +533,7 @@ Bookmark editor.
 %_kde_bindir/kbookmarkmerger
 %_kde_bindir/keditbookmarks
 %_kde_libdir/libkdeinit4_keditbookmarks.so
+%_kde_datadir/kde4/services/bookmarks.desktop
 %_kde_appsdir/keditbookmarks
 %_kde_datadir/config.kcfg/keditbook*
 
@@ -641,9 +640,7 @@ based on kdebase.
 %setup -q -n kdebase-%version
 %patch0 -p0
 %patch1 -p1 -b .dnd_fix
-%patch2 -p1 -b .sidebar_allow_rename
 
-%patch100 -p1 
 %build
 %cmake_kde4
 
