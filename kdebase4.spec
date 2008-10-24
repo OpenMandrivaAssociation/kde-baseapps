@@ -1,7 +1,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 4.1.70
-Release: %mkrel 2 
+Version: 4.1.71
+Release: %mkrel 1 
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -87,12 +87,10 @@ A shell program similar to xterm for KDE
 %defattr(-,root,root)
 %_kde_bindir/konsole
 %_kde_bindir/konsoleprofile
-%_kde_libdir/kde4/kded_kwrited.so
 %_kde_libdir/kde4/libkonsolepart.so
 %_kde_libdir/libkdeinit4_konsole.so
 %_kde_datadir/applications/kde4/konsole.desktop
 %_kde_appsdir/konsole
-%_kde_datadir/kde4/services/kded/kwrited.desktop
 %_kde_datadir/kde4/services/konsolepart.desktop
 %_kde_datadir/kde4/servicetypes/terminalemulator.desktop
 %_kde_datadir/kde4/services/ServiceMenus/konsolehere.desktop
@@ -639,7 +637,8 @@ based on kdebase.
 %prep
 %setup -q -n kdebase-%version
 %patch0 -p0
-%patch1 -p1 -b .dnd_fix
+# Is it still needed ???
+#%patch1 -p1 -b .dnd_fix
 
 %build
 %cmake_kde4
