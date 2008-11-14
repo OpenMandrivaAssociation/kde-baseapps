@@ -648,7 +648,7 @@ based on kdebase.
 rm -fr %buildroot
 cd build
 
-%makeinstall
+make DESTDIR=%buildroot install
 
 %clean
 rm -fr %buildroot
