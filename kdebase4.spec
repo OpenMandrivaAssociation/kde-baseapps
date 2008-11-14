@@ -1,6 +1,6 @@
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 4.1.71
+Version: 4.1.73
 Release: %mkrel 1 
 Epoch: 1
 Group: Graphical desktop/KDE
@@ -11,7 +11,6 @@ Patch0: kdebase-4.0.84-fix-menu-entries.patch
 Patch1: kdebase-4.1.1-konqueror_dnd_fix.patch
 # Patch from Trunk
 BuildRequires: kde4-macros
-BuildRequires: cmake
 BuildRequires: kdelibs4-devel >= 4.1.70
 BuildRequires: kdebase4-workspace-devel >= 4.1.70
 BuildRequires: kdepimlibs4-devel >= 4.0.85
@@ -461,7 +460,6 @@ KDE file and web browser
 %_kde_appsdir/kconf_update/kfmclient_3_2_update.sh
 %_kde_appsdir/kconf_update/konqsidebartng.upd
 %_kde_appsdir/kconf_update/move_konqsidebartng_entries.sh
-%_kde_appsdir/kconf_update/socks.upd
 %_kde_appsdir/khtml/kpartplugins/khtmlkttsd.desktop
 %_kde_appsdir/khtml/kpartplugins/khtmlkttsd.rc
 %_kde_appsdir/dolphinpart/kpartplugins/kremoteencodingplugin.desktop
@@ -650,10 +648,7 @@ based on kdebase.
 rm -fr %buildroot
 cd build
 
-make DESTDIR=%buildroot install
-
-# kcalc.svgz crashes kicker
-rm -rf %buildroot/%_kde_iconsdir/oxygen/scalable/apps/small/16x16/kcalc.svgz
+%makeinstall
 
 %clean
 rm -fr %buildroot
