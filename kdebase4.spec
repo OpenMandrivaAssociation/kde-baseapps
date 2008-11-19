@@ -11,7 +11,7 @@ Patch0: kdebase-4.0.84-fix-menu-entries.patch
 Patch1: kdebase-4.1.1-konqueror_dnd_fix.patch
 # Patch from Trunk
 BuildRequires: kde4-macros
-BuildRequires: kdelibs4-devel >= 4.1.70
+BuildRequires: kdelibs4-devel >= 2:4.1.80
 BuildRequires: kdebase4-workspace-devel >= 4.1.70
 BuildRequires: kdepimlibs4-devel >= 4.0.85
 BuildRequires: strigi-devel
