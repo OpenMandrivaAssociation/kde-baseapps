@@ -583,14 +583,14 @@ Dialog KDE base widgets
 #-----------------------------------------------------------------------------
 
 %package -n plasma-applet-folderview
-Summary: Plasma folder view applet
+Summary: Display the content of folders (Desktop as default)
 Group: Graphical desktop/KDE
 Requires: kdebase4-workspace
 Provides: plasma-applet
 Obsoletes: plasma-applets-folderview
 
 %description -n plasma-applet-folderview
-Plasma applet folder view applet.
+Display the content of folders (Desktop as default)
 
 %files -n plasma-applet-folderview
 %defattr(-,root,root)
