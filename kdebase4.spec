@@ -1,6 +1,6 @@
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 4.1.80
+Version: 4.1.81
 Release: %mkrel 1
 Epoch: 1
 Group: Graphical desktop/KDE
@@ -11,8 +11,8 @@ Patch0: kdebase-4.0.84-fix-menu-entries.patch
 Patch1: kdebase-4.1.1-konqueror_dnd_fix.patch
 # Patch from Trunk
 BuildRequires: kde4-macros
-BuildRequires: kdelibs4-devel >= 2:4.1.80
-BuildRequires: kdebase4-workspace-devel >= 4.1.70
+BuildRequires: kdelibs4-devel >= 2:4.1.81
+BuildRequires: kdebase4-workspace-devel >= 4.1.81
 BuildRequires: kdepimlibs4-devel >= 4.0.85
 BuildRequires: strigi-devel
 BuildRequires: soprano-devel >= 2.0.98
@@ -301,8 +301,7 @@ Netscape plugins wrapper for kde.
 %_kde_libdir/kde4/libnsplugin.so
 %_kde_appsdir/plugin
 %_kde_datadir/kde4/services/khtml_plugins.desktop
-%_kde_appsdir/webkitpart/kpartplugins/khtmlkttsd.desktop
-%_kde_appsdir/webkitpart/kpartplugins/khtmlkttsd.rc
+
 #-----------------------------------------------------------------------------
 
 %package -n kwrite
