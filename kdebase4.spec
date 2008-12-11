@@ -1,6 +1,6 @@
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 4.1.81
+Version: 4.1.82
 Release: %mkrel 1
 Epoch: 1
 Group: Graphical desktop/KDE
