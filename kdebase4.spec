@@ -424,7 +424,6 @@ KDE file and web browser
 %_kde_bindir/kfmclient
 %_kde_bindir/konqueror
 %_kde_libdir/kde4/kded_konqy_preloader.so
-%_kde_libdir/kde4/kcm_css.so
 %_kde_libdir/kde4/kcm_history.so
 %_kde_libdir/kde4/kcm_kio.so
 %_kde_libdir/kde4/kcm_konq.so
@@ -476,9 +475,6 @@ KDE file and web browser
 %_kde_datadir/kde4/services/desktoppath.desktop
 %_kde_datadir/kde4/services/ebrowsing.desktop
 %_kde_datadir/kde4/services/filebehavior.desktop
-%_kde_datadir/kde4/services/filebrowser.desktop
-%_kde_datadir/kde4/services/filepreviews.desktop
-%_kde_datadir/kde4/services/kcmcss.desktop
 %_kde_datadir/kde4/services/kcmhistory.desktop
 %_kde_datadir/kde4/services/kcmkonqyperformance.desktop
 %_kde_datadir/kde4/services/kcmperformance.desktop
@@ -496,9 +492,9 @@ KDE file and web browser
 %_kde_datadir/kde4/services/smb.desktop
 %_kde_datadir/kde4/services/useragent.desktop
 %_kde_datadir/kde4/services/useragentstrings
+%_kde_datadir/kde4/services/khtml_appearance.desktop
 %_kde_datadir/kde4/servicetypes/konqaboutpage.desktop
 %_kde_datadir/kde4/servicetypes/uasprovider.desktop
-%_kde_datadir/kde4/services/khtml_fonts.desktop
 %_kde_appsdir/konqueror
 %_kde_iconsdir/*/*/*/konqueror.*
 %_kde_docdir/*/*/konqueror
