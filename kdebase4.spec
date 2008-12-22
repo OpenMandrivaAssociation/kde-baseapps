@@ -10,6 +10,7 @@ Source: ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 Patch0: kdebase-4.0.84-fix-menu-entries.patch
 Patch1: kdebase-4.1.1-konqueror_dnd_fix.patch
 # Patch from Trunk
+Patch100:      kdebase-4.1.85-testing-file-association.patch
 BuildRequires: kde4-macros
 BuildRequires: kdelibs4-devel >= 2:4.1.81
 BuildRequires: kdebase4-workspace-devel >= 4.1.81
@@ -632,7 +633,7 @@ based on kdebase.
 %patch0 -p0
 # Is it still needed ???
 #%patch1 -p1 -b .dnd_fix
-
+%patch100 -p0
 %build
 %cmake_kde4
 
