@@ -1,7 +1,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.1.85
-Release: %mkrel 1
+Release: %mkrel 2
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -11,6 +11,7 @@ Patch0: kdebase-4.0.84-fix-menu-entries.patch
 Patch1: kdebase-4.1.1-konqueror_dnd_fix.patch
 # Patch from Trunk
 Patch100:      kdebase-4.1.85-testing-file-association.patch
+Patch102:      kdebase-4.1.85-rev901122.patch
 BuildRequires: kde4-macros
 BuildRequires: kdelibs4-devel >= 2:4.1.81
 BuildRequires: kdebase4-workspace-devel >= 4.1.81
@@ -634,6 +635,8 @@ based on kdebase.
 # Is it still needed ???
 #%patch1 -p1 -b .dnd_fix
 %patch100 -p0
+%patch102 -p0
+
 %build
 %cmake_kde4
 
