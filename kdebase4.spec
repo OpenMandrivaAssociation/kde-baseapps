@@ -189,6 +189,7 @@ Utility to search and update the list of installed applications
 %_kde_datadir/applications/kde4/kappfinder.desktop
 %_kde_appsdir/kappfinder
 %_kde_iconsdir/*/*/*/*
+%_kde_mandir/man1/kappfinder.1.*
 %exclude %_kde_iconsdir/*/*/*/konqueror.*
 %exclude %_kde_iconsdir/*/*/*/kfind.*
 
@@ -527,6 +528,7 @@ Bookmark editor.
 %_kde_datadir/kde4/services/bookmarks.desktop
 %_kde_appsdir/keditbookmarks
 %_kde_datadir/config.kcfg/keditbook*
+%_kde_mandir/man1/kbookmarkmerger.1.*
 
 #-----------------------------------------------------------------------------
 
@@ -553,6 +555,7 @@ Application finder
 %_kde_datadir/kde4/services/kfindpart.desktop
 %_kde_datadir/kde4/servicetypes/findpart.desktop
 %_kde_iconsdir/*/*/*/kfind.*
+%_kde_mandir/man1/kfind.1.*
 %_kde_docdir/*/*/kfind
 
 #-----------------------------------------------------------------------------
