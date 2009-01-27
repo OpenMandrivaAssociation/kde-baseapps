@@ -109,13 +109,6 @@ Obsoletes: %{_lib}dolphinprivate1 < 1:4.0.83-6
 %description -n %libdolphinprivate
 KDE 4 core library.
 
-%if %mdkversion < 200900
-%post -n %libdolphinprivate -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %libdolphinprivate -p /sbin/ldconfig
-%endif
-
 %files -n %libdolphinprivate
 %defattr(-,root,root)
 %_kde_libdir/libdolphinprivate.so.%{dolphinprivate_major}*
@@ -342,13 +335,6 @@ Conflicts: konqueror <  1:4.0.82-5
 %description -n %libkonq
 KDE 4 core library.
 
-%if %mdkversion < 200900
-%post -n %libkonq -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %libkonq -p /sbin/ldconfig
-%endif
-
 %files -n %libkonq
 %defattr(-,root,root)
 %_kde_libdir/libkonq.so.%{konq_major}*
@@ -367,13 +353,6 @@ Obsoletes: %{_lib}kdebase46 <= 1:3.80.3
 %description -n %libkonqsidebarplugin
 KDE 4 core library.
 
-%if %mdkversion < 200900
-%post -n %libkonqsidebarplugin -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %libkonqsidebarplugin -p /sbin/ldconfig
-%endif
-
 %files -n %libkonqsidebarplugin
 %defattr(-,root,root)
 %_kde_libdir/libkonqsidebarplugin.so.%{konqsidebarplugin_major}*
@@ -390,13 +369,6 @@ Obsoletes: %{_lib}konquerorprivate1 < 1:4.0.83-6
 
 %description -n %libkonquerorprivate
 KDE 4 core library.
-
-%if %mdkversion < 200900
-%post -n %libkonquerorprivate -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %libkonquerorprivate -p /sbin/ldconfig
-%endif
 
 %files -n %libkonquerorprivate
 %defattr(-,root,root)
@@ -466,6 +438,7 @@ KDE file and web browser
 %_kde_appsdir/dolphinpart/kpartplugins/kremoteencodingplugin.rc
 %_kde_appsdir/dolphinpart/kpartplugins/kshellcmdplugin.desktop
 %_kde_appsdir/dolphinpart/kpartplugins/kshellcmdplugin.rc
+%_kde_appsdir/webkitpart/kpartplugins/*
 %_kde_appsdir/konqsidebartng
 %_kde_appsdir/kbookmark/directory_bookmarkbar.desktop
 %_kde_appsdir/kconf_update/favicons.upd
