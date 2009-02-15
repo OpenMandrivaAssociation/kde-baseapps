@@ -1,7 +1,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.2.0
-Release: %mkrel 3
+Release: %mkrel 4
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -9,6 +9,8 @@ URL: http://www.kde.org
 Source: ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 Patch0: kdebase-4.0.84-fix-menu-entries.patch
 Patch1: kdebase-4.1.1-konqueror_dnd_fix.patch
+# Backported from branch
+Patch100: kdebase-post-4.2.0-rev925605.patch
 # Patch from Trunk
 # Testing patches
 Patch200:      kdebase-4.2.0-testing-bko-181910.patch
@@ -612,6 +614,7 @@ based on kdebase.
 %patch0 -p0
 # Is it still needed ???
 #%patch1 -p1 -b .dnd_fix
+%patch100 -p0
 %patch200 -p1 -b .bko_181910
 %patch201 -p0
 %build
