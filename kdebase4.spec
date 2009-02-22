@@ -1,7 +1,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.2.0
-Release: %mkrel 6
+Release: %mkrel 7
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -12,9 +12,9 @@ Patch1: kdebase-4.1.1-konqueror_dnd_fix.patch
 # Backported from branch
 Patch100: kdebase-post-4.2.0-rev925605.patch
 # Patch from Trunk
+Patch200: kdebase-backport-4.3.0-rev930077.patch
 # Testing patches
-Patch200:      kdebase-4.2.0-testing-bko-181910.patch
-
+Patch300:      kdebase-4.2.0-testing-bko-181910.patch
 BuildRequires: kde4-macros
 BuildRequires: kdelibs4-devel >= 2:4.1.81
 BuildRequires: kdebase4-workspace-devel >= 4.1.81
@@ -615,7 +615,8 @@ based on kdebase.
 # Is it still needed ???
 #%patch1 -p1 -b .dnd_fix
 %patch100 -p0
-%patch200 -p1 -b .bko_181910
+%patch200 -p0
+%patch300 -p1 -b .bko_181910
 
 %build
 %cmake_kde4
