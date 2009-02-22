@@ -615,7 +615,7 @@ based on kdebase.
 # Is it still needed ???
 #%patch1 -p1 -b .dnd_fix
 %patch100 -p0
-%patch200 -p0
+%patch200 -p1
 %patch300 -p1 -b .bko_181910
 
 %build
