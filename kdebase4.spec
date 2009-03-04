@@ -1,7 +1,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.2.1
-Release: %mkrel 1
+Release: %mkrel 2
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -9,6 +9,7 @@ URL: http://www.kde.org
 Source: ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 Patch0: kdebase-4.0.84-fix-menu-entries.patch
 Patch1: kdebase-4.2.0-mdvuserface.patch
+Patch2: kdebase-revert-4.2.0-behavior.patch
 # Patch from Trunk
 # Testing patches
 Patch300:      kdebase-4.2.0-testing-bko-181910.patch
@@ -610,6 +611,7 @@ based on kdebase.
 %setup -q -n kdebase-%version
 %patch0 -p0
 %patch1 -p0 -b .userface
+%patch2 -p0 -b .badkonsole
 
 %patch300 -p1 -b .bko_181910
 
