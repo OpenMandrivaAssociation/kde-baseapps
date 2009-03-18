@@ -1,7 +1,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.2.1
-Release: %mkrel 4
+Release: %mkrel 5
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -78,7 +78,7 @@ Obsoletes: kdebase4-konsole < 1:3.93.0-0.714129.2
 Obsoletes: kde4-konsole < 1:4.0.68
 Provides: kde4-konsole = %epoch:%version
 Requires: x11-font-misc-misc
-Conflicts: kdebase-konsole < 1:3.5.9-38
+Obsoletes: kdebase-konsole < 1:3.5.10-9
 
 %description -n konsole
 A shell program similar to xterm for KDE
