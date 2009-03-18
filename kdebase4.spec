@@ -1,7 +1,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.2.1
-Release: %mkrel 3
+Release: %mkrel 4
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -276,7 +276,7 @@ Summary: Netscape plugins wrapper for kde
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
 Obsoletes: kdebase4-nsplugins < 1:3.93.0-0.714129.2
-Conflicts: kdebase-nsplugins < 1:3.5.9-38
+Obsoletes: kdebase-nsplugins < 1:3.5.10-8
 
 %description -n kde4-nsplugins
 Netscape plugins wrapper for kde.
