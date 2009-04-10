@@ -1,7 +1,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.2.2
-Release: %mkrel 4
+Release: %mkrel 5
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -17,6 +17,8 @@ Patch104: kdebase-4.2.3-rev947485.patch
 Patch105: kdebase-4.2.3-rev947944.patch
 Patch106: kdebase-4.2.3-rev945886.patch
 Patch107: kdebase-4.2.3-rev949865.patch
+Patch108: kdebase-4.2.3-rev951962.patch
+Patch109: kdebase-4.2.3-rev951897.patch 
 # Patch from Trunk
 Patch200: kdebase-backport-4.3-rev947077.patch
 Patch201: kdebase-backport-4.3-rev948413.patch
@@ -607,6 +609,9 @@ based on kdebase.
 %patch105 -p0
 %patch106 -p0
 %patch107 -p0
+%patch108 -p0
+%patch109 -p0
+
 %patch200 -p0 
 %patch201 -p0
 %patch300 -p1 -b .bko_181910
