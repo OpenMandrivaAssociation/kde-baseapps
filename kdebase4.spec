@@ -1,28 +1,16 @@
+%define kderevision svn954171
+
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 4.2.2
-Release: %mkrel 7
+Version: 4.2.70
+Release: %mkrel 0.%kderevision.1
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
 URL: http://www.kde.org
-Source: ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
+Source: ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.%kderevision.tar.bz2
 Patch0: kdebase-4.0.84-fix-menu-entries.patch
-Patch1: kdebase-4.2.0-mdvuserface.patch
-Patch100: kdebase-4.2.3-rev948414.patch
-Patch101: kdebase-4.2.3-rev947904.patch
-Patch102: kdebase-4.2.3-rev948408.patch
-Patch103: kdebase-4.2.3-rev947077.patch
-Patch104: kdebase-4.2.3-rev947485.patch
-Patch105: kdebase-4.2.3-rev947944.patch
-Patch106: kdebase-4.2.3-rev945886.patch
-Patch107: kdebase-4.2.3-rev949865.patch
-Patch108: kdebase-4.2.3-rev951962.patch
-Patch109: kdebase-4.2.3-rev951897.patch 
-Patch110: kdebase-4.2.3-rev954374.patch
-# Patch from Trunk
-Patch200: kdebase-backport-4.3-rev947077.patch
-Patch201: kdebase-backport-4.3-rev948413.patch
+Patch1: kdebase-4.2.70-mdvuserface.patch
 # Testing patches
 Patch300:      kdebase-4.2.0-testing-bko-181910.patch
 BuildRequires: kde4-macros
@@ -101,6 +89,7 @@ A shell program similar to xterm for KDE
 %_kde_bindir/konsoleprofile
 %_kde_libdir/kde4/libkonsolepart.so
 %_kde_libdir/libkdeinit4_konsole.so
+%_kde_libdir/libkonsoleprivate.so
 %_kde_datadir/applications/kde4/konsole.desktop
 %_kde_appsdir/konsole
 %_kde_datadir/kde4/services/konsolepart.desktop
@@ -160,15 +149,18 @@ of file management.
 %files -n dolphin
 %defattr(-,root,root)
 %_kde_bindir/dolphin
-%_kde_bindir/keditfiletype
 %_kde_datadir/applications/kde4/dolphin.desktop
 %_kde_datadir/kde4/services/dolphinpart.desktop
-%_kde_datadir/kde4/services/kcmdolphin.desktop
-%_kde_datadir/kde4/services/filetypes.desktop
+%_kde_datadir/kde4/services/kcmdolphingeneral.desktop
+%_kde_datadir/kde4/services/kcmdolphinnavigation.desktop
+%_kde_datadir/kde4/services/kcmdolphinservices.desktop
+%_kde_datadir/kde4/services/kcmdolphinviewmodes.desktop
 %_kde_datadir/config.kcfg/dolphin_*
 %_kde_libdir/kde4/dolphinpart.so
-%_kde_libdir/kde4/kcm_dolphin.so
-%_kde_libdir/kde4/kcm_filetypes.so
+%_kde_libdir/kde4/kcm_dolphingeneral.so
+%_kde_libdir/kde4/kcm_dolphinnavigation.so
+%_kde_libdir/kde4/kcm_dolphinservices.so
+%_kde_libdir/kde4/kcm_dolphinviewmodes.so
 %_kde_appsdir/dolphinpart/dolphinpart.rc
 %_kde_appsdir/dolphin
 %_kde_docdir/*/*/dolphin
@@ -400,19 +392,16 @@ KDE file and web browser
 %_kde_bindir/kfmclient
 %_kde_bindir/konqueror
 %_kde_libdir/kde4/kded_konqy_preloader.so
-%_kde_libdir/kde4/kcm_history.so
 %_kde_libdir/kde4/kcm_kio.so
 %_kde_libdir/kde4/kcm_konq.so
 %_kde_libdir/kde4/kcm_konqhtml.so
 %_kde_libdir/kde4/kcm_kurifilt.so
 %_kde_libdir/kde4/kcm_performance.so
 %_kde_libdir/kde4/konq_aboutpage.so
-%_kde_libdir/kde4/konq_remoteencoding.so
 %_kde_libdir/kde4/konq_shellcmdplugin.so
 %_kde_libdir/kde4/konq_sidebar.so
 %_kde_libdir/kde4/konq_sidebartree_bookmarks.so
 %_kde_libdir/kde4/konq_sidebartree_dirtree.so
-%_kde_libdir/kde4/konq_sidebartree_history.so
 %_kde_libdir/kde4/konqsidebar_tree.so
 %_kde_libdir/kde4/konqsidebar_web.so
 %_kde_libdir/kde4/khtmlkttsdplugin.so
@@ -436,8 +425,6 @@ KDE file and web browser
 %_kde_appsdir/kconf_update/move_konqsidebartng_entries.sh
 %_kde_appsdir/khtml/kpartplugins/khtmlkttsd.desktop
 %_kde_appsdir/khtml/kpartplugins/khtmlkttsd.rc
-%_kde_appsdir/dolphinpart/kpartplugins/kremoteencodingplugin.desktop
-%_kde_appsdir/dolphinpart/kpartplugins/kremoteencodingplugin.rc
 %_kde_appsdir/dolphinpart/kpartplugins/kshellcmdplugin.desktop
 %_kde_appsdir/dolphinpart/kpartplugins/kshellcmdplugin.rc
 %_kde_appsdir/webkitpart/kpartplugins/*
@@ -452,7 +439,6 @@ KDE file and web browser
 %_kde_datadir/kde4/services/desktoppath.desktop
 %_kde_datadir/kde4/services/ebrowsing.desktop
 %_kde_datadir/kde4/services/filebehavior.desktop
-%_kde_datadir/kde4/services/kcmhistory.desktop
 %_kde_datadir/kde4/services/kcmkonqyperformance.desktop
 %_kde_datadir/kde4/services/kcmperformance.desktop
 %_kde_datadir/kde4/services/kded/konqy_preloader.desktop
@@ -472,6 +458,7 @@ KDE file and web browser
 %_kde_datadir/kde4/services/khtml_appearance.desktop
 %_kde_datadir/kde4/servicetypes/konqaboutpage.desktop
 %_kde_datadir/kde4/servicetypes/uasprovider.desktop
+%_kde_datadir/kde4/servicetypes/konqdndpopupmenuplugin.desktop
 %_kde_appsdir/konqueror
 %_kde_iconsdir/*/*/*/konqueror.*
 %_kde_docdir/*/*/konqueror
@@ -599,22 +586,9 @@ based on kdebase.
 #-----------------------------------------------------------------------------
 
 %prep
-%setup -q -n kdebase-%version
+%setup -q -n kdebase-%version.%kderevision
 %patch0 -p0
 %patch1 -p0 -b .userface
-%patch100 -p0
-%patch101 -p0
-%patch102 -p0
-%patch103 -p0
-%patch104 -p0
-%patch105 -p0
-%patch106 -p0
-%patch107 -p0
-%patch108 -p0
-%patch109 -p0
-%patch110 -p0
-%patch200 -p0 
-%patch201 -p0
 %patch300 -p1 -b .bko_181910
 
 %build
