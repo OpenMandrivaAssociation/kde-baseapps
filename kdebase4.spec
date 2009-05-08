@@ -2,13 +2,13 @@
 
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 4.2.71
-Release: %mkrel 0.%kderevision.1
+Version: 4.2.85
+Release: %mkrel 1
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
 URL: http://www.kde.org
-Source: ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.%kderevision.tar.bz2
+Source: ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 Patch0: kdebase-4.0.84-fix-menu-entries.patch
 Patch1: kdebase-4.2.70-mdvuserface.patch
 # Testing patches
@@ -407,6 +407,7 @@ KDE file and web browser
 %_kde_libdir/kde4/khtmlkttsdplugin.so
 %_kde_libdir/libkdeinit4_kfmclient.so
 %_kde_libdir/libkdeinit4_konqueror.so
+%_kde_libdir/kde4/kcm_history.so
 %_kde_libdir/kde4/kded_favicons.so
 %_kde_libdir/kde4/konq_sound.so
 %_kde_datadir/apps/kcontrol/*
@@ -456,12 +457,14 @@ KDE file and web browser
 %_kde_datadir/kde4/services/useragent.desktop
 %_kde_datadir/kde4/services/useragentstrings
 %_kde_datadir/kde4/services/khtml_appearance.desktop
+%_kde_datadir/kde4/services/kcmhistory.desktop
 %_kde_datadir/kde4/servicetypes/konqaboutpage.desktop
 %_kde_datadir/kde4/servicetypes/uasprovider.desktop
 %_kde_datadir/kde4/servicetypes/konqdndpopupmenuplugin.desktop
 %_kde_appsdir/konqueror
 %_kde_iconsdir/*/*/*/konqueror.*
 %_kde_docdir/*/*/konqueror
+%_kde_libdir/kde4/konq_sidebartree_history.so
 %_kde_datadir/kde4/services/kded/favicons.desktop
 %_kde_datadir/kde4/servicetypes/konqpopupmenuplugin.desktop
 %_kde_datadir/templates
@@ -586,7 +589,7 @@ based on kdebase.
 #-----------------------------------------------------------------------------
 
 %prep
-%setup -q -n kdebase-%version.%kderevision
+%setup -q -n kdebase-%version
 %patch0 -p0
 %patch1 -p0 -b .userface
 %patch300 -p1 -b .bko_181910
