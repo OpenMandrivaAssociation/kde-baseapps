@@ -1,14 +1,23 @@
-%define kderevision svn961800
+%define branch 1
+%{?_branch: %{expand: %%global branch 1}}
+
+%if %branch
+%define kderevision svn969966
+%endif
 
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 4.2.85
+Version: 4.2.87
 Release: %mkrel 1
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
 URL: http://www.kde.org
+%if %branch
+Source: ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version%kderevision.tar.bz2
+%else
 Source: ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
+%endif
 Patch0: kdebase-4.0.84-fix-menu-entries.patch
 Patch1: kdebase-4.2.70-mdvuserface.patch
 # Testing patches
@@ -589,7 +598,11 @@ based on kdebase.
 #-----------------------------------------------------------------------------
 
 %prep
+%if %branch
+%setup -q -n kdebase-%version%kderevision
+%else
 %setup -q -n kdebase-%version
+%endif
 %patch0 -p0
 %patch1 -p0 -b .userface
 %patch300 -p1 -b .bko_181910
