@@ -8,7 +8,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.2.88
-Release: %mkrel 1
+Release: %mkrel 2
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -384,6 +384,7 @@ KDE 4 core library.
 Summary:    KDE file and web browser
 Group:      Graphical desktop/KDE
 Requires:   kdebase4-runtime
+Requires:   dolphin
 Obsoletes:  kdebase4-konqueror < 1:3.93.0-0.714129.2
 Obsoletes: kde4-konqueror < 1:4.0.68
 Provides: kde4-konqueror = %epoch:%version
