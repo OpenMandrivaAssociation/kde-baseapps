@@ -8,7 +8,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.2.88
-Release: %mkrel 2
+Release: %mkrel 3
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -131,7 +131,6 @@ Summary: File manager for KDE focusing on usability
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
 Requires: kfind
-Requires: konqueror
 Provides: dolphin4
 Conflicts: kdebase4-workspace < 1:3.93.0
 Conflicts: kdebase4 < 1:4.1.0-4
