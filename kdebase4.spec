@@ -8,7 +8,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.2.95
-Release: %mkrel 2
+Release: %mkrel 3
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -606,6 +606,7 @@ based on kdebase.
 %endif
 %patch0 -p0
 %patch1 -p0 -b .userface
+%patch2 -p0 -b .Mdv_Home_icon
 %patch300 -p1 -b .bko_181910
 
 %build
