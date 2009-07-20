@@ -88,7 +88,9 @@ Obsoletes: kdebase4-konsole < 1:3.93.0-0.714129.2
 Obsoletes: kde4-konsole < 1:4.0.68
 Provides: kde4-konsole = %epoch:%version
 Requires: x11-font-misc-misc
+%if %mdkversion >= 200910
 Obsoletes: kdebase-konsole < 1:3.5.10-9
+%endif
 
 %description -n konsole
 A shell program similar to xterm for KDE
@@ -182,9 +184,11 @@ Group:      Graphical desktop/KDE
 Requires:   kdebase4-runtime
 Obsoletes:  kde4-kappfinder < 1:4.0.68
 Provides:   kde4-kappfinder = %epoch:%version
+%if %mdkversion >= 200910
 Conflicts:  kdemultimedia-common < 1:3.5.9-4
 Conflicts:  kdebase-common < 1:3.5.9-38
 Conflicts:  kdebase-progs < 1:3.5.9-38
+%endif
 
 %description -n kappfinder
 Utility to search and update the list of installed applications
@@ -210,8 +214,10 @@ Conflicts:  kdebase4-runtime < 1:4.0.68
 Conflicts:  kdebase4-workspace < 1:4.0.2-1
 Obsoletes: kde4-kinfocenter < 1:4.0.68
 Provides: kde4-kinfocenter = %epoch:%version
+%if %mdkversion >= 200910
 Conflicts: kdebase-common < 1:3.5.9-38
 Conflicts: kdebase-progs < 1:3.5.9-38
+%endif
 
 %description -n kinfocenter
 Kinfocenter is a utility in KDE that provides information
@@ -265,9 +271,11 @@ Requires: kdebase4-runtime
 Obsoletes: kdebase4-kdepasswd < 1:3.93.0-0.714129.2
 Obsoletes: kde4-kdepasswd < 1:4.0.68
 Provides: kde4-kdepasswd = %epoch:%version
+%if %mdkversion >= 200910
 Conflicts: kdebase-common < 1:3.5.9-38
 Conflicts: kdebase-kdm < 1:3.5.9-38
 Conflicts: kdebase-progs < 1:3.5.9-38
+%endif
 
 %description -n kdepasswd
 User password management
@@ -289,7 +297,9 @@ Summary: Netscape plugins wrapper for kde
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
 Obsoletes: kdebase4-nsplugins < 1:3.93.0-0.714129.2
+%if %mdkversion >= 200910
 Obsoletes: kdebase-nsplugins < 1:3.5.10-8
+%endif
 
 %description -n kde4-nsplugins
 Netscape plugins wrapper for kde.
@@ -312,8 +322,10 @@ Requires: kdebase4-runtime
 Obsoletes: kdebase4-kwrite < 1:3.93.0-0.714129.2
 Obsoletes: kde4-kwrite < 1:4.0.68
 Provides: kde4-kwrite = %epoch:%version
+%if %mdkversion >= 200910
 Conflicts: kdebase-common < 1:3.5.9-38
 Conflicts: kdebase-progs < 1:3.5.9-38
+%endif
 
 %description -n kwrite
 Simple text editor for KDE
@@ -390,8 +402,10 @@ Obsoletes: kde4-konqueror < 1:4.0.68
 Provides: kde4-konqueror = %epoch:%version
 Conflicts: %{libkonq} <  1:4.0.82-5
 Conflicts: kde4-nsplugins < 1:4.2.1
+%if %mdkversion >= 200910
 Conflicts: kdebase-common < 1:3.5.9-38
 Conflicts: kdebase-progs < 1:3.5.9-38
+%endif
 Suggests:  keditbookmarks
 
 %description -n konqueror
@@ -488,8 +502,10 @@ Requires: kdebase4-runtime
 Obsoletes: kdebase4-keditbookmarks < 1:3.93.0-0.714129.2
 Obsoletes: kde4-keditbookmarks < 1:4.0.68
 Provides: kde4-keditbookmarks = %epoch:%version
+%if %mdkversion >= 200910
 Conflicts: kdebase-common < 1:3.5.9-38
 Conflicts: kdebase-progs < 1:3.5.9-38
+%endif
 
 %description -n keditbookmarks
 Bookmark editor.
@@ -513,8 +529,10 @@ Requires: kdebase4-runtime
 Obsoletes: kdebase4-kfind < 1:3.93.0-0.714129.2
 Obsoletes: kde4-kfind < 1:4.0.68
 Provides: kde4-kfind = %epoch:%version
+%if %mdkversion >= 200910
 Conflicts: kdebase-common < 1:3.5.9-38
 Conflicts: kdebase-progs < 1:3.5.9-38
+%endif
 
 %description -n kfind
 Application finder
@@ -539,7 +557,9 @@ Requires: kdebase4-runtime
 Obsoletes: kdebase4-kdialog < 1:3.93.0-0.714129.2
 Obsoletes: kde4-kdialog < 1:4.0.68
 Provides: kde4-kdialog = %epoch:%version
+%if %mdkversion >= 200910
 Conflicts: kdebase-progs < 1:3.5.9-38
+%endif
 
 %description -n kdialog
 Dialog KDE base widgets
@@ -581,7 +601,9 @@ Obsoletes: %{_lib}kdebase46-devel < 1:3.93.0-0.714129.2
 Conflicts: kde4-kdialog < 1:4.0.68
 Conflicts: kde4-konqueror < 1:4.0.68
 Conflicts: kde4-nsplugins < 1:4.2.1
+%if %mdkversion >= 200910
 Conflicts: kdebase3-devel < 1:3.5.9-38
+%endif
 
 %description  devel
 This package contains header files needed if you wish to build applications
