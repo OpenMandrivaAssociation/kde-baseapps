@@ -1,32 +1,20 @@
-%define branch 0
-%{?_branch: %{expand: %%global branch 1}}
-
-%if %branch
-%define kderevision svn973768
-%endif
-
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 4.2.96
+Version: 4.2.98
 Release: %mkrel 1
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
 URL: http://www.kde.org
-%if %branch
-Source: ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version%kderevision.tar.bz2
-%else
 Source: ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
-%endif
 Patch0: kdebase-4.0.84-fix-menu-entries.patch
-Patch1: kdebase-4.2.70-mdvuserface.patch
+Patch1: kdebase-4.2.98-mdvuserface.patch
 Patch2: kdebase-4.2.95-Use-Mandriva-Home-Icon.patch
-# Testing patches
-Patch300:      kdebase-4.2.0-testing-bko-181910.patch
 BuildRequires: kde4-macros
-BuildRequires: kdelibs4-devel >= 2:4.1.81
-BuildRequires: kdebase4-workspace-devel >= 4.1.81
-BuildRequires: kdepimlibs4-devel >= 4.0.85
+BuildRequires: kdelibs4-devel >= 2:4.2.98
+BuildRequires: kdelibs4-experimental-devel >= 4.2.98
+BuildRequires: kdebase4-workspace-devel >= 4.2.98
+BuildRequires: kdepimlibs4-devel >= 4.2.98
 BuildRequires: strigi-devel
 BuildRequires: soprano-devel >= 2.0.98
 BuildRequires: fontconfig-devel >= 2.1-9mdk
@@ -591,7 +579,8 @@ Display the content of folders (Desktop as default)
 Summary: Devel stuff for kdebase 4
 Group: Development/KDE and Qt
 Requires: kde4-macros
-Requires: kdelibs4-devel
+Requires: kdelibs4-devel >= 2:4.2.98
+Requires: kdelibs4-experimental-devel >= 4.2.98
 Requires: %libdolphinprivate = %epoch:%version
 Requires: %libkonq = %epoch:%version
 Requires: %libkonqsidebarplugin = %epoch:%version
@@ -621,15 +610,11 @@ based on kdebase.
 #-----------------------------------------------------------------------------
 
 %prep
-%if %branch
-%setup -q -n kdebase-%version%kderevision
-%else
 %setup -q -n kdebase-%version
-%endif
+
 %patch0 -p0
 %patch1 -p0 -b .userface
 %patch2 -p0 -b .Mdv_Home_icon
-%patch300 -p1 -b .bko_181910
 
 %build
 %cmake_kde4
@@ -639,9 +624,8 @@ based on kdebase.
 
 %install
 rm -fr %buildroot
-cd build
 
-make DESTDIR=%buildroot install
+%makeinstall_std -C build
 
 %clean
 rm -fr %buildroot
