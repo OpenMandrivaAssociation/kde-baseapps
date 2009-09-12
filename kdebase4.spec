@@ -1,7 +1,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.3.1
-Release: %mkrel 1
+Release: %mkrel 2
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -78,6 +78,9 @@ Provides: kde4-konsole = %epoch:%version
 Requires: x11-font-misc-misc
 %if %mdkversion >= 200910
 Obsoletes: kdebase-konsole < 1:3.5.10-9
+%endif
+%if %mdkversion >= 200100
+Obsoletes: kdebase3-konsole < 1:3.5.10-24
 %endif
 
 %description -n konsole
@@ -287,6 +290,9 @@ Requires: kdebase4-runtime
 Obsoletes: kdebase4-nsplugins < 1:3.93.0-0.714129.2
 %if %mdkversion >= 200910
 Obsoletes: kdebase-nsplugins < 1:3.5.10-8
+%endif
+%if %mdkversion >= 200100
+Obsoletes: kdebase3-nsplugins < 1:3.5.10-24
 %endif
 
 %description -n kde4-nsplugins
