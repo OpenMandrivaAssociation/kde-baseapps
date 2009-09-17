@@ -1,7 +1,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.3.1
-Release: %mkrel 3
+Release: %mkrel 4
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -57,6 +57,8 @@ Requires: kfind
 Requires: kdialog
 Requires: kinfocenter
 Requires: plasma-applet-folderview
+Obsoletes: kdebase-servicemenu < 2007-9
+
 BuildRoot: %_tmppath/%name-%version-%release-root
 
 %description
