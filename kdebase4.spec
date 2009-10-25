@@ -1,7 +1,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.3.2
-Release: %mkrel 1
+Release: %mkrel 2
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -10,6 +10,8 @@ Source: ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 Patch0: kdebase-4.0.84-fix-menu-entries.patch
 Patch1: kdebase-4.2.98-mdvuserface.patch
 Patch2: kdebase-4.2.95-Use-Mandriva-Home-Icon.patch
+Patch300: kdebase-4.3.2-t1032893-fix-access-xdg-user.patch
+Patch301: kdebase-4.3.2-t1035639-fix-xdg-user.patch
 BuildRequires: kde4-macros
 BuildRequires: kdelibs4-devel >= 2:4.2.98
 BuildRequires: kdelibs4-experimental-devel >= 4.2.98
@@ -623,7 +625,8 @@ based on kdebase.
 %patch0 -p0
 %patch1 -p0 -b .userface
 %patch2 -p0 -b .Mdv_Home_icon
-
+%patch300 -p0
+%patch301 -p0
 %build
 %cmake_kde4
 
