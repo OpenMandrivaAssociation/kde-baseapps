@@ -3,7 +3,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.3.73
-Release: %mkrel 1
+Release: %mkrel 2
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -590,7 +590,6 @@ Summary: Devel stuff for kdebase 4
 Group: Development/KDE and Qt
 Requires: kde4-macros
 Requires: kdelibs4-devel >= 2:4.2.98
-Requires: kdelibs4-experimental-devel >= 4.2.98
 Requires: %libdolphinprivate = %epoch:%version
 Requires: %libkonq = %epoch:%version
 Requires: %libkonqsidebarplugin = %epoch:%version
