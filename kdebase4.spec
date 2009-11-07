@@ -1,21 +1,19 @@
+%define kde_snapshot svn1040395
+
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 4.3.2
-Release: %mkrel 3
+Version: 4.3.73
+Release: %mkrel 1
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
 URL: http://www.kde.org
-Source: ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
+Source: ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version%kde_snapshot.tar.bz2
 Patch0: kdebase-4.0.84-fix-menu-entries.patch
 Patch1: kdebase-4.2.98-mdvuserface.patch
 Patch2: kdebase-4.2.95-Use-Mandriva-Home-Icon.patch
-Patch300: kdebase-4.3.2-t1032893-fix-access-xdg-user.patch
-Patch301: kdebase-4.3.2-t1035639-fix-xdg-user.patch
-Patch302: kdebase-4.3.2-fix-password-change.patch
 BuildRequires: kde4-macros
 BuildRequires: kdelibs4-devel >= 2:4.2.98
-BuildRequires: kdelibs4-experimental-devel >= 4.2.98
 BuildRequires: kdebase4-workspace-devel >= 4.2.98
 BuildRequires: kdepimlibs4-devel >= 4.2.98
 BuildRequires: strigi-devel
@@ -423,7 +421,6 @@ KDE file and web browser
 %_kde_libdir/kde4/konq_aboutpage.so
 %_kde_libdir/kde4/konq_shellcmdplugin.so
 %_kde_libdir/kde4/konq_sidebar.so
-%_kde_libdir/kde4/konq_sidebartree_bookmarks.so
 %_kde_libdir/kde4/konq_sidebartree_dirtree.so
 %_kde_libdir/kde4/konqsidebar_tree.so
 %_kde_libdir/kde4/konqsidebar_web.so
@@ -435,6 +432,8 @@ KDE file and web browser
 %_kde_libdir/kde4/konq_sound.so
 %_kde_datadir/apps/kcontrol/*
 %_kde_datadir/config.kcfg/konqueror*
+%_kde_libdir/kde4/fileviewsvnplugin.so
+%_kde_datadir/kde4/services/fileviewsvnplugin.desktop
 %_kde_datadir/applications/kde4/Home.desktop
 %_kde_datadir/applications/kde4/kfmclient.desktop
 %_kde_datadir/applications/kde4/kfmclient_dir.desktop
@@ -621,14 +620,11 @@ based on kdebase.
 #-----------------------------------------------------------------------------
 
 %prep
-%setup -q -n kdebase-%version
+%setup -q -n kdebase-%version%kde_snapshot
 
 %patch0 -p0
 %patch1 -p0 -b .userface
 %patch2 -p0 -b .Mdv_Home_icon
-%patch300 -p0
-%patch301 -p0
-%patch302 -p0
 
 %build
 %cmake_kde4
