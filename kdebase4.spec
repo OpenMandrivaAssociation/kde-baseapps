@@ -1,9 +1,9 @@
-%define kde_snapshot svn1040395
+%define kde_snapshot svn1048496
 
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 4.3.73
-Release: %mkrel 3
+Version: 4.3.75
+Release: %mkrel 1
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -44,7 +44,6 @@ BuildRequires: boost-devel
 BuildRequires: xrdb
 BuildRequires: qimageblitz-devel
 BuildRequires: pciutils-devel
-BuildRequires: webkitkde-devel
 Requires: kdebase4-runtime
 Requires: kappfinder
 Requires: konsole
@@ -154,12 +153,16 @@ of file management.
 %files -n dolphin
 %defattr(-,root,root)
 %_kde_bindir/dolphin
+%_kde_bindir/servicemenudeinstallation
+%_kde_bindir/servicemenuinstallation
 %_kde_datadir/applications/kde4/dolphin.desktop
 %_kde_datadir/kde4/services/dolphinpart.desktop
 %_kde_datadir/kde4/services/kcmdolphingeneral.desktop
 %_kde_datadir/kde4/services/kcmdolphinnavigation.desktop
 %_kde_datadir/kde4/services/kcmdolphinservices.desktop
 %_kde_datadir/kde4/services/kcmdolphinviewmodes.desktop
+%_kde_datadir/kde4/servicetypes/fileviewversioncontrolplugin.desktop
+%_kde_datadir/config/servicemenu.knsrc
 %_kde_datadir/config.kcfg/dolphin_*
 %_kde_libdir/kde4/dolphinpart.so
 %_kde_libdir/kde4/kcm_dolphingeneral.so
@@ -430,6 +433,8 @@ KDE file and web browser
 %_kde_libdir/kde4/kcm_history.so
 %_kde_libdir/kde4/kded_favicons.so
 %_kde_libdir/kde4/konq_sound.so
+%_kde_libdir/kde4/konq_sidebartree_bookmarks.so
+%_kde_libdir/kde4/konqsidebar_history.so
 %_kde_datadir/apps/kcontrol/*
 %_kde_datadir/config.kcfg/konqueror*
 %_kde_libdir/kde4/fileviewsvnplugin.so
@@ -444,13 +449,11 @@ KDE file and web browser
 %_kde_appsdir/kcmcss/template.css
 %_kde_appsdir/kconf_update/kfmclient_3_2.upd
 %_kde_appsdir/kconf_update/kfmclient_3_2_update.sh
-%_kde_appsdir/kconf_update/konqsidebartng.upd
-%_kde_appsdir/kconf_update/move_konqsidebartng_entries.sh
 %_kde_appsdir/khtml/kpartplugins/khtmlkttsd.desktop
 %_kde_appsdir/khtml/kpartplugins/khtmlkttsd.rc
 %_kde_appsdir/dolphinpart/kpartplugins/kshellcmdplugin.desktop
 %_kde_appsdir/dolphinpart/kpartplugins/kshellcmdplugin.rc
-%_kde_appsdir/webkitpart/kpartplugins/*
+#%_kde_appsdir/webkitpart/kpartplugins/*
 %_kde_appsdir/konqsidebartng
 %_kde_appsdir/kbookmark/directory_bookmarkbar.desktop
 %_kde_appsdir/kconf_update/favicons.upd
@@ -486,7 +489,6 @@ KDE file and web browser
 %_kde_appsdir/konqueror
 %_kde_iconsdir/*/*/*/konqueror.*
 %_kde_docdir/*/*/konqueror
-%_kde_libdir/kde4/konq_sidebartree_history.so
 %_kde_datadir/kde4/services/kded/favicons.desktop
 %_kde_datadir/kde4/servicetypes/konqpopupmenuplugin.desktop
 %_kde_datadir/templates
