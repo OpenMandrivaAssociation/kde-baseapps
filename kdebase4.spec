@@ -54,6 +54,7 @@ BuildRequires: boost-devel
 BuildRequires: xrdb
 BuildRequires: qimageblitz-devel
 BuildRequires: pciutils-devel
+BuildRequires: webkitkde-devel
 Requires: kdebase4-runtime
 Requires: kappfinder
 Requires: konsole
@@ -463,7 +464,7 @@ KDE file and web browser
 %_kde_appsdir/khtml/kpartplugins/khtmlkttsd.rc
 %_kde_appsdir/dolphinpart/kpartplugins/kshellcmdplugin.desktop
 %_kde_appsdir/dolphinpart/kpartplugins/kshellcmdplugin.rc
-#%_kde_appsdir/webkitpart/kpartplugins/*
+%_kde_appsdir/webkitpart/kpartplugins/*
 %_kde_appsdir/konqsidebartng
 %_kde_appsdir/kbookmark/directory_bookmarkbar.desktop
 %_kde_appsdir/kconf_update/favicons.upd
@@ -485,7 +486,7 @@ KDE file and web browser
 %_kde_datadir/kde4/services/konq_aboutpage.desktop
 %_kde_datadir/kde4/services/konq_sidebartng.desktop
 %_kde_datadir/kde4/services/konqueror.desktop
-%_kde_datadir/kde4/services/lanbrowser.desktop
+#%_kde_datadir/kde4/services/lanbrowser.desktop
 %_kde_datadir/kde4/services/netpref.desktop
 %_kde_datadir/kde4/services/proxy.desktop
 %_kde_datadir/kde4/services/smb.desktop
