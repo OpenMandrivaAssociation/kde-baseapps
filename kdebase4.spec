@@ -1,4 +1,4 @@
-%define branch 1
+%define branch 0
 %{?_branch: %{expand: %%global branch 1}}
 
 
@@ -8,7 +8,7 @@
 
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 4.3.77
+Version: 4.3.80
 Release: %mkrel 1
 Epoch: 1
 Group: Graphical desktop/KDE
@@ -470,7 +470,7 @@ KDE file and web browser
 %_kde_appsdir/kconf_update/favicons.upd
 %_kde_appsdir/kconf_update/move_favicons.sh
 %_kde_datadir/autostart/konqy_preload.desktop
-%_kde_datadir/config/konqsidebartng.rc
+%_kde_datadir/config/konqsidebartngrc
 %_kde_datadir/kde4/services/cache.desktop
 %_kde_datadir/kde4/services/cookies.desktop
 %_kde_datadir/kde4/services/desktoppath.desktop
