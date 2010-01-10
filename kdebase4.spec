@@ -464,7 +464,6 @@ KDE file and web browser
 %_kde_appsdir/khtml/kpartplugins/khtmlkttsd.rc
 %_kde_appsdir/dolphinpart/kpartplugins/kshellcmdplugin.desktop
 %_kde_appsdir/dolphinpart/kpartplugins/kshellcmdplugin.rc
-%_kde_appsdir/webkitpart/kpartplugins/*
 %_kde_appsdir/konqsidebartng
 %_kde_appsdir/kbookmark/directory_bookmarkbar.desktop
 %_kde_appsdir/kconf_update/favicons.upd
