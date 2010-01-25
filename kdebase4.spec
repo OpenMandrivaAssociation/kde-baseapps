@@ -48,7 +48,6 @@ BuildRequires: imake
 BuildRequires: libraw1394-devel
 BuildRequires: libxklavier-devel
 BuildRequires: lua-devel
-BuildRequires: resmgr-devel
 BuildRequires: bluez-devel
 BuildRequires: boost-devel
 BuildRequires: xrdb
