@@ -461,6 +461,8 @@ KDE file and web browser
 %_kde_appsdir/kconf_update/kfmclient_3_2_update.sh
 %_kde_appsdir/khtml/kpartplugins/khtmlkttsd.desktop
 %_kde_appsdir/khtml/kpartplugins/khtmlkttsd.rc
+%_kde_appsdir/kwebkitpart/kpartplugins/khtmlkttsd.desktop
+%_kde_appsdir/kwebkitpart/kpartplugins/khtmlkttsd.rc
 %_kde_appsdir/dolphinpart/kpartplugins/kshellcmdplugin.desktop
 %_kde_appsdir/dolphinpart/kpartplugins/kshellcmdplugin.rc
 %_kde_appsdir/konqsidebartng
