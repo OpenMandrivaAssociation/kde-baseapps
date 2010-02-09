@@ -9,7 +9,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.4.0
-Release: %mkrel 2
+Release: %mkrel 3
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -462,8 +462,6 @@ KDE file and web browser
 %_kde_appsdir/kconf_update/kfmclient_3_2_update.sh
 %_kde_appsdir/khtml/kpartplugins/khtmlkttsd.desktop
 %_kde_appsdir/khtml/kpartplugins/khtmlkttsd.rc
-%_kde_appsdir/kwebkitpart/kpartplugins/khtmlkttsd.desktop
-%_kde_appsdir/kwebkitpart/kpartplugins/khtmlkttsd.rc
 %_kde_appsdir/dolphinpart/kpartplugins/kshellcmdplugin.desktop
 %_kde_appsdir/dolphinpart/kpartplugins/kshellcmdplugin.rc
 %_kde_appsdir/konqsidebartng
