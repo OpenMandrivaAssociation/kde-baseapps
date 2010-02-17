@@ -9,7 +9,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.4.0
-Release: %mkrel 3
+Release: %mkrel 4
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -23,6 +23,7 @@ Patch0: kdebase-4.0.84-fix-menu-entries.patch
 Patch1: kdebase-4.2.98-mdvuserface.patch
 Patch2: kdebase-4.2.95-Use-Mandriva-Home-Icon.patch
 Patch3: kdebase-4.3.98-fix-execute-scripts.patch
+Patch100: kdebase-4.4.0-b1091903-implemented-search-restriction-to-filename.patch
 BuildRequires: kde4-macros
 BuildRequires: kdelibs4-devel >= 2:4.2.98
 BuildRequires: kdebase4-workspace-devel >= 4.2.98
@@ -641,7 +642,7 @@ based on kdebase.
 %patch1 -p0 -b .userface
 %patch2 -p0 -b .Mdv_Home_icon
 %patch3 -p0
-
+%patch100 -p0
 %build
 %cmake_kde4
 
