@@ -9,7 +9,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.4.1
-Release: %mkrel 6
+Release: %mkrel 7
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -24,6 +24,8 @@ Patch1: kdebase-4.2.98-mdvuserface.patch
 Patch2: kdebase-4.2.95-Use-Mandriva-Home-Icon.patch
 Patch3: kdebase-4.3.98-fix-execute-scripts.patch
 Patch4: kdebase-folderview-icon-text.patch
+Patch200: kdebase-4.4.1-t1100886-fix-konqueror-crash.patch
+Patch300: kdebase-4.4.1-add-kcm-webcam.patch
 BuildRequires: kde4-macros
 BuildRequires: kdelibs4-devel >= 2:4.2.98
 BuildRequires: kdebase4-workspace-devel >= 4.2.98
@@ -643,6 +645,8 @@ based on kdebase.
 %patch2 -p0 -b .Mdv_Home_icon
 %patch3 -p0
 %patch4 -p0
+%patch300 -p0
+
 %build
 %cmake_kde4
 
