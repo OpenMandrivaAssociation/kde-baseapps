@@ -9,7 +9,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.4.1
-Release: %mkrel 7
+Release: %mkrel 8
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -26,7 +26,6 @@ Patch3: kdebase-4.3.98-fix-execute-scripts.patch
 Patch4: kdebase-folderview-icon-text.patch
 Patch200: kdebase-4.4.1-t1100886-fix-konqueror-crash.patch
 Patch300: kdebase-4.4.1-add-kcm-webcam.patch
-BuildRequires: kde4-macros
 BuildRequires: kdelibs4-devel >= 2:4.2.98
 BuildRequires: kdebase4-workspace-devel >= 4.2.98
 BuildRequires: kdepimlibs4-devel >= 4.2.98
@@ -58,6 +57,7 @@ BuildRequires: xrdb
 BuildRequires: qimageblitz-devel
 BuildRequires: pciutils-devel
 BuildRequires: webkitkde-devel
+BuildRequires: opencv-devel
 Requires: kdebase4-runtime
 Requires: kappfinder
 Requires: konsole
