@@ -9,7 +9,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.4.1
-Release: %mkrel 9
+Release: %mkrel 10
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
