@@ -9,7 +9,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.4.2
-Release: %mkrel 4
+Release: %mkrel 5
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -28,6 +28,7 @@ Patch5: kdebase-4.4.1-configure-trashbin.patch
 Patch6: kdebase-4.4.1-handle-emptytrash.patch
 Patch7: kdebase-4.4.2-konsole-add-debug.patch
 Patch8: kdebase-dolphin-icon-text.patch
+Patch9: kdebase-4.4.2-add-menubar-shortcut.patch 
 Patch200: kdebase-4.4.1-t1100886-fix-konqueror-crash.patch
 Patch300: kdebase-4.4.1-add-kcm-webcam.patch
 BuildRequires: kdelibs4-devel >= 2:4.4.1-3
@@ -653,6 +654,7 @@ based on kdebase.
 %patch6 -p0
 %patch7 -p0
 %patch8 -p0
+%patch9 -p0
 %patch300 -p0
 
 %build
