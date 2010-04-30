@@ -9,7 +9,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.4.2
-Release: %mkrel 5
+Release: %mkrel 6
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -149,6 +149,7 @@ Requires: kfind
 Provides: dolphin4
 Conflicts: kdebase4-workspace < 1:3.93.0
 Conflicts: kdebase4 < 1:4.1.0-4
+Conflicts: konqueror < 1:4.4.2-6 
 Obsoletes: kde4-dolphin < 1:4.0.68
 Provides: kde4-dolphin = %epoch:%version
 
@@ -190,6 +191,7 @@ of file management.
 %_kde_libdir/kde4/kcm_dolphinviewmodes.so
 %_kde_appsdir/dolphinpart/dolphinpart.rc
 %_kde_appsdir/dolphin
+%_kde_datadir/templates
 %_kde_docdir/*/*/dolphin
 
 #-----------------------------------------------------------------------------
@@ -493,7 +495,6 @@ KDE file and web browser
 %_kde_datadir/kde4/services/konq_aboutpage.desktop
 %_kde_datadir/kde4/services/konq_sidebartng.desktop
 %_kde_datadir/kde4/services/konqueror.desktop
-#%_kde_datadir/kde4/services/lanbrowser.desktop
 %_kde_datadir/kde4/services/netpref.desktop
 %_kde_datadir/kde4/services/proxy.desktop
 %_kde_datadir/kde4/services/smb.desktop
@@ -509,7 +510,6 @@ KDE file and web browser
 %_kde_docdir/*/*/konqueror
 %_kde_datadir/kde4/services/kded/favicons.desktop
 %_kde_datadir/kde4/servicetypes/konqpopupmenuplugin.desktop
-%_kde_datadir/templates
 
 #-----------------------------------------------------------------------------
 
