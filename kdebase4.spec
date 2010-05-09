@@ -30,7 +30,12 @@ Patch7: kdebase-4.4.2-konsole-add-debug.patch
 Patch8: kdebase-dolphin-icon-text.patch
 Patch9: kdebase-4.4.2-add-menubar-shortcut.patch 
 Patch10: dolphin-annotationmenu.patch
+#branch patches
+Patch100: kdebase-4.4.3-b1122353-konqueror-refuse-empty-lineedit.patch
+Patch101: kdebase-4.4.3-b1122762-dolphin-dont-show-svnignore-files.patch
+#trunk patches
 Patch200: kdebase-4.4.1-t1100886-fix-konqueror-crash.patch
+# test patches
 Patch300: kdebase-4.4.1-add-kcm-webcam.patch
 BuildRequires: kdelibs4-devel >= 2:4.4.1-3
 BuildRequires: kdebase4-workspace-devel >= 4.2.98
@@ -657,6 +662,9 @@ based on kdebase.
 %patch8 -p0
 %patch9 -p0
 %patch10 -p0
+%patch100 -p1
+%patch101 -p1
+%patch200 -p0
 %patch300 -p0
 
 %build
