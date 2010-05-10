@@ -69,6 +69,7 @@ BuildRequires: qimageblitz-devel
 BuildRequires: pciutils-devel
 BuildRequires: webkitkde-devel
 BuildRequires: opencv-devel
+BuildRequires: nepomuk-scribo-devel
 Requires: kdebase4-runtime
 Requires: kappfinder
 Requires: konsole
