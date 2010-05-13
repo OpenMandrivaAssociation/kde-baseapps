@@ -9,7 +9,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.4.3
-Release: %mkrel 2
+Release: %mkrel 3
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -71,17 +71,17 @@ BuildRequires: webkitkde-devel
 BuildRequires: opencv-devel
 BuildRequires: nepomuk-scribo-devel
 Requires: kdebase4-runtime
-Requires: kappfinder
-Requires: konsole
-Requires: dolphin
-Requires: kdepasswd
-Requires: kde4-nsplugins
-Requires: kwrite
-Requires: konqueror
-Requires: keditbookmarks
-Requires: kfind
-Requires: kdialog
-Requires: kinfocenter
+Suggests: kappfinder
+Suggests: konsole
+Suggests: dolphin
+Suggests: kdepasswd
+Suggests: kde4-nsplugins
+Suggests: kwrite
+Suggests: konqueror
+Suggests: keditbookmarks
+Suggests: kfind
+Suggests: kdialog
+Suggests: kinfocenter
 Requires: plasma-applet-folderview
 Obsoletes: kdebase-servicemenu < 2007-9
 
@@ -154,6 +154,7 @@ Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
 Requires: kfind
 Provides: dolphin4
+Suggests: ffmpegthumbs
 Conflicts: kdebase4-workspace < 1:3.93.0
 Conflicts: kdebase4 < 1:4.1.0-4
 Conflicts: konqueror < 1:4.4.2-6 
