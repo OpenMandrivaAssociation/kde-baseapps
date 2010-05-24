@@ -9,7 +9,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.4.3
-Release: %mkrel 3
+Release: %mkrel 4
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -37,6 +37,7 @@ Patch101: kdebase-4.4.3-b1122762-dolphin-dont-show-svnignore-files.patch
 Patch200: kdebase-4.4.1-t1100886-fix-konqueror-crash.patch
 # test patches
 Patch300: kdebase-4.4.1-add-kcm-webcam.patch
+Patch301: kdebase-4.4.3-fix-konsole-fonts.patch
 BuildRequires: kdelibs4-devel >= 2:4.4.1-3
 BuildRequires: kdebase4-workspace-devel >= 4.2.98
 BuildRequires: kdepimlibs4-devel >= 4.2.98
@@ -668,7 +669,7 @@ based on kdebase.
 %patch101 -p1
 %patch200 -p0
 %patch300 -p0
-
+%patch301 -p1
 %build
 %cmake_kde4
 
