@@ -9,7 +9,7 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.4.3
-Release: %mkrel 6
+Release: %mkrel 7
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -156,6 +156,7 @@ Requires: kdebase4-runtime
 Requires: kfind
 Provides: dolphin4
 Suggests: ffmpegthumbs
+Suggests:  kde-odf-thumbnail
 Conflicts: kdebase4-workspace < 1:3.93.0
 Conflicts: kdebase4 < 1:4.1.0-4
 Conflicts: konqueror < 1:4.4.2-6 
