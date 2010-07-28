@@ -3,13 +3,13 @@
 
 
 %if %branch
-%define kde_snapshot svn1053349
+%define kde_snapshot svn1138650
 %endif
 
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 4.4.3
-Release: %mkrel 7
+Version: 4.4.95
+Release: %mkrel 1
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -72,7 +72,6 @@ BuildRequires: webkitkde-devel
 BuildRequires: opencv-devel
 BuildRequires: nepomuk-scribo-devel
 Requires: kdebase4-runtime
-Suggests: kappfinder
 Suggests: konsole
 Suggests: dolphin
 Suggests: kdepasswd
@@ -82,7 +81,6 @@ Suggests: konqueror
 Suggests: keditbookmarks
 Suggests: kfind
 Suggests: kdialog
-Suggests: kinfocenter
 Requires: plasma-applet-folderview
 Obsoletes: kdebase-servicemenu < 2007-9
 
@@ -194,6 +192,7 @@ of file management.
 %_kde_datadir/kde4/servicetypes/fileviewversioncontrolplugin.desktop
 %_kde_datadir/config/servicemenu.knsrc
 %_kde_datadir/config.kcfg/dolphin_*
+%_kde_libdir/libkdeinit4_dolphin.so
 %_kde_libdir/kde4/dolphinpart.so
 %_kde_libdir/kde4/kcm_dolphingeneral.so
 %_kde_libdir/kde4/kcm_dolphinnavigation.so
@@ -203,92 +202,6 @@ of file management.
 %_kde_appsdir/dolphin
 %_kde_datadir/templates
 %_kde_docdir/*/*/dolphin
-
-#-----------------------------------------------------------------------------
-
-%package -n kappfinder
-Summary:    Utility to search and update the list of installed applications
-Group:      Graphical desktop/KDE
-Requires:   kdebase4-runtime
-Obsoletes:  kde4-kappfinder < 1:4.0.68
-Provides:   kde4-kappfinder = %epoch:%version
-%if %mdkversion >= 200910
-Conflicts:  kdemultimedia-common < 1:3.5.9-4
-Conflicts:  kdebase-common < 1:3.5.9-38
-Conflicts:  kdebase-progs < 1:3.5.9-38
-%endif
-
-%description -n kappfinder
-Utility to search and update the list of installed applications
-
-%files -n kappfinder
-%defattr(-,root,root)
-%_kde_bindir/kappfinder
-%_kde_datadir/applications/kde4/kappfinder.desktop
-%_kde_appsdir/kappfinder
-%_kde_iconsdir/*/*/*/*
-%_kde_mandir/man1/kappfinder.1.*
-%exclude %_kde_iconsdir/*/*/*/konqueror.*
-%exclude %_kde_iconsdir/*/*/*/kfind.*
-
-#-----------------------------------------------------------------------------
-
-%package -n kinfocenter
-Summary:    Kinfocenter
-Group:      Graphical desktop/KDE
-Requires:   kdebase4-runtime
-Provides:   kinfocenter4
-Conflicts:  kdebase4-runtime < 1:4.0.68
-Conflicts:  kdebase4-workspace < 1:4.0.2-1
-Obsoletes: kde4-kinfocenter < 1:4.0.68
-Provides: kde4-kinfocenter = %epoch:%version
-%if %mdkversion >= 200910
-Conflicts: kdebase-common < 1:3.5.9-38
-Conflicts: kdebase-progs < 1:3.5.9-38
-%endif
-
-%description -n kinfocenter
-Kinfocenter is a utility in KDE that provides information
-about a computer system.
-
-%files -n kinfocenter
-%defattr(-,root,root)
-%_kde_bindir/kinfocenter
-%_kde_libdir/libkdeinit4_kinfocenter.so
-%dir %_kde_appsdir/kinfocenter
-%_kde_appsdir/kinfocenter/*
-%_kde_appsdir/kcmusb
-%_kde_appsdir/kcmview1394
-%_kde_libdir/kde4/kcm_info.so
-%_kde_libdir/kde4/kcm_opengl.so
-%_kde_libdir/kde4/kcm_solidproc.so
-%_kde_libdir/kde4/kcm_nic.so
-%_kde_libdir/kde4/kcm_usb.so
-%_kde_libdir/kde4/kcm_view1394.so
-%_kde_libdir/kde4/kcm_ioslaveinfo.so
-%_kde_libdir/kde4/kcm_memory.so
-%_kde_libdir/kde4/kcm_pci.so
-%_kde_libdir/kde4/kcm_samba.so
-%_kde_libdir/kde4/kcm_partition.so
-%_kde_datadir/applications/kde4/kinfocenter.desktop
-%_kde_docdir/*/*/kinfocenter
-%_kde_datadir/kde4/services/devices.desktop
-%_kde_datadir/kde4/services/dma.desktop
-%_kde_datadir/kde4/services/interrupts.desktop
-%_kde_datadir/kde4/services/ioports.desktop
-%_kde_datadir/kde4/services/kcmusb.desktop
-%_kde_datadir/kde4/services/kcmsolidproc.desktop
-%_kde_datadir/kde4/services/kcmview1394.desktop
-%_kde_datadir/kde4/services/nic.desktop
-%_kde_datadir/kde4/services/opengl.desktop
-%_kde_datadir/kde4/services/scsi.desktop
-%_kde_datadir/kde4/services/sound.desktop
-%_kde_datadir/kde4/services/xserver.desktop
-%_kde_datadir/kde4/services/ioslaveinfo.desktop
-%_kde_datadir/kde4/services/kcm_memory.desktop
-%_kde_datadir/kde4/services/kcm_pci.desktop
-%_kde_datadir/kde4/services/smbstatus.desktop
-%_kde_datadir/kde4/services/kcm_partition.desktop
 
 #-----------------------------------------------------------------------------
 
@@ -421,7 +334,24 @@ KDE 4 core library.
 %defattr(-,root,root)
 %_kde_libdir/libkonquerorprivate.so.%{konquerorprivate_major}*
 
-#-----------------------------------------------------------------------------
+
+#------------------------------------------------
+
+%define kbookmarkmodel_private_major 4
+%define libkbookmarkmodel_private %mklibname kbookmarkmodel_private %kbookmarkmodel_private_major
+
+%package -n %libkbookmarkmodel_private
+Summary: KDE 4 core library
+Group: System/Libraries
+
+%description -n %libkbookmarkmodel_private
+KDE 4 core library.
+
+%files -n %libkbookmarkmodel_private
+%defattr(-,root,root)
+%_kde_libdir/libkbookmarkmodel_private.so.%{kbookmarkmodel_private_major}*
+
+#------------------------------------------------
 
 %package -n konqueror
 Summary:    KDE file and web browser
@@ -466,10 +396,9 @@ KDE file and web browser
 %_kde_libdir/kde4/konq_sound.so
 %_kde_libdir/kde4/konq_sidebartree_bookmarks.so
 %_kde_libdir/kde4/konqsidebar_history.so
+%_kde_libdir/kde4/konqsidebar_places.so
 %_kde_datadir/apps/kcontrol/*
 %_kde_datadir/config.kcfg/konqueror*
-%_kde_libdir/kde4/fileviewsvnplugin.so
-%_kde_datadir/kde4/services/fileviewsvnplugin.desktop
 %_kde_datadir/applications/kde4/Home.desktop
 %_kde_datadir/applications/kde4/kfmclient.desktop
 %_kde_datadir/applications/kde4/kfmclient_dir.desktop
@@ -492,7 +421,6 @@ KDE file and web browser
 %_kde_datadir/config/konqsidebartngrc
 %_kde_datadir/kde4/services/cache.desktop
 %_kde_datadir/kde4/services/cookies.desktop
-%_kde_datadir/kde4/services/desktoppath.desktop
 %_kde_datadir/kde4/services/ebrowsing.desktop
 %_kde_datadir/kde4/services/filebehavior.desktop
 %_kde_datadir/kde4/services/kcmkonqyperformance.desktop
@@ -543,6 +471,7 @@ Bookmark editor.
 %_kde_bindir/kbookmarkmerger
 %_kde_bindir/keditbookmarks
 %_kde_libdir/libkdeinit4_keditbookmarks.so
+%_kde_datadir/applications/kde4/keditbookmarks.desktop
 %_kde_datadir/kde4/services/bookmarks.desktop
 %_kde_appsdir/keditbookmarks
 %_kde_datadir/config.kcfg/keditbook*
@@ -568,10 +497,7 @@ Application finder
 %files -n kfind
 %defattr(-,root,root)
 %_kde_bindir/kfind
-%_kde_libdir/kde4/libkfindpart.so
 %_kde_datadir/applications/kde4/kfind.desktop
-%_kde_datadir/kde4/services/kfindpart.desktop
-%_kde_datadir/kde4/servicetypes/findpart.desktop
 %_kde_iconsdir/*/*/*/kfind.*
 %_kde_mandir/man1/kfind.1.*
 %_kde_docdir/*/*/kfind
@@ -624,6 +550,7 @@ Requires: %libdolphinprivate = %epoch:%version
 Requires: %libkonq = %epoch:%version
 Requires: %libkonqsidebarplugin = %epoch:%version
 Requires: %libkonquerorprivate = %epoch:%version
+Requires: %libkbookmarkmodel_private = %epoch:%version
 Requires: kdebase4-workspace-devel
 Obsoletes: %{_lib}kdebase46-devel < 1:3.93.0-0.714129.2
 Conflicts: kde4-kdialog < 1:4.0.68
@@ -643,6 +570,7 @@ based on kdebase.
 %_kde_libdir/libkonq.so
 %_kde_libdir/libkonqsidebarplugin.so
 %_kde_libdir/libkonquerorprivate.so
+%_kde_libdir/libkbookmarkmodel_private.so
 %_kde_includedir/*.h
 %_kde_datadir/dbus-1/interfaces/*
 
@@ -655,22 +583,19 @@ based on kdebase.
 %setup -q -n kdebase-%version
 %endif
 
-%patch0 -p0
-%patch1 -p0 -b .userface
+######%patch0 -p0
+######%patch1 -p0 -b .userface
 %patch2 -p0 -b .Mdv_Home_icon
-%patch3 -p0
-%patch4 -p0
-%patch5 -p1
-%patch6 -p0
-%patch7 -p0
-%patch8 -p0
-%patch9 -p0
-%patch10 -p0
-%patch100 -p1
-%patch101 -p1
-%patch200 -p0
-%patch300 -p0
-%patch301 -p1
+######%patch3 -p0
+######%patch4 -p0
+######%patch5 -p1
+######%patch6 -p0
+######%patch7 -p0
+######%patch8 -p0
+######%patch9 -p0
+######%patch10 -p0
+######%patch300 -p0
+######%patch301 -p1
 %build
 %cmake_kde4
 
