@@ -1,14 +1,14 @@
-%define branch 0
+%define branch 1
 %{?_branch: %{expand: %%global branch 1}}
 
 
 %if %branch
-%define kde_snapshot svn1138650
+%define kde_snapshot svn1165394
 %endif
 
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 4.5.0
+Version: 4.5.65
 Release: %mkrel 1
 Epoch: 1
 Group: Graphical desktop/KDE
@@ -31,13 +31,8 @@ Patch8: kdebase-dolphin-icon-text.patch
 Patch9: kdebase-4.4.2-add-menubar-shortcut.patch 
 Patch10: dolphin-annotationmenu.patch
 #branch patches
-Patch100: kdebase-4.4.3-b1122353-konqueror-refuse-empty-lineedit.patch
-Patch101: kdebase-4.4.3-b1122762-dolphin-dont-show-svnignore-files.patch
 #trunk patches
-Patch200: kdebase-4.4.1-t1100886-fix-konqueror-crash.patch
 # test patches
-Patch300: kdebase-4.4.1-add-kcm-webcam.patch
-Patch301: kdebase-4.4.3-fix-konsole-fonts.patch
 BuildRequires: kdelibs4-devel >= 2:4.4.1-3
 BuildRequires: kdebase4-workspace-devel >= 4.2.98
 BuildRequires: kdepimlibs4-devel >= 4.2.98
@@ -189,6 +184,7 @@ of file management.
 %_kde_datadir/kde4/services/kcmdolphinnavigation.desktop
 %_kde_datadir/kde4/services/kcmdolphinservices.desktop
 %_kde_datadir/kde4/services/kcmdolphinviewmodes.desktop
+%_kde_datadir/kde4/services/filenamesearch.protocol
 %_kde_datadir/kde4/servicetypes/fileviewversioncontrolplugin.desktop
 %_kde_datadir/config/servicemenu.knsrc
 %_kde_datadir/config.kcfg/dolphin_*
@@ -198,6 +194,7 @@ of file management.
 %_kde_libdir/kde4/kcm_dolphinnavigation.so
 %_kde_libdir/kde4/kcm_dolphinservices.so
 %_kde_libdir/kde4/kcm_dolphinviewmodes.so
+%_kde_libdir/kde4/kio_filenamesearch.so
 %_kde_appsdir/dolphinpart/dolphinpart.rc
 %_kde_appsdir/dolphin
 %_kde_datadir/templates
