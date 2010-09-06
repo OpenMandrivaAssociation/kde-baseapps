@@ -65,7 +65,6 @@ BuildRequires: qimageblitz-devel
 BuildRequires: pciutils-devel
 BuildRequires: webkitkde-devel
 BuildRequires: opencv-devel
-BuildRequires: nepomuk-scribo-devel
 Requires: kdebase4-runtime
 Suggests: konsole
 Suggests: dolphin
@@ -77,7 +76,6 @@ Suggests: keditbookmarks
 Suggests: kfind
 Suggests: kdialog
 Requires: plasma-applet-folderview
-Obsoletes: kdebase-servicemenu < 2007-9
 
 BuildRoot: %_tmppath/%name-%version-%release-root
 
@@ -98,12 +96,6 @@ Obsoletes: kdebase4-konsole < 1:3.93.0-0.714129.2
 Obsoletes: kde4-konsole < 1:4.0.68
 Provides: kde4-konsole = %epoch:%version
 Requires: x11-font-misc-misc
-%if %mdkversion >= 200910
-Obsoletes: kdebase-konsole < 1:3.5.10-9
-%endif
-%if %mdkversion >= 200100
-Obsoletes: kdebase3-konsole < 1:3.5.10-24
-%endif
 
 %description -n konsole
 A shell program similar to xterm for KDE
@@ -206,14 +198,6 @@ of file management.
 Summary: Kdepasswd
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
-Obsoletes: kdebase4-kdepasswd < 1:3.93.0-0.714129.2
-Obsoletes: kde4-kdepasswd < 1:4.0.68
-Provides: kde4-kdepasswd = %epoch:%version
-%if %mdkversion >= 200910
-Conflicts: kdebase-common < 1:3.5.9-38
-Conflicts: kdebase-kdm < 1:3.5.9-38
-Conflicts: kdebase-progs < 1:3.5.9-38
-%endif
 
 %description -n kdepasswd
 User password management
@@ -234,13 +218,6 @@ User password management
 Summary: Netscape plugins wrapper for kde
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
-Obsoletes: kdebase4-nsplugins < 1:3.93.0-0.714129.2
-%if %mdkversion >= 200910
-Obsoletes: kdebase-nsplugins < 1:3.5.10-8
-%endif
-%if %mdkversion >= 200100
-Obsoletes: kdebase3-nsplugins < 1:3.5.10-24
-%endif
 
 %description -n kde4-nsplugins
 Netscape plugins wrapper for kde.
@@ -260,13 +237,6 @@ Netscape plugins wrapper for kde.
 Summary: Simple text editor for KDE
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
-Obsoletes: kdebase4-kwrite < 1:3.93.0-0.714129.2
-Obsoletes: kde4-kwrite < 1:4.0.68
-Provides: kde4-kwrite = %epoch:%version
-%if %mdkversion >= 200910
-Conflicts: kdebase-common < 1:3.5.9-38
-Conflicts: kdebase-progs < 1:3.5.9-38
-%endif
 
 %description -n kwrite
 Simple text editor for KDE
@@ -355,15 +325,6 @@ Summary:    KDE file and web browser
 Group:      Graphical desktop/KDE
 Requires:   kdebase4-runtime
 Requires:   dolphin
-Obsoletes:  kdebase4-konqueror < 1:3.93.0-0.714129.2
-Obsoletes: kde4-konqueror < 1:4.0.68
-Provides: kde4-konqueror = %epoch:%version
-Conflicts: %{libkonq} <  1:4.0.82-5
-Conflicts: kde4-nsplugins < 1:4.2.1
-%if %mdkversion >= 200910
-Conflicts: kdebase-common < 1:3.5.9-38
-Conflicts: kdebase-progs < 1:3.5.9-38
-%endif
 Suggests:  keditbookmarks
 
 %description -n konqueror
@@ -452,13 +413,6 @@ KDE file and web browser
 Summary: Bookmark editor
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
-Obsoletes: kdebase4-keditbookmarks < 1:3.93.0-0.714129.2
-Obsoletes: kde4-keditbookmarks < 1:4.0.68
-Provides: kde4-keditbookmarks = %epoch:%version
-%if %mdkversion >= 200910
-Conflicts: kdebase-common < 1:3.5.9-38
-Conflicts: kdebase-progs < 1:3.5.9-38
-%endif
 
 %description -n keditbookmarks
 Bookmark editor.
@@ -480,13 +434,6 @@ Bookmark editor.
 Summary: Application finder
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
-Obsoletes: kdebase4-kfind < 1:3.93.0-0.714129.2
-Obsoletes: kde4-kfind < 1:4.0.68
-Provides: kde4-kfind = %epoch:%version
-%if %mdkversion >= 200910
-Conflicts: kdebase-common < 1:3.5.9-38
-Conflicts: kdebase-progs < 1:3.5.9-38
-%endif
 
 %description -n kfind
 Application finder
@@ -505,12 +452,6 @@ Application finder
 Summary: Dialog KDE base widgets
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
-Obsoletes: kdebase4-kdialog < 1:3.93.0-0.714129.2
-Obsoletes: kde4-kdialog < 1:4.0.68
-Provides: kde4-kdialog = %epoch:%version
-%if %mdkversion >= 200910
-Conflicts: kdebase-progs < 1:3.5.9-38
-%endif
 
 %description -n kdialog
 Dialog KDE base widgets
@@ -526,7 +467,6 @@ Summary: Display the content of folders (Desktop as default)
 Group: Graphical desktop/KDE
 Requires: kdebase4-workspace
 Provides: plasma-applet
-Obsoletes: plasma-applets-folderview
 
 %description -n plasma-applet-folderview
 Display the content of folders (Desktop as default)
@@ -549,13 +489,6 @@ Requires: %libkonqsidebarplugin = %epoch:%version
 Requires: %libkonquerorprivate = %epoch:%version
 Requires: %libkbookmarkmodel_private = %epoch:%version
 Requires: kdebase4-workspace-devel
-Obsoletes: %{_lib}kdebase46-devel < 1:3.93.0-0.714129.2
-Conflicts: kde4-kdialog < 1:4.0.68
-Conflicts: kde4-konqueror < 1:4.0.68
-Conflicts: kde4-nsplugins < 1:4.2.1
-%if %mdkversion >= 200910
-Conflicts: kdebase3-devel < 1:3.5.9-38
-%endif
 
 %description  devel
 This package contains header files needed if you wish to build applications
@@ -580,19 +513,6 @@ based on kdebase.
 %setup -q -n kdebase-%version
 %endif
 
-######%patch0 -p0
-######%patch1 -p0 -b .userface
-%patch2 -p0 -b .Mdv_Home_icon
-######%patch3 -p0
-######%patch4 -p0
-######%patch5 -p1
-######%patch6 -p0
-######%patch7 -p0
-######%patch8 -p0
-######%patch9 -p0
-######%patch10 -p0
-######%patch300 -p0
-######%patch301 -p1
 %build
 %cmake_kde4
 
