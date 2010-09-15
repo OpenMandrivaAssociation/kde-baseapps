@@ -22,7 +22,6 @@ Patch1: kdebase-4.2.98-mdvuserface.patch
 Patch2: kdebase-4.2.95-Use-Mandriva-Home-Icon.patch
 Patch3: kdebase-4.3.98-fix-execute-scripts.patch
 Patch4: kdebase-folderview-icon-text.patch
-Patch6: kdebase-4.4.1-handle-emptytrash.patch
 Patch7: kdebase-4.4.2-konsole-add-debug.patch
 Patch8: kdebase-dolphin-icon-text.patch
 Patch9: kdebase-4.4.2-add-menubar-shortcut.patch 
