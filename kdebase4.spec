@@ -511,6 +511,7 @@ based on kdebase.
 %setup -q -n kdebase-%version
 %endif
 
+%patch1 -p0 -b .mdvuserface
 %patch2 -p0 -b .mdvicon
 
 %build
