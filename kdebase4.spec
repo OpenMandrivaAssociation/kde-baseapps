@@ -23,8 +23,8 @@ Patch2: kdebase-4.2.95-Use-Mandriva-Home-Icon.patch
 Patch3: kdebase-4.3.98-fix-execute-scripts.patch
 Patch4: kdebase-folderview-icon-text.patch
 Patch7: kdebase-4.4.2-konsole-add-debug.patch
+#fwang: patch8,10 does not apply in kde 4.6
 Patch8: kdebase-dolphin-icon-text.patch
-Patch9: kdebase-4.4.2-add-menubar-shortcut.patch 
 Patch10: dolphin-annotationmenu.patch
 #branch patches
 #trunk patches
@@ -513,6 +513,7 @@ based on kdebase.
 %patch2 -p0 -b .mdvicon
 %patch3 -p0 -b .execute-scripts
 %patch4 -p0 -b .folderview
+%patch7 -p0 -b .konsoledebug
 
 %build
 %cmake_kde4
