@@ -511,6 +511,8 @@ based on kdebase.
 %setup -q -n kdebase-%version
 %endif
 
+%patch2 -p0 -b .mdvicon
+
 %build
 %cmake_kde4
 
