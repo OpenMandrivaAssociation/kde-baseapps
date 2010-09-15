@@ -18,7 +18,6 @@ Source: ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version%kde_snaps
 %else
 Source: ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
 %endif
-Patch0: kdebase-4.0.84-fix-menu-entries.patch
 Patch1: kdebase-4.2.98-mdvuserface.patch
 Patch2: kdebase-4.2.95-Use-Mandriva-Home-Icon.patch
 Patch3: kdebase-4.3.98-fix-execute-scripts.patch
