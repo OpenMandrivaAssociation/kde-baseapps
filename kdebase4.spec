@@ -2,13 +2,17 @@
 %{?_branch: %{expand: %%global branch 1}}
 
 %if %branch
-%define kde_snapshot svn1174542
+%define kde_snapshot svn1183606
 %endif
 
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 4.5.68
+Version: 4.5.71
+%if %branch
+Release: %mkrel -c %kde_snapshot 1
+%else
 Release: %mkrel 1
+%endif
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
@@ -29,38 +33,12 @@ Patch10: dolphin-annotationmenu.patch
 #branch patches
 #trunk patches
 # test patches
-BuildRequires: kdelibs4-devel >= 2:4.4.1-3
-BuildRequires: kdebase4-workspace-devel >= 4.2.98
-BuildRequires: kdepimlibs4-devel >= 4.2.98
+BuildRequires: kdelibs4-devel >= 2:4.5.60
 BuildRequires: strigi-devel
-BuildRequires: soprano-devel >= 2.0.98
-BuildRequires: fontconfig-devel >= 2.1-9mdk
-BuildRequires: pam-devel
-BuildRequires: freetype2-devel
-BuildRequires: libsasl-devel
-BuildRequires: openldap-devel
-BuildRequires: avahi-compat-libdns_sd-devel
-BuildRequires: avahi-client-devel
-BuildRequires: libsmbclient-devel > 3.0
-BuildRequires: libieee1284-devel
-BuildRequires: OpenEXR-devel
-BuildRequires: hal-devel
-BuildRequires: libusb-devel
-BuildRequires: libxml2-utils
-BuildRequires: X11-devel
-BuildRequires: GL-devel
-BuildRequires: bdftopcf
-BuildRequires: imake
-BuildRequires: libraw1394-devel
-BuildRequires: libxklavier-devel
-BuildRequires: lua-devel
-BuildRequires: bluez-devel
-BuildRequires: boost-devel
-BuildRequires: xrdb
+BuildRequires: zlib-devel
 BuildRequires: qimageblitz-devel
-BuildRequires: pciutils-devel
-BuildRequires: webkitkde-devel
-BuildRequires: opencv-devel
+BuildRequires: shared-desktop-ontologies-devel
+BuildRequires: glib2-devel
 Requires: kdebase4-runtime
 Suggests: konsole
 Suggests: dolphin
@@ -477,14 +455,11 @@ Display the content of folders (Desktop as default)
 %package devel
 Summary: Devel stuff for kdebase 4
 Group: Development/KDE and Qt
-Requires: kde4-macros
-Requires: kdelibs4-devel >= 2:4.2.98
+Requires: kdelibs4-devel >= 2:4.5.60
 Requires: %libdolphinprivate = %epoch:%version
 Requires: %libkonq = %epoch:%version
 Requires: %libkonqsidebarplugin = %epoch:%version
-Requires: %libkonquerorprivate = %epoch:%version
 Requires: %libkbookmarkmodel_private = %epoch:%version
-Requires: kdebase4-workspace-devel
 
 %description  devel
 This package contains header files needed if you wish to build applications
@@ -495,7 +470,6 @@ based on kdebase.
 %_kde_libdir/libdolphinprivate.so
 %_kde_libdir/libkonq.so
 %_kde_libdir/libkonqsidebarplugin.so
-%_kde_libdir/libkonquerorprivate.so
 %_kde_libdir/libkbookmarkmodel_private.so
 %_kde_includedir/*.h
 %_kde_datadir/dbus-1/interfaces/*
