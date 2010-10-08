@@ -349,6 +349,8 @@ KDE file and web browser
 %_kde_appsdir/kbookmark/directory_bookmarkbar.desktop
 %_kde_appsdir/kconf_update/favicons.upd
 %_kde_appsdir/kconf_update/move_favicons.sh
+%_kde_appsdir/kwebkitpart/kpartplugins/khtmlkttsd.desktop
+%_kde_appsdir/kwebkitpart/kpartplugins/khtmlkttsd.rc
 %_kde_datadir/autostart/konqy_preload.desktop
 %_kde_datadir/config/konqsidebartngrc
 %_kde_datadir/kde4/services/cache.desktop
