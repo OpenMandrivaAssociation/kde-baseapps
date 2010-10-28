@@ -2,12 +2,12 @@
 %{?_branch: %{expand: %%global branch 1}}
 
 %if %branch
-%define kde_snapshot svn1183606
+%define kde_snapshot svn1190490
 %endif
 
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 4.5.71
+Version: 4.5.74
 %if %branch
 Release: %mkrel -c %kde_snapshot 1
 %else
