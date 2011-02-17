@@ -11,7 +11,7 @@ Version: 4.6.0
 %if %branch
 Release: %mkrel -c %kde_snapshot 1
 %else
-Release: %mkrel 1
+Release: %mkrel 2
 %endif
 Epoch: 1
 Group: Graphical desktop/KDE
@@ -300,7 +300,8 @@ Summary:    KDE file and web browser
 Group:      Graphical desktop/KDE
 Requires:   kdebase4-runtime
 Requires:   dolphin
-Suggests:  keditbookmarks
+Suggests:   keditbookmarks
+SUggests:   konq-plugins
 
 %description -n konqueror
 KDE file and web browser
