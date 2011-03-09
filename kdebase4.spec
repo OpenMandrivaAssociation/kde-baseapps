@@ -490,7 +490,7 @@ based on kdebase.
 %patch1 -p0 -b .mdvuserface
 %patch2 -p0 -b .mdvicon
 %patch3 -p0 -b .execute-scripts
-%patch4 -p0 -b .folderview
+#%patch4 -p0 -b .folderview
 %patch7 -p0 -b .konsoledebug
 
 %build
