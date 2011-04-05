@@ -9,9 +9,9 @@ Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.6.2
 %if %branch
-Release: %mkrel -c %kde_snapshot 1
+Release: 0.%kde_snapshot.1
 %else
-Release: %mkrel 2
+Release: 1
 %endif
 Epoch: 1
 Group: Graphical desktop/KDE
