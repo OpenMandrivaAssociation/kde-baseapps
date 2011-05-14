@@ -7,11 +7,11 @@
 
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 4.6.2
+Version: 4.6.3
 %if %branch
 Release: 0.%kde_snapshot.1
 %else
-Release: 2
+Release: 1
 %endif
 Epoch: 1
 Group: Graphical desktop/KDE
