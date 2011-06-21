@@ -11,7 +11,7 @@ Version: 4.6.4
 %if %branch
 Release: 0.%kde_snapshot.1
 %else
-Release: 1
+Release: 2
 %endif
 Epoch: 1
 Group: Graphical desktop/KDE
@@ -31,7 +31,7 @@ Patch7: kdebase-4.4.2-konsole-add-debug.patch
 Patch8: kdebase-dolphin-icon-text.patch
 Patch10: dolphin-annotationmenu.patch
 Patch11: kdebase-4.6.2-dolphinui.patch
-
+Patch12: dolphin-interface.patch
 #branch patches
 #trunk patches
 # test patches
@@ -495,6 +495,7 @@ based on kdebase.
 #%patch4 -p0 -b .folderview
 %patch7 -p0 -b .konsoledebug
 %patch11 -p1 -b .dolphinui
+%patch12 -p0
 %build
 %cmake_kde4
 
