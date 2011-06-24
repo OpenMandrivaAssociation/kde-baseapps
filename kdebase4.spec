@@ -11,7 +11,7 @@ Version: 4.6.4
 %if %branch
 Release: 0.%kde_snapshot.1
 %else
-Release: 2
+Release: 3
 %endif
 Epoch: 1
 Group: Graphical desktop/KDE
@@ -32,6 +32,7 @@ Patch8: kdebase-dolphin-icon-text.patch
 Patch10: dolphin-annotationmenu.patch
 Patch11: kdebase-4.6.2-dolphinui.patch
 Patch12: dolphin-interface.patch
+Patch13: kdebase-4.6.4-Set-Preview-true.patch
 #branch patches
 #trunk patches
 # test patches
@@ -496,6 +497,8 @@ based on kdebase.
 %patch7 -p0 -b .konsoledebug
 %patch11 -p1 -b .dolphinui
 %patch12 -p0
+%patch13 -p0
+
 %build
 %cmake_kde4
 
