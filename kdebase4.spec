@@ -497,7 +497,7 @@ based on kdebase.
 %patch7 -p0 -b .konsoledebug
 %patch11 -p1 -b .dolphinui
 %patch12 -p0
-%patch13 -p0
+%patch13 -p1
 
 %build
 %cmake_kde4
