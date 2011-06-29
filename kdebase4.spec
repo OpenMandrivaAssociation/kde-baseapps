@@ -45,8 +45,7 @@ BuildRequires: qimageblitz-devel
 BuildRequires: shared-desktop-ontologies-devel
 BuildRequires: glib2-devel
 BuildRequires: libxt-devel
-BuildRequires: libpsyncipc1
-BuildRequires: libpsyncipc-devel
+BuildRequires: psyncclient-devel
 Requires: kdebase4-runtime
 Suggests: konsole
 Suggests: dolphin
