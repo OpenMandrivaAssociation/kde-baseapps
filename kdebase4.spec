@@ -500,7 +500,7 @@ based on kdebase.
 %patch11 -p1 -b .dolphinui
 %patch12 -p0
 %patch13 -p1
-%patch14 -p1
+%patch14 -p0
 
 %build
 %cmake_kde4
