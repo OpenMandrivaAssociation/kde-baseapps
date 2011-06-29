@@ -45,6 +45,7 @@ BuildRequires: qimageblitz-devel
 BuildRequires: shared-desktop-ontologies-devel
 BuildRequires: glib2-devel
 BuildRequires: libxt-devel
+BuildRequires: libpsyncipc1
 Requires: kdebase4-runtime
 Suggests: konsole
 Suggests: dolphin
@@ -56,6 +57,7 @@ Suggests: keditbookmarks
 Suggests: kfind
 Suggests: kdialog
 Requires: plasma-applet-folderview
+Requires: psyncclient
 
 BuildRoot: %_tmppath/%name-%version-%release-root
 
