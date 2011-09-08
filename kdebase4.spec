@@ -23,7 +23,6 @@ BuildRequires: glib2-devel
 BuildRequires: libxt-devel
 BuildRequires: psyncclient-devel
 Requires: kdebase4-runtime
-Suggests: konsole
 Suggests: dolphin
 Suggests: kdepasswd
 Suggests: kde4-nsplugins
@@ -35,42 +34,11 @@ Suggests: kdialog
 Requires: plasma-applet-folderview
 Requires: psyncclient
 
-BuildRoot: %_tmppath/%name-%version-%release-root
-
 %description
 This meta package requires all base kdebase 4 packages.
 
 %files
 %doc README
-
-#-----------------------------------------------------------------------------
-
-%package -n konsole
-Summary: A shell program similar to xterm for KDE
-Group: Graphical desktop/KDE
-Requires: kdebase4-runtime
-Provides: konsole4
-Obsoletes: kdebase4-konsole < 1:3.93.0-0.714129.2
-Obsoletes: kde4-konsole < 1:4.0.68
-Provides: kde4-konsole = %epoch:%version
-Requires: x11-font-misc-misc
-
-%description -n konsole
-A shell program similar to xterm for KDE
-
-%files -n konsole
-%defattr(-,root,root)
-%_kde_bindir/konsole
-%_kde_bindir/konsoleprofile
-%_kde_libdir/kde4/libkonsolepart.so
-%_kde_libdir/libkdeinit4_konsole.so
-%_kde_libdir/libkonsoleprivate.so
-%_kde_datadir/applications/kde4/konsole.desktop
-%_kde_appsdir/konsole
-%_kde_datadir/kde4/services/konsolepart.desktop
-%_kde_datadir/kde4/servicetypes/terminalemulator.desktop
-%_kde_datadir/kde4/services/ServiceMenus/konsolehere.desktop
-%_kde_docdir/*/*/konsole
 
 #------------------------------------------------
 
