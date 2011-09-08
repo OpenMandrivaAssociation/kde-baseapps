@@ -1,39 +1,15 @@
-%define branch 0
-%{?_branch: %{expand: %%global branch 1}}
-
-%if %branch
-%define kde_snapshot svn1198704
-%endif
-
 Name: kdebase4
 Summary: K Desktop Environment
-Version: 4.6.4
-%if %branch
-Release: 0.%kde_snapshot.1
-%else
+Version: 4.7.41
 Release: 4
-%endif
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
 URL: http://www.kde.org
-%if %branch
-Source: ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version%kde_snapshot.tar.bz2
-%else
-Source: ftp://ftp.kde.org/pub/kde/stable/%version/src/kdebase-%version.tar.bz2
-%endif
+Source: ftp://ftp.kde.org/pub/kde/stable/%version/src/kde-baseapps-%version.tar.bz2
+Source2: kdebase-dolphin.tar.bz2
 Patch1: kdebase-4.2.98-mdvuserface.patch
 Patch2: kdebase-4.2.95-Use-Mandriva-Home-Icon.patch
-Patch3: kdebase-4.3.98-fix-execute-scripts.patch
-Patch4: kdebase-folderview-icon-text.patch
-Patch7: kdebase-4.4.2-konsole-add-debug.patch
-#fwang: patch8,10 does not apply in kde 4.6
-Patch8: kdebase-dolphin-icon-text.patch
-Patch10: dolphin-annotationmenu.patch
-Patch11: kdebase-4.6.2-dolphinui.patch
-Patch12: dolphin-interface.patch
-Patch13: kdebase-4.6.4-Set-Preview-true.patch
-Patch14: dolphin-sync.patch
 
 #branch patches
 #trunk patches
@@ -488,33 +464,19 @@ based on kdebase.
 #-----------------------------------------------------------------------------
 
 %prep
-%if %branch
-%setup -q -n kdebase-%version%kde_snapshot
-%else
-%setup -q -n kdebase-%version
-%endif
+%setup -q -n kde-baseapps-%version
 
 %patch1 -p0 -b .mdvuserface
 %patch2 -p0 -b .mdvicon
-%patch3 -p0 -b .execute-scripts
-#%patch4 -p0 -b .folderview
-%patch7 -p0 -b .konsoledebug
-%patch11 -p1 -b .dolphinui
-%patch12 -p0
-%patch13 -p1
-%patch14 -p0
 
 %build
-%cmake_kde4
+rm -fr dolphin
+tar xvf %SOURCE2
 
+%cmake_kde4
 %make
 
 
 %install
-rm -fr %buildroot
-
 %makeinstall_std -C build
-
-%clean
-rm -fr %buildroot
 
