@@ -226,6 +226,94 @@ KDE 4 core library.
 
 #------------------------------------------------
 
+%package -n konq-plugins
+Summary: Konqueror plugins
+Group:Graphical desktop/KDE
+Requires: konqueror
+Conflicts: dolphin < 1:4.7.0
+%description -n konq-plugins
+This module contains plugins that interact with Konqueror.                      
+                                                                               
+%files -n konq-plugins
+
+%_kde_bindir/fsview
+%_kde_libdir/kde4/adblock.so
+%_kde_libdir/kde4/akregatorkonqfeedicon.so
+%_kde_libdir/kde4/autorefresh.so
+%_kde_libdir/kde4/babelfishplugin.so
+%_kde_libdir/kde4/dirfilterplugin.so
+%_kde_libdir/kde4/domtreeviewerplugin.so
+%_kde_libdir/kde4/fsviewpart.so
+%_kde_libdir/kde4/khtmlsettingsplugin.so
+%_kde_libdir/kde4/kimgallery.so
+%_kde_libdir/kde4/minitoolsplugin.so
+%_kde_libdir/kde4/rellinksplugin.so
+%_kde_libdir/kde4/searchbarplugin.so
+%_kde_libdir/kde4/uachangerplugin.so
+%_kde_libdir/kde4/validatorsplugin.so
+%_kde_libdir/kde4/webarchiverplugin.so
+%_kde_libdir/kde4/webarchivethumbnail.so
+%_kde_appsdir/akregator/pics/feed.png
+%_kde_appsdir/dolphinpart/kpartplugins/dirfilterplugin.desktop
+%_kde_appsdir/dolphinpart/kpartplugins/dirfilterplugin.rc
+%_kde_appsdir/dolphinpart/kpartplugins/kimgalleryplugin.desktop
+%_kde_appsdir/dolphinpart/kpartplugins/kimgalleryplugin.rc
+%_kde_appsdir/domtreeviewer/domtreeviewerui.rc
+%_kde_appsdir/fsview/fsview_part.rc
+%_kde_appsdir/khtml/kpartplugins/akregator_konqfeedicon.desktop
+%_kde_appsdir/khtml/kpartplugins/akregator_konqfeedicon.rc
+%_kde_appsdir/khtml/kpartplugins/autorefresh.desktop
+%_kde_appsdir/khtml/kpartplugins/autorefresh.rc
+%_kde_appsdir/khtml/kpartplugins/khtmlsettingsplugin.desktop
+%_kde_appsdir/khtml/kpartplugins/khtmlsettingsplugin.rc
+%_kde_appsdir/khtml/kpartplugins/minitoolsplugin.desktop
+%_kde_appsdir/khtml/kpartplugins/minitoolsplugin.rc
+%_kde_appsdir/khtml/kpartplugins/plugin_adblock.desktop
+%_kde_appsdir/khtml/kpartplugins/plugin_adblock.rc
+%_kde_appsdir/khtml/kpartplugins/plugin_babelfish.desktop
+%_kde_appsdir/khtml/kpartplugins/plugin_babelfish.rc
+%_kde_appsdir/khtml/kpartplugins/plugin_domtreeviewer.desktop
+%_kde_appsdir/khtml/kpartplugins/plugin_domtreeviewer.rc
+%_kde_appsdir/khtml/kpartplugins/plugin_rellinks.desktop
+%_kde_appsdir/khtml/kpartplugins/plugin_rellinks.rc
+%_kde_appsdir/khtml/kpartplugins/plugin_validators.desktop
+%_kde_appsdir/khtml/kpartplugins/plugin_validators.rc
+%_kde_appsdir/khtml/kpartplugins/plugin_webarchiver.desktop
+%_kde_appsdir/khtml/kpartplugins/plugin_webarchiver.rc
+%_kde_appsdir/khtml/kpartplugins/uachangerplugin.desktop
+%_kde_appsdir/khtml/kpartplugins/uachangerplugin.rc
+%_kde_appsdir/konqueror/icons/oxygen/*/actions/google.png
+%_kde_appsdir/konqueror/icons/oxygen/scalable/actions/google.svgz
+%_kde_appsdir/konqueror/kpartplugins/searchbar.desktop
+%_kde_appsdir/konqueror/kpartplugins/searchbar.rc
+%_kde_appsdir/konqueror/opensearch/google.xml
+%_kde_appsdir/kwebkitpart/kpartplugins/akregator_konqfeedicon.desktop
+%_kde_appsdir/kwebkitpart/kpartplugins/akregator_konqfeedicon.rc
+%_kde_appsdir/kwebkitpart/kpartplugins/autorefresh.desktop
+%_kde_appsdir/kwebkitpart/kpartplugins/autorefresh.rc
+%_kde_appsdir/kwebkitpart/kpartplugins/plugin_babelfish.desktop
+%_kde_appsdir/kwebkitpart/kpartplugins/plugin_babelfish.rc
+%_kde_appsdir/kwebkitpart/kpartplugins/plugin_validators.desktop
+%_kde_appsdir/kwebkitpart/kpartplugins/plugin_validators.rc
+%_kde_appsdir/kwebkitpart/kpartplugins/uachangerplugin.desktop
+%_kde_appsdir/kwebkitpart/kpartplugins/uachangerplugin.rc
+%_kde_datadir/config.kcfg/validators.kcfg
+%_kde_datadir/config/translaterc
+%_kde_iconsdir/hicolor/*/apps/fsview.png
+%_kde_iconsdir/oxygen/*/actions/babelfish.png
+%_kde_iconsdir/oxygen/*/actions/cssvalidator.png
+%_kde_iconsdir/oxygen/*/actions/htmlvalidator.png
+%_kde_iconsdir/oxygen/*/actions/imagegallery.png
+%_kde_iconsdir/oxygen/*/actions/validators.png
+%_kde_iconsdir/oxygen/*/actions/webarchiver.png
+%_kde_iconsdir/oxygen/scalable/actions/htmlvalidator.svgz
+%_kde_iconsdir/oxygen/scalable/actions/validators.svgz
+%_kde_services/ServiceMenus/imageconverter.desktop
+%_kde_services/fsview_part.desktop
+%_kde_services/webarchivethumbnail.desktop
+
+#-----------------------------------------------------------------------------
+
 %package -n konqueror
 Summary:    KDE file and web browser
 Group:      Graphical desktop/KDE
