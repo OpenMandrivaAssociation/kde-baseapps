@@ -26,7 +26,6 @@ Requires: kdebase4-runtime
 Suggests: dolphin
 Suggests: kdepasswd
 Suggests: kde4-nsplugins
-Suggests: kwrite
 Suggests: konqueror
 Suggests: keditbookmarks
 Suggests: kfind
@@ -155,24 +154,6 @@ Netscape plugins wrapper for kde.
 %_kde_libdir/kde4/libkcminit_nsplugins.so
 %_kde_libdir/kde4/libnsplugin.so
 %_kde_datadir/kde4/services/khtml_plugins.desktop
-
-#-----------------------------------------------------------------------------
-
-%package -n kwrite
-Summary: Simple text editor for KDE
-Group: Graphical desktop/KDE
-Requires: kdebase4-runtime
-
-%description -n kwrite
-Simple text editor for KDE
-
-%files -n kwrite
-%defattr(-,root,root)
-%_kde_bindir/kwrite
-%_kde_libdir/libkdeinit4_kwrite.so
-%_kde_datadir/applications/kde4/kwrite.desktop
-%_kde_appsdir/kwrite
-%_kde_docdir/*/*/kwrite
 
 #------------------------------------------------
 
