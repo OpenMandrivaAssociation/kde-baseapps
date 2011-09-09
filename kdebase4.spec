@@ -154,7 +154,6 @@ Netscape plugins wrapper for kde.
 %_kde_bindir/nspluginviewer
 %_kde_libdir/kde4/libkcminit_nsplugins.so
 %_kde_libdir/kde4/libnsplugin.so
-%_kde_appsdir/plugin
 %_kde_datadir/kde4/services/khtml_plugins.desktop
 
 #-----------------------------------------------------------------------------
