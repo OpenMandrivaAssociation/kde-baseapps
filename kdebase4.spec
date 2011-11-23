@@ -503,7 +503,8 @@ based on kdebase.
 %prep
 %setup -q -n kde-baseapps-%version
 
-%patch1 -p0 -b .mdvuserface
+# Rediff
+#%patch1 -p0 -b .mdvuserface
 %patch2 -p0 -b .mdvicon
 
 %build
