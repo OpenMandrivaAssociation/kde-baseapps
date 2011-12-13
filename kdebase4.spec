@@ -404,6 +404,11 @@ KDE file and web browser
 %_kde_docdir/*/*/konqueror
 %_kde_datadir/kde4/services/kded/favicons.desktop
 %_kde_datadir/kde4/servicetypes/konqpopupmenuplugin.desktop
+%exclude %_kde_appsdir/konqueror/icons/oxygen/*/actions/google.png
+%exclude %_kde_appsdir/konqueror/icons/oxygen/scalable/actions/google.svgz
+%exclude %_kde_appsdir/konqueror/kpartplugins/searchbar.desktop
+%exclude %_kde_appsdir/konqueror/kpartplugins/searchbar.rc
+%exclude %_kde_appsdir/konqueror/opensearch/google.xml
 
 #-----------------------------------------------------------------------------
 
