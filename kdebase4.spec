@@ -54,7 +54,6 @@ Obsoletes: %{_lib}dolphinprivate1 < 1:4.0.83-6
 KDE 4 core library.
 
 %files -n %libdolphinprivate
-%defattr(-,root,root)
 %_kde_libdir/libdolphinprivate.so.%{dolphinprivate_major}*
 
 #-----------------------------------------------------------------------------
@@ -91,7 +90,7 @@ manager. This approach allows to optimize the user interface for the task
 of file management.
 
 %files -n dolphin
-%defattr(-,root,root)
+%doc %{_kde_docdir}/HTML/en/dolphin/
 %_kde_bindir/dolphin
 %_kde_bindir/servicemenudeinstallation
 %_kde_bindir/servicemenuinstallation
@@ -113,9 +112,8 @@ of file management.
 %_kde_libdir/kde4/kcm_dolphinviewmodes.so
 %_kde_libdir/kde4/kio_filenamesearch.so
 %_kde_appsdir/dolphinpart/dolphinpart.rc
-%_kde_appsdir/dolphin
-%_kde_datadir/templates
-%_kde_docdir/*/*/dolphin
+%_kde_appsdir/dolphin/
+%_kde_datadir/templates/
 
 #-----------------------------------------------------------------------------
 
@@ -128,14 +126,13 @@ Requires: kdebase4-runtime
 User password management
 
 %files -n kdepasswd
-%defattr(-,root,root)
+%doc %{_kde_docdir}/HTML/en/kdepasswd/
 %_kde_bindir/kdepasswd
 %_kde_libdir/kde4/kcm_useraccount.so
 %_kde_datadir/applications/kde4/kdepasswd.desktop
 %_kde_datadir/kde4/services/kcm_useraccount.desktop
 %_kde_datadir/config.kcfg/kcm_useracc*
-%_kde_datadir/apps/kdm/*
-%_kde_docdir/*/*/kdepasswd
+%{_kde_appsdir}/kdm/pics/users/*.png
 
 #-----------------------------------------------------------------------------
 
@@ -143,12 +140,13 @@ User password management
 Summary: Netscape plugins wrapper for kde
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
+Conflicts: kdebase-devel < 1:4.7.90-2
 
 %description -n kde4-nsplugins
 Netscape plugins wrapper for kde.
 
 %files -n kde4-nsplugins
-%defattr(-,root,root)
+%{_datadir}/dbus-1/interfaces/org.kde.nsplugins.*.xml
 %_kde_bindir/nspluginscan
 %_kde_bindir/nspluginviewer
 %_kde_appsdir/nsplugin/nspluginpart.rc
@@ -170,7 +168,6 @@ Conflicts: konqueror <  1:4.0.82-5
 KDE 4 core library.
 
 %files -n %libkonq
-%defattr(-,root,root)
 %_kde_libdir/libkonq.so.%{konq_major}*
 
 #------------------------------------------------
@@ -188,7 +185,6 @@ Obsoletes: %{_lib}kdebase46 <= 1:3.80.3
 KDE 4 core library.
 
 %files -n %libkonqsidebarplugin
-%defattr(-,root,root)
 %_kde_libdir/libkonqsidebarplugin.so.%{konqsidebarplugin_major}*
 
 #------------------------------------------------
@@ -205,9 +201,7 @@ Obsoletes: %{_lib}konquerorprivate1 < 1:4.0.83-6
 KDE 4 core library.
 
 %files -n %libkonquerorprivate
-%defattr(-,root,root)
 %_kde_libdir/libkonquerorprivate.so.%{konquerorprivate_major}*
-
 
 #------------------------------------------------
 
@@ -222,7 +216,6 @@ Group: System/Libraries
 KDE 4 core library.
 
 %files -n %libkbookmarkmodel_private
-%defattr(-,root,root)
 %_kde_libdir/libkbookmarkmodel_private.so.%{kbookmarkmodel_private_major}*
 
 #------------------------------------------------
@@ -232,11 +225,11 @@ Summary: Konqueror plugins
 Group:Graphical desktop/KDE
 Requires: konqueror
 Conflicts: dolphin < 1:4.7.0
+
 %description -n konq-plugins
 This module contains plugins that interact with Konqueror.                      
                                                                                
 %files -n konq-plugins
-
 %_kde_bindir/fsview
 %_kde_libdir/kde4/adblock.so
 %_kde_libdir/kde4/akregatorkonqfeedicon.so
@@ -321,13 +314,16 @@ Group:      Graphical desktop/KDE
 Requires:   kdebase4-runtime
 Requires:   dolphin
 Suggests:   keditbookmarks
-SUggests:   konq-plugins
+Suggests:   konq-plugins
+Conflicts:  kdebase-devel < 1:4.7.90-2
 
 %description -n konqueror
 KDE file and web browser
 
 %files -n konqueror
-%defattr(-,root,root)
+%{_datadir}/dbus-1/interfaces/org.kde.FavIcon.xml
+%{_datadir}/dbus-1/interfaces/org.kde.?onqueror.*.xml
+%doc %{_kde_docdir}/HTML/en/konqueror/
 %_kde_bindir/kfmclient
 %_kde_bindir/konqueror
 %_kde_libdir/kde4/kded_konqy_preloader.so
@@ -399,9 +395,8 @@ KDE file and web browser
 %_kde_datadir/kde4/servicetypes/konqaboutpage.desktop
 %_kde_datadir/kde4/servicetypes/uasprovider.desktop
 %_kde_datadir/kde4/servicetypes/konqdndpopupmenuplugin.desktop
-%_kde_appsdir/konqueror
+%_kde_appsdir/konqueror/
 %_kde_iconsdir/*/*/*/konqueror.*
-%_kde_docdir/*/*/konqueror
 %_kde_datadir/kde4/services/kded/favicons.desktop
 %_kde_datadir/kde4/servicetypes/konqpopupmenuplugin.desktop
 %exclude %_kde_appsdir/konqueror/icons/oxygen/*/actions/google.png
@@ -421,7 +416,6 @@ Requires: kdebase4-runtime
 Bookmark editor.
 
 %files -n keditbookmarks
-%defattr(-,root,root)
 %_kde_bindir/kbookmarkmerger
 %_kde_bindir/keditbookmarks
 %_kde_libdir/libkdeinit4_keditbookmarks.so
@@ -442,12 +436,11 @@ Requires: kdebase4-runtime
 Application finder
 
 %files -n kfind
-%defattr(-,root,root)
+%doc %{_kde_docdir}/HTML/en/kfind/
 %_kde_bindir/kfind
 %_kde_datadir/applications/kde4/kfind.desktop
 %_kde_iconsdir/*/*/*/kfind.*
 %_kde_mandir/man1/kfind.1.*
-%_kde_docdir/*/*/kfind
 
 #-----------------------------------------------------------------------------
 
@@ -455,12 +448,13 @@ Application finder
 Summary: Dialog KDE base widgets
 Group: Graphical desktop/KDE
 Requires: kdebase4-runtime
+Conflicts: kdebase-devel < 1:4.7.90-2
 
 %description -n kdialog
 Dialog KDE base widgets
 
 %files -n kdialog
-%defattr(-,root,root)
+%{_datadir}/dbus-1/interfaces/org.kde.kdialog.ProgressDialog.xml
 %_kde_bindir/kdialog
 
 #-----------------------------------------------------------------------------
@@ -475,7 +469,6 @@ Provides: plasma-applet
 Display the content of folders (Desktop as default)
 
 %files -n plasma-applet-folderview
-%defattr(-,root,root)
 %_kde_libdir/kde4/plasma_applet_folderview.so
 %_kde_datadir/kde4/services/plasma-applet-folderview.desktop
 
@@ -495,13 +488,11 @@ This package contains header files needed if you wish to build applications
 based on kdebase.
 
 %files devel
-%defattr(-,root,root)
 %_kde_libdir/libdolphinprivate.so
 %_kde_libdir/libkonq.so
 %_kde_libdir/libkonqsidebarplugin.so
 %_kde_libdir/libkbookmarkmodel_private.so
 %_kde_includedir/*.h
-%_kde_datadir/dbus-1/interfaces/*
 
 #-----------------------------------------------------------------------------
 
@@ -522,4 +513,3 @@ tar xvf %SOURCE2
 
 %install
 %makeinstall_std -C build
-
