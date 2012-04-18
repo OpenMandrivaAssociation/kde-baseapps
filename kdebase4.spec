@@ -291,6 +291,8 @@ This module contains plugins that interact with Konqueror.
 %_kde_appsdir/kwebkitpart/kpartplugins/plugin_validators.rc
 %_kde_appsdir/kwebkitpart/kpartplugins/uachangerplugin.desktop
 %_kde_appsdir/kwebkitpart/kpartplugins/uachangerplugin.rc
+%_kde_appsdir/kwebkitpart/kpartplugins/khtmlsettingsplugin.desktop
+%_kde_appsdir/kwebkitpart/kpartplugins/khtmlsettingsplugin.rc
 %_kde_datadir/config.kcfg/validators.kcfg
 %_kde_datadir/config/translaterc
 %_kde_iconsdir/hicolor/*/apps/fsview.png
