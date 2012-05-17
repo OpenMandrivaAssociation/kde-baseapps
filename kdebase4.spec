@@ -1,13 +1,12 @@
 Name: kdebase4
 Summary: K Desktop Environment
 Version: 4.8.3
-Release: 1
+Release: 2
 Epoch: 1
 Group: Graphical desktop/KDE
 License: GPL
 URL: http://www.kde.org
 Source: ftp://ftp.kde.org/pub/kde/stable/%version/src/kde-baseapps-%version.tar.xz
-Source2: kdebase-dolphin.tar.bz2
 Patch1: kdebase-4.2.98-mdvuserface.patch
 Patch2: kdebase-4.2.95-Use-Mandriva-Home-Icon.patch
 
@@ -506,8 +505,6 @@ based on kdebase.
 %patch2 -p0 -b .mdvicon
 
 %build
-rm -fr dolphin
-tar xvf %SOURCE2
 
 %cmake_kde4
 %make
