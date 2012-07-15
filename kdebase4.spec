@@ -2,7 +2,7 @@
 
 Name:		kdebase4
 Summary:	K Desktop Environment
-Version:	4.8.95
+Version:	4.8.97
 Release:	1
 Epoch:		1
 Group:		Graphical desktop/KDE
@@ -27,11 +27,11 @@ Patch105:	kdebase-4.8.3-dolphin-klook-overlay-icon.patch
 #trunk patches
 # test patches
 BuildRequires:	kdelibs4-devel
-BuildRequires:	strigi-devel
 BuildRequires:	zlib-devel
-BuildRequires:	qimageblitz-devel
-BuildRequires:	shared-desktop-ontologies-devel
-BuildRequires:	glib2-devel
+BuildRequires:	pkgconfig(glib-2.0)
+BuildRequires:	pkgconfig(libstreams)
+BuildRequires:	pkgconfig(qimageblitz)
+BuildRequires:	pkgconfig(shared-desktop-ontologies)
 BuildRequires:	pkgconfig(xt)
 Requires:	kdebase4-runtime
 Suggests:	dolphin
@@ -57,8 +57,6 @@ This meta package requires all base kdebase 4 packages.
 %package -n %{libdolphinprivate}
 Summary:	KDE 4 core library
 Group:		System/Libraries
-Obsoletes:	%{_lib}dolphinprivate5 < 1:3.93.0-0.714129.2
-Obsoletes:	%{_lib}dolphinprivate1 < 1:4.0.83-6
 
 %description -n %{libdolphinprivate}
 KDE 4 core library.
@@ -77,9 +75,6 @@ Provides:	dolphin4
 Suggests:	ffmpegthumbs
 Suggests:	kde-odf-thumbnail
 Suggests:	klook
-Conflicts:	kdebase4-workspace < 1:3.93.0
-Conflicts:	kdebase4 < 1:4.1.0-4
-Conflicts:	konqueror < 1:4.4.2-6
 Provides:	kde4-dolphin = %{EVRD}
 
 %description -n dolphin
@@ -104,16 +99,16 @@ of file management.
 %{_kde_bindir}/dolphin
 %{_kde_bindir}/servicemenudeinstallation
 %{_kde_bindir}/servicemenuinstallation
-%{_kde_datadir}/applications/kde4/dolphin.desktop
-%{_kde_datadir}/kde4/services/dolphinpart.desktop
-%{_kde_datadir}/kde4/services/kcmdolphingeneral.desktop
-%{_kde_datadir}/kde4/services/kcmdolphinnavigation.desktop
-%{_kde_datadir}/kde4/services/kcmdolphinservices.desktop
-%{_kde_datadir}/kde4/services/kcmdolphinviewmodes.desktop
-%{_kde_datadir}/kde4/services/filenamesearch.protocol
-%{_kde_datadir}/kde4/servicetypes/fileviewversioncontrolplugin.desktop
+%{_kde_applicationsdir}/dolphin.desktop
+%{_kde_services}/dolphinpart.desktop
+%{_kde_services}/kcmdolphingeneral.desktop
+%{_kde_services}/kcmdolphinnavigation.desktop
+%{_kde_services}/kcmdolphinservices.desktop
+%{_kde_services}/kcmdolphinviewmodes.desktop
+%{_kde_services}/filenamesearch.protocol
+%{_kde_servicetypes}/fileviewversioncontrolplugin.desktop
 #%{_kde_datadir}/kde4/servicetypes/iconviewoverlaycontrolplugin.desktop
-%{_kde_datadir}/config/servicemenu.knsrc
+%{_kde_configdir}/servicemenu.knsrc
 %{_kde_datadir}/config.kcfg/dolphin_*
 %{_kde_libdir}/libkdeinit4_dolphin.so
 %{_kde_libdir}/kde4/dolphinpart.so
@@ -140,8 +135,8 @@ User password management
 %doc %{_kde_docdir}/HTML/en/kdepasswd/
 %{_kde_bindir}/kdepasswd
 %{_kde_libdir}/kde4/kcm_useraccount.so
-%{_kde_datadir}/applications/kde4/kdepasswd.desktop
-%{_kde_datadir}/kde4/services/kcm_useraccount.desktop
+%{_kde_applicationsdir}/kdepasswd.desktop
+%{_kde_services}/kcm_useraccount.desktop
 %{_kde_datadir}/config.kcfg/kcm_useracc*
 %{_kde_appsdir}/kdm/pics/users/*.png
 
@@ -151,7 +146,7 @@ User password management
 Summary:	Netscape plugins wrapper for kde
 Group:		Graphical desktop/KDE
 Requires:	kdebase4-runtime
-Conflicts:	kdebase-devel < 1:4.7.90-2
+Conflicts:	kdebase4-devel < 1:4.7.90-2
 
 %description -n kde4-nsplugins
 Netscape plugins wrapper for kde.
@@ -163,7 +158,7 @@ Netscape plugins wrapper for kde.
 %{_kde_appsdir}/nsplugin/nspluginpart.rc
 %{_kde_libdir}/kde4/libkcminit_nsplugins.so
 %{_kde_libdir}/kde4/libnsplugin.so
-%{_kde_datadir}/kde4/services/khtml_plugins.desktop
+%{_kde_services}/khtml_plugins.desktop
 
 #------------------------------------------------
 
@@ -173,7 +168,6 @@ Netscape plugins wrapper for kde.
 %package -n %{libkonq}
 Summary:	KDE 4 core library
 Group:		System/Libraries
-Conflicts:	konqueror <  1:4.0.82-5
 
 %description -n %{libkonq}
 KDE 4 core library.
@@ -189,8 +183,6 @@ KDE 4 core library.
 %package -n %{libkonqsidebarplugin}
 Summary:	KDE 4 core library
 Group:		System/Libraries
-Obsoletes:	%{_lib}konqsidebarplugin5 < 1:3.93.0-0.714129.2
-Obsoletes:	%{_lib}kdebase46 <= 1:3.80.3
 
 %description -n %{libkonqsidebarplugin}
 KDE 4 core library.
@@ -206,7 +198,6 @@ KDE 4 core library.
 %package -n %{libkonquerorprivate}
 Summary:	KDE 4 core library
 Group:		System/Libraries
-Obsoletes:	%{_lib}konquerorprivate1 < 1:4.0.83-6
 
 %description -n %{libkonquerorprivate}
 KDE 4 core library.
@@ -305,7 +296,7 @@ This module contains plugins that interact with Konqueror.
 %{_kde_appsdir}/kwebkitpart/kpartplugins/khtmlsettingsplugin.desktop
 %{_kde_appsdir}/kwebkitpart/kpartplugins/khtmlsettingsplugin.rc
 %{_kde_datadir}/config.kcfg/validators.kcfg
-%{_kde_datadir}/config/translaterc
+%{_kde_configdir}/translaterc
 %{_kde_iconsdir}/hicolor/*/apps/fsview.png
 %{_kde_iconsdir}/oxygen/*/actions/babelfish.png
 %{_kde_iconsdir}/oxygen/*/actions/cssvalidator.png
@@ -328,7 +319,7 @@ Requires:	kdebase4-runtime
 Requires:	dolphin
 Suggests:	keditbookmarks
 Suggests:	konq-plugins
-Conflicts:	kdebase-devel < 1:4.7.90-2
+Conflicts:	kdebase4-devel < 1:4.7.90-2
 
 %description -n konqueror
 KDE file and web browser
@@ -360,13 +351,13 @@ KDE file and web browser
 %{_kde_libdir}/kde4/konq_sidebartree_bookmarks.so
 %{_kde_libdir}/kde4/konqsidebar_history.so
 %{_kde_libdir}/kde4/konqsidebar_places.so
-%{_kde_datadir}/apps/kcontrol/*
+%{_kde_appsdir}/kcontrol/*
 %{_kde_datadir}/config.kcfg/konqueror*
-%{_kde_datadir}/applications/kde4/Home.desktop
-%{_kde_datadir}/applications/kde4/kfmclient.desktop
-%{_kde_datadir}/applications/kde4/kfmclient_dir.desktop
-%{_kde_datadir}/applications/kde4/kfmclient_html.desktop
-%{_kde_datadir}/applications/kde4/kfmclient_war.desktop
+%{_kde_applicationsdir}/Home.desktop
+%{_kde_applicationsdir}/kfmclient.desktop
+%{_kde_applicationsdir}/kfmclient_dir.desktop
+%{_kde_applicationsdir}/kfmclient_html.desktop
+%{_kde_applicationsdir}/kfmclient_war.desktop
 %{_kde_appsdir}/kcmcss/template.css
 %{_kde_appsdir}/kconf_update/kfmclient_3_2.upd
 %{_kde_appsdir}/kconf_update/kfmclient_3_2_update.sh
@@ -381,35 +372,35 @@ KDE file and web browser
 %{_kde_appsdir}/kwebkitpart/kpartplugins/khtmlkttsd.desktop
 %{_kde_appsdir}/kwebkitpart/kpartplugins/khtmlkttsd.rc
 %{_kde_datadir}/autostart/konqy_preload.desktop
-%{_kde_datadir}/config/konqsidebartngrc
-%{_kde_datadir}/kde4/services/cache.desktop
-%{_kde_datadir}/kde4/services/cookies.desktop
-%{_kde_datadir}/kde4/services/ebrowsing.desktop
-%{_kde_datadir}/kde4/services/filebehavior.desktop
-%{_kde_datadir}/kde4/services/kcmkonqyperformance.desktop
-%{_kde_datadir}/kde4/services/kcmperformance.desktop
-%{_kde_datadir}/kde4/services/kded/konqy_preloader.desktop
-%{_kde_datadir}/kde4/services/khtml_behavior.desktop
-%{_kde_datadir}/kde4/services/khtml_filter.desktop
-%{_kde_datadir}/kde4/services/khtml_general.desktop
-%{_kde_datadir}/kde4/services/khtml_java_js.desktop
-%{_kde_datadir}/kde4/services/konq_aboutpage.desktop
-%{_kde_datadir}/kde4/services/konq_sidebartng.desktop
-%{_kde_datadir}/kde4/services/konqueror.desktop
-%{_kde_datadir}/kde4/services/netpref.desktop
-%{_kde_datadir}/kde4/services/proxy.desktop
-%{_kde_datadir}/kde4/services/smb.desktop
-%{_kde_datadir}/kde4/services/useragent.desktop
-%{_kde_datadir}/kde4/services/useragentstrings
-%{_kde_datadir}/kde4/services/khtml_appearance.desktop
-%{_kde_datadir}/kde4/services/kcmhistory.desktop
-%{_kde_datadir}/kde4/servicetypes/konqaboutpage.desktop
-%{_kde_datadir}/kde4/servicetypes/uasprovider.desktop
-%{_kde_datadir}/kde4/servicetypes/konqdndpopupmenuplugin.desktop
+%{_kde_configdir}/konqsidebartngrc
+%{_kde_services}/cache.desktop
+%{_kde_services}/cookies.desktop
+%{_kde_services}/ebrowsing.desktop
+%{_kde_services}/filebehavior.desktop
+%{_kde_services}/kcmkonqyperformance.desktop
+%{_kde_services}/kcmperformance.desktop
+%{_kde_services}/kded/konqy_preloader.desktop
+%{_kde_services}/khtml_behavior.desktop
+%{_kde_services}/khtml_filter.desktop
+%{_kde_services}/khtml_general.desktop
+%{_kde_services}/khtml_java_js.desktop
+%{_kde_services}/konq_aboutpage.desktop
+%{_kde_services}/konq_sidebartng.desktop
+%{_kde_services}/konqueror.desktop
+%{_kde_services}/netpref.desktop
+%{_kde_services}/proxy.desktop
+%{_kde_services}/smb.desktop
+%{_kde_services}/useragent.desktop
+%{_kde_services}/useragentstrings
+%{_kde_services}/khtml_appearance.desktop
+%{_kde_services}/kcmhistory.desktop
+%{_kde_servicetypes}/konqaboutpage.desktop
+%{_kde_servicetypes}/uasprovider.desktop
+%{_kde_servicetypes}/konqdndpopupmenuplugin.desktop
 %{_kde_appsdir}/konqueror/
 %{_kde_iconsdir}/*/*/*/konqueror.*
-%{_kde_datadir}/kde4/services/kded/favicons.desktop
-%{_kde_datadir}/kde4/servicetypes/konqpopupmenuplugin.desktop
+%{_kde_services}/kded/favicons.desktop
+%{_kde_servicetypes}/konqpopupmenuplugin.desktop
 %exclude %{_kde_appsdir}/konqueror/icons/oxygen/*/actions/google.png
 %exclude %{_kde_appsdir}/konqueror/icons/oxygen/scalable/actions/google.svgz
 %exclude %{_kde_appsdir}/konqueror/kpartplugins/searchbar.desktop
@@ -430,8 +421,8 @@ Bookmark editor.
 %{_kde_bindir}/kbookmarkmerger
 %{_kde_bindir}/keditbookmarks
 %{_kde_libdir}/libkdeinit4_keditbookmarks.so
-%{_kde_datadir}/applications/kde4/keditbookmarks.desktop
-%{_kde_datadir}/kde4/services/bookmarks.desktop
+%{_kde_applicationsdir}/keditbookmarks.desktop
+%{_kde_services}/bookmarks.desktop
 %{_kde_appsdir}/keditbookmarks
 %{_kde_datadir}/config.kcfg/keditbook*
 %{_kde_mandir}/man1/kbookmarkmerger.1.*
@@ -449,7 +440,7 @@ Application finder
 %files -n kfind
 %doc %{_kde_docdir}/HTML/en/kfind/
 %{_kde_bindir}/kfind
-%{_kde_datadir}/applications/kde4/kfind.desktop
+%{_kde_applicationsdir}/kfind.desktop
 %{_kde_iconsdir}/*/*/*/kfind.*
 %{_kde_mandir}/man1/kfind.1.*
 
@@ -459,7 +450,7 @@ Application finder
 Summary:	Dialog KDE base widgets
 Group:		Graphical desktop/KDE
 Requires:	kdebase4-runtime
-Conflicts:	kdebase-devel < 1:4.7.90-2
+Conflicts:	kdebase4-devel < 1:4.7.90-2
 
 %description -n kdialog
 Dialog KDE base widgets
@@ -481,7 +472,7 @@ Display the content of folders (Desktop as default)
 
 %files -n plasma-applet-folderview
 %{_kde_libdir}/kde4/plasma_applet_folderview.so
-%{_kde_datadir}/kde4/services/plasma-applet-folderview.desktop
+%{_kde_services}/plasma-applet-folderview.desktop
 
 #-----------------------------------------------------------------------------
 
@@ -494,7 +485,7 @@ Requires:	%{libkonq} = %{EVRD}
 Requires:	%{libkonqsidebarplugin} = %{EVRD}
 Requires:	%{libkbookmarkmodel_private} = %{EVRD}
 
-%description  devel
+%description devel
 This package contains header files needed if you wish to build applications
 based on kdebase.
 
