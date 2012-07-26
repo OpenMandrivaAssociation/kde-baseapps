@@ -3,13 +3,15 @@
 Name:		kdebase4
 Summary:	K Desktop Environment
 Version:	4.8.97
-Release:	1
+Release:	3
 Epoch:		1
 Group:		Graphical desktop/KDE
 License:	GPL
 URL:		http://www.kde.org
 Source:		ftp://ftp.kde.org/pub/kde/unstable/%{version}/src/kde-baseapps-%{version}.tar.xz
 Patch1:		kdebase-4.2.95-Use-Mandriva-Home-Icon.patch
+Patch2:		kdebase-4.8.97-mdvuserface.patch
+Patch3:		kdebase-4.8.97-fileplaces.patch
 Patch10:	kdebase-4.8.1-dolphin-showdelete.patch
 Patch11:	kdebase-4.8.1-dolphin-klook.patch
 Patch12:	kdebase-4.8.1-Set-Preview-true.patch
@@ -20,7 +22,6 @@ Patch16:	kdebase-4.8.1-dolphin-context-menu-symlink.patch
 Patch100:	kde-baseapps-4.8.2-l10n-ru.patch
 Patch101:	kdebase-4.8.2.dolphinrcui.patch
 Patch102:	kdebase-4.8.2-konq-templates-cleanup.patch
-Patch103:	kdebase-4.8.2-mdvuserface.patch
 Patch104:	kdebase-4.8.2-dolphin-delete-files-on-flash-drives.patch
 Patch105:	kdebase-4.8.3-dolphin-klook-overlay-icon.patch
 #branch patches
@@ -503,6 +504,8 @@ based on kdebase.
 
 # Rediff
 %patch1 -p0 -b .mdvicon
+%patch2 -p1 -b .mdvface
+%patch3 -p1 -b .fileplaces
 %patch10 -p1
 #patch11 -p1
 %patch12 -p1
@@ -513,7 +516,6 @@ based on kdebase.
 #patch100 -p1
 %patch101 -p1
 %patch102 -p1
-#patch103 -p1
 #patch104 -p1
 #patch105 -p1
 
