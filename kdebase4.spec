@@ -2,13 +2,13 @@
 
 Name:		kdebase4
 Summary:	K Desktop Environment
-Version:	4.8.97
-Release:	3
+Version: 4.9.0
+Release: 1
 Epoch:		1
 Group:		Graphical desktop/KDE
 License:	GPL
 URL:		http://www.kde.org
-Source:		ftp://ftp.kde.org/pub/kde/unstable/%{version}/src/kde-baseapps-%{version}.tar.xz
+Source:		ftp://ftp.kde.org/pub/kde/stable/%{version}/src/kde-baseapps-%{version}.tar.xz
 Patch1:		kdebase-4.2.95-Use-Mandriva-Home-Icon.patch
 Patch2:		kdebase-4.8.97-mdvuserface.patch
 Patch3:		kdebase-4.8.97-fileplaces.patch
