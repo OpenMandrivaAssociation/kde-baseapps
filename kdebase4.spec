@@ -21,7 +21,6 @@ Patch15:	kdebase-4.8.1-dolphin-context-menu.patch
 Patch16:	kdebase-4.8.1-dolphin-context-menu-symlink.patch
 Patch100:	kde-baseapps-4.8.2-l10n-ru.patch
 Patch101:	kdebase-4.8.2.dolphinrcui.patch
-Patch102:	kdebase-4.8.2-konq-templates-cleanup.patch
 Patch104:	kdebase-4.8.2-dolphin-delete-files-on-flash-drives.patch
 Patch105:	kdebase-4.8.3-dolphin-klook-overlay-icon.patch
 #branch patches
@@ -515,7 +514,6 @@ based on kdebase.
 #patch16 -p1
 #patch100 -p1
 %patch101 -p1
-%patch102 -p1
 #patch104 -p1
 #patch105 -p1
 
