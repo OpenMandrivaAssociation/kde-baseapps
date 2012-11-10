@@ -1,0 +1,312 @@
+diff -X exclude -Nuar kde-baseapps-4.8.1/dolphin/src/dolphincontextmenu.cpp kde-baseapps-4.8.1_new/dolphin/src/dolphincontextmenu.cpp
+--- kde-baseapps-4.8.1/dolphin/src/dolphincontextmenu.cpp	2012-04-03 13:30:36.193696621 +0400
++++ kde-baseapps-4.8.1_new/dolphin/src/dolphincontextmenu.cpp	2012-04-03 13:26:28.486141463 +0400
+@@ -225,8 +225,11 @@
+     }
+ }
+ 
++#include <KDebug>
++
+ void DolphinContextMenu::openItemContextMenu()
+ {
++    kDebug() << m_mainWindow->actionCollection()->actions();
+     Q_ASSERT(!m_fileInfo.isNull());
+ 
+     QAction* openParentInNewWindowAction = 0;
+@@ -235,24 +238,27 @@
+     if (m_selectedItems.count() == 1) {
+         if (m_fileInfo.isDir()) {
+             // setup 'Create New' menu
+-            DolphinNewFileMenu* newFileMenu = new DolphinNewFileMenu(m_mainWindow);
+-            const DolphinView* view = m_mainWindow->activeViewContainer()->view();
+-            newFileMenu->setViewShowsHiddenFiles(view->hiddenFilesShown());
+-            newFileMenu->checkUpToDate();
+-            newFileMenu->setPopupFiles(m_fileInfo.url());
+-            newFileMenu->setEnabled(selectedItemsProperties().supportsWriting());
+-            connect(newFileMenu, SIGNAL(fileCreated(KUrl)), newFileMenu, SLOT(deleteLater()));
+-            connect(newFileMenu, SIGNAL(directoryCreated(KUrl)), newFileMenu, SLOT(deleteLater()));
+-
+-            KMenu* menu = newFileMenu->menu();
+-            menu->setTitle(i18nc("@title:menu Create new folder, file, link, etc.", "Create New"));
+-            menu->setIcon(KIcon("document-new"));
+-            m_popup->addMenu(menu);
+-            m_popup->addSeparator();
++            //DolphinNewFileMenu* newFileMenu = new DolphinNewFileMenu(m_mainWindow);
++            //const DolphinView* view = m_mainWindow->activeViewContainer()->view();
++            //newFileMenu->setViewShowsHiddenFiles(view->hiddenFilesShown());
++            //newFileMenu->checkUpToDate();
++            //newFileMenu->setPopupFiles(m_fileInfo.url());
++            //newFileMenu->setEnabled(selectedItemsProperties().supportsWriting());
++            //connect(newFileMenu, SIGNAL(fileCreated(KUrl)), newFileMenu, SLOT(deleteLater()));
++            //connect(newFileMenu, SIGNAL(directoryCreated(KUrl)), newFileMenu, SLOT(deleteLater()));
++
++            //KMenu* menu = newFileMenu->menu();
++            //menu->setTitle(i18nc("@title:menu Create new folder, file, link, etc.", "Create New"));
++            //menu->setIcon(KIcon("document-new"));
++            //m_popup->addMenu(menu);
++            //m_popup->addSeparator();
++
++            // insert 'Open' entry
++            m_popup->addAction(m_mainWindow->actionCollection()->action("open_item"));
+ 
+             // insert 'Open in new window' and 'Open in new tab' entries
+             m_popup->addAction(m_mainWindow->actionCollection()->action("open_in_new_window"));
+-            m_popup->addAction(m_mainWindow->actionCollection()->action("open_in_new_tab"));
++            //m_popup->addAction(m_mainWindow->actionCollection()->action("open_in_new_tab"));
+ 
+             // insert 'Add to Places' entry
+             if (!placeExists(m_fileInfo.url())) {
+@@ -277,16 +283,23 @@
+ 
+             m_popup->addSeparator();
+         }
++        else
++        {
++            // insert 'Open' entry
++            m_popup->addAction(m_mainWindow->actionCollection()->action("run"));
++        }
+     }
+ 
+-    insertDefaultItemActions();
+-
+-    m_popup->addSeparator();
+-
+     KFileItemActions fileItemActions;
+     fileItemActions.setItemListProperties(selectedItemsProperties());
+     addServiceActions(fileItemActions);
+ 
++    //m_popup->addSeparator();
++
++    insertDefaultItemActions();
++
++    m_popup->addSeparator();
++
+     addFileItemPluginActions();
+ 
+     addVersionControlPluginActions();
+@@ -327,12 +340,12 @@
+     newFileMenu->checkUpToDate();
+     newFileMenu->setPopupFiles(m_baseUrl);
+     m_popup->addMenu(newFileMenu->menu());
+-    m_popup->addSeparator();
++    //m_popup->addSeparator();
+ 
+     // Insert 'New Window' and 'New Tab' entries. Don't use "open_in_new_window" and
+     // "open_in_new_tab" here, as the current selection should get ignored.
+-    m_popup->addAction(m_mainWindow->actionCollection()->action("new_window"));
+-    m_popup->addAction(m_mainWindow->actionCollection()->action("new_tab"));
++    //m_popup->addAction(m_mainWindow->actionCollection()->action("new_window"));
++    //m_popup->addAction(m_mainWindow->actionCollection()->action("new_tab"));
+ 
+     // Insert 'Add to Places' entry if exactly one item is selected
+     QAction* addToPlacesAction = 0;
+@@ -343,17 +356,31 @@
+ 
+     m_popup->addSeparator();
+ 
++    KMenu* menu = new KMenu(m_mainWindow);
++    menu->setTitle(i18nc("@title:menu Sort By", "Sort By"));
++
++    menu->addAction(m_mainWindow->actionCollection()->action("sort_by_name"));
++    menu->addAction(m_mainWindow->actionCollection()->action("sort_by_date"));
++    menu->addAction(m_mainWindow->actionCollection()->action("sort_by_size"));
++    menu->addAction(m_mainWindow->actionCollection()->action("sort_by_type"));
++    m_popup->addMenu(menu);
++
++//    m_popup->addSeparator();
++
++    m_popup->addAction(createPasteAction());
++
++
+     QAction* pasteAction = createPasteAction();
+     m_popup->addAction(pasteAction);
+     m_popup->addSeparator();
+ 
+     // Insert service actions
+-    const KFileItemListProperties baseUrlProperties(KFileItemList() << baseFileItem());
+-    KFileItemActions fileItemActions;
+-    fileItemActions.setItemListProperties(baseUrlProperties);
+-    addServiceActions(fileItemActions);
++    //const KFileItemListProperties baseUrlProperties(KFileItemList() << baseFileItem());
++    //KFileItemActions fileItemActions;
++    //fileItemActions.setItemListProperties(baseUrlProperties);
++    //addServiceActions(fileItemActions);
+ 
+-    addFileItemPluginActions();
++    //addFileItemPluginActions();
+ 
+     addVersionControlPluginActions();
+ 
+@@ -377,28 +404,32 @@
+ {
+     const KActionCollection* collection = m_mainWindow->actionCollection();
+ 
+-    // Insert 'Cut', 'Copy' and 'Paste'
+-    m_popup->addAction(collection->action(KStandardAction::name(KStandardAction::Cut)));
+-    m_popup->addAction(collection->action(KStandardAction::name(KStandardAction::Copy)));
+-    m_popup->addAction(createPasteAction());
+-
+-    m_popup->addSeparator();
+-
+-    // Insert 'Rename'
+-    QAction* renameAction = collection->action("rename");
+-    m_popup->addAction(renameAction);
+-
+     KSharedConfig::Ptr globalConfig = KSharedConfig::openConfig("kdeglobals", KConfig::IncludeGlobals);
+     KConfigGroup configGroup(globalConfig, "KDE");
+ 
++    m_popup->addSeparator();
++
+     // Insert 'Move to Trash' and/or 'Delete'
+     if (configGroup.readEntry("ShowDeleteCommand", true)) {
+         m_popup->addAction(collection->action("move_to_trash"));
+         m_popup->addAction(collection->action("delete"));
+     } else {
+         m_popup->addAction(m_removeAction);
+         updateRemoveAction();
+     }
++
++    m_popup->addSeparator();
++
++    // Insert 'Cut', 'Copy' and 'Paste'
++    m_popup->addAction(collection->action(KStandardAction::name(KStandardAction::Cut)));
++    m_popup->addAction(collection->action(KStandardAction::name(KStandardAction::Copy)));
++    m_popup->addAction(createPasteAction());
++
++    //m_popup->addSeparator();
++
++    // Insert 'Rename'
++    QAction* renameAction = collection->action("rename");
++    m_popup->addAction(renameAction);
+ }
+ 
+ void DolphinContextMenu::addShowMenuBarAction()
+diff -X exclude -Nuar kde-baseapps-4.8.1/dolphin/src/dolphinmainwindow.cpp kde-baseapps-4.8.1_new/dolphin/src/dolphinmainwindow.cpp
+--- kde-baseapps-4.8.1/dolphin/src/dolphinmainwindow.cpp	2012-04-03 13:30:36.185696474 +0400
++++ kde-baseapps-4.8.1_new/dolphin/src/dolphinmainwindow.cpp	2012-04-03 13:26:28.487141481 +0400
+@@ -1774,6 +1774,10 @@
+     openInNewWindow->setIcon(KIcon("window-new"));
+     connect(openInNewWindow, SIGNAL(triggered()), this, SLOT(openInNewWindow()));
+ 
++    KAction* openItem = actionCollection()->addAction("open_item");
++    openItem->setText(i18nc("@action:inmenu", "Open"));
++    connect(openItem, SIGNAL(triggered()), this, SLOT(openItem()));
++
+     // KLook
+     KAction* openInKLook = actionCollection()->addAction("open_in_KLook");
+     openInKLook->setText(i18nc("@action:inmenu", "Preview"));
+@@ -1783,6 +1787,22 @@
+     connect(openInKLook, SIGNAL(triggered()), this, SLOT(previewItem()));
+ }
+ 
++void DolphinMainWindow::openItem()
++{
++    KUrl newWindowUrl;
++
++    const KFileItemList list = m_activeViewContainer->view()->selectedItems();
++    if (list.isEmpty()) {
++        newWindowUrl = m_activeViewContainer->url();
++    } else if ((list.count() == 1) && list[0].isDir()) {
++        newWindowUrl = list[0].url();
++    }
++
++    if (!newWindowUrl.isEmpty()) {
++        changeUrl(newWindowUrl);
++    }
++}
++
+ void DolphinMainWindow::setupDockWidgets()
+ {
+     const bool lock = GeneralSettings::lockPanels();
+diff -X exclude -Nuar kde-baseapps-4.8.1/dolphin/src/dolphinmainwindow.h kde-baseapps-4.8.1_new/dolphin/src/dolphinmainwindow.h
+--- kde-baseapps-4.8.1/dolphin/src/dolphinmainwindow.h	2012-04-03 13:30:36.185696474 +0400
++++ kde-baseapps-4.8.1_new/dolphin/src/dolphinmainwindow.h	2012-04-03 13:26:28.487141481 +0400
+@@ -470,6 +470,7 @@
+     void slotToolBarMenuButtonDeleted();
+     void slotToolBarIconSizeChanged(const QSize& iconSize);
+     void focusChanged(QWidget* old, QWidget* now);
++    void openItem();
+ 
+ private:
+     /**
+diff -X exclude -Nuar kde-baseapps-4.8.1/dolphin/src/views/dolphinviewactionhandler.cpp kde-baseapps-4.8.1_new/dolphin/src/views/dolphinviewactionhandler.cpp
+--- kde-baseapps-4.8.1/dolphin/src/views/dolphinviewactionhandler.cpp	2012-01-18 22:07:34.000000000 +0400
++++ kde-baseapps-4.8.1_new/dolphin/src/views/dolphinviewactionhandler.cpp	2012-04-03 13:26:28.488141499 +0400
+@@ -84,6 +84,11 @@
+     return m_currentView;
+ }
+ 
++void DolphinViewActionHandler::slotRun()
++{
++    m_currentView->runSelectedItems();
++}
++
+ void DolphinViewActionHandler::createActions()
+ {
+     // This action doesn't appear in the GUI, it's for the shortcut only.
+@@ -94,6 +99,10 @@
+     newDirAction->setIcon(KIcon("folder-new"));
+     connect(newDirAction, SIGNAL(triggered()), this, SIGNAL(createDirectory()));
+ 
++    KAction* run = m_actionCollection->addAction("run");
++    run->setText(i18nc("@action:inmenu File", "Run"));
++    connect(run, SIGNAL(triggered()), this, SLOT(slotRun()));
++
+     // File menu
+ 
+     KAction* rename = m_actionCollection->addAction("rename");
+diff -X exclude -Nuar kde-baseapps-4.8.1/dolphin/src/views/dolphinviewactionhandler.h kde-baseapps-4.8.1_new/dolphin/src/views/dolphinviewactionhandler.h
+--- kde-baseapps-4.8.1/dolphin/src/views/dolphinviewactionhandler.h	2011-10-21 00:52:59.000000000 +0400
++++ kde-baseapps-4.8.1_new/dolphin/src/views/dolphinviewactionhandler.h	2012-04-03 13:26:28.488141499 +0400
+@@ -108,6 +108,11 @@
+     void slotRename();
+ 
+     /**
++      * Run current application.
++      */
++    void slotRun();
++
++    /**
+      * Moves the selected items of the active view to the trash.
+      * This methods adds "shift means del" handling.
+      */
+diff -X exclude -Nuar kde-baseapps-4.8.1/dolphin/src/views/dolphinview.cpp kde-baseapps-4.8.1_new/dolphin/src/views/dolphinview.cpp
+--- kde-baseapps-4.8.1/dolphin/src/views/dolphinview.cpp	2012-04-03 13:30:36.195696657 +0400
++++ kde-baseapps-4.8.1_new/dolphin/src/views/dolphinview.cpp	2012-04-03 13:26:28.489141517 +0400
+@@ -39,6 +39,7 @@
+ #include <KFileItem>
+ #include <KFileItemListProperties>
+ #include <KLocale>
++#include <kfileitemactions.h>
+ #include <kitemviews/kfileitemmodel.h>
+ #include <kitemviews/kfileitemlistview.h>
+ #include <kitemviews/kitemlistselectionmanager.h>
+@@ -643,6 +644,13 @@
+     m_assureVisibleCurrentIndex = true;
+ }
+ 
++void DolphinView::runSelectedItems()
++{
++    KFileItemList fileOpenList = selectedItems();
++    KFileItemActions fileItemActions;
++    fileItemActions.runPreferredApplications(fileOpenList, "DesktopEntryName != 'dolphin'");
++}
++
+ void DolphinView::trashSelectedItems()
+ {
+     const KUrl::List list = simplifiedSelectedUrls();
+diff -X exclude -Nuar kde-baseapps-4.8.1/dolphin/src/views/dolphinview.h kde-baseapps-4.8.1_new/dolphin/src/views/dolphinview.h
+--- kde-baseapps-4.8.1/dolphin/src/views/dolphinview.h	2012-04-03 13:30:36.195696657 +0400
++++ kde-baseapps-4.8.1_new/dolphin/src/views/dolphinview.h	2012-04-03 13:26:28.489141517 +0400
+@@ -375,6 +375,11 @@
+     void renameSelectedItems();
+ 
+     /**
++     * Runs preferred application on selected items.
++     */
++    void runSelectedItems();
++
++    /**
+      * Moves all selected items to the trash.
+      */
+     void trashSelectedItems();

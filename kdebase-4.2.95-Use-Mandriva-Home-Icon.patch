@@ -1,0 +1,11 @@
+--- konqueror/Home.desktop.mdv	2010-09-15 02:38:21.000000000 +0200
++++ konqueror/Home.desktop	2010-09-15 02:40:07.000000000 +0200
+@@ -1,7 +1,7 @@
+ [Desktop Entry]
+ Type=Application
+ Exec=kfmclient openProfile filemanagement
+-Icon=user-home
++Icon=home-mdk
+ Terminal=false
+ 
+ Name=Home

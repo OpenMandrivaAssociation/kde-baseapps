@@ -1,0 +1,115 @@
+diff -X exclude -Nuar kde-baseapps-4.8.2/dolphin/src/CMakeLists.txt kde-baseapps-4.8.2_new/dolphin/src/CMakeLists.txt
+--- kde-baseapps-4.8.2/dolphin/src/CMakeLists.txt	2012-05-03 12:48:46.277661217 +0400
++++ kde-baseapps-4.8.2_new/dolphin/src/CMakeLists.txt	2012-04-23 16:30:28.447195613 +0400
+@@ -80,7 +80,7 @@
+ 
+ kde4_add_library(dolphinprivate SHARED ${dolphinprivate_LIB_SRCS})
+ 
+-target_link_libraries(dolphinprivate ${KDE4_KFILE_LIBS} konq ${KDE4_KNEWSTUFF3_LIBS})
++target_link_libraries(dolphinprivate ${KDE4_KFILE_LIBS} konq ${KDE4_SOLID_LIBS} ${KDE4_KNEWSTUFF3_LIBS})
+ if (Nepomuk_FOUND)
+   target_link_libraries(dolphinprivate ${NEPOMUK_LIBRARIES} ${NEPOMUK_QUERY_LIBRARIES} nepomukutils ${SOPRANO_LIBRARIES})
+ endif (Nepomuk_FOUND)
+diff -X exclude -Nuar kde-baseapps-4.8.2/dolphin/src/dolphincontextmenu.cpp kde-baseapps-4.8.2_new/dolphin/src/dolphincontextmenu.cpp
+--- kde-baseapps-4.8.2/dolphin/src/dolphincontextmenu.cpp	2012-05-03 12:48:46.288661411 +0400
++++ kde-baseapps-4.8.2_new/dolphin/src/dolphincontextmenu.cpp	2012-05-03 12:37:21.850422210 +0400
+@@ -604,7 +604,7 @@
+ 
+ bool DolphinContextMenu::moveToTrash() const
+ {
+-    return selectedItemsProperties().isLocal() && !m_shiftPressed;
++    return selectedItemsProperties().isLocal() && !m_shiftPressed && !DolphinView::isFileOnRemovableMedia(m_selectedItems.urlList());
+ }
+ 
+ #include "dolphincontextmenu.moc"
+diff -X exclude -Nuar kde-baseapps-4.8.2/dolphin/src/views/dolphinviewactionhandler.cpp kde-baseapps-4.8.2_new/dolphin/src/views/dolphinviewactionhandler.cpp
+--- kde-baseapps-4.8.2/dolphin/src/views/dolphinviewactionhandler.cpp	2012-05-03 12:48:46.288661411 +0400
++++ kde-baseapps-4.8.2_new/dolphin/src/views/dolphinviewactionhandler.cpp	2012-05-03 12:53:06.931400561 +0400
+@@ -315,7 +315,7 @@
+     // Note: kde3's konq_mainwindow.cpp used to check
+     // reason == KAction::PopupMenuActivation && ...
+     // but this isn't supported anymore
+-    if (modifiers & Qt::ShiftModifier) {
++    if (modifiers & Qt::ShiftModifier || DolphinView::isFileOnRemovableMedia(m_currentView->selectedItems().urlList())) {
+         m_currentView->deleteSelectedItems();
+     } else {
+         m_currentView->trashSelectedItems();
+diff -X exclude -Nuar kde-baseapps-4.8.2/dolphin/src/views/dolphinview.cpp kde-baseapps-4.8.2_new/dolphin/src/views/dolphinview.cpp
+--- kde-baseapps-4.8.2/dolphin/src/views/dolphinview.cpp	2012-05-03 12:48:46.285661358 +0400
++++ kde-baseapps-4.8.2_new/dolphin/src/views/dolphinview.cpp	2012-05-03 12:33:27.797190873 +0400
+@@ -72,6 +72,11 @@
+ #include "zoomlevelinfo.h"
+ #include "iconoverlay/iconoverlayobserver.h"
+ 
++#include <solid/devicenotifier.h>
++#include <solid/device.h>
++#include <solid/storageaccess.h>
++#include <solid/storagedrive.h>
++
+ namespace {
+     const int MaxModeEnum = DolphinView::CompactView;
+     const int MaxSortingEnum = DolphinView::SortByPath;
+@@ -1041,6 +1046,47 @@
+     return m_dirLister->rootItem();
+ }
+ 
++bool DolphinView::isFileOnRemovableMedia(const KUrl::List& urlList)
++{
++    Solid::DeviceNotifier *notifier = Solid::DeviceNotifier::instance();
++    QList<Solid::Device> list = Solid::Device::listFromType(Solid::DeviceInterface::StorageAccess, QString());
++
++    bool result = false;
++    
++    foreach(Solid::Device device, list)
++    {
++        if (result)
++            break;
++
++        bool isRemovable;
++        if(device.is<Solid::StorageDrive>())
++        {
++            Solid::StorageDrive *drive = device.as<Solid::StorageDrive>();
++            isRemovable = drive && (drive->isHotpluggable() || drive->isRemovable());
++        }
++        else
++        {
++            // Fixes removable property, taken from kde-workspace-4.8.2/plasma/generic/dataengines/soliddevice/soliddeviceengine.cpp, line 186
++            Solid::Device parentDevice = device.parent();
++            Solid::StorageDrive *drive = parentDevice.as<Solid::StorageDrive>();
++            isRemovable = drive && (drive->isHotpluggable() || drive->isRemovable());
++        }
++
++        if(isRemovable && device.is<Solid::StorageAccess>())
++        {
++            Solid::StorageAccess *storage = device.as<Solid::StorageAccess>();
++            if (!storage->filePath().isEmpty())
++                foreach(KUrl url, urlList)
++                    if (url.path().startsWith(storage->filePath()))
++                    {
++                        result = true;
++                        break;
++                    }
++        }
++    }
++    return result;
++}
++
+ void DolphinView::observeCreatedItem(const KUrl& url)
+ {
+     m_createdItemUrl = url;
+diff -X exclude -Nuar kde-baseapps-4.8.2/dolphin/src/views/dolphinview.h kde-baseapps-4.8.2_new/dolphin/src/views/dolphinview.h
+--- kde-baseapps-4.8.2/dolphin/src/views/dolphinview.h	2012-05-03 12:48:46.286661376 +0400
++++ kde-baseapps-4.8.2_new/dolphin/src/views/dolphinview.h	2012-05-03 12:55:08.069683931 +0400
+@@ -345,6 +345,12 @@
+      */
+     KFileItem rootItem() const;
+ 
++    /**
++     * Returns true if any of the specified files is located on removable device
++     */
++    static bool isFileOnRemovableMedia(const KUrl::List& urlList);
++
++
+ public slots:
+     /**
+      * Changes the directory to \a url. If the current directory is equal to

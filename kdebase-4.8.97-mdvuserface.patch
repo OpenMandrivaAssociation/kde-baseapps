@@ -1,0 +1,64 @@
+diff -urN kde-baseapps-4.8.97/kdepasswd/kcm/chfacedlg.h kde-baseapps-4.8.97-patched/kdepasswd/kcm/chfacedlg.h
+--- kde-baseapps-4.8.97/kdepasswd/kcm/chfacedlg.h	2012-06-26 07:10:42.000000000 +1100
++++ kde-baseapps-4.8.97-patched/kdepasswd/kcm/chfacedlg.h	2012-07-25 00:04:40.634547210 +1100
+@@ -53,7 +53,7 @@
+   QPixmap getFaceImage() const
+   {
+     if(ui.m_FacesWidget->currentItem())
+-      return ui.m_FacesWidget->currentItem()->icon().pixmap(64);
++      return ui.m_FacesWidget->currentItem()->icon().pixmap(225);
+     else
+       return QPixmap();
+   }
+diff -urN kde-baseapps-4.8.97/kdepasswd/kcm/kcm_useraccount.kcfg kde-baseapps-4.8.97-patched/kdepasswd/kcm/kcm_useraccount.kcfg
+--- kde-baseapps-4.8.97/kdepasswd/kcm/kcm_useraccount.kcfg	2012-06-26 07:10:42.000000000 +1100
++++ kde-baseapps-4.8.97-patched/kdepasswd/kcm/kcm_useraccount.kcfg	2012-07-25 00:04:40.635547210 +1100
+@@ -20,13 +20,17 @@
+ 		</entry>
+ 		<!-- These entries doesn't "exist" or is used in kdmrc 
+ 		but this is a nifty way of handling default values ;-) -->
++		<entry name = "IconSize" type="Int">
++			<label>The size of change face button image</label>
++			<default>64</default>
++		</entry>
+ 		<entry name = "FaceSize" type="Int">
+ 			<label>The size of login images</label>
+-			<default>64</default>
++			<default>225</default>
+ 		</entry>
+ 		<entry name = "DefaultFile" type="Path">
+ 			<label>The default image file</label>
+-			<default>.default.face.icon</default>
++			<default>default</default>
+ 		</entry>
+ 		<entry name="CustomFaceFile" type="Path">
+ 			<label>The filename of the user's custom image file</label>
+diff -urN kde-baseapps-4.8.97/kdepasswd/kcm/main.cpp kde-baseapps-4.8.97-patched/kdepasswd/kcm/main.cpp
+--- kde-baseapps-4.8.97/kdepasswd/kcm/main.cpp	2012-06-26 07:10:42.000000000 +1100
++++ kde-baseapps-4.8.97-patched/kdepasswd/kcm/main.cpp	2012-07-25 00:09:47.371543961 +1100
+@@ -153,7 +153,7 @@
+ 	_facePixmap = QPixmap( KCFGUserAccount::faceFile() );
+ 	_mw->btnChangeFace->setIcon( KIcon(_facePixmap) );
+ 	if (!_facePixmap.isNull()) {
+-		_mw->btnChangeFace->setIconSize(_facePixmap.size());
++		_mw->btnChangeFace->setIconSize( QSize( KCFGUserAccount::iconSize(), KCFGUserAccount::iconSize() ) );
+ 	}
+ 
+ 	KCModule::load(); /* KConfigXT */
+@@ -233,14 +233,13 @@
+   _facePixmap = pix;
+   _mw->btnChangeFace->setIcon( KIcon(_facePixmap) );
+   if ( !_facePixmap.isNull() )
+-    _mw->btnChangeFace->setIconSize(_facePixmap.size());
++    _mw->btnChangeFace->setIconSize( QSize( KCFGUserAccount::iconSize(), KCFGUserAccount::iconSize() ) );
+   emit changed( true );
+ }
+ 
+ void KCMUserAccount::slotFaceButtonClicked()
+ {
+-  ChFaceDlg* pDlg = new ChFaceDlg( KGlobal::dirs()->resourceDirs("data").last() +
+-	"/kdm/pics/users/", this );
++  ChFaceDlg* pDlg = new ChFaceDlg( "/usr/share/mdk/faces/", this );
+ 
+   if ( pDlg->exec() == QDialog::Accepted )
+       changeFace( pDlg->getFaceImage() );

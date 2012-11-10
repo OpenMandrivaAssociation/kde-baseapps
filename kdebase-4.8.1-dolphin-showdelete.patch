@@ -1,0 +1,16 @@
+diff -urN kde-baseapps-4.8.1/dolphin/src/dolphincontextmenu.cpp kde-baseapps-4.8.1-patched/dolphin/src/dolphincontextmenu.cpp
+--- kde-baseapps-4.8.1/dolphin/src/dolphincontextmenu.cpp	2012-01-19 05:07:34.000000000 +1100
++++ kde-baseapps-4.8.1-patched/dolphin/src/dolphincontextmenu.cpp	2012-03-12 13:35:48.000000000 +1100
+@@ -388,8 +388,11 @@
+     QAction* renameAction = collection->action("rename");
+     m_popup->addAction(renameAction);
+ 
++    KSharedConfig::Ptr globalConfig = KSharedConfig::openConfig("kdeglobals", KConfig::IncludeGlobals);
++    KConfigGroup configGroup(globalConfig, "KDE");
++
+     // Insert 'Move to Trash' and/or 'Delete'
+-    if (KGlobal::config()->group("KDE").readEntry("ShowDeleteCommand", false)) {
++    if (configGroup.readEntry("ShowDeleteCommand", true)) {
+         m_popup->addAction(collection->action("move_to_trash"));
+         m_popup->addAction(collection->action("delete"));
+     } else {
