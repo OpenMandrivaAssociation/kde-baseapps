@@ -1,0 +1,803 @@
+diff -urN kde-baseapps-4.9.4/dolphin/src/CMakeLists.txt kde-baseapps-4.9.4-patched/dolphin/src/CMakeLists.txt
+--- kde-baseapps-4.9.4/dolphin/src/CMakeLists.txt	2012-12-02 22:42:39.000000000 +0000
++++ kde-baseapps-4.9.4-patched/dolphin/src/CMakeLists.txt	2012-12-02 22:56:21.733535071 +0000
+@@ -67,6 +67,8 @@
+     views/tooltips/tooltipmanager.cpp
+     views/versioncontrol/updateitemstatesthread.cpp
+     views/versioncontrol/versioncontrolobserver.cpp
++    views/iconoverlay/updatefilestatesthread.cpp
++    views/iconoverlay/iconoverlayobserver.cpp
+     views/viewmodecontroller.cpp
+     views/viewproperties.cpp
+     views/zoomlevelinfo.cpp
+@@ -147,6 +149,7 @@
+ install(FILES dolphinpart.rc DESTINATION ${DATA_INSTALL_DIR}/dolphinpart)
+ install(FILES dolphinpart.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
+ install(FILES views/versioncontrol/fileviewversioncontrolplugin.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
++install(FILES views/iconoverlay/iconviewoverlaycontrolplugin.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
+ 
+ ##########################################
+ 
+diff -urN kde-baseapps-4.9.4/dolphin/src/dolphincontextmenu.cpp kde-baseapps-4.9.4-patched/dolphin/src/dolphincontextmenu.cpp
+--- kde-baseapps-4.9.4/dolphin/src/dolphincontextmenu.cpp	2012-12-02 22:42:39.000000000 +0000
++++ kde-baseapps-4.9.4-patched/dolphin/src/dolphincontextmenu.cpp	2012-12-02 22:56:21.733535071 +0000
+@@ -512,6 +512,13 @@
+         }
+         m_popup->addSeparator();
+     }
++    const QList<QAction*> iconOverlayActions = view->iconOverlayControlActions(m_selectedItems);
++    if (!iconOverlayActions.isEmpty()) {
++        foreach (QAction* action, iconOverlayActions) {
++            m_popup->addAction(action);
++        }
++        m_popup->addSeparator();
++    }
+ }
+ 
+ void DolphinContextMenu::addCustomActions()
+diff -urN kde-baseapps-4.9.4/dolphin/src/dolphinpart.cpp kde-baseapps-4.9.4-patched/dolphin/src/dolphinpart.cpp
+--- kde-baseapps-4.9.4/dolphin/src/dolphinpart.cpp	2012-12-02 22:42:39.000000000 +0000
++++ kde-baseapps-4.9.4-patched/dolphin/src/dolphinpart.cpp	2012-12-02 22:56:21.734035072 +0000
+@@ -408,6 +408,7 @@
+     KParts::BrowserExtension::ActionGroupMap actionGroups;
+     QList<QAction *> editActions;
+     editActions += m_view->versionControlActions(m_view->selectedItems());
++    editActions += m_view->iconOverlayControlActions(m_view->selectedItems());
+     editActions += customActions;
+ 
+     if (!_item.isNull()) { // only for context menu on one or more items
+diff -urN kde-baseapps-4.9.4/dolphin/src/views/dolphinfileitemlistwidget.cpp kde-baseapps-4.9.4-patched/dolphin/src/views/dolphinfileitemlistwidget.cpp
+--- kde-baseapps-4.9.4/dolphin/src/views/dolphinfileitemlistwidget.cpp	2012-12-02 22:42:39.000000000 +0000
++++ kde-baseapps-4.9.4-patched/dolphin/src/views/dolphinfileitemlistwidget.cpp	2012-12-02 22:56:21.734035072 +0000
+@@ -74,7 +74,33 @@
+     } else if (!overlay().isNull()) {
+         setOverlay(QPixmap());
+     }
++    //=====================================================================
++    //icon overlay
++    //=====================================================================
+ 
++    if (values.contains("iconOverlay"))
++    {
++        // The item is under icon overlay control.
++        const QString icon = static_cast<QString>(values.value("iconOverlay").toString());
++
++        int overlayHeight = KIconLoader::SizeSmall;
++        if (styleOption().iconSize >= KIconLoader::SizeEnormous)
++        {
++            overlayHeight = KIconLoader::SizeLarge;
++        } else if (styleOption().iconSize >= KIconLoader::SizeLarge)
++        {
++            overlayHeight = KIconLoader::SizeSmallMedium;
++        } else if (styleOption().iconSize >= KIconLoader::SizeMedium)
++        {
++            overlayHeight = KIconLoader::SizeSmall;
++        } else
++        {
++            overlayHeight = KIconLoader::SizeSmall / 2;
++        }
++
++        setOverlay(KIcon(icon).pixmap(QSize(overlayHeight, overlayHeight)));
++    }
++    //=====================================================================
+     setTextColor(color);
+ }
+ 
+diff -urN kde-baseapps-4.9.4/dolphin/src/views/dolphinview.cpp kde-baseapps-4.9.4-patched/dolphin/src/views/dolphinview.cpp
+--- kde-baseapps-4.9.4/dolphin/src/views/dolphinview.cpp	2012-12-02 22:42:39.000000000 +0000
++++ kde-baseapps-4.9.4-patched/dolphin/src/views/dolphinview.cpp	2012-12-02 22:57:26.530157941 +0000
+@@ -71,6 +71,7 @@
+ #include "viewproperties.h"
+ #include "views/tooltips/tooltipmanager.h"
+ #include "zoomlevelinfo.h"
++#include "iconoverlay/iconoverlayobserver.h"
+ 
+ #ifdef HAVE_NEPOMUK
+     #include <Nepomuk/ResourceManager>
+@@ -102,7 +103,8 @@
+     m_restoredContentsPosition(),
+     m_selectedUrls(),
+     m_clearSelectionBeforeSelectingNewItems(false),
+-    m_versionControlObserver(0)
++    m_versionControlObserver(0),
++    m_iconOverlayObserver(0)
+ {
+     m_topLayout = new QVBoxLayout(this);
+     m_topLayout->setSpacing(0);
+@@ -189,6 +191,11 @@
+     connect(m_versionControlObserver, SIGNAL(infoMessage(QString)), this, SIGNAL(infoMessage(QString)));
+     connect(m_versionControlObserver, SIGNAL(errorMessage(QString)), this, SIGNAL(errorMessage(QString)));
+     connect(m_versionControlObserver, SIGNAL(operationCompletedMessage(QString)), this, SIGNAL(operationCompletedMessage(QString)));
++    m_iconOverlayObserver = new IconOverlayObserver(this);
++    m_iconOverlayObserver->setModel(m_model);
++    connect(m_iconOverlayObserver, SIGNAL(infoMessage(QString)), this, SIGNAL(infoMessage(QString)));
++    connect(m_iconOverlayObserver, SIGNAL(errorMessage(QString)), this, SIGNAL(errorMessage(QString)));
++    connect(m_iconOverlayObserver, SIGNAL(operationCompletedMessage(QString)), this, SIGNAL(operationCompletedMessage(QString)));
+ 
+     applyViewProperties();
+     m_topLayout->addWidget(m_container);
+@@ -593,6 +600,23 @@
+     return actions;
+ }
+ 
++
++QList<QAction*> DolphinView::iconOverlayControlActions(const KFileItemList& items) const
++{
++    QList<QAction*> actions;
++
++    if (items.isEmpty())
++    {
++        const KFileItem item = m_model->rootItem();
++        if (!item.isNull()) {
++            actions = m_iconOverlayObserver->actions(KFileItemList() << item);
++        }
++    } else {
++        actions = m_iconOverlayObserver->actions(items);
++    }
++    return actions;
++}
++
+ void DolphinView::setUrl(const KUrl& url)
+ {
+     if (url == m_url) {
+@@ -1023,6 +1047,7 @@
+     if (previous != 0) {
+         disconnect(previous, SIGNAL(directoryLoadingCompleted()), this, SLOT(slotDirectoryLoadingCompleted()));
+         m_versionControlObserver->setModel(0);
++        m_iconOverlayObserver->setModel(0);
+     }
+ 
+     if (current) {
+@@ -1031,6 +1056,7 @@
+ 
+         KFileItemModel* fileItemModel = static_cast<KFileItemModel*>(current);
+         m_versionControlObserver->setModel(fileItemModel);
++        m_iconOverlayObserver->setModel(fileItemModel);
+     }
+ }
+ 
+diff -urN kde-baseapps-4.9.4/dolphin/src/views/dolphinview.h kde-baseapps-4.9.4-patched/dolphin/src/views/dolphinview.h
+--- kde-baseapps-4.9.4/dolphin/src/views/dolphinview.h	2012-12-02 22:42:39.000000000 +0000
++++ kde-baseapps-4.9.4-patched/dolphin/src/views/dolphinview.h	2012-12-02 22:56:21.735035074 +0000
+@@ -51,6 +51,7 @@
+ class ViewProperties;
+ class QGraphicsSceneDragDropEvent;
+ class QRegExp;
++class IconOverlayObserver;
+ 
+ /**
+  * @short Represents a view for the directory content.
+@@ -257,6 +258,8 @@
+      */
+     QList<QAction*> versionControlActions(const KFileItemList& items) const;
+ 
++    QList<QAction*> iconOverlayControlActions(const KFileItemList& items) const;
++
+     /**
+      * Returns the state of the paste action:
+      * first is whether the action should be enabled
+@@ -763,6 +766,8 @@
+ 
+     VersionControlObserver* m_versionControlObserver;
+ 
++    IconOverlayObserver* m_iconOverlayObserver;
++
+     // For unit tests
+     friend class TestBase;
+     friend class DolphinDetailsViewTest;
+diff -urN kde-baseapps-4.9.4/dolphin/src/views/iconoverlay/iconoverlayobserver.cpp kde-baseapps-4.9.4-patched/dolphin/src/views/iconoverlay/iconoverlayobserver.cpp
+--- kde-baseapps-4.9.4/dolphin/src/views/iconoverlay/iconoverlayobserver.cpp	1970-01-01 00:00:00.000000000 +0000
++++ kde-baseapps-4.9.4-patched/dolphin/src/views/iconoverlay/iconoverlayobserver.cpp	2012-12-02 22:56:21.735035074 +0000
+@@ -0,0 +1,219 @@
++#include "iconoverlayobserver.h"
++#include "kiconoverlayplugin.h"
++
++#include <KDirLister>
++#include <KLocale>
++#include <KService>
++#include <KServiceTypeTrader>
++#include <kitemviews/kfileitemmodel.h>
++
++
++#include "updatefilestatesthread.h"
++
++#include <QMutexLocker>
++#include <QTimer>
++
++IconOverlayObserver::IconOverlayObserver(QObject* parent) :
++    QObject(parent),
++    m_pendingItemStatesUpdate(false),
++    m_silentUpdate(false),
++    m_model(0),
++    m_dirVerificationTimer(0),
++    m_plugin(0),
++    m_UpdateFileStatesThread(0)
++{
++    m_dirVerificationTimer = new QTimer(this);
++    m_dirVerificationTimer->setSingleShot(true);
++    m_dirVerificationTimer->setInterval(100);
++    connect(m_dirVerificationTimer, SIGNAL(timeout()), this, SLOT(verifyDirectory()));
++}
++
++IconOverlayObserver::~IconOverlayObserver()
++{
++    if (m_plugin)
++    {
++        m_plugin->disconnect(this);
++        m_plugin = 0;
++    }
++}
++
++void IconOverlayObserver::setModel(KFileItemModel* model)
++{
++    if (m_model) {
++        disconnect(m_model, SIGNAL(itemsInserted(KItemRangeList)),
++                   this, SLOT(delayedDirectoryVerification()));
++        disconnect(m_model, SIGNAL(itemsChanged(KItemRangeList,QSet<QByteArray>)),
++                   this, SLOT(delayedDirectoryVerification()));
++    }
++
++    m_model = model;
++
++    if (model) {
++        connect(m_model, SIGNAL(itemsInserted(KItemRangeList)),
++                this, SLOT(delayedDirectoryVerification()));
++        connect(m_model, SIGNAL(itemsChanged(KItemRangeList,QSet<QByteArray>)),
++                this, SLOT(delayedDirectoryVerification()));
++    }
++}
++
++KFileItemModel* IconOverlayObserver::model() const
++{
++    return m_model;
++}
++
++QList<QAction*> IconOverlayObserver::actions(const KFileItemList& items) const
++{
++    QList<QAction*> actions;
++    if (!m_model)
++    {
++        return actions;
++    }
++
++    KIconOverlayPlugin* plugin = qobject_cast<KIconOverlayPlugin*>(m_plugin);
++    if (plugin)
++    {
++        if (m_UpdateFileStatesThread && m_UpdateFileStatesThread->lockPlugin())
++        {
++            actions = plugin->actions(items);
++            m_UpdateFileStatesThread->unlockPlugin();
++        } else
++        {
++            actions = plugin->actions(items);
++        }
++    }
++
++    return actions;
++}
++
++void IconOverlayObserver::delayedDirectoryVerification()
++{
++    m_silentUpdate = false;
++    m_dirVerificationTimer->start();
++}
++
++void IconOverlayObserver::silentDirectoryVerification()
++{
++    m_silentUpdate = true;
++    m_dirVerificationTimer->start();
++}
++
++void IconOverlayObserver::verifyDirectory()
++{
++    if (!m_model) {
++        return;
++    }
++
++    if (!m_plugin)
++    {
++          m_plugin = searchPlugin();
++          if (m_plugin)
++          {
++              connect(m_plugin, SIGNAL(itemStateChanged()),this, SLOT(silentDirectoryVerification()));
++              connect(m_plugin, SIGNAL(infoMessage(QString)),
++                      this, SIGNAL(infoMessage(QString)));
++              connect(m_plugin, SIGNAL(errorMessage(QString)),
++                      this, SIGNAL(errorMessage(QString)));
++              connect(m_plugin, SIGNAL(operationCompletedMessage(QString)),
++                      this, SIGNAL(operationCompletedMessage(QString)));
++         }
++    }
++    updateItemStates();
++}
++
++void IconOverlayObserver::slotThreadFinished()
++{
++    UpdateFileStatesThread* thread = m_UpdateFileStatesThread;
++    m_UpdateFileStatesThread = 0;
++
++    if (!m_plugin || !thread) {
++        return;
++    }
++
++    if (!thread->retrievedItems()) {
++        emit errorMessage(i18nc("@info:status", "Update of overlay information failed."));
++        return;
++    }
++
++    const QList<ItemState> itemStates = thread->itemStates();
++    foreach (const ItemState& itemState, itemStates)
++    {
++        QHash<QByteArray, QVariant> data = m_model->data(itemState.index);
++        QString path = data["iconOverlay"].value<QString>();
++        if(path == itemState.icon_path)
++            continue;
++        QHash<QByteArray, QVariant> values;
++        values.insert("iconOverlay", QVariant(itemState.icon_path));
++        m_model->setData(itemState.index, values);
++    }
++    if (!m_silentUpdate) {
++        emit itemStateChanged(QString());
++    }
++
++    if (m_pendingItemStatesUpdate)
++    {
++        m_pendingItemStatesUpdate = false;
++        updateItemStates();
++    }
++}
++
++void IconOverlayObserver::updateItemStates()
++{
++    Q_ASSERT(m_plugin);
++    if (!m_UpdateFileStatesThread)
++    {
++        m_UpdateFileStatesThread = new UpdateFileStatesThread();
++        connect(m_UpdateFileStatesThread, SIGNAL(finished()),
++                this, SLOT( slotThreadFinished()));
++        connect(m_UpdateFileStatesThread, SIGNAL(finished()),
++                m_UpdateFileStatesThread, SLOT(deleteLater()));
++    }
++    if (m_UpdateFileStatesThread->isRunning()) {
++        m_pendingItemStatesUpdate = true;
++        return;
++    }
++
++    QList<ItemState> itemStates;
++    const int itemCount = m_model->count();
++    itemStates.reserve(itemCount);
++
++    for (int i = 0; i < itemCount; ++i)
++    {
++        ItemState itemState;
++        itemState.index = i;
++        itemState.item = m_model->fileItem(i);
++        itemState.icon_path = "";
++        itemStates.append(itemState);
++    }
++
++    if (!itemStates.isEmpty()) {
++        if (!m_silentUpdate) {
++            emit infoMessage(i18nc("@info:status", "Updating overlay information..."));
++        }
++        m_UpdateFileStatesThread->setData(m_plugin, itemStates);
++        m_UpdateFileStatesThread->start();
++    }
++}
++
++KIconOverlayPlugin* IconOverlayObserver::searchPlugin() const
++{
++    static bool pluginsAvailable = true;
++
++    if (!pluginsAvailable)
++    {
++        return 0;
++    }
++
++    const KService::List pluginServices = KServiceTypeTrader::self()->query("IconViewOverlayControlPlugin");
++
++    for (KService::List::ConstIterator it = pluginServices.constBegin(); it != pluginServices.constEnd(); ++it)
++    {
++
++        KIconOverlayPlugin* plugin = (*it)->createInstance<KIconOverlayPlugin>();
++        if (plugin)
++            return plugin;
++    }
++    return 0;
++}
++
++#include "iconoverlayobserver.moc"
++
+diff -urN kde-baseapps-4.9.4/dolphin/src/views/iconoverlay/iconoverlayobserver.h kde-baseapps-4.9.4-patched/dolphin/src/views/iconoverlay/iconoverlayobserver.h
+--- kde-baseapps-4.9.4/dolphin/src/views/iconoverlay/iconoverlayobserver.h	1970-01-01 00:00:00.000000000 +0000
++++ kde-baseapps-4.9.4-patched/dolphin/src/views/iconoverlay/iconoverlayobserver.h	2012-12-02 22:56:21.735535075 +0000
+@@ -0,0 +1,109 @@
++#ifndef ICONOVERLAYOBSERVER_H
++#define ICONOVERLAYOBSERVER_H
++
++#include <libdolphin_export.h>
++
++#include <KFileItem>
++#include <QList>
++#include <QMutex>
++#include <QObject>
++#include <QString>
++#include "kiconoverlayplugin.h"
++
++class KFileItemList;
++class KFileItemModel;
++class QAction;
++class QTimer;
++class UpdateFileStatesThread;
++
++class LIBDOLPHINPRIVATE_EXPORT IconOverlayObserver : public QObject
++{
++    Q_OBJECT
++
++public:
++    explicit IconOverlayObserver(QObject* parent = 0);
++    virtual ~IconOverlayObserver();
++
++    void setModel(KFileItemModel* model);
++    KFileItemModel* model() const;
++
++    QList<QAction*> actions(const KFileItemList& items) const;
++
++signals:
++    /**
++     * Is emitted if an information message with the content \a msg
++     * should be shown.
++     */
++    void infoMessage(const QString& msg);
++
++    /**
++     * Is emitted if an error message with the content \a msg
++     * should be shown.
++     */
++    void errorMessage(const QString& msg);
++
++    /**
++     * Is emitted if an "operation completed" message with the content \a msg
++     * should be shown.
++     */
++    void operationCompletedMessage(const QString& msg);
++
++
++    void itemStateChanged(const QString & msg );
++
++private slots:
++    /**
++     * Invokes verifyDirectory() with a small delay. If delayedDirectoryVerification()
++     * is invoked before the delay has been exceeded, the delay will be reset. This
++     * assures that a lot of short requests for directory verification only result
++     * in one (expensive) call.
++     */
++    void delayedDirectoryVerification();
++
++    /**
++     * Invokes verifyDirectory() with a small delay. In opposite to
++     * delayedDirectoryVerification() it and assures that the verification of
++     * the directory is done silently without information messages.
++     */
++    void silentDirectoryVerification();
++
++    void verifyDirectory();
++
++    /**
++     * Is invoked if the thread m_UpdateFileStatesThread has been finished
++     * and applys the item states.
++     */
++    void slotThreadFinished();
++
++private:
++    struct ItemState
++    {
++        int index;
++        KFileItem item;
++        QString icon_path;
++    };
++
++    void updateItemStates();
++
++    /**
++     * Returns a matching plugin for the given directory.
++     * 0 is returned, if no matching plugin has been found.
++     */
++    KIconOverlayPlugin* searchPlugin() const;
++
++
++private:
++    bool m_pendingItemStatesUpdate;
++    bool m_silentUpdate;
++
++    KFileItemModel* m_model;
++
++    QTimer* m_dirVerificationTimer;
++
++    KIconOverlayPlugin* m_plugin;
++    UpdateFileStatesThread* m_UpdateFileStatesThread;
++
++    friend class UpdateFileStatesThread;
++};
++
++#endif // ICONOVERLAYOBSERVER_H
+diff -urN kde-baseapps-4.9.4/dolphin/src/views/iconoverlay/iconviewoverlaycontrolplugin.desktop kde-baseapps-4.9.4-patched/dolphin/src/views/iconoverlay/iconviewoverlaycontrolplugin.desktop
+--- kde-baseapps-4.9.4/dolphin/src/views/iconoverlay/iconviewoverlaycontrolplugin.desktop	1970-01-01 00:00:00.000000000 +0000
++++ kde-baseapps-4.9.4-patched/dolphin/src/views/iconoverlay/iconviewoverlaycontrolplugin.desktop	2012-12-02 22:56:21.735535075 +0000
+@@ -0,0 +1,4 @@
++[Desktop Entry]
++Type=ServiceType
++X-KDE-ServiceType=IconViewOverlayControlPlugin
++Name=IconViewOverlayControlPlugin
+diff -urN kde-baseapps-4.9.4/dolphin/src/views/iconoverlay/updatefilestatesthread.cpp kde-baseapps-4.9.4-patched/dolphin/src/views/iconoverlay/updatefilestatesthread.cpp
+--- kde-baseapps-4.9.4/dolphin/src/views/iconoverlay/updatefilestatesthread.cpp	1970-01-01 00:00:00.000000000 +0000
++++ kde-baseapps-4.9.4-patched/dolphin/src/views/iconoverlay/updatefilestatesthread.cpp	2012-12-02 22:56:21.735535075 +0000
+@@ -0,0 +1,101 @@
++/***************************************************************************
++ *   Copyright (C) 2009 by Peter Penz <peter.penz19@gmail.com>             *
++ *                                                                         *
++ *   This program is free software; you can redistribute it and/or modify  *
++ *   it under the terms of the GNU General Public License as published by  *
++ *   the Free Software Foundation; either version 2 of the License, or     *
++ *   (at your option) any later version.                                   *
++ *                                                                         *
++ *   This program is distributed in the hope that it will be useful,       *
++ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
++ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
++ *   GNU General Public License for more details.                          *
++ *                                                                         *
++ *   You should have received a copy of the GNU General Public License     *
++ *   along with this program; if not, write to the                         *
++ *   Free Software Foundation, Inc.,                                       *
++ *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA            *
++ ***************************************************************************/
++
++#include "updatefilestatesthread.h"
++
++#include "kiconoverlayplugin.h"
++
++#include <QMutexLocker>
++
++UpdateFileStatesThread::UpdateFileStatesThread() :
++    QThread(),
++    m_globalPluginMutex(0),
++    m_plugin(0),
++    m_itemMutex(),
++    m_retrievedItems(false),
++    m_itemStates()
++{
++    // Several threads may share one instance of a plugin. A global
++    // mutex is required to serialize the retrieval of version control
++    // states inside run().
++    static QMutex globalMutex;
++    m_globalPluginMutex = &globalMutex;
++}
++
++UpdateFileStatesThread::~UpdateFileStatesThread()
++{
++}
++
++void UpdateFileStatesThread::setData(KIconOverlayPlugin* plugin,
++                                     const QList<IconOverlayObserver::ItemState>& itemStates)
++{
++    QMutexLocker itemLocker(&m_itemMutex);
++    m_itemStates = itemStates;
++
++    QMutexLocker pluginLocker(m_globalPluginMutex);
++    m_plugin = plugin;
++}
++
++void UpdateFileStatesThread::run()
++{
++    Q_ASSERT(!m_itemStates.isEmpty());
++    Q_ASSERT(m_plugin);
++
++    QMutexLocker itemLocker(&m_itemMutex);
++    const QString directory = m_itemStates.first().item.url().directory(KUrl::AppendTrailingSlash);
++    itemLocker.unlock();
++
++    QMutexLocker pluginLocker(m_globalPluginMutex);
++    m_retrievedItems = false;
++    KIconOverlayPlugin* plugin = qobject_cast<KIconOverlayPlugin*>(m_plugin);
++    itemLocker.relock();
++    const int count = m_itemStates.count();
++    if (plugin)
++    {
++        for (int i = 0; i < count; ++i)
++        {
++            m_itemStates[i].icon_path = plugin->iconPath(m_itemStates[i].item);
++        }
++    }
++    m_retrievedItems = true;
++}
++
++bool UpdateFileStatesThread::lockPlugin()
++{
++    return m_globalPluginMutex->tryLock(300);
++}
++
++void UpdateFileStatesThread::unlockPlugin()
++{
++    m_globalPluginMutex->unlock();
++}
++
++QList<IconOverlayObserver::ItemState> UpdateFileStatesThread::itemStates() const
++{
++    QMutexLocker locker(&m_itemMutex);
++    return m_itemStates;
++}
++
++bool UpdateFileStatesThread::retrievedItems() const
++{
++    QMutexLocker locker(&m_itemMutex);
++    return m_retrievedItems;
++}
++
++#include "updatefilestatesthread.moc"
+diff -urN kde-baseapps-4.9.4/dolphin/src/views/iconoverlay/updatefilestatesthread.h kde-baseapps-4.9.4-patched/dolphin/src/views/iconoverlay/updatefilestatesthread.h
+--- kde-baseapps-4.9.4/dolphin/src/views/iconoverlay/updatefilestatesthread.h	1970-01-01 00:00:00.000000000 +0000
++++ kde-baseapps-4.9.4-patched/dolphin/src/views/iconoverlay/updatefilestatesthread.h	2012-12-02 22:56:21.735535075 +0000
+@@ -0,0 +1,84 @@
++/***************************************************************************
++ *   Copyright (C) 2009 by Peter Penz <peter.penz19@gmail.com>             *
++ *                                                                         *
++ *   This program is free software; you can redistribute it and/or modify  *
++ *   it under the terms of the GNU General Public License as published by  *
++ *   the Free Software Foundation; either version 2 of the License, or     *
++ *   (at your option) any later version.                                   *
++ *                                                                         *
++ *   This program is distributed in the hope that it will be useful,       *
++ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
++ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
++ *   GNU General Public License for more details.                          *
++ *                                                                         *
++ *   You should have received a copy of the GNU General Public License     *
++ *   along with this program; if not, write to the                         *
++ *   Free Software Foundation, Inc.,                                       *
++ *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA            *
++ ***************************************************************************/
++
++#ifndef UPDATEFILESTATESTHREAD_H
++#define UPDATEFILESTATESTHREAD_H
++
++#include <libdolphin_export.h>
++#include <views/iconoverlay/iconoverlayobserver.h>
++
++#include <QMutex>
++#include <QThread>
++
++class KIconOverlayPlugin;
++
++/**
++ * The performance of updating the version state of items depends
++ * on the used plugin. To prevent that Dolphin gets blocked by a
++ * slow plugin, the updating is delegated to a thread.
++ */
++class LIBDOLPHINPRIVATE_EXPORT UpdateFileStatesThread : public QThread
++{
++    Q_OBJECT
++
++public:
++    UpdateFileStatesThread();
++    virtual ~UpdateFileStatesThread();
++
++    /**
++     * @param plugin     Version control plugin that is used to update the
++     *                   state of the items. Whenever the plugin is accessed
++     *                   from the thread creator after starting the thread,
++     *                   UpdateItemStatesThread::lockPlugin() and
++     *                   UpdateItemStatesThread::unlockPlugin() must be used.
++     * @param itemStates List of items, where the states get updated.
++     */
++    void setData(KIconOverlayPlugin* plugin,
++                 const QList<IconOverlayObserver::ItemState>& itemStates);
++
++    /**
++     * Whenever the plugin is accessed by the thread creator, lockPlugin() must
++     * be invoked. True is returned, if the plugin could be locked within 300
++     * milliseconds.
++     */
++    bool lockPlugin();
++
++    /**
++     * Must be invoked if lockPlugin() returned true and plugin has been accessed
++     * by the thread creator.
++     */
++    void unlockPlugin();
++
++    QList<IconOverlayObserver::ItemState> itemStates() const;
++
++    bool retrievedItems() const;
++
++protected:
++    virtual void run();
++
++private:
++    QMutex* m_globalPluginMutex; // Protects the m_plugin globally
++    KIconOverlayPlugin* m_plugin;
++
++    mutable QMutex m_itemMutex; // Protects m_retrievedItems and m_itemStates
++    bool m_retrievedItems;
++    QList<IconOverlayObserver::ItemState> m_itemStates;
++};
++
++#endif // UPDATEFILESTATESTHREAD_H
+diff -urN kde-baseapps-4.9.4/lib/konq/CMakeLists.txt kde-baseapps-4.9.4-patched/lib/konq/CMakeLists.txt
+--- kde-baseapps-4.9.4/lib/konq/CMakeLists.txt	2012-12-02 22:42:39.000000000 +0000
++++ kde-baseapps-4.9.4-patched/lib/konq/CMakeLists.txt	2012-12-02 22:56:21.735535075 +0000
+@@ -22,6 +22,7 @@
+    konq_historyprovider.cpp
+    kversioncontrolplugin.cpp  # used by dolphin and its version control plugins (deprecated)
+    kversioncontrolplugin2.cpp # used by dolphin and its version control plugins
++   kiconoverlayplugin.cpp
+ 
+    konq_nameandurlinputdialog.cpp # deprecated (functionality has moved to kdelibs)
+    knewmenu.cpp # deprecated (functionality has moved to kdelibs)
+@@ -67,6 +68,7 @@
+  konq_fileitemcapabilities.h
+  kversioncontrolplugin.h
+  kversioncontrolplugin2.h
++ kiconoverlayplugin.h
+  konq_historyprovider.h
+  konq_historyentry.h
+ DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel
+diff -urN kde-baseapps-4.9.4/lib/konq/kiconoverlayplugin.cpp kde-baseapps-4.9.4-patched/lib/konq/kiconoverlayplugin.cpp
+--- kde-baseapps-4.9.4/lib/konq/kiconoverlayplugin.cpp	1970-01-01 00:00:00.000000000 +0000
++++ kde-baseapps-4.9.4-patched/lib/konq/kiconoverlayplugin.cpp	2012-12-02 22:56:21.736035076 +0000
+@@ -0,0 +1,12 @@
++#include "kiconoverlayplugin.h"
++
++
++KIconOverlayPlugin::KIconOverlayPlugin(QObject* parent) : QObject(parent)
++{
++
++}
++KIconOverlayPlugin::~KIconOverlayPlugin()
++{
++}
++
++#include "kiconoverlayplugin.moc"
+diff -urN kde-baseapps-4.9.4/lib/konq/kiconoverlayplugin.h kde-baseapps-4.9.4-patched/lib/konq/kiconoverlayplugin.h
+--- kde-baseapps-4.9.4/lib/konq/kiconoverlayplugin.h	1970-01-01 00:00:00.000000000 +0000
++++ kde-baseapps-4.9.4-patched/lib/konq/kiconoverlayplugin.h	2012-12-02 22:56:21.736035076 +0000
+@@ -0,0 +1,40 @@
++#ifndef KICONOVERLAYPLUGIN_H
++#define KICONOVERLAYPLUGIN_H
++
++
++#include <libkonq_export.h>
++
++#include <QObject>
++
++class KFileItem;
++class KFileItemList;
++class QAction;
++class QString;
++
++
++
++class LIBKONQ_EXPORT KIconOverlayPlugin : public QObject
++{
++    Q_OBJECT
++public:
++    KIconOverlayPlugin(QObject *parent = 0);
++    virtual ~KIconOverlayPlugin();
++
++    virtual bool isFileUnderControl(const QString & file) = 0;
++
++    virtual QString iconPath(const KFileItem& item) = 0;
++
++    virtual QList<QAction*> actions(const KFileItemList& items)=0;
++signals:
++    void itemStateChanged();
++
++    void infoMessage(const QString& msg);
++
++    void errorMessage(const QString& msg);
++
++    void operationCompletedMessage(const QString& msg);
++
++
++};
++
++#endif // KICONOVERLAYPLUGIN_H

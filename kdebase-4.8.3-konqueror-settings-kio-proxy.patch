@@ -1,0 +1,321 @@
+diff -Nuar kde-baseapps-orig/konqueror/settings/kio/CMakeLists.txt kde-baseapps/konqueror/settings/kio/CMakeLists.txt
+--- kde-baseapps-orig/konqueror/settings/kio/CMakeLists.txt	2012-09-28 04:17:12.000000000 +0400
++++ kde-baseapps/konqueror/settings/kio/CMakeLists.txt	2012-10-19 16:20:22.619059181 +0400
+@@ -35,6 +35,16 @@
+ 
+ install(TARGETS kcm_kio  DESTINATION ${PLUGIN_INSTALL_DIR} )
+ 
++########### next target ###############
++
++kde4_add_executable(kcmproxyhelper kproxyhelper.cpp ${kproxyhelper_mocs})
++target_link_libraries(kcmproxyhelper ${KDE4_KDECORE_LIBS})
++install(TARGETS kcmproxyhelper DESTINATION ${LIBEXEC_INSTALL_DIR})
++
++kde4_install_auth_helper_files(kcmproxyhelper org.kde.kcontrol.kcmproxy root)
++
++kde4_install_auth_actions(org.kde.kcontrol.kcmproxy kcmproxy.actions)
++
+ ########### install files ###############
+ 
+ install( FILES smb.desktop cookies.desktop useragent.desktop bookmarks.desktop cache.desktop
+diff -Nuar kde-baseapps-orig/konqueror/settings/kio/kcmproxy.actions kde-baseapps/konqueror/settings/kio/kcmproxy.actions
+--- kde-baseapps-orig/konqueror/settings/kio/kcmproxy.actions	1970-01-01 03:00:00.000000000 +0300
++++ kde-baseapps/konqueror/settings/kio/kcmproxy.actions	2012-10-19 16:26:51.280065694 +0400
+@@ -0,0 +1,14 @@
++[Domain]
++Name=Proxy Control Module
++Name[en_GB]=Proxy Control Module
++Name[ru]=Модуль настройки прокси-сервера
++Icon=preferences-system-network-proxy
++
++[org.kde.kcontrol.kcmproxy.save]
++Name=Save the proxy settings
++Name[en_GB]=Save the proxy settings
++Name[ru]=Сохранить параметры прокси-сервера
++Description=System policies prevent you from saving the proxy settings.
++Description[en_GB]=System policies prevent you from saving the proxy settings.
++Description[ru]=Правила безопасности запрещают вам сохранять настройки прокси-сервера.
++Policy=auth_admin
+\ В конце файла нет новой строки
+diff -Nuar kde-baseapps-orig/konqueror/settings/kio/kproxydlg.cpp kde-baseapps/konqueror/settings/kio/kproxydlg.cpp
+--- kde-baseapps-orig/konqueror/settings/kio/kproxydlg.cpp	2012-09-28 04:17:12.000000000 +0400
++++ kde-baseapps/konqueror/settings/kio/kproxydlg.cpp	2012-10-19 16:45:50.884084788 +0400
+@@ -24,6 +24,9 @@
+ 
+ // Local
+ #include "ksaveioconfig.h"
++#if defined(Q_OS_LINUX) || defined (Q_OS_UNIX)
++#include "kproxyhelper.h"
++#endif
+ 
+ // KDE
+ #include <kpluginfactory.h>
+@@ -32,12 +35,16 @@
+ #include <kmessagebox.h>
+ #include <kurifilter.h>
+ #include <kdebug.h>
++#if defined(Q_OS_LINUX) || defined (Q_OS_UNIX)
++#include <kauthaction.h>
++#endif
+ 
+ // Qt
+ #include <QLabel>
+ #include <QRadioButton>
+ #include <QLineEdit>
+ #include <QSpinBox>
++#include <QtCore/QFile>
+ 
+ 
+ #define QL1C(x)         QLatin1Char(x)
+@@ -118,7 +125,7 @@
+ }
+ 
+ static QString proxyUrlFromInput(KProxyDialog::DisplayUrlFlags* flags,
+-                                 const QLineEdit* edit, const QSpinBox* spinBox,
++                                 const QLineEdit* edit, const QChar &separator, const QSpinBox* spinBox,
+                                  KProxyDialog::DisplayUrlFlag flag = KProxyDialog::HideNone)
+ {
+     Q_ASSERT(edit);
+@@ -143,14 +150,14 @@
+         url.setPort(-1);
+ 
+         proxyStr = url.url();
+-        proxyStr += QL1C(' ');
++        proxyStr += QL1C(separator.toLatin1());
+         if (portNum > -1) {
+             proxyStr += QString::number(portNum);
+         }
+     } else {
+         proxyStr = edit->text();
+         if (spinBox->value() > 0) {
+-            proxyStr += QL1C(' ');
++            proxyStr += QL1C(separator.toLatin1());
+             proxyStr += QString::number(spinBox->value());
+         }
+     }
+@@ -250,6 +257,9 @@
+ 
+ #if defined(Q_OS_LINUX) || defined (Q_OS_UNIX)
+     connect(mUi.systemProxyRadioButton, SIGNAL(toggled(bool)), mUi.systemProxyGroupBox, SLOT(setVisible(bool)));
++    connect(mUi.manualProxyRadioButton, SIGNAL(toggled(bool)), this, SLOT(on_manualProxyGroupBox_toggled(bool)));
++    connect(mUi.useSystemSettingsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(on_useSystemSettingsCheckBox_stateChanged(int)));
++ 
+ #else
+     mUi.autoDetectButton->setVisible(false);
+     connect(mUi.systemProxyRadioButton, SIGNAL(clicked()), SLOT(slotChanged()));
+@@ -358,10 +368,10 @@
+     if (mUi.manualProxyRadioButton->isChecked()) {
+         DisplayUrlFlags flags = HideNone;
+         proxyType = KProtocolManager::ManualProxy;
+-        mProxyMap[QL1S("HttpProxy")] = proxyUrlFromInput(&flags, mUi.manualProxyHttpEdit, mUi.manualProxyHttpSpinBox, HideHttpUrlScheme);
+-        mProxyMap[QL1S("HttpsProxy")] = proxyUrlFromInput(&flags, mUi.manualProxyHttpsEdit, mUi.manualProxyHttpsSpinBox, HideHttpsUrlScheme);
+-        mProxyMap[QL1S("FtpProxy")] = proxyUrlFromInput(&flags, mUi.manualProxyFtpEdit, mUi.manualProxyFtpSpinBox, HideFtpUrlScheme);
+-        mProxyMap[QL1S("SocksProxy")] = proxyUrlFromInput(&flags, mUi.manualProxySocksEdit, mUi.manualProxySocksSpinBox, HideSocksUrlScheme);
++        mProxyMap[QL1S("HttpProxy")] = proxyUrlFromInput(&flags, mUi.manualProxyHttpEdit, ' ', mUi.manualProxyHttpSpinBox, HideHttpUrlScheme);
++        mProxyMap[QL1S("HttpsProxy")] = proxyUrlFromInput(&flags, mUi.manualProxyHttpsEdit, ' ', mUi.manualProxyHttpsSpinBox, HideHttpsUrlScheme);
++        mProxyMap[QL1S("FtpProxy")] = proxyUrlFromInput(&flags, mUi.manualProxyFtpEdit, ' ', mUi.manualProxyFtpSpinBox, HideFtpUrlScheme);
++        mProxyMap[QL1S("SocksProxy")] = proxyUrlFromInput(&flags, mUi.manualProxySocksEdit, ' ', mUi.manualProxySocksSpinBox, HideSocksUrlScheme);
+         mProxyMap[QL1S("NoProxy")] = mUi.manualNoProxyEdit->text();
+         displayUrlFlags = flags;
+     } else if (mUi.systemProxyRadioButton->isChecked()) {
+@@ -396,11 +406,40 @@
+         KSaveIOConfig::updateProxyScout (this);
+     }
+ 
++#if defined(Q_OS_LINUX) || defined (Q_OS_UNIX)
++    if (mUi.useSystemSettingsCheckBox->checkState() == Qt::Checked) {
++        QVariantMap helperargs;
++        if (proxyType == KProtocolManager::ManualProxy) {
++        DisplayUrlFlags flags = HideNone;
++        helperargs["HttpProxy"] = proxyUrlFromInput(&flags, mUi.manualProxyHttpEdit, ':', mUi.manualProxyHttpSpinBox, HideHttpUrlScheme);
++        helperargs["HttpsProxy"] = proxyUrlFromInput(&flags, mUi.manualProxyHttpsEdit, ':', mUi.manualProxyHttpsSpinBox, HideHttpsUrlScheme);
++        helperargs["FtpProxy"] = proxyUrlFromInput(&flags, mUi.manualProxyFtpEdit, ':', mUi.manualProxyFtpSpinBox, HideFtpUrlScheme);
++        helperargs["NoProxy"] = mUi.manualNoProxyEdit->text();
++        }
++        else {
++        helperargs["HttpProxy"] = QL1S("");
++        helperargs["HttpsProxy"] = QL1S("");
++        helperargs["FtpProxy"] = QL1S("");
++        helperargs["NoProxy"] = QL1S("");
++        }
++
++        Action action("org.kde.kcontrol.kcmproxy.save");
++        action.setHelperID("org.kde.kcontrol.kcmproxy");
++        action.setArguments(helperargs);
++
++        ActionReply reply = action.execute();
++        if (reply.failed()) {
++            qDebug() << "KProxyDialog::save()  reply failed";
++        }
++    }
++#endif
++    
+     emit changed (false);
+ }
+ 
+ void KProxyDialog::defaults()
+ {
++    mUi.useSystemSettingsCheckBox->setChecked(false);
+     mUi.noProxyRadioButton->setChecked(true);
+     mUi.proxyScriptUrlRequester->clear();
+ 
+@@ -468,6 +507,17 @@
+     mUi.manualProxySocksSpinBox->setValue(value);
+ }
+ 
++void KProxyDialog::on_useSystemSettingsCheckBox_stateChanged(int state)
++{
++    setNeedsAuthorization(state == Qt::Checked);
++}
++
++void KProxyDialog::on_manualProxyGroupBox_toggled(bool state)
++{
++    if (state == false)
++        mUi.useSystemSettingsCheckBox->setChecked(false);
++}
++
+ void KProxyDialog::on_showEnvValueCheckBox_toggled (bool on)
+ {
+     if (on) {
+diff -Nuar kde-baseapps-orig/konqueror/settings/kio/kproxydlg.h kde-baseapps/konqueror/settings/kio/kproxydlg.h
+--- kde-baseapps-orig/konqueror/settings/kio/kproxydlg.h	2012-09-28 04:17:12.000000000 +0400
++++ kde-baseapps/konqueror/settings/kio/kproxydlg.h	2012-10-19 16:46:28.960085425 +0400
+@@ -56,6 +56,8 @@
+     void on_manualNoProxyEdit_textChanged(const QString&);    
+     void on_manualProxyHttpEdit_textEdited(const QString&);
+     void on_manualProxyHttpSpinBox_valueChanged(int);
++    void on_useSystemSettingsCheckBox_stateChanged(int);
++    void on_manualProxyGroupBox_toggled(bool);
+ 
+     void slotChanged();
+ 
+diff -Nuar kde-baseapps-orig/konqueror/settings/kio/kproxydlg.ui kde-baseapps/konqueror/settings/kio/kproxydlg.ui
+--- kde-baseapps-orig/konqueror/settings/kio/kproxydlg.ui	2012-09-28 04:17:12.000000000 +0400
++++ kde-baseapps/konqueror/settings/kio/kproxydlg.ui	2012-10-19 16:47:31.679086476 +0400
+@@ -643,6 +643,16 @@
+         </property>
+        </widget>
+       </item>
++      <item row="7" column="1">
++       <widget class="QCheckBox" name="useSystemSettingsCheckBox">
++        <property name="toolTip">
++         <string extracomment="Checkbox item: if checked then proxy settings will be saved for all users">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If it checked then proxy settings will be saved for all users (globally/systemwide).   Root privileges are required.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
++        </property>
++        <property name="text">
++         <string>Save these settings for all users (requires root privileges) </string>
++        </property>
++       </widget>
++      </item>
+      </layout>
+     </widget>
+    </item>
+diff -Nuar kde-baseapps-orig/konqueror/settings/kio/kproxyhelper.cpp kde-baseapps/konqueror/settings/kio/kproxyhelper.cpp
+--- kde-baseapps-orig/konqueror/settings/kio/kproxyhelper.cpp	1970-01-01 03:00:00.000000000 +0300
++++ kde-baseapps/konqueror/settings/kio/kproxyhelper.cpp	2012-10-19 16:48:40.511087630 +0400
+@@ -0,0 +1,65 @@
++/*
++ *  kproxyhelper - Proxy helper
++ *
++ *  Copyright (C) 2012 Ural Mullabaev <ural.mullabaev@rosalab.ru>
++ *
++ *  This program is free software; you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation; either version 2 of the License, or
++ *  (at your option) any later version.
++ *
++ *  This program is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with this program; if not, write to the Free Software
++ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ *
++ */
++
++// Own
++#include "kproxyhelper.h"
++
++// Qt
++#include <QtCore/QFile>
++#include <QtCore/QTextStream>
++
++// KDE
++#include <kcomponentdata.h>
++
++ActionReply ProxyHelper::save(const QVariantMap &args)
++{
++    QString httpProxy = args.value("HttpProxy").toString();
++    QString httpsProxy = args.value("HttpsProxy").toString();
++    QString ftpProxy = args.value("FtpProxy").toString();
++    QString noProxy = args.value("NoProxy").toString();
++
++    KComponentData data( "kcmproxyhelper" );
++
++    QFile file("/etc/profile.d/proxy.sh");
++    if (file.open(QIODevice::WriteOnly)) {
++        QTextStream stream(&file);
++        if (!httpProxy.isEmpty())
++    	    stream << "http_proxy=" << httpProxy << endl;
++	if (!httpsProxy.isEmpty())
++	    stream << "https_proxy=" << httpsProxy << endl;
++	if (!ftpProxy.isEmpty())
++	    stream << "ftp_proxy=" << ftpProxy << endl;
++	if (!noProxy.isEmpty())
++	    stream << "no_proxy=" << noProxy << endl;
++	stream << "export http_proxy https_proxy ftp_proxy no_proxy" << endl;
++
++	file.close();
++	file.setPermissions(QFile::ReadOwner | QFile::WriteOwner | QFile::ExeOwner | 
++			    QFile::ReadGroup | QFile::ExeGroup | 
++			    QFile::ReadOther | QFile::ExeOther);
++	return ActionReply::SuccessReply;
++    }
++    else {
++	return ActionReply::HelperError;
++    }
++}
++
++KDE4_AUTH_HELPER_MAIN("org.kde.kcontrol.kcmproxy", ProxyHelper) 
+diff -Nuar kde-baseapps-orig/konqueror/settings/kio/kproxyhelper.h kde-baseapps/konqueror/settings/kio/kproxyhelper.h
+--- kde-baseapps-orig/konqueror/settings/kio/kproxyhelper.h	1970-01-01 03:00:00.000000000 +0300
++++ kde-baseapps/konqueror/settings/kio/kproxyhelper.h	2012-10-19 16:51:09.456090125 +0400
+@@ -0,0 +1,37 @@
++/*
++ *  kproxyhelper - Proxy helper
++ *
++ *  Copyright (C) 2012 Ural Mullabaev <ural.mullabaev@rosalab.ru>
++ *
++ *  This program is free software; you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation; either version 2 of the License, or
++ *  (at your option) any later version.
++ *
++ *  This program is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with this program; if not, write to the Free Software
++ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ *
++ */
++
++#ifndef PROXY_HELPER_H
++#define PROXY_HELPER_H
++
++#include <kauth.h>
++
++using namespace KAuth;
++
++class ProxyHelper : public QObject
++{
++    Q_OBJECT
++
++    public slots:
++        ActionReply save(const QVariantMap &map);
++};
++
++#endif // PROXY_HELPER_H 
