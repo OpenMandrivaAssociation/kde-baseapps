@@ -1,7 +1,6 @@
-diff -urN kde-baseapps-4.9.4/dolphin/src/CMakeLists.txt kde-baseapps-4.9.4-patched/dolphin/src/CMakeLists.txt
---- kde-baseapps-4.9.4/dolphin/src/CMakeLists.txt	2012-12-02 22:42:39.000000000 +0000
-+++ kde-baseapps-4.9.4-patched/dolphin/src/CMakeLists.txt	2012-12-02 22:56:21.733535071 +0000
-@@ -67,6 +67,8 @@
+--- kde-baseapps-4.9.98/dolphin/src/CMakeLists.txt.0106~	2013-01-29 20:07:18.734150830 +0100
++++ kde-baseapps-4.9.98/dolphin/src/CMakeLists.txt	2013-01-29 20:07:18.737150797 +0100
+@@ -75,6 +75,8 @@ set(dolphinprivate_LIB_SRCS
      views/tooltips/tooltipmanager.cpp
      views/versioncontrol/updateitemstatesthread.cpp
      views/versioncontrol/versioncontrolobserver.cpp
@@ -10,7 +9,7 @@ diff -urN kde-baseapps-4.9.4/dolphin/src/CMakeLists.txt kde-baseapps-4.9.4-patch
      views/viewmodecontroller.cpp
      views/viewproperties.cpp
      views/zoomlevelinfo.cpp
-@@ -147,6 +149,7 @@
+@@ -145,6 +147,7 @@ install(TARGETS dolphinpart DESTINATION
  install(FILES dolphinpart.rc DESTINATION ${DATA_INSTALL_DIR}/dolphinpart)
  install(FILES dolphinpart.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
  install(FILES views/versioncontrol/fileviewversioncontrolplugin.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
@@ -18,10 +17,9 @@ diff -urN kde-baseapps-4.9.4/dolphin/src/CMakeLists.txt kde-baseapps-4.9.4-patch
  
  ##########################################
  
-diff -urN kde-baseapps-4.9.4/dolphin/src/dolphincontextmenu.cpp kde-baseapps-4.9.4-patched/dolphin/src/dolphincontextmenu.cpp
---- kde-baseapps-4.9.4/dolphin/src/dolphincontextmenu.cpp	2012-12-02 22:42:39.000000000 +0000
-+++ kde-baseapps-4.9.4-patched/dolphin/src/dolphincontextmenu.cpp	2012-12-02 22:56:21.733535071 +0000
-@@ -512,6 +512,13 @@
+--- kde-baseapps-4.9.98/dolphin/src/dolphincontextmenu.cpp.0106~	2013-01-29 20:07:18.728150900 +0100
++++ kde-baseapps-4.9.98/dolphin/src/dolphincontextmenu.cpp	2013-01-29 20:07:18.737150797 +0100
+@@ -515,6 +515,13 @@ void DolphinContextMenu::addVersionContr
          }
          m_popup->addSeparator();
      }
@@ -35,10 +33,9 @@ diff -urN kde-baseapps-4.9.4/dolphin/src/dolphincontextmenu.cpp kde-baseapps-4.9
  }
  
  void DolphinContextMenu::addCustomActions()
-diff -urN kde-baseapps-4.9.4/dolphin/src/dolphinpart.cpp kde-baseapps-4.9.4-patched/dolphin/src/dolphinpart.cpp
---- kde-baseapps-4.9.4/dolphin/src/dolphinpart.cpp	2012-12-02 22:42:39.000000000 +0000
-+++ kde-baseapps-4.9.4-patched/dolphin/src/dolphinpart.cpp	2012-12-02 22:56:21.734035072 +0000
-@@ -408,6 +408,7 @@
+--- kde-baseapps-4.9.98/dolphin/src/dolphinpart.cpp.0106~	2012-12-17 15:29:48.000000000 +0100
++++ kde-baseapps-4.9.98/dolphin/src/dolphinpart.cpp	2013-01-29 20:07:18.738150786 +0100
+@@ -417,6 +417,7 @@ void DolphinPart::slotOpenContextMenu(co
      KParts::BrowserExtension::ActionGroupMap actionGroups;
      QList<QAction *> editActions;
      editActions += m_view->versionControlActions(m_view->selectedItems());
@@ -46,10 +43,9 @@ diff -urN kde-baseapps-4.9.4/dolphin/src/dolphinpart.cpp kde-baseapps-4.9.4-patc
      editActions += customActions;
  
      if (!_item.isNull()) { // only for context menu on one or more items
-diff -urN kde-baseapps-4.9.4/dolphin/src/views/dolphinfileitemlistwidget.cpp kde-baseapps-4.9.4-patched/dolphin/src/views/dolphinfileitemlistwidget.cpp
---- kde-baseapps-4.9.4/dolphin/src/views/dolphinfileitemlistwidget.cpp	2012-12-02 22:42:39.000000000 +0000
-+++ kde-baseapps-4.9.4-patched/dolphin/src/views/dolphinfileitemlistwidget.cpp	2012-12-02 22:56:21.734035072 +0000
-@@ -74,7 +74,33 @@
+--- kde-baseapps-4.9.98/dolphin/src/views/dolphinfileitemlistwidget.cpp.0106~	2012-12-17 15:29:48.000000000 +0100
++++ kde-baseapps-4.9.98/dolphin/src/views/dolphinfileitemlistwidget.cpp	2013-01-29 20:07:18.738150786 +0100
+@@ -74,7 +74,33 @@ void DolphinFileItemListWidget::refreshC
      } else if (!overlay().isNull()) {
          setOverlay(QPixmap());
      }
@@ -83,9 +79,8 @@ diff -urN kde-baseapps-4.9.4/dolphin/src/views/dolphinfileitemlistwidget.cpp kde
      setTextColor(color);
  }
  
-diff -urN kde-baseapps-4.9.4/dolphin/src/views/dolphinview.cpp kde-baseapps-4.9.4-patched/dolphin/src/views/dolphinview.cpp
---- kde-baseapps-4.9.4/dolphin/src/views/dolphinview.cpp	2012-12-02 22:42:39.000000000 +0000
-+++ kde-baseapps-4.9.4-patched/dolphin/src/views/dolphinview.cpp	2012-12-02 22:57:26.530157941 +0000
+--- kde-baseapps-4.9.98/dolphin/src/views/dolphinview.cpp.0106~	2013-01-29 20:07:18.735150819 +0100
++++ kde-baseapps-4.9.98/dolphin/src/views/dolphinview.cpp	2013-01-29 20:07:28.773031975 +0100
 @@ -71,6 +71,7 @@
  #include "viewproperties.h"
  #include "views/tooltips/tooltipmanager.h"
@@ -93,8 +88,8 @@ diff -urN kde-baseapps-4.9.4/dolphin/src/views/dolphinview.cpp kde-baseapps-4.9.
 +#include "iconoverlay/iconoverlayobserver.h"
  
  #ifdef HAVE_NEPOMUK
-     #include <Nepomuk/ResourceManager>
-@@ -102,7 +103,8 @@
+     #include <Nepomuk2/ResourceManager>
+@@ -102,7 +103,8 @@ DolphinView::DolphinView(const KUrl& url
      m_restoredContentsPosition(),
      m_selectedUrls(),
      m_clearSelectionBeforeSelectingNewItems(false),
@@ -104,7 +99,7 @@ diff -urN kde-baseapps-4.9.4/dolphin/src/views/dolphinview.cpp kde-baseapps-4.9.
  {
      m_topLayout = new QVBoxLayout(this);
      m_topLayout->setSpacing(0);
-@@ -189,6 +191,11 @@
+@@ -191,6 +193,11 @@ DolphinView::DolphinView(const KUrl& url
      connect(m_versionControlObserver, SIGNAL(infoMessage(QString)), this, SIGNAL(infoMessage(QString)));
      connect(m_versionControlObserver, SIGNAL(errorMessage(QString)), this, SIGNAL(errorMessage(QString)));
      connect(m_versionControlObserver, SIGNAL(operationCompletedMessage(QString)), this, SIGNAL(operationCompletedMessage(QString)));
@@ -116,7 +111,7 @@ diff -urN kde-baseapps-4.9.4/dolphin/src/views/dolphinview.cpp kde-baseapps-4.9.
  
      applyViewProperties();
      m_topLayout->addWidget(m_container);
-@@ -593,6 +600,23 @@
+@@ -597,6 +604,23 @@ QList<QAction*> DolphinView::versionCont
      return actions;
  }
  
@@ -140,7 +135,7 @@ diff -urN kde-baseapps-4.9.4/dolphin/src/views/dolphinview.cpp kde-baseapps-4.9.
  void DolphinView::setUrl(const KUrl& url)
  {
      if (url == m_url) {
-@@ -1023,6 +1047,7 @@
+@@ -1040,6 +1064,7 @@ void DolphinView::slotModelChanged(KItem
      if (previous != 0) {
          disconnect(previous, SIGNAL(directoryLoadingCompleted()), this, SLOT(slotDirectoryLoadingCompleted()));
          m_versionControlObserver->setModel(0);
@@ -148,7 +143,7 @@ diff -urN kde-baseapps-4.9.4/dolphin/src/views/dolphinview.cpp kde-baseapps-4.9.
      }
  
      if (current) {
-@@ -1031,6 +1056,7 @@
+@@ -1048,6 +1073,7 @@ void DolphinView::slotModelChanged(KItem
  
          KFileItemModel* fileItemModel = static_cast<KFileItemModel*>(current);
          m_versionControlObserver->setModel(fileItemModel);
@@ -156,10 +151,9 @@ diff -urN kde-baseapps-4.9.4/dolphin/src/views/dolphinview.cpp kde-baseapps-4.9.
      }
  }
  
-diff -urN kde-baseapps-4.9.4/dolphin/src/views/dolphinview.h kde-baseapps-4.9.4-patched/dolphin/src/views/dolphinview.h
---- kde-baseapps-4.9.4/dolphin/src/views/dolphinview.h	2012-12-02 22:42:39.000000000 +0000
-+++ kde-baseapps-4.9.4-patched/dolphin/src/views/dolphinview.h	2012-12-02 22:56:21.735035074 +0000
-@@ -51,6 +51,7 @@
+--- kde-baseapps-4.9.98/dolphin/src/views/dolphinview.h.0106~	2013-01-29 20:07:18.735150819 +0100
++++ kde-baseapps-4.9.98/dolphin/src/views/dolphinview.h	2013-01-29 20:07:18.739150774 +0100
+@@ -51,6 +51,7 @@ class VersionControlObserver;
  class ViewProperties;
  class QGraphicsSceneDragDropEvent;
  class QRegExp;
@@ -167,7 +161,7 @@ diff -urN kde-baseapps-4.9.4/dolphin/src/views/dolphinview.h kde-baseapps-4.9.4-
  
  /**
   * @short Represents a view for the directory content.
-@@ -257,6 +258,8 @@
+@@ -257,6 +258,8 @@ public:
       */
      QList<QAction*> versionControlActions(const KFileItemList& items) const;
  
@@ -176,7 +170,7 @@ diff -urN kde-baseapps-4.9.4/dolphin/src/views/dolphinview.h kde-baseapps-4.9.4-
      /**
       * Returns the state of the paste action:
       * first is whether the action should be enabled
-@@ -763,6 +766,8 @@
+@@ -779,6 +782,8 @@ private:
  
      VersionControlObserver* m_versionControlObserver;
  
@@ -185,9 +179,8 @@ diff -urN kde-baseapps-4.9.4/dolphin/src/views/dolphinview.h kde-baseapps-4.9.4-
      // For unit tests
      friend class TestBase;
      friend class DolphinDetailsViewTest;
-diff -urN kde-baseapps-4.9.4/dolphin/src/views/iconoverlay/iconoverlayobserver.cpp kde-baseapps-4.9.4-patched/dolphin/src/views/iconoverlay/iconoverlayobserver.cpp
---- kde-baseapps-4.9.4/dolphin/src/views/iconoverlay/iconoverlayobserver.cpp	1970-01-01 00:00:00.000000000 +0000
-+++ kde-baseapps-4.9.4-patched/dolphin/src/views/iconoverlay/iconoverlayobserver.cpp	2012-12-02 22:56:21.735035074 +0000
+--- kde-baseapps-4.9.98/dolphin/src/views/iconoverlay/iconoverlayobserver.cpp.0106~	2013-01-29 20:07:18.739150774 +0100
++++ kde-baseapps-4.9.98/dolphin/src/views/iconoverlay/iconoverlayobserver.cpp	2013-01-29 20:07:18.739150774 +0100
 @@ -0,0 +1,219 @@
 +#include "iconoverlayobserver.h"
 +#include "kiconoverlayplugin.h"
@@ -408,9 +401,8 @@ diff -urN kde-baseapps-4.9.4/dolphin/src/views/iconoverlay/iconoverlayobserver.c
 +
 +#include "iconoverlayobserver.moc"
 +
-diff -urN kde-baseapps-4.9.4/dolphin/src/views/iconoverlay/iconoverlayobserver.h kde-baseapps-4.9.4-patched/dolphin/src/views/iconoverlay/iconoverlayobserver.h
---- kde-baseapps-4.9.4/dolphin/src/views/iconoverlay/iconoverlayobserver.h	1970-01-01 00:00:00.000000000 +0000
-+++ kde-baseapps-4.9.4-patched/dolphin/src/views/iconoverlay/iconoverlayobserver.h	2012-12-02 22:56:21.735535075 +0000
+--- kde-baseapps-4.9.98/dolphin/src/views/iconoverlay/iconoverlayobserver.h.0106~	2013-01-29 20:07:18.739150774 +0100
++++ kde-baseapps-4.9.98/dolphin/src/views/iconoverlay/iconoverlayobserver.h	2013-01-29 20:07:18.739150774 +0100
 @@ -0,0 +1,109 @@
 +#ifndef ICONOVERLAYOBSERVER_H
 +#define ICONOVERLAYOBSERVER_H
@@ -521,17 +513,15 @@ diff -urN kde-baseapps-4.9.4/dolphin/src/views/iconoverlay/iconoverlayobserver.h
 +};
 +
 +#endif // ICONOVERLAYOBSERVER_H
-diff -urN kde-baseapps-4.9.4/dolphin/src/views/iconoverlay/iconviewoverlaycontrolplugin.desktop kde-baseapps-4.9.4-patched/dolphin/src/views/iconoverlay/iconviewoverlaycontrolplugin.desktop
---- kde-baseapps-4.9.4/dolphin/src/views/iconoverlay/iconviewoverlaycontrolplugin.desktop	1970-01-01 00:00:00.000000000 +0000
-+++ kde-baseapps-4.9.4-patched/dolphin/src/views/iconoverlay/iconviewoverlaycontrolplugin.desktop	2012-12-02 22:56:21.735535075 +0000
+--- kde-baseapps-4.9.98/dolphin/src/views/iconoverlay/iconviewoverlaycontrolplugin.desktop.0106~	2013-01-29 20:07:18.740150762 +0100
++++ kde-baseapps-4.9.98/dolphin/src/views/iconoverlay/iconviewoverlaycontrolplugin.desktop	2013-01-29 20:07:18.740150762 +0100
 @@ -0,0 +1,4 @@
 +[Desktop Entry]
 +Type=ServiceType
 +X-KDE-ServiceType=IconViewOverlayControlPlugin
 +Name=IconViewOverlayControlPlugin
-diff -urN kde-baseapps-4.9.4/dolphin/src/views/iconoverlay/updatefilestatesthread.cpp kde-baseapps-4.9.4-patched/dolphin/src/views/iconoverlay/updatefilestatesthread.cpp
---- kde-baseapps-4.9.4/dolphin/src/views/iconoverlay/updatefilestatesthread.cpp	1970-01-01 00:00:00.000000000 +0000
-+++ kde-baseapps-4.9.4-patched/dolphin/src/views/iconoverlay/updatefilestatesthread.cpp	2012-12-02 22:56:21.735535075 +0000
+--- kde-baseapps-4.9.98/dolphin/src/views/iconoverlay/updatefilestatesthread.cpp.0106~	2013-01-29 20:07:18.740150762 +0100
++++ kde-baseapps-4.9.98/dolphin/src/views/iconoverlay/updatefilestatesthread.cpp	2013-01-29 20:07:18.740150762 +0100
 @@ -0,0 +1,101 @@
 +/***************************************************************************
 + *   Copyright (C) 2009 by Peter Penz <peter.penz19@gmail.com>             *
@@ -634,9 +624,8 @@ diff -urN kde-baseapps-4.9.4/dolphin/src/views/iconoverlay/updatefilestatesthrea
 +}
 +
 +#include "updatefilestatesthread.moc"
-diff -urN kde-baseapps-4.9.4/dolphin/src/views/iconoverlay/updatefilestatesthread.h kde-baseapps-4.9.4-patched/dolphin/src/views/iconoverlay/updatefilestatesthread.h
---- kde-baseapps-4.9.4/dolphin/src/views/iconoverlay/updatefilestatesthread.h	1970-01-01 00:00:00.000000000 +0000
-+++ kde-baseapps-4.9.4-patched/dolphin/src/views/iconoverlay/updatefilestatesthread.h	2012-12-02 22:56:21.735535075 +0000
+--- kde-baseapps-4.9.98/dolphin/src/views/iconoverlay/updatefilestatesthread.h.0106~	2013-01-29 20:07:18.740150762 +0100
++++ kde-baseapps-4.9.98/dolphin/src/views/iconoverlay/updatefilestatesthread.h	2013-01-29 20:07:18.740150762 +0100
 @@ -0,0 +1,84 @@
 +/***************************************************************************
 + *   Copyright (C) 2009 by Peter Penz <peter.penz19@gmail.com>             *
@@ -722,10 +711,9 @@ diff -urN kde-baseapps-4.9.4/dolphin/src/views/iconoverlay/updatefilestatesthrea
 +};
 +
 +#endif // UPDATEFILESTATESTHREAD_H
-diff -urN kde-baseapps-4.9.4/lib/konq/CMakeLists.txt kde-baseapps-4.9.4-patched/lib/konq/CMakeLists.txt
---- kde-baseapps-4.9.4/lib/konq/CMakeLists.txt	2012-12-02 22:42:39.000000000 +0000
-+++ kde-baseapps-4.9.4-patched/lib/konq/CMakeLists.txt	2012-12-02 22:56:21.735535075 +0000
-@@ -22,6 +22,7 @@
+--- kde-baseapps-4.9.98/lib/konq/CMakeLists.txt.0106~	2012-12-17 15:29:48.000000000 +0100
++++ kde-baseapps-4.9.98/lib/konq/CMakeLists.txt	2013-01-29 20:07:18.740150762 +0100
+@@ -22,6 +22,7 @@ set(konq_LIB_SRCS
     konq_historyprovider.cpp
     kversioncontrolplugin.cpp  # used by dolphin and its version control plugins (deprecated)
     kversioncontrolplugin2.cpp # used by dolphin and its version control plugins
@@ -733,7 +721,7 @@ diff -urN kde-baseapps-4.9.4/lib/konq/CMakeLists.txt kde-baseapps-4.9.4-patched/
  
     konq_nameandurlinputdialog.cpp # deprecated (functionality has moved to kdelibs)
     knewmenu.cpp # deprecated (functionality has moved to kdelibs)
-@@ -67,6 +68,7 @@
+@@ -67,6 +68,7 @@ install( FILES
   konq_fileitemcapabilities.h
   kversioncontrolplugin.h
   kversioncontrolplugin2.h
@@ -741,9 +729,8 @@ diff -urN kde-baseapps-4.9.4/lib/konq/CMakeLists.txt kde-baseapps-4.9.4-patched/
   konq_historyprovider.h
   konq_historyentry.h
  DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel
-diff -urN kde-baseapps-4.9.4/lib/konq/kiconoverlayplugin.cpp kde-baseapps-4.9.4-patched/lib/konq/kiconoverlayplugin.cpp
---- kde-baseapps-4.9.4/lib/konq/kiconoverlayplugin.cpp	1970-01-01 00:00:00.000000000 +0000
-+++ kde-baseapps-4.9.4-patched/lib/konq/kiconoverlayplugin.cpp	2012-12-02 22:56:21.736035076 +0000
+--- kde-baseapps-4.9.98/lib/konq/kiconoverlayplugin.cpp.0106~	2013-01-29 20:07:18.740150762 +0100
++++ kde-baseapps-4.9.98/lib/konq/kiconoverlayplugin.cpp	2013-01-29 20:07:18.740150762 +0100
 @@ -0,0 +1,12 @@
 +#include "kiconoverlayplugin.h"
 +
@@ -757,9 +744,8 @@ diff -urN kde-baseapps-4.9.4/lib/konq/kiconoverlayplugin.cpp kde-baseapps-4.9.4-
 +}
 +
 +#include "kiconoverlayplugin.moc"
-diff -urN kde-baseapps-4.9.4/lib/konq/kiconoverlayplugin.h kde-baseapps-4.9.4-patched/lib/konq/kiconoverlayplugin.h
---- kde-baseapps-4.9.4/lib/konq/kiconoverlayplugin.h	1970-01-01 00:00:00.000000000 +0000
-+++ kde-baseapps-4.9.4-patched/lib/konq/kiconoverlayplugin.h	2012-12-02 22:56:21.736035076 +0000
+--- kde-baseapps-4.9.98/lib/konq/kiconoverlayplugin.h.0106~	2013-01-29 20:07:18.740150762 +0100
++++ kde-baseapps-4.9.98/lib/konq/kiconoverlayplugin.h	2013-01-29 20:07:18.740150762 +0100
 @@ -0,0 +1,40 @@
 +#ifndef KICONOVERLAYPLUGIN_H
 +#define KICONOVERLAYPLUGIN_H

@@ -1,7 +1,6 @@
-diff -urN kde-baseapps-4.8.97/dolphin/src/panels/places/placesitemmodel.cpp kde-baseapps-4.8.97-patched/dolphin/src/panels/places/placesitemmodel.cpp
---- kde-baseapps-4.8.97/dolphin/src/panels/places/placesitemmodel.cpp	2012-06-26 07:10:42.000000000 +1100
-+++ kde-baseapps-4.8.97-patched/dolphin/src/panels/places/placesitemmodel.cpp	2012-07-25 20:57:09.922443705 +1100
-@@ -34,6 +34,7 @@
+--- kde-baseapps-4.9.98/dolphin/src/panels/places/placesitemmodel.cpp.fileplaces	2012-12-17 15:29:48.000000000 +0100
++++ kde-baseapps-4.9.98/dolphin/src/panels/places/placesitemmodel.cpp	2013-01-29 20:00:48.132765255 +0100
+@@ -35,6 +35,7 @@
  #include <KLocale>
  #include <KStandardDirs>
  #include <KUser>
@@ -9,7 +8,7 @@ diff -urN kde-baseapps-4.8.97/dolphin/src/panels/places/placesitemmodel.cpp kde-
  #include "placesitem.h"
  #include <QAction>
  #include <QDate>
-@@ -900,6 +901,23 @@
+@@ -917,6 +918,23 @@ void PlacesItemModel::createSystemBookma
                                                  "user-trash",
                                                  I18N_NOOP2("KFile System Bookmarks", "Trash")));
  
@@ -32,4 +31,4 @@ diff -urN kde-baseapps-4.8.97/dolphin/src/panels/places/placesitemmodel.cpp kde-
 +
      if (m_fileIndexingEnabled) {
          m_systemBookmarks.append(SystemBookmarkData(KUrl("timeline:/today"),
-                                                     timeLineIcon,
+                                                     "go-jump-today",

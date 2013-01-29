@@ -2,18 +2,23 @@
 
 Name:		kdebase4
 Summary:	K Desktop Environment
-Version:	4.9.4
+Version:	4.9.98
 Release:	1
 Epoch:		1
 Group:		Graphical desktop/KDE
 License:	GPL
 URL:		http://www.kde.org
-Source0:	ftp://ftp.kde.org/pub/kde/stable/%{version}/src/kde-baseapps-%{version}.tar.xz
+%define is_beta %(if test `echo %version |cut -d. -f3` -ge 70; then echo -n 1; else echo -n 0; fi)
+%if %is_beta
+%define ftpdir unstable
+%else
+%define ftpdir stable
+%endif
+Source0:	ftp://ftp.kde.org/pub/kde/%ftpdir/%{version}/src/kde-baseapps-%{version}.tar.xz
 Source1:	%{name}.rpmlintrc
 Patch1:		kdebase-4.2.95-Use-Mandriva-Home-Icon.patch
 Patch2:		kdebase-4.8.97-mdvuserface.patch
 Patch3:		kdebase-4.8.97-fileplaces.patch
-Patch4:		kdebase-4.9.0-konq-templates-cleanup.patch
 Patch10:	kdebase-4.8.1-dolphin-showdelete.patch
 Patch12:	kdebase-4.8.1-Set-Preview-true.patch
 Patch13:	kdebase-4.8.1-kdepasswd-kcm.patch
@@ -32,6 +37,10 @@ BuildRequires:	pkgconfig(libstreams)
 BuildRequires:	pkgconfig(qimageblitz)
 BuildRequires:	pkgconfig(shared-desktop-ontologies)
 BuildRequires:	pkgconfig(xt)
+BuildRequires:	nepomuk-core-devel nepomuk-widgets-devel
+BuildRequires:	tidy-devel
+BuildRequires:	pkgconfig(glib-2.0)
+BuildRequires:	pkgconfig(libkactivities) >= 4.9.80
 Requires:	kdebase4-runtime
 Suggests:	dolphin
 Suggests:	kdepasswd
@@ -362,16 +371,12 @@ KDE file and web browser
 %{_kde_applicationsdir}/kfmclient_html.desktop
 %{_kde_applicationsdir}/kfmclient_war.desktop
 %{_kde_appsdir}/kcmcss/template.css
-%{_kde_appsdir}/kconf_update/kfmclient_3_2.upd
-%{_kde_appsdir}/kconf_update/kfmclient_3_2_update.sh
 %{_kde_appsdir}/khtml/kpartplugins/khtmlkttsd.desktop
 %{_kde_appsdir}/khtml/kpartplugins/khtmlkttsd.rc
 %{_kde_appsdir}/dolphinpart/kpartplugins/kshellcmdplugin.desktop
 %{_kde_appsdir}/dolphinpart/kpartplugins/kshellcmdplugin.rc
 %{_kde_appsdir}/konqsidebartng
 %{_kde_appsdir}/kbookmark/directory_bookmarkbar.desktop
-%{_kde_appsdir}/kconf_update/favicons.upd
-%{_kde_appsdir}/kconf_update/move_favicons.sh
 %{_kde_appsdir}/kwebkitpart/kpartplugins/khtmlkttsd.desktop
 %{_kde_appsdir}/kwebkitpart/kpartplugins/khtmlkttsd.rc
 %{_kde_datadir}/autostart/konqy_preload.desktop
@@ -508,15 +513,14 @@ based on kdebase.
 %patch1 -p0 -b .mdvicon
 %patch2 -p1 -b .mdvface
 %patch3 -p1 -b .fileplaces
-%patch4 -p1 -b .konq-templates
 %patch10 -p1
 %patch12 -p1
 %patch13 -p1
 %patch101 -p1
 #patch104 -p1
-%patch105 -p1
-%patch106 -p1
-%patch107 -p1
+%patch105 -p1 -b .0105~
+%patch106 -p1 -b .0106~
+%patch107 -p1 -b .0107~
 
 %build
 %cmake_kde4
