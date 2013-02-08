@@ -1,0 +1,59 @@
+diff -urN kde-baseapps-4.9.5/dolphin/src/views/iconoverlay/iconoverlayobserver.cpp kde-baseapps-4.9.5.patched/dolphin/src/views/iconoverlay/iconoverlayobserver.cpp
+--- kde-baseapps-4.9.5/dolphin/src/views/iconoverlay/iconoverlayobserver.cpp	2013-01-30 12:51:09.000000000 +0400
++++ kde-baseapps-4.9.5.patched/dolphin/src/views/iconoverlay/iconoverlayobserver.cpp	2013-01-31 15:47:54.896498309 +0400
+@@ -159,19 +159,19 @@
+ void IconOverlayObserver::updateItemStates()
+ {
+     Q_ASSERT(m_plugin);
+-    if (!m_UpdateFileStatesThread)
+-    {
+-        m_UpdateFileStatesThread = new UpdateFileStatesThread();
+-        connect(m_UpdateFileStatesThread, SIGNAL(finished()),
+-                this, SLOT( slotThreadFinished()));
+-        connect(m_UpdateFileStatesThread, SIGNAL(finished()),
+-                m_UpdateFileStatesThread, SLOT(deleteLater()));
+-    }
+-    if (m_UpdateFileStatesThread->isRunning()) {
++    if (m_UpdateFileStatesThread) {
++        // It is easier not to reuse the thread object but rather to wait
++        // until it dies and then create a new one.
+         m_pendingItemStatesUpdate = true;
+         return;
+     }
+ 
++    m_UpdateFileStatesThread = new UpdateFileStatesThread();
++    connect(m_UpdateFileStatesThread, SIGNAL(finished()),
++            this, SLOT( slotThreadFinished()));
++    connect(m_UpdateFileStatesThread, SIGNAL(finished()),
++            m_UpdateFileStatesThread, SLOT(deleteLater()));
++
+     QList<ItemState> itemStates;
+     const int itemCount = m_model->count();
+     itemStates.reserve(itemCount);
+@@ -192,6 +192,13 @@
+         m_UpdateFileStatesThread->setData(m_plugin, itemStates);
+         m_UpdateFileStatesThread->start();
+     }
++    else {
++        // If the thread object does not start a thread, we need to delete
++        // it explicitly. If it does, deleteLater() and slotThreadFinished()
++        // will take care of that.
++        delete m_UpdateFileStatesThread;
++        m_UpdateFileStatesThread = 0;
++    }
+ }
+ 
+ KIconOverlayPlugin* IconOverlayObserver::searchPlugin() const
+diff -urN kde-baseapps-4.9.5/dolphin/src/views/iconoverlay/updatefilestatesthread.cpp kde-baseapps-4.9.5.patched/dolphin/src/views/iconoverlay/updatefilestatesthread.cpp
+--- kde-baseapps-4.9.5/dolphin/src/views/iconoverlay/updatefilestatesthread.cpp	2013-01-30 13:27:19.091323794 +0400
++++ kde-baseapps-4.9.5.patched/dolphin/src/views/iconoverlay/updatefilestatesthread.cpp	2013-01-30 13:29:33.631319008 +0400
+@@ -40,6 +40,9 @@
+ 
+ UpdateFileStatesThread::~UpdateFileStatesThread()
+ {
++    // Make sure the worker thread has finished before this object is
++    // destroyed.
++    wait();
+ }
+ 
+ void UpdateFileStatesThread::setData(KIconOverlayPlugin* plugin,

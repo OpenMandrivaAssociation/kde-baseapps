@@ -2,14 +2,14 @@
 
 Name:		kdebase4
 Summary:	K Desktop Environment
-Version:	4.9.98
+Version:	4.10.0
 Release:	1
 Epoch:		1
 Group:		Graphical desktop/KDE
 License:	GPL
 URL:		http://www.kde.org
 %define is_beta %(if test `echo %version |cut -d. -f3` -ge 70; then echo -n 1; else echo -n 0; fi)
-%if %is_beta
+%if %{is_beta}
 %define ftpdir unstable
 %else
 %define ftpdir stable
@@ -18,15 +18,17 @@ Source0:	ftp://ftp.kde.org/pub/kde/%ftpdir/%{version}/src/kde-baseapps-%{version
 Source1:	%{name}.rpmlintrc
 Patch1:		kdebase-4.2.95-Use-Mandriva-Home-Icon.patch
 Patch2:		kdebase-4.8.97-mdvuserface.patch
-Patch3:		kdebase-4.8.97-fileplaces.patch
+Patch3:		kdebase-4.10.0-fileplaces.patch
+Patch4:		kdebase-4.9.5-konq-templates-cleanup.patch
 Patch10:	kdebase-4.8.1-dolphin-showdelete.patch
 Patch12:	kdebase-4.8.1-Set-Preview-true.patch
 Patch13:	kdebase-4.8.1-kdepasswd-kcm.patch
 Patch101:	kdebase-4.8.2.dolphinrcui.patch
 Patch104:	kdebase-4.8.2-dolphin-delete-files-on-flash-drives.patch
-Patch105:	kdebase-4.9.0-dolphin-klook.patch
-Patch106:	kdebase-4.9.4-iconoverlay-plugin.patch
+Patch105:	kdebase-4.10.0-dolphin-klook.patch
+Patch106:	kdebase-4.10.0-iconoverlay-plugin.patch
 Patch107:	kdebase-4.8.3-konqueror-settings-kio-proxy.patch
+Patch108:	kdebase-4.9.5-iconoverlay-race-fix.patch
 #branch patches
 #trunk patches
 # test patches
@@ -513,6 +515,7 @@ based on kdebase.
 %patch1 -p0 -b .mdvicon
 %patch2 -p1 -b .mdvface
 %patch3 -p1 -b .fileplaces
+%patch4 -p1 -b .konq-templates
 %patch10 -p1
 %patch12 -p1
 %patch13 -p1
@@ -521,6 +524,7 @@ based on kdebase.
 %patch105 -p1 -b .0105~
 %patch106 -p1 -b .0106~
 %patch107 -p1 -b .0107~
+%patch108 -p1 -b .icon-race
 
 %build
 %cmake_kde4
@@ -533,6 +537,14 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konqbrowser.desktop
 rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 
 %changelog
+* Thu Feb 07 2013 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.10.0-1
+- New version 4.10.0
+- Re-diff some patches
+- Add patch 108 (fixes a race in IconOverlay plugin for Dolphin (Rosa bug #1519))
+- Add BuildRequires nepomuk-core-devel, nepomuk-widgets-devel, tidy-devel,
+  pkgconfig(glib-2.0), pkgconfig(libkactivities)
+- Update files
+
 * Wed Dec 05 2012 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.9.4-1
 - New version 4.9.4
 
