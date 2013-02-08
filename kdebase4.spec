@@ -19,7 +19,6 @@ Source1:	%{name}.rpmlintrc
 Patch1:		kdebase-4.2.95-Use-Mandriva-Home-Icon.patch
 Patch2:		kdebase-4.8.97-mdvuserface.patch
 Patch3:		kdebase-4.10.0-fileplaces.patch
-Patch4:		kdebase-4.9.5-konq-templates-cleanup.patch
 Patch10:	kdebase-4.8.1-dolphin-showdelete.patch
 Patch12:	kdebase-4.8.1-Set-Preview-true.patch
 Patch13:	kdebase-4.8.1-kdepasswd-kcm.patch
@@ -515,7 +514,6 @@ based on kdebase.
 %patch1 -p0 -b .mdvicon
 %patch2 -p1 -b .mdvface
 %patch3 -p1 -b .fileplaces
-%patch4 -p1 -b .konq-templates
 %patch10 -p1
 %patch12 -p1
 %patch13 -p1
@@ -541,6 +539,8 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 - New version 4.10.0
 - Re-diff some patches
 - Add patch 108 (fixes a race in IconOverlay plugin for Dolphin (Rosa bug #1519))
+- Drop konq-templates-cleanup patch because it's really no longer needed due to
+  template cleanups in upstream
 - Add BuildRequires nepomuk-core-devel, nepomuk-widgets-devel, tidy-devel,
   pkgconfig(glib-2.0), pkgconfig(libkactivities)
 - Update files
