@@ -1,9 +1,9 @@
-%define build_iconoverlay 1
+%define build_iconoverlay 0
 
 Name:		kdebase4
 Summary:	K Desktop Environment
 Version:	4.10.0
-Release:	1
+Release:	2
 Epoch:		1
 Group:		Graphical desktop/KDE
 License:	GPL
@@ -25,8 +25,8 @@ Patch13:	kdebase-4.8.1-kdepasswd-kcm.patch
 Patch101:	kdebase-4.8.2.dolphinrcui.patch
 Patch104:	kdebase-4.8.2-dolphin-delete-files-on-flash-drives.patch
 Patch105:	kdebase-4.10.0-dolphin-klook.patch
-Patch106:	kdebase-4.10.0-iconoverlay-plugin.patch
-Patch107:	kdebase-4.8.3-konqueror-settings-kio-proxy.patch
+Patch106:	kdebase-4.8.3-konqueror-settings-kio-proxy.patch
+Patch107:	kdebase-4.10.0-iconoverlay-plugin.patch
 Patch108:	kdebase-4.9.5-iconoverlay-race-fix.patch
 #branch patches
 #trunk patches
@@ -116,7 +116,9 @@ of file management.
 %{_kde_services}/kcmdolphinviewmodes.desktop
 %{_kde_services}/filenamesearch.protocol
 %{_kde_servicetypes}/fileviewversioncontrolplugin.desktop
-%{_kde_datadir}/kde4/servicetypes/iconviewoverlaycontrolplugin.desktop
+%if %{build_iconoverlay}
+%{_kde_servicetypes}/iconviewoverlaycontrolplugin.desktop
+%endif
 %{_kde_configdir}/servicemenu.knsrc
 %{_kde_datadir}/config.kcfg/dolphin_*
 %{_kde_libdir}/libkdeinit4_dolphin.so
@@ -521,8 +523,10 @@ based on kdebase.
 #patch104 -p1
 %patch105 -p1 -b .0105~
 %patch106 -p1 -b .0106~
-%patch107 -p1 -b .0107~
+%if %{build_iconoverlay}
+%patch107 -p1 -b .icon-plugin
 %patch108 -p1 -b .icon-race
+%endif
 
 %build
 %cmake_kde4
@@ -535,6 +539,9 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konqbrowser.desktop
 rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 
 %changelog
+* Mon Feb 11 2013 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.10.0-2
+- Make iconoverlay stuff optional and disable it for now
+
 * Thu Feb 07 2013 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.10.0-1
 - New version 4.10.0
 - Re-diff some patches
