@@ -2,8 +2,8 @@
 
 Name:		kdebase4
 Summary:	K Desktop Environment
-Version:	4.10.0
-Release:	2
+Version:	4.10.1
+Release:	1
 Epoch:		1
 Group:		Graphical desktop/KDE
 License:	GPL
@@ -539,6 +539,9 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konqbrowser.desktop
 rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 
 %changelog
+* Sat Mar 09 2013 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.10.1-1
+- New version 4.10.1
+
 * Mon Feb 11 2013 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.10.0-2
 - Make iconoverlay stuff optional and disable it for now
 
