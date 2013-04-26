@@ -3,7 +3,7 @@
 Name:		kdebase4
 Summary:	K Desktop Environment
 Version:	4.10.2
-Release:	1
+Release:	2
 Epoch:		1
 Group:		Graphical desktop/KDE
 License:	GPL
@@ -19,6 +19,7 @@ Source1:	%{name}.rpmlintrc
 Patch1:		kdebase-4.2.95-Use-Mandriva-Home-Icon.patch
 Patch2:		kdebase-4.8.97-mdvuserface.patch
 Patch3:		kdebase-4.10.0-fileplaces.patch
+Patch4:		kdebase-4.10.2-konq-templates-cleanup.patch
 Patch10:	kdebase-4.8.1-dolphin-showdelete.patch
 Patch12:	kdebase-4.8.1-Set-Preview-true.patch
 Patch13:	kdebase-4.8.1-kdepasswd-kcm.patch
@@ -516,6 +517,7 @@ based on kdebase.
 %patch1 -p0 -b .mdvicon
 %patch2 -p1 -b .mdvface
 %patch3 -p1 -b .fileplaces
+%patch4 -p1 -b .konq-templates
 %patch10 -p1
 %patch12 -p1
 %patch13 -p1
@@ -539,6 +541,9 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konqbrowser.desktop
 rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 
 %changelog
+* Fri Apr 26 2013 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.10.2-2
+- Add konq-templates-cleanup patch to remove some useless entries in Create menu
+
 * Wed Apr 03 2013 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.10.2-1
 - New version 4.10.2
 
