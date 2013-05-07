@@ -2,8 +2,8 @@
 
 Name:		kdebase4
 Summary:	K Desktop Environment
-Version:	4.10.2
-Release:	2
+Version:	4.10.3
+Release:	1
 Epoch:		1
 Group:		Graphical desktop/KDE
 License:	GPL
@@ -541,6 +541,9 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konqbrowser.desktop
 rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 
 %changelog
+* Tue May 07 2013 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.10.3-1
+- New version 4.10.3
+
 * Fri Apr 26 2013 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.10.2-2
 - Add konq-templates-cleanup patch to remove some useless entries in Create menu
 
