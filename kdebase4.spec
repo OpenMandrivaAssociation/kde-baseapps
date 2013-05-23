@@ -3,18 +3,18 @@
 Name:		kdebase4
 Summary:	K Desktop Environment
 Version:	4.10.3
-Release:	1
+Release:	2
 Epoch:		1
 Group:		Graphical desktop/KDE
 License:	GPL
 URL:		http://www.kde.org
-%define is_beta %(if test `echo %version |cut -d. -f3` -ge 70; then echo -n 1; else echo -n 0; fi)
+%define is_beta %(if test `echo %{version} |cut -d. -f3` -ge 70; then echo -n 1; else echo -n 0; fi)
 %if %{is_beta}
 %define ftpdir unstable
 %else
 %define ftpdir stable
 %endif
-Source0:	ftp://ftp.kde.org/pub/kde/%ftpdir/%{version}/src/kde-baseapps-%{version}.tar.xz
+Source0:	ftp://ftp.kde.org/pub/kde/%{ftpdir}/%{version}/src/kde-baseapps-%{version}.tar.xz
 Source1:	%{name}.rpmlintrc
 Patch1:		kdebase-4.2.95-Use-Mandriva-Home-Icon.patch
 Patch2:		kdebase-4.8.97-mdvuserface.patch
@@ -541,6 +541,9 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konqbrowser.desktop
 rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 
 %changelog
+* Thu May 23 2013 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.10.3-2
+- Update konq-templates-cleanup patch to remove more entries in Create menu
+
 * Tue May 07 2013 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.10.3-1
 - New version 4.10.3
 
