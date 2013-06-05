@@ -1,13 +1,13 @@
 %define build_iconoverlay 0
 
-Name:		kdebase4
 Summary:	K Desktop Environment
-Version:	4.10.3
-Release:	2
+Name:		kdebase4
+Version:	4.10.4
+Release:	1
 Epoch:		1
 Group:		Graphical desktop/KDE
 License:	GPL
-URL:		http://www.kde.org
+Url:		http://www.kde.org
 %define is_beta %(if test `echo %{version} |cut -d. -f3` -ge 70; then echo -n 1; else echo -n 0; fi)
 %if %{is_beta}
 %define ftpdir unstable
@@ -33,14 +33,15 @@ Patch108:	kdebase-4.9.5-iconoverlay-race-fix.patch
 #trunk patches
 # test patches
 BuildRequires:	kdelibs4-devel
+BuildRequires:	nepomuk-core-devel
+BuildRequires:	nepomuk-widgets-devel
+BuildRequires:	tidy-devel
 BuildRequires:	zlib-devel
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(libstreams)
 BuildRequires:	pkgconfig(qimageblitz)
 BuildRequires:	pkgconfig(shared-desktop-ontologies)
 BuildRequires:	pkgconfig(xt)
-BuildRequires:	nepomuk-core-devel nepomuk-widgets-devel
-BuildRequires:	tidy-devel
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(libkactivities) >= 4.9.80
 Requires:	kdebase4-runtime
@@ -541,6 +542,9 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konqbrowser.desktop
 rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 
 %changelog
+* Wed Jun 05 2013 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.10.4-1
+- New version 4.10.4
+
 * Thu May 23 2013 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.10.3-2
 - Update konq-templates-cleanup patch to remove more entries in Create menu
 
