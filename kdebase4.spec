@@ -278,12 +278,12 @@ This module contains plugins that interact with Konqueror.
 %{_kde_appsdir}/khtml/kpartplugins/minitoolsplugin.rc
 %{_kde_appsdir}/khtml/kpartplugins/plugin_adblock.desktop
 %{_kde_appsdir}/khtml/kpartplugins/plugin_adblock.rc
-%{_kde_appsdir}/khtml/kpartplugins/plugin_babelfish.desktop
 %{_kde_appsdir}/khtml/kpartplugins/plugin_babelfish.rc
 %{_kde_appsdir}/khtml/kpartplugins/plugin_domtreeviewer.desktop
 %{_kde_appsdir}/khtml/kpartplugins/plugin_domtreeviewer.rc
 %{_kde_appsdir}/khtml/kpartplugins/plugin_rellinks.desktop
 %{_kde_appsdir}/khtml/kpartplugins/plugin_rellinks.rc
+%{_kde_appsdir}/khtml/kpartplugins/plugin_translator.desktop
 %{_kde_appsdir}/khtml/kpartplugins/plugin_validators.desktop
 %{_kde_appsdir}/khtml/kpartplugins/plugin_validators.rc
 %{_kde_appsdir}/khtml/kpartplugins/plugin_webarchiver.desktop
@@ -299,8 +299,8 @@ This module contains plugins that interact with Konqueror.
 %{_kde_appsdir}/kwebkitpart/kpartplugins/akregator_konqfeedicon.rc
 %{_kde_appsdir}/kwebkitpart/kpartplugins/autorefresh.desktop
 %{_kde_appsdir}/kwebkitpart/kpartplugins/autorefresh.rc
-%{_kde_appsdir}/kwebkitpart/kpartplugins/plugin_babelfish.desktop
 %{_kde_appsdir}/kwebkitpart/kpartplugins/plugin_babelfish.rc
+%{_kde_appsdir}/kwebkitpart/kpartplugins/plugin_translator.desktop
 %{_kde_appsdir}/kwebkitpart/kpartplugins/plugin_validators.desktop
 %{_kde_appsdir}/kwebkitpart/kpartplugins/plugin_validators.rc
 %{_kde_appsdir}/kwebkitpart/kpartplugins/uachangerplugin.desktop
@@ -544,6 +544,7 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 - New version 4.11.0
 - Drop dolphin-showdelete patch
 - Re-diff dolphin-klook patch
+- Update files list
 
 * Wed Jul 03 2013 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.10.5-1
 - New version 4.10.5
