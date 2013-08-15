@@ -20,12 +20,11 @@ Patch1:		kdebase-4.2.95-Use-Mandriva-Home-Icon.patch
 Patch2:		kdebase-4.8.97-mdvuserface.patch
 Patch3:		kdebase-4.10.0-fileplaces.patch
 Patch4:		kdebase-4.10.2-konq-templates-cleanup.patch
-Patch10:	kdebase-4.8.1-dolphin-showdelete.patch
 Patch12:	kdebase-4.8.1-Set-Preview-true.patch
 Patch13:	kdebase-4.8.1-kdepasswd-kcm.patch
 Patch101:	kdebase-4.8.2.dolphinrcui.patch
 Patch104:	kdebase-4.8.2-dolphin-delete-files-on-flash-drives.patch
-Patch105:	kdebase-4.10.5-dolphin-klook.patch
+Patch105:	kdebase-4.11.0-dolphin-klook.patch
 Patch106:	kdebase-4.8.3-konqueror-settings-kio-proxy.patch
 Patch107:	kdebase-4.10.0-iconoverlay-plugin.patch
 Patch108:	kdebase-4.9.5-iconoverlay-race-fix.patch
@@ -519,7 +518,6 @@ based on kdebase.
 %patch2 -p1 -b .mdvface
 %patch3 -p1 -b .fileplaces
 %patch4 -p1 -b .konq-templates
-%patch10 -p1
 %patch12 -p1
 %patch13 -p1
 %patch101 -p1
@@ -544,6 +542,8 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 %changelog
 * Wed Aug 14 2013 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.11.0-1
 - New version 4.11.0
+- Drop dolphin-showdelete patch
+- Re-diff dolphin-klook patch
 
 * Wed Jul 03 2013 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.10.5-1
 - New version 4.10.5
