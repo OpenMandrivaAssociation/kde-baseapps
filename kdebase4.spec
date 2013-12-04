@@ -2,8 +2,8 @@
 
 Summary:	K Desktop Environment
 Name:		kdebase4
-Version:	4.11.3
-Release:	2
+Version:	4.11.4
+Release:	1
 Epoch:		1
 Group:		Graphical desktop/KDE
 License:	GPL
@@ -30,8 +30,6 @@ Patch107:	kdebase-4.10.0-iconoverlay-plugin.patch
 Patch108:	kdebase-4.9.5-iconoverlay-race-fix.patch
 #branch patches
 #trunk patches
-# Regression in 4.11.3, see https://bugs.kde.org/show_bug.cgi?id=327224
-Patch200:	kdebase4-4.11.3-revert-unsupported.patch
 # test patches
 BuildRequires:	kdelibs4-devel
 BuildRequires:	nepomuk-core-devel
@@ -531,8 +529,6 @@ based on kdebase.
 %patch108 -p1 -b .icon-race
 %endif
 
-%patch200 -p1
-
 %build
 %cmake_kde4
 %make
@@ -544,6 +540,10 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konqbrowser.desktop
 rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 
 %changelog
+* Wed Dec 04 2013 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.11.4-1
+- New version 4.11.4
+- Drop no longer needed revert-unsupported patch
+
 * Wed Nov 27 2013 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.11.3-2
 - Add revert-unsupported patch from upstream to fix regression in Dolphin
 
