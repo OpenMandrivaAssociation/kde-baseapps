@@ -25,7 +25,7 @@ Patch13:	kdebase-4.8.1-kdepasswd-kcm.patch
 Patch101:	kdebase-4.12.1-dolphinrcui.patch
 Patch104:	kdebase-4.8.2-dolphin-delete-files-on-flash-drives.patch
 Patch105:	kdebase-4.12.1-dolphin-klook.patch
-Patch106:	kdebase-4.8.3-konqueror-settings-kio-proxy.patch
+Patch106:	kdebase-4.12.1-konqueror-settings-kio-proxy.patch
 Patch107:	kdebase-4.10.0-iconoverlay-plugin.patch
 Patch108:	kdebase-4.9.5-iconoverlay-race-fix.patch
 #branch patches
@@ -544,6 +544,7 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 - New version 4.12.1
 - Re-diff dolphinrcui patch
 - Re-diff klook patch
+- Re-diff konqueror-settings-kio-proxy patch
 
 * Wed Dec 04 2013 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.11.4-1
 - New version 4.11.4

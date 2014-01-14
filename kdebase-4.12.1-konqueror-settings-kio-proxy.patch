@@ -1,6 +1,6 @@
-diff -Nuar kde-baseapps-orig/konqueror/settings/kio/CMakeLists.txt kde-baseapps/konqueror/settings/kio/CMakeLists.txt
---- kde-baseapps-orig/konqueror/settings/kio/CMakeLists.txt	2012-09-28 04:17:12.000000000 +0400
-+++ kde-baseapps/konqueror/settings/kio/CMakeLists.txt	2012-10-19 16:20:22.619059181 +0400
+diff -urN kde-baseapps-4.12.1/konqueror/settings/kio/CMakeLists.txt kde-baseapps-4.12.1-patched/konqueror/settings/kio/CMakeLists.txt
+--- kde-baseapps-4.12.1/konqueror/settings/kio/CMakeLists.txt	2014-01-10 00:28:46.000000000 +1100
++++ kde-baseapps-4.12.1-patched/konqueror/settings/kio/CMakeLists.txt	2014-01-14 22:50:05.335973473 +1100
 @@ -35,6 +35,16 @@
  
  install(TARGETS kcm_kio  DESTINATION ${PLUGIN_INSTALL_DIR} )
@@ -18,9 +18,9 @@ diff -Nuar kde-baseapps-orig/konqueror/settings/kio/CMakeLists.txt kde-baseapps/
  ########### install files ###############
  
  install( FILES smb.desktop cookies.desktop useragent.desktop bookmarks.desktop cache.desktop
-diff -Nuar kde-baseapps-orig/konqueror/settings/kio/kcmproxy.actions kde-baseapps/konqueror/settings/kio/kcmproxy.actions
---- kde-baseapps-orig/konqueror/settings/kio/kcmproxy.actions	1970-01-01 03:00:00.000000000 +0300
-+++ kde-baseapps/konqueror/settings/kio/kcmproxy.actions	2012-10-19 16:26:51.280065694 +0400
+diff -urN kde-baseapps-4.12.1/konqueror/settings/kio/kcmproxy.actions kde-baseapps-4.12.1-patched/konqueror/settings/kio/kcmproxy.actions
+--- kde-baseapps-4.12.1/konqueror/settings/kio/kcmproxy.actions	1970-01-01 10:00:00.000000000 +1000
++++ kde-baseapps-4.12.1-patched/konqueror/settings/kio/kcmproxy.actions	2014-01-14 22:50:05.335973473 +1100
 @@ -0,0 +1,14 @@
 +[Domain]
 +Name=Proxy Control Module
@@ -37,9 +37,9 @@ diff -Nuar kde-baseapps-orig/konqueror/settings/kio/kcmproxy.actions kde-baseapp
 +Description[ru]=Правила безопасности запрещают вам сохранять настройки прокси-сервера.
 +Policy=auth_admin
 \ В конце файла нет новой строки
-diff -Nuar kde-baseapps-orig/konqueror/settings/kio/kproxydlg.cpp kde-baseapps/konqueror/settings/kio/kproxydlg.cpp
---- kde-baseapps-orig/konqueror/settings/kio/kproxydlg.cpp	2012-09-28 04:17:12.000000000 +0400
-+++ kde-baseapps/konqueror/settings/kio/kproxydlg.cpp	2012-10-19 16:45:50.884084788 +0400
+diff -urN kde-baseapps-4.12.1/konqueror/settings/kio/kproxydlg.cpp kde-baseapps-4.12.1-patched/konqueror/settings/kio/kproxydlg.cpp
+--- kde-baseapps-4.12.1/konqueror/settings/kio/kproxydlg.cpp	2014-01-10 00:28:46.000000000 +1100
++++ kde-baseapps-4.12.1-patched/konqueror/settings/kio/kproxydlg.cpp	2014-01-14 22:51:46.552574105 +1100
 @@ -24,6 +24,9 @@
  
  // Local
@@ -50,10 +50,10 @@ diff -Nuar kde-baseapps-orig/konqueror/settings/kio/kproxydlg.cpp kde-baseapps/k
  
  // KDE
  #include <kpluginfactory.h>
-@@ -32,12 +35,16 @@
+@@ -31,13 +34,16 @@
+ #include <klocale.h>
  #include <kmessagebox.h>
  #include <kurifilter.h>
- #include <kdebug.h>
 +#if defined(Q_OS_LINUX) || defined (Q_OS_UNIX)
 +#include <kauthaction.h>
 +#endif
@@ -63,11 +63,12 @@ diff -Nuar kde-baseapps-orig/konqueror/settings/kio/kproxydlg.cpp kde-baseapps/k
  #include <QRadioButton>
  #include <QLineEdit>
  #include <QSpinBox>
+-
 +#include <QtCore/QFile>
  
- 
  #define QL1C(x)         QLatin1Char(x)
-@@ -118,7 +125,7 @@
+ #define QL1S(x)         QLatin1String(x)
+@@ -104,7 +110,7 @@
  }
  
  static QString proxyUrlFromInput(KProxyDialog::DisplayUrlFlags* flags,
@@ -76,7 +77,7 @@ diff -Nuar kde-baseapps-orig/konqueror/settings/kio/kproxydlg.cpp kde-baseapps/k
                                   KProxyDialog::DisplayUrlFlag flag = KProxyDialog::HideNone)
  {
      Q_ASSERT(edit);
-@@ -143,14 +150,14 @@
+@@ -129,14 +135,14 @@
          url.setPort(-1);
  
          proxyStr = url.url();
@@ -93,7 +94,7 @@ diff -Nuar kde-baseapps-orig/konqueror/settings/kio/kproxydlg.cpp kde-baseapps/k
              proxyStr += QString::number(spinBox->value());
          }
      }
-@@ -250,6 +257,9 @@
+@@ -231,6 +237,9 @@
  
  #if defined(Q_OS_LINUX) || defined (Q_OS_UNIX)
      connect(mUi.systemProxyRadioButton, SIGNAL(toggled(bool)), mUi.systemProxyGroupBox, SLOT(setVisible(bool)));
@@ -103,7 +104,7 @@ diff -Nuar kde-baseapps-orig/konqueror/settings/kio/kproxydlg.cpp kde-baseapps/k
  #else
      mUi.autoDetectButton->setVisible(false);
      connect(mUi.systemProxyRadioButton, SIGNAL(clicked()), SLOT(slotChanged()));
-@@ -358,10 +368,10 @@
+@@ -348,10 +357,10 @@
      if (mUi.manualProxyRadioButton->isChecked()) {
          DisplayUrlFlags flags = HideNone;
          proxyType = KProtocolManager::ManualProxy;
@@ -118,7 +119,7 @@ diff -Nuar kde-baseapps-orig/konqueror/settings/kio/kproxydlg.cpp kde-baseapps/k
          mProxyMap[QL1S("NoProxy")] = mUi.manualNoProxyEdit->text();
          displayUrlFlags = flags;
      } else if (mUi.systemProxyRadioButton->isChecked()) {
-@@ -396,11 +406,40 @@
+@@ -395,11 +404,40 @@
          KSaveIOConfig::updateProxyScout (this);
      }
  
@@ -159,7 +160,7 @@ diff -Nuar kde-baseapps-orig/konqueror/settings/kio/kproxydlg.cpp kde-baseapps/k
      mUi.noProxyRadioButton->setChecked(true);
      mUi.proxyScriptUrlRequester->clear();
  
-@@ -468,6 +507,17 @@
+@@ -489,6 +527,17 @@
      mUi.manualProxySocksSpinBox->setValue(value);
  }
  
@@ -177,9 +178,9 @@ diff -Nuar kde-baseapps-orig/konqueror/settings/kio/kproxydlg.cpp kde-baseapps/k
  void KProxyDialog::on_showEnvValueCheckBox_toggled (bool on)
  {
      if (on) {
-diff -Nuar kde-baseapps-orig/konqueror/settings/kio/kproxydlg.h kde-baseapps/konqueror/settings/kio/kproxydlg.h
---- kde-baseapps-orig/konqueror/settings/kio/kproxydlg.h	2012-09-28 04:17:12.000000000 +0400
-+++ kde-baseapps/konqueror/settings/kio/kproxydlg.h	2012-10-19 16:46:28.960085425 +0400
+diff -urN kde-baseapps-4.12.1/konqueror/settings/kio/kproxydlg.h kde-baseapps-4.12.1-patched/konqueror/settings/kio/kproxydlg.h
+--- kde-baseapps-4.12.1/konqueror/settings/kio/kproxydlg.h	2014-01-10 00:28:46.000000000 +1100
++++ kde-baseapps-4.12.1-patched/konqueror/settings/kio/kproxydlg.h	2014-01-14 22:50:05.336973489 +1100
 @@ -56,6 +56,8 @@
      void on_manualNoProxyEdit_textChanged(const QString&);    
      void on_manualProxyHttpEdit_textEdited(const QString&);
@@ -189,9 +190,9 @@ diff -Nuar kde-baseapps-orig/konqueror/settings/kio/kproxydlg.h kde-baseapps/kon
  
      void slotChanged();
  
-diff -Nuar kde-baseapps-orig/konqueror/settings/kio/kproxydlg.ui kde-baseapps/konqueror/settings/kio/kproxydlg.ui
---- kde-baseapps-orig/konqueror/settings/kio/kproxydlg.ui	2012-09-28 04:17:12.000000000 +0400
-+++ kde-baseapps/konqueror/settings/kio/kproxydlg.ui	2012-10-19 16:47:31.679086476 +0400
+diff -urN kde-baseapps-4.12.1/konqueror/settings/kio/kproxydlg.ui kde-baseapps-4.12.1-patched/konqueror/settings/kio/kproxydlg.ui
+--- kde-baseapps-4.12.1/konqueror/settings/kio/kproxydlg.ui	2014-01-10 00:28:46.000000000 +1100
++++ kde-baseapps-4.12.1-patched/konqueror/settings/kio/kproxydlg.ui	2014-01-14 22:50:05.336973489 +1100
 @@ -643,6 +643,16 @@
          </property>
         </widget>
@@ -209,9 +210,9 @@ diff -Nuar kde-baseapps-orig/konqueror/settings/kio/kproxydlg.ui kde-baseapps/ko
       </layout>
      </widget>
     </item>
-diff -Nuar kde-baseapps-orig/konqueror/settings/kio/kproxyhelper.cpp kde-baseapps/konqueror/settings/kio/kproxyhelper.cpp
---- kde-baseapps-orig/konqueror/settings/kio/kproxyhelper.cpp	1970-01-01 03:00:00.000000000 +0300
-+++ kde-baseapps/konqueror/settings/kio/kproxyhelper.cpp	2012-10-19 16:48:40.511087630 +0400
+diff -urN kde-baseapps-4.12.1/konqueror/settings/kio/kproxyhelper.cpp kde-baseapps-4.12.1-patched/konqueror/settings/kio/kproxyhelper.cpp
+--- kde-baseapps-4.12.1/konqueror/settings/kio/kproxyhelper.cpp	1970-01-01 10:00:00.000000000 +1000
++++ kde-baseapps-4.12.1-patched/konqueror/settings/kio/kproxyhelper.cpp	2014-01-14 22:50:05.337973505 +1100
 @@ -0,0 +1,65 @@
 +/*
 + *  kproxyhelper - Proxy helper
@@ -278,9 +279,9 @@ diff -Nuar kde-baseapps-orig/konqueror/settings/kio/kproxyhelper.cpp kde-baseapp
 +}
 +
 +KDE4_AUTH_HELPER_MAIN("org.kde.kcontrol.kcmproxy", ProxyHelper) 
-diff -Nuar kde-baseapps-orig/konqueror/settings/kio/kproxyhelper.h kde-baseapps/konqueror/settings/kio/kproxyhelper.h
---- kde-baseapps-orig/konqueror/settings/kio/kproxyhelper.h	1970-01-01 03:00:00.000000000 +0300
-+++ kde-baseapps/konqueror/settings/kio/kproxyhelper.h	2012-10-19 16:51:09.456090125 +0400
+diff -urN kde-baseapps-4.12.1/konqueror/settings/kio/kproxyhelper.h kde-baseapps-4.12.1-patched/konqueror/settings/kio/kproxyhelper.h
+--- kde-baseapps-4.12.1/konqueror/settings/kio/kproxyhelper.h	1970-01-01 10:00:00.000000000 +1000
++++ kde-baseapps-4.12.1-patched/konqueror/settings/kio/kproxyhelper.h	2014-01-14 22:50:05.337973505 +1100
 @@ -0,0 +1,37 @@
 +/*
 + *  kproxyhelper - Proxy helper
