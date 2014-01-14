@@ -1,12 +1,12 @@
-diff -Nur kde-baseapps-4.8.2.old/dolphin/src/dolphinui.rc kde-baseapps-4.8.2/dolphin/src/dolphinui.rc
---- kde-baseapps-4.8.2.old/dolphin/src/dolphinui.rc	2011-08-07 19:40:34.000000000 +0400
-+++ kde-baseapps-4.8.2/dolphin/src/dolphinui.rc	2012-04-10 17:10:05.000000000 +0400
+diff -urN kde-baseapps-4.12.1/dolphin/src/dolphinui.rc kde-baseapps-4.12.1-patched/dolphin/src/dolphinui.rc
+--- kde-baseapps-4.12.1/dolphin/src/dolphinui.rc	2014-01-10 00:28:46.000000000 +1100
++++ kde-baseapps-4.12.1-patched/dolphin/src/dolphinui.rc	2014-01-14 22:25:48.207992151 +1100
 @@ -1,115 +1,191 @@
 -<!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
 -<kpartgui name="dolphin" version="14">
 -    <MenuBar>
 -        <Menu name="file">
--            <Action name="create_new" />
+-            <Action name="new_menu" />
 -            <Action name="new_window" />
 -            <Action name="new_tab" />
 -            <Action name="close_tab" />
@@ -121,7 +121,7 @@ diff -Nur kde-baseapps-4.8.2.old/dolphin/src/dolphinui.rc kde-baseapps-4.8.2/dol
 + <MenuBar alreadyVisited="1">
 +  <Menu name="file" alreadyVisited="1">
 +   <text>&amp;File</text>
-+   <Action name="create_new"/>
++   <Action name="new_menu"/>
 +   <Action name="new_window"/>
 +   <Action name="new_tab"/>
 +   <Action name="close_tab"/>
