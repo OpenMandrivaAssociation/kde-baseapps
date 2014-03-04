@@ -2,7 +2,7 @@
 
 Summary:	K Desktop Environment
 Name:		kdebase4
-Version:	4.12.2
+Version:	4.12.3
 Release:	1
 Epoch:		1
 Group:		Graphical desktop/KDE
@@ -540,6 +540,9 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konqbrowser.desktop
 rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 
 %changelog
+* Tue Mar 04 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.12.3-1
+- New version 4.12.3
+
 * Tue Feb 04 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.12.2-1
 - New version 4.12.2
 
