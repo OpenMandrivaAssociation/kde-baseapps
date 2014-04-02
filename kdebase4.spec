@@ -2,8 +2,8 @@
 
 Summary:	K Desktop Environment
 Name:		kdebase4
-Version:	4.12.3
-Release:	2
+Version:	4.12.4
+Release:	1
 Epoch:		1
 License:	GPLv2+
 Group:		Graphical desktop/KDE
@@ -542,6 +542,9 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konqbrowser.desktop
 rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 
 %changelog
+* Wed Apr 02 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.12.4-1
+- New version 4.12.4
+
 * Thu Mar 13 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.12.3-2
 - Add folderview-preview patch to enable more previews by default
 
