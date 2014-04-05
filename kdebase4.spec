@@ -2,11 +2,11 @@
 
 Summary:	K Desktop Environment
 Name:		kdebase4
-Version:	4.12.3
+Version:	4.12.4
 Release:	1
 Epoch:		1
+License:	GPLv2+
 Group:		Graphical desktop/KDE
-License:	GPL
 Url:		http://www.kde.org
 %define is_beta %(if test `echo %{version} |cut -d. -f3` -ge 70; then echo -n 1; else echo -n 0; fi)
 %if %{is_beta}
@@ -20,6 +20,7 @@ Patch1:		kdebase-4.2.95-Use-Mandriva-Home-Icon.patch
 Patch2:		kdebase-4.8.97-mdvuserface.patch
 Patch3:		kdebase-4.10.0-fileplaces.patch
 Patch4:		kdebase-4.10.2-konq-templates-cleanup.patch
+Patch5:		kdebase-4.11.4-folderview-preview.patch
 Patch12:	kdebase-4.8.1-Set-Preview-true.patch
 Patch13:	kdebase-4.8.1-kdepasswd-kcm.patch
 Patch101:	kdebase-4.12.1-dolphinrcui.patch
@@ -518,6 +519,7 @@ based on kdebase.
 %patch2 -p1 -b .mdvface
 %patch3 -p1 -b .fileplaces
 %patch4 -p1 -b .konq-templates
+%patch5 -p1 -b .folder-preview
 %patch12 -p1
 %patch13 -p1
 %patch101 -p1
@@ -540,6 +542,12 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konqbrowser.desktop
 rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 
 %changelog
+* Wed Apr 02 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.12.4-1
+- New version 4.12.4
+
+* Thu Mar 13 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.12.3-2
+- Add folderview-preview patch to enable more previews by default
+
 * Tue Mar 04 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.12.3-1
 - New version 4.12.3
 

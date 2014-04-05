@@ -1,0 +1,12 @@
+diff -urN kde-baseapps-4.11.4.orig/plasma/applets/folderview/folderview.cpp kde-baseapps-4.11.4/plasma/applets/folderview/folderview.cpp
+--- kde-baseapps-4.11.4.orig/plasma/applets/folderview/folderview.cpp	2013-08-28 23:00:18.000000000 +0600
++++ kde-baseapps-4.11.4/plasma/applets/folderview/folderview.cpp	2014-03-07 11:32:34.762638598 +0600
+@@ -387,7 +387,7 @@
+     m_iconsLocked         = cg.readEntry("iconsLocked", false);
+     m_alignToGrid         = cg.readEntry("alignToGrid", false);
+     m_clickToView         = cg.readEntry("clickForFolderPreviews", true);
+-    m_previewPlugins      = cg.readEntry("previewPlugins", QStringList() << "imagethumbnail" << "jpegthumbnail");
++    m_previewPlugins      = cg.readEntry("previewPlugins", QStringList() << "ffmpegthumbs" << "imagethumbnail" << "jpegthumbnail" << "svgthumbnail" << "windowsimagethumbnail");
+     m_sortDirsFirst       = cg.readEntry("sortDirsFirst", true);
+     m_sortColumn          = cg.readEntry("sortColumn", int(KDirModel::Name));
+     m_sortOrder           = sortOrderStringToEnum(cg.readEntry("sortOrder", "ascending"));
