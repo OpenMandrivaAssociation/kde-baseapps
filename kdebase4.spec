@@ -3,7 +3,7 @@
 Summary:	K Desktop Environment
 Name:		kdebase4
 Version:	4.12.4
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPLv2+
 Group:		Graphical desktop/KDE
@@ -31,6 +31,7 @@ Patch107:	kdebase-4.10.0-iconoverlay-plugin.patch
 Patch108:	kdebase-4.9.5-iconoverlay-race-fix.patch
 #branch patches
 #trunk patches
+Patch200:	kdebase-4.12.1-dolphin-bookmarks-l10n.patch
 # test patches
 BuildRequires:	kdelibs4-devel
 BuildRequires:	nepomuk-core-devel
@@ -530,6 +531,7 @@ based on kdebase.
 %patch107 -p1 -b .icon-plugin
 %patch108 -p1 -b .icon-race
 %endif
+%patch200 -p1
 
 %build
 %cmake_kde4
@@ -542,6 +544,9 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konqbrowser.desktop
 rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 
 %changelog
+* Wed Apr 23 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.12.4-2
+- Backport dolphin-bookmarks-l10n patch from trunk
+
 * Wed Apr 02 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.12.4-1
 - New version 4.12.4
 
