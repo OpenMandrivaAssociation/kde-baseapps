@@ -2,8 +2,8 @@
 
 Summary:	K Desktop Environment
 Name:		kdebase4
-Version:	4.12.4
-Release:	2
+Version:	4.13.2
+Release:	1
 Epoch:		1
 License:	GPLv2+
 Group:		Graphical desktop/KDE
@@ -544,6 +544,9 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konqbrowser.desktop
 rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 
 %changelog
+* Wed Jun 11 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.13.2-1
+- New version 4.13.2
+
 * Wed Apr 23 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.12.4-2
 - Backport dolphin-bookmarks-l10n patch from trunk
 
