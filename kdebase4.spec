@@ -33,9 +33,10 @@ Patch108:	kdebase-4.9.5-iconoverlay-race-fix.patch
 #trunk patches
 Patch200:	kdebase-4.12.1-dolphin-bookmarks-l10n.patch
 # test patches
+BuildRequires:	baloo-devel
+BuildRequires:	baloo-widgets-devel
 BuildRequires:	kdelibs4-devel
-BuildRequires:	nepomuk-core-devel
-BuildRequires:	nepomuk-widgets-devel
+BuildRequires:	kfilemetadata-devel
 BuildRequires:	tidy-devel
 BuildRequires:	zlib-devel
 BuildRequires:	pkgconfig(glib-2.0)
@@ -547,6 +548,8 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 * Wed Jun 11 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.13.2-1
 - New version 4.13.2
 - Re-diff dolphin-klook patch
+- Add baloo-devel, baloo-widgets-devel and kfilemetadata-devel to BuildRequires
+- Remove nepomuk-core-devel and nepomuk-widgets-devel from BuildRequires
 
 * Wed Apr 23 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.12.4-2
 - Backport dolphin-bookmarks-l10n patch from trunk
