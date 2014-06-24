@@ -2,7 +2,7 @@
 
 Summary:	K Desktop Environment
 Name:		kdebase4
-Version:	4.12.4
+Version:	4.13.2
 Release:	1
 Epoch:		1
 License:	GPLv2+
@@ -25,16 +25,18 @@ Patch12:	kdebase-4.8.1-Set-Preview-true.patch
 Patch13:	kdebase-4.8.1-kdepasswd-kcm.patch
 Patch101:	kdebase-4.12.1-dolphinrcui.patch
 Patch104:	kdebase-4.8.2-dolphin-delete-files-on-flash-drives.patch
-Patch105:	kdebase-4.12.1-dolphin-klook.patch
+Patch105:	kdebase-4.13.2-dolphin-klook.patch
 Patch106:	kdebase-4.12.1-konqueror-settings-kio-proxy.patch
 Patch107:	kdebase-4.10.0-iconoverlay-plugin.patch
 Patch108:	kdebase-4.9.5-iconoverlay-race-fix.patch
 #branch patches
 #trunk patches
+Patch200:	kdebase-4.12.1-dolphin-bookmarks-l10n.patch
 # test patches
+BuildRequires:	baloo-devel
+BuildRequires:	baloo-widgets-devel
 BuildRequires:	kdelibs4-devel
-BuildRequires:	nepomuk-core-devel
-BuildRequires:	nepomuk-widgets-devel
+BuildRequires:	kfilemetadata-devel
 BuildRequires:	tidy-devel
 BuildRequires:	zlib-devel
 BuildRequires:	pkgconfig(glib-2.0)
@@ -530,6 +532,7 @@ based on kdebase.
 %patch107 -p1 -b .icon-plugin
 %patch108 -p1 -b .icon-race
 %endif
+%patch200 -p1
 
 %build
 %cmake_kde4
@@ -542,6 +545,15 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konqbrowser.desktop
 rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 
 %changelog
+* Wed Jun 11 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.13.2-1
+- New version 4.13.2
+- Re-diff dolphin-klook patch
+- Add baloo-devel, baloo-widgets-devel and kfilemetadata-devel to BuildRequires
+- Remove nepomuk-core-devel and nepomuk-widgets-devel from BuildRequires
+
+* Wed Apr 23 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.12.4-2
+- Backport dolphin-bookmarks-l10n patch from trunk
+
 * Wed Apr 02 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.12.4-1
 - New version 4.12.4
 
