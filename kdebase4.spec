@@ -3,7 +3,7 @@
 Summary:	K Desktop Environment
 Name:		kdebase4
 Version:	4.13.3
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPLv2+
 Group:		Graphical desktop/KDE
@@ -23,6 +23,8 @@ Patch4:		kdebase-4.10.2-konq-templates-cleanup.patch
 Patch5:		kdebase-4.11.4-folderview-preview.patch
 Patch12:	kdebase-4.8.1-Set-Preview-true.patch
 Patch13:	kdebase-4.8.1-kdepasswd-kcm.patch
+# https://bugs.kde.org/show_bug.cgi?id=294795#c357
+Patch14:	kdebase-4.13.3-folderview-bug294795.patch
 Patch101:	kdebase-4.12.1-dolphinrcui.patch
 Patch104:	kdebase-4.8.2-dolphin-delete-files-on-flash-drives.patch
 Patch105:	kdebase-4.13.2-dolphin-klook.patch
@@ -524,6 +526,7 @@ based on kdebase.
 %patch5 -p1 -b .folder-preview
 %patch12 -p1
 %patch13 -p1
+%patch14 -p1
 %patch101 -p1
 #patch104 -p1
 %patch105 -p1 -b .0105~
@@ -545,6 +548,9 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konqbrowser.desktop
 rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 
 %changelog
+* Wed Aug 27 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.13.3-2
+- Add folderview-bug294795 patch to workaround KDE bug #294795
+
 * Tue Jul 15 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.13.3-1
 - New version 4.13.3
 
