@@ -2,8 +2,8 @@
 
 Summary:	K Desktop Environment
 Name:		kdebase4
-Version:	4.13.3
-Release:	2
+Version:	4.14.1
+Release:	1
 Epoch:		1
 License:	GPLv2+
 Group:		Graphical desktop/KDE
@@ -548,6 +548,9 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konqbrowser.desktop
 rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 
 %changelog
+* Mon Sep 29 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.14.1-1
+- New version 4.14.1
+
 * Wed Aug 27 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.13.3-2
 - Add folderview-bug294795 patch to workaround KDE bug #294795
 
