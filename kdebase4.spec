@@ -32,7 +32,6 @@ Patch107:	kdebase-4.10.0-iconoverlay-plugin.patch
 Patch108:	kdebase-4.9.5-iconoverlay-race-fix.patch
 #branch patches
 #trunk patches
-Patch200:	kdebase-4.12.1-dolphin-bookmarks-l10n.patch
 # test patches
 BuildRequires:	baloo-devel
 BuildRequires:	baloo-widgets-devel
@@ -534,7 +533,6 @@ based on kdebase.
 %patch107 -p1 -b .icon-plugin
 %patch108 -p1 -b .icon-race
 %endif
-%patch200 -p1
 
 %build
 %cmake_kde4
@@ -552,6 +550,7 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 - Drop kdepasswd-kcm patch as the code was repleaced with accountsservice
 - Add accountsservice to kdepasswd Requires
 - Re-diff dolphin-klook patch
+- Drop merged dolphin-bookmarks-l10n patch
 
 * Wed Aug 27 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.13.3-2
 - Add folderview-bug294795 patch to workaround KDE bug #294795
