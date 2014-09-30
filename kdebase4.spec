@@ -26,7 +26,7 @@ Patch12:	kdebase-4.8.1-Set-Preview-true.patch
 Patch14:	kdebase-4.13.3-folderview-bug294795.patch
 Patch101:	kdebase-4.12.1-dolphinrcui.patch
 Patch104:	kdebase-4.8.2-dolphin-delete-files-on-flash-drives.patch
-Patch105:	kdebase-4.13.2-dolphin-klook.patch
+Patch105:	kdebase-4.14.1-dolphin-klook.patch
 Patch106:	kdebase-4.12.1-konqueror-settings-kio-proxy.patch
 Patch107:	kdebase-4.10.0-iconoverlay-plugin.patch
 Patch108:	kdebase-4.9.5-iconoverlay-race-fix.patch
@@ -551,6 +551,7 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 - New version 4.14.1
 - Drop kdepasswd-kcm patch as the code was repleaced with accountsservice
 - Add accountsservice to kdepasswd Requires
+- Re-diff dolphin-klook patch
 
 * Wed Aug 27 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.13.3-2
 - Add folderview-bug294795 patch to workaround KDE bug #294795
