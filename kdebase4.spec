@@ -134,6 +134,7 @@ of file management.
 %{_kde_libdir}/kde4/kio_filenamesearch.so
 %{_kde_appsdir}/dolphinpart/dolphinpart.rc
 %{_kde_appsdir}/dolphin/
+%{_kde_datadir}/appdata/dolphin.appdata.xml
 %{_kde_datadir}/templates/
 
 #-----------------------------------------------------------------------------
@@ -551,6 +552,7 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 - Add accountsservice to kdepasswd Requires
 - Re-diff dolphin-klook patch
 - Drop merged dolphin-bookmarks-l10n patch
+- Add new file dolphin.appdata.xml
 
 * Wed Aug 27 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.13.3-2
 - Add folderview-bug294795 patch to workaround KDE bug #294795
