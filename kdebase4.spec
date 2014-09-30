@@ -22,7 +22,6 @@ Patch3:		kdebase-4.10.0-fileplaces.patch
 Patch4:		kdebase-4.10.2-konq-templates-cleanup.patch
 Patch5:		kdebase-4.11.4-folderview-preview.patch
 Patch12:	kdebase-4.8.1-Set-Preview-true.patch
-Patch13:	kdebase-4.8.1-kdepasswd-kcm.patch
 # https://bugs.kde.org/show_bug.cgi?id=294795#c357
 Patch14:	kdebase-4.13.3-folderview-bug294795.patch
 Patch101:	kdebase-4.12.1-dolphinrcui.patch
@@ -141,12 +140,13 @@ of file management.
 #-----------------------------------------------------------------------------
 
 %package -n kdepasswd
-Summary:	Kdepasswd
+Summary:	User password management for KDE
 Group:		Graphical desktop/KDE
 Requires:	kdebase4-runtime
+Requires:	accountsservice
 
 %description -n kdepasswd
-User password management
+User password management.
 
 %files -n kdepasswd
 %doc %{_kde_docdir}/HTML/en/kdepasswd/
@@ -160,7 +160,7 @@ User password management
 #-----------------------------------------------------------------------------
 
 %package -n kde4-nsplugins
-Summary:	Netscape plugins wrapper for kde
+Summary:	Netscape plugins wrapper for KDE
 Group:		Graphical desktop/KDE
 Requires:	kdebase4-runtime
 Conflicts:	kdebase4-devel < 1:4.7.90-2
@@ -525,7 +525,6 @@ based on kdebase.
 %patch4 -p1 -b .konq-templates
 %patch5 -p1 -b .folder-preview
 %patch12 -p1
-%patch13 -p1
 %patch14 -p1
 %patch101 -p1
 #patch104 -p1
@@ -550,6 +549,8 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 %changelog
 * Mon Sep 29 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.14.1-1
 - New version 4.14.1
+- Drop kdepasswd-kcm patch as the code was repleaced with accountsservice
+- Add accountsservice to kdepasswd Requires
 
 * Wed Aug 27 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.13.3-2
 - Add folderview-bug294795 patch to workaround KDE bug #294795
