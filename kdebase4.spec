@@ -22,8 +22,6 @@ Patch3:		kdebase-4.10.0-fileplaces.patch
 Patch4:		kdebase-4.10.2-konq-templates-cleanup.patch
 Patch5:		kdebase-4.11.4-folderview-preview.patch
 Patch12:	kdebase-4.8.1-Set-Preview-true.patch
-# https://bugs.kde.org/show_bug.cgi?id=294795#c357
-Patch14:	kdebase-4.13.3-folderview-bug294795.patch
 Patch101:	kdebase-4.12.1-dolphinrcui.patch
 Patch104:	kdebase-4.8.2-dolphin-delete-files-on-flash-drives.patch
 Patch105:	kdebase-4.14.1-dolphin-klook.patch
@@ -525,7 +523,6 @@ based on kdebase.
 %patch4 -p1 -b .konq-templates
 %patch5 -p1 -b .folder-preview
 %patch12 -p1
-%patch14 -p1
 %patch101 -p1
 #patch104 -p1
 %patch105 -p1 -b .0105~
@@ -548,6 +545,7 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 %changelog
 * Wed Oct 15 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.14.2-1
 - New version 4.14.2
+- Drop folderview-bug294795 patch (fixed upstream)
 
 * Mon Sep 29 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.14.1-1
 - New version 4.14.1
