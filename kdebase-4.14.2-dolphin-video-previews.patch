@@ -1,0 +1,31 @@
+diff -urN kde-baseapps-4.14.2/dolphin/src/panels/information/phononwidget.cpp kde-baseapps-4.14.2-patched/dolphin/src/panels/information/phononwidget.cpp
+--- kde-baseapps-4.14.2/dolphin/src/panels/information/phononwidget.cpp	2014-10-09 18:06:23.000000000 +1100
++++ kde-baseapps-4.14.2-patched/dolphin/src/panels/information/phononwidget.cpp	2014-10-22 21:41:55.699446931 +1100
+@@ -182,6 +182,12 @@
+         connect(m_media, SIGNAL(hasVideoChanged(bool)),
+                 this, SLOT(slotHasVideoChanged(bool)));
+         m_seekSlider->setMediaObject(m_media);
++        if (!m_videoPlayer) {
++            m_videoPlayer = new EmbeddedVideoPlayer(this);
++            m_videoPlayer->show();
++            m_topLayout->insertWidget(0, m_videoPlayer);
++            Phonon::createPath(m_media, m_videoPlayer);
++        }
+     }
+ 
+     if (!m_audioOutput) {
+@@ -217,14 +223,6 @@
+     emit hasVideoChanged(hasVideo);
+ 
+     if (hasVideo) {
+-        if (!m_videoPlayer) {
+-            // Replay the media to apply path changes
+-            m_media->stop();
+-            m_videoPlayer = new EmbeddedVideoPlayer(this);
+-            m_topLayout->insertWidget(0, m_videoPlayer);
+-            Phonon::createPath(m_media, m_videoPlayer);
+-            m_media->play();
+-        }
+         applyVideoSize();
+         m_videoPlayer->show();
+     }

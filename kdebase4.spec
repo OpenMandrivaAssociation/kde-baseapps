@@ -3,7 +3,7 @@
 Summary:	K Desktop Environment
 Name:		kdebase4
 Version:	4.14.2
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPLv2+
 Group:		Graphical desktop/KDE
@@ -21,6 +21,8 @@ Patch2:		kdebase-4.8.97-mdvuserface.patch
 Patch3:		kdebase-4.10.0-fileplaces.patch
 Patch4:		kdebase-4.10.2-konq-templates-cleanup.patch
 Patch5:		kdebase-4.11.4-folderview-preview.patch
+# KDE #334924, playing video previews is messed up
+Patch6:		kdebase-4.14.2-dolphin-video-previews.patch
 Patch12:	kdebase-4.8.1-Set-Preview-true.patch
 Patch101:	kdebase-4.12.1-dolphinrcui.patch
 Patch104:	kdebase-4.8.2-dolphin-delete-files-on-flash-drives.patch
@@ -522,6 +524,7 @@ based on kdebase.
 %patch3 -p1 -b .fileplaces
 %patch4 -p1 -b .konq-templates
 %patch5 -p1 -b .folder-preview
+%patch6 -p1 -b .video-previews
 %patch12 -p1
 %patch101 -p1
 #patch104 -p1
@@ -543,6 +546,9 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konqbrowser.desktop
 rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 
 %changelog
+* Wed Oct 22 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.14.2-2
+- Add dolphin-video-previews patch to fix video previews in Dolphin (KDE #334924)
+
 * Wed Oct 15 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.14.2-1
 - New version 4.14.2
 - Drop folderview-bug294795 patch (fixed upstream)
