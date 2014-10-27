@@ -3,7 +3,7 @@
 Summary:	K Desktop Environment
 Name:		kdebase4
 Version:	4.14.2
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPLv2+
 Group:		Graphical desktop/KDE
@@ -38,14 +38,13 @@ BuildRequires:	baloo-widgets-devel
 BuildRequires:	kdelibs4-devel
 BuildRequires:	kfilemetadata-devel
 BuildRequires:	tidy-devel
-BuildRequires:	zlib-devel
 BuildRequires:	pkgconfig(glib-2.0)
+BuildRequires:	pkgconfig(libkactivities)
 BuildRequires:	pkgconfig(libstreams)
-BuildRequires:	pkgconfig(qimageblitz)
+BuildRequires:	pkgconfig(qimageblitz) < 5.0.0
 BuildRequires:	pkgconfig(shared-desktop-ontologies)
 BuildRequires:	pkgconfig(xt)
-BuildRequires:	pkgconfig(glib-2.0)
-BuildRequires:	pkgconfig(libkactivities) >= 4.9.80
+BuildRequires:	pkgconfig(zlib)
 Requires:	kdebase4-runtime
 Suggests:	dolphin
 Suggests:	kdepasswd
@@ -546,6 +545,9 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konqbrowser.desktop
 rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 
 %changelog
+* Mon Oct 27 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.14.2-3
+- Use pkgconfig(qimageblitz) < 5.0.0 to force Qt4 version
+
 * Wed Oct 22 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.14.2-2
 - Add dolphin-video-previews patch to fix video previews in Dolphin (KDE #334924)
 
