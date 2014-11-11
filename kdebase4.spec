@@ -21,8 +21,6 @@ Patch2:		kdebase-4.8.97-mdvuserface.patch
 Patch3:		kdebase-4.10.0-fileplaces.patch
 Patch4:		kdebase-4.10.2-konq-templates-cleanup.patch
 Patch5:		kdebase-4.11.4-folderview-preview.patch
-# KDE #334924, playing video previews is messed up
-Patch6:		kdebase-4.14.2-dolphin-video-previews.patch
 Patch12:	kdebase-4.8.1-Set-Preview-true.patch
 Patch101:	kdebase-4.12.1-dolphinrcui.patch
 Patch104:	kdebase-4.8.2-dolphin-delete-files-on-flash-drives.patch
@@ -523,7 +521,6 @@ based on kdebase.
 %patch3 -p1 -b .fileplaces
 %patch4 -p1 -b .konq-templates
 %patch5 -p1 -b .folder-preview
-%patch6 -p1 -b .video-previews
 %patch12 -p1
 %patch101 -p1
 #patch104 -p1
@@ -547,6 +544,7 @@ rm -f %{buildroot}%{_kde_datadir}/applications/kde4/konquerorsu.desktop
 %changelog
 * Tue Nov 11 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.14.3-1
 - New version 4.14.3
+- Drop dolphin-video-previews patch (merged upstream)
 
 * Mon Oct 27 2014 Andrey Bondrov <andrey.bondrov@rosalab.ru> 1:4.14.2-3
 - Use pkgconfig(qimageblitz) < 5.0.0 to force Qt4 version
