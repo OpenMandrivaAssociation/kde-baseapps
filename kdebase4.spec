@@ -1,20 +1,15 @@
+%define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 %define build_iconoverlay 0
 
 Summary:	K Desktop Environment
 Name:		kdebase4
-Version:	4.14.3
-Release:	2
+Version:	14.11.97
+Release:	1
 Epoch:		1
 License:	GPLv2+
 Group:		Graphical desktop/KDE
 Url:		http://www.kde.org
-%define is_beta %(if test `echo %{version} |cut -d. -f3` -ge 70; then echo -n 1; else echo -n 0; fi)
-%if %{is_beta}
-%define ftpdir unstable
-%else
-%define ftpdir stable
-%endif
-Source0:	ftp://ftp.kde.org/pub/kde/%{ftpdir}/%{version}/src/kde-baseapps-%{version}.tar.xz
+Source0:	ftp://ftp.kde.org/pub/kde/%{stable}/applications/%{version}/src/kde-baseapps-%{version}.tar.xz
 Source1:	%{name}.rpmlintrc
 Patch1:		kdebase-4.2.95-Use-Mandriva-Home-Icon.patch
 Patch2:		kdebase-4.8.97-mdvuserface.patch
@@ -22,9 +17,9 @@ Patch3:		kdebase-4.10.0-fileplaces.patch
 Patch4:		kdebase-4.10.2-konq-templates-cleanup.patch
 Patch5:		kdebase-4.11.4-folderview-preview.patch
 Patch12:	kdebase-4.8.1-Set-Preview-true.patch
-Patch101:	kdebase-4.12.1-dolphinrcui.patch
+Patch101:	kdebase-14.11.97-dolphinrcui.patch
 Patch104:	kdebase-4.8.2-dolphin-delete-files-on-flash-drives.patch
-Patch105:	kdebase-4.14.1-dolphin-klook.patch
+Patch105:	kdebase-14.11.97-dolphin-klook.patch
 Patch106:	kdebase-4.12.1-konqueror-settings-kio-proxy.patch
 Patch107:	kdebase-4.10.0-iconoverlay-plugin.patch
 Patch108:	kdebase-4.9.5-iconoverlay-race-fix.patch
@@ -420,6 +415,7 @@ KDE file and web browser
 %exclude %{_kde_appsdir}/konqueror/kpartplugins/searchbar.desktop
 %exclude %{_kde_appsdir}/konqueror/kpartplugins/searchbar.rc
 %exclude %{_kde_appsdir}/konqueror/opensearch/google.xml
+%{_datadir}/appdata/konqueror.appdata.xml
 
 #-----------------------------------------------------------------------------
 
@@ -457,6 +453,7 @@ Application finder
 %{_kde_applicationsdir}/kfind.desktop
 %{_kde_iconsdir}/*/*/*/kfind.*
 %{_kde_mandir}/man1/kfind.1.*
+%{_datadir}/appdata/kfind.appdata.xml
 
 #-----------------------------------------------------------------------------
 
@@ -522,7 +519,7 @@ based on kdebase.
 %patch4 -p1 -b .konq-templates
 %patch5 -p1 -b .folder-preview
 %patch12 -p1
-%patch101 -p1
+%patch101 -p1 -b .uirc~
 #patch104 -p1
 %patch105 -p1 -b .0105~
 %patch106 -p1 -b .0106~

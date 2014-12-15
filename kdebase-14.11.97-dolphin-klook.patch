@@ -1,7 +1,6 @@
-diff -urN kde-baseapps-4.14.1/dolphin/src/CMakeLists.txt kde-baseapps-4.14.1-patched/dolphin/src/CMakeLists.txt
---- kde-baseapps-4.14.1/dolphin/src/CMakeLists.txt	2014-09-01 09:06:18.000000000 +1100
-+++ kde-baseapps-4.14.1-patched/dolphin/src/CMakeLists.txt	2014-09-30 19:47:10.072393631 +1100
-@@ -47,6 +47,7 @@
+--- kde-baseapps-14.11.97/dolphin/src/CMakeLists.txt.0105~	2014-11-26 10:27:41.000000000 +0100
++++ kde-baseapps-14.11.97/dolphin/src/CMakeLists.txt	2014-12-15 13:25:38.299153823 +0100
+@@ -47,6 +47,7 @@ set(dolphinprivate_LIB_SRCS
      kitemviews/kitemlistgroupheader.cpp
      kitemviews/kitemlistheader.cpp
      kitemviews/kitemlistselectionmanager.cpp
@@ -9,9 +8,8 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/CMakeLists.txt kde-baseapps-4.14.1-pat
      kitemviews/kitemliststyleoption.cpp
      kitemviews/kitemlistview.cpp
      kitemviews/kitemlistviewaccessible.cpp
-diff -urN kde-baseapps-4.14.1/dolphin/src/dolphinmainwindow.cpp kde-baseapps-4.14.1-patched/dolphin/src/dolphinmainwindow.cpp
---- kde-baseapps-4.14.1/dolphin/src/dolphinmainwindow.cpp	2014-09-01 09:06:18.000000000 +1100
-+++ kde-baseapps-4.14.1-patched/dolphin/src/dolphinmainwindow.cpp	2014-09-30 19:48:14.282396553 +1100
+--- kde-baseapps-14.11.97/dolphin/src/dolphinmainwindow.cpp.0105~	2014-11-26 10:27:41.000000000 +0100
++++ kde-baseapps-14.11.97/dolphin/src/dolphinmainwindow.cpp	2014-12-15 13:25:38.299153823 +0100
 @@ -87,6 +87,8 @@
  #include <QKeyEvent>
  #include <QClipboard>
@@ -21,7 +19,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/dolphinmainwindow.cpp kde-baseapps-4.1
  
  namespace {
      // Used for GeneralSettings::version() to determine whether
-@@ -107,7 +109,8 @@
+@@ -104,7 +106,8 @@ DolphinMainWindow::DolphinMainWindow() :
      m_settingsDialog(),
      m_controlButton(0),
      m_updateToolBarTimer(0),
@@ -31,7 +29,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/dolphinmainwindow.cpp kde-baseapps-4.1
  {
      setObjectName("Dolphin#");
  
-@@ -198,6 +201,8 @@
+@@ -174,6 +177,8 @@ DolphinMainWindow::DolphinMainWindow() :
      if (!showMenu) {
          createControlButton();
      }
@@ -40,7 +38,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/dolphinmainwindow.cpp kde-baseapps-4.1
  }
  
  DolphinMainWindow::~DolphinMainWindow()
-@@ -337,6 +342,15 @@
+@@ -269,6 +274,15 @@ void DolphinMainWindow::slotSelectionCha
          compareFilesAction->setEnabled(false);
      }
  
@@ -56,7 +54,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/dolphinmainwindow.cpp kde-baseapps-4.1
      emit selectionChanged(selection);
  }
  
-@@ -1452,6 +1466,14 @@
+@@ -1159,6 +1173,14 @@ void DolphinMainWindow::setupActions()
      openInNewWindow->setText(i18nc("@action:inmenu", "Open in New Window"));
      openInNewWindow->setIcon(KIcon("window-new"));
      connect(openInNewWindow, SIGNAL(triggered()), this, SLOT(openInNewWindow()));
@@ -71,7 +69,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/dolphinmainwindow.cpp kde-baseapps-4.1
  }
  
  void DolphinMainWindow::setupDockWidgets()
-@@ -1733,6 +1755,9 @@
+@@ -1440,6 +1462,9 @@ void DolphinMainWindow::connectViewSigna
              this, SLOT(goBack()));
      connect(view, SIGNAL(goForwardRequested()),
              this, SLOT(goForward()));
@@ -81,7 +79,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/dolphinmainwindow.cpp kde-baseapps-4.1
  
      const KUrlNavigator* navigator = container->urlNavigator();
      connect(navigator, SIGNAL(urlChanged(KUrl)),
-@@ -1855,4 +1880,51 @@
+@@ -1522,4 +1547,51 @@ void DolphinMainWindow::UndoUiInterface:
      }
  }
  
@@ -133,9 +131,8 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/dolphinmainwindow.cpp kde-baseapps-4.1
 +#endif
 +}
  #include "dolphinmainwindow.moc"
-diff -urN kde-baseapps-4.14.1/dolphin/src/dolphinmainwindow.h kde-baseapps-4.14.1-patched/dolphin/src/dolphinmainwindow.h
---- kde-baseapps-4.14.1/dolphin/src/dolphinmainwindow.h	2014-09-01 09:06:18.000000000 +1100
-+++ kde-baseapps-4.14.1-patched/dolphin/src/dolphinmainwindow.h	2014-09-30 19:47:10.073393631 +1100
+--- kde-baseapps-14.11.97/dolphin/src/dolphinmainwindow.h.0105~	2014-11-26 10:27:41.000000000 +0100
++++ kde-baseapps-14.11.97/dolphin/src/dolphinmainwindow.h	2014-12-15 13:26:40.745373137 +0100
 @@ -35,6 +35,7 @@
  
  typedef KIO::FileUndoManager::CommandType CommandType;
@@ -144,15 +141,15 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/dolphinmainwindow.h kde-baseapps-4.14.
  class DolphinViewActionHandler;
  class DolphinApplication;
  class DolphinSettingsDialog;
-@@ -51,6 +52,7 @@
- class QSplitter;
+@@ -48,6 +49,7 @@ class KJob;
+ class KNewFileMenu;
+ class KUrl;
  class QToolButton;
- class QVBoxLayout;
 +class Panel;
  
  /**
   * @short Main window for Dolphin.
-@@ -95,6 +97,8 @@
+@@ -92,6 +94,8 @@ public:
       */
      KNewFileMenu* newFileMenu() const;
  
@@ -161,7 +158,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/dolphinmainwindow.h kde-baseapps-4.14.
  public slots:
      /**
       * Pastes the clipboard data into the currently selected folder
-@@ -368,6 +372,12 @@
+@@ -352,6 +356,12 @@ private slots:
      void openInNewTab();
  
      /**
@@ -174,7 +171,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/dolphinmainwindow.h kde-baseapps-4.14.
       * Opens the selected folder in a new window.
       */
      void openInNewWindow();
-@@ -566,6 +576,7 @@
+@@ -509,6 +519,7 @@ private:
      QTimer* m_updateToolBarTimer;
  
      KIO::Job* m_lastHandleUrlStatJob;
@@ -182,10 +179,9 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/dolphinmainwindow.h kde-baseapps-4.14.
  };
  
  inline DolphinViewContainer* DolphinMainWindow::activeViewContainer() const
-diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kfileitemlistwidget.cpp kde-baseapps-4.14.1-patched/dolphin/src/kitemviews/kfileitemlistwidget.cpp
---- kde-baseapps-4.14.1/dolphin/src/kitemviews/kfileitemlistwidget.cpp	2014-09-01 09:06:18.000000000 +1100
-+++ kde-baseapps-4.14.1-patched/dolphin/src/kitemviews/kfileitemlistwidget.cpp	2014-09-30 19:47:10.073393631 +1100
-@@ -99,6 +99,44 @@
+--- kde-baseapps-14.11.97/dolphin/src/kitemviews/kfileitemlistwidget.cpp.0105~	2014-11-26 10:27:41.000000000 +0100
++++ kde-baseapps-14.11.97/dolphin/src/kitemviews/kfileitemlistwidget.cpp	2014-12-15 13:25:38.299153823 +0100
+@@ -99,6 +99,44 @@ QFont KFileItemListWidgetInformant::cust
  }
  
  
@@ -230,10 +226,9 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kfileitemlistwidget.cpp kde
  KFileItemListWidget::KFileItemListWidget(KItemListWidgetInformant* informant, QGraphicsItem* parent) :
      KStandardItemListWidget(informant, parent)
  {
-diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kfileitemlistwidget.h kde-baseapps-4.14.1-patched/dolphin/src/kitemviews/kfileitemlistwidget.h
---- kde-baseapps-4.14.1/dolphin/src/kitemviews/kfileitemlistwidget.h	2014-09-01 09:06:18.000000000 +1100
-+++ kde-baseapps-4.14.1-patched/dolphin/src/kitemviews/kfileitemlistwidget.h	2014-09-30 19:47:10.074393631 +1100
-@@ -46,6 +46,7 @@
+--- kde-baseapps-14.11.97/dolphin/src/kitemviews/kfileitemlistwidget.h.0105~	2014-11-26 10:27:41.000000000 +0100
++++ kde-baseapps-14.11.97/dolphin/src/kitemviews/kfileitemlistwidget.h	2014-12-15 13:25:38.299153823 +0100
+@@ -46,6 +46,7 @@ public:
      virtual ~KFileItemListWidget();
  
      static KItemListWidgetInformant* createInformant();
@@ -241,10 +236,9 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kfileitemlistwidget.h kde-b
  
  protected:
      virtual bool isRoleRightAligned(const QByteArray& role) const;
-diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistcontroller.cpp kde-baseapps-4.14.1-patched/dolphin/src/kitemviews/kitemlistcontroller.cpp
---- kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistcontroller.cpp	2014-09-01 09:06:18.000000000 +1100
-+++ kde-baseapps-4.14.1-patched/dolphin/src/kitemviews/kitemlistcontroller.cpp	2014-09-30 19:47:10.074393631 +1100
-@@ -562,6 +562,13 @@
+--- kde-baseapps-14.11.97/dolphin/src/kitemviews/kitemlistcontroller.cpp.0105~	2014-11-26 10:27:41.000000000 +0100
++++ kde-baseapps-14.11.97/dolphin/src/kitemviews/kitemlistcontroller.cpp	2014-12-15 13:25:38.300153810 +0100
+@@ -562,6 +562,13 @@ bool KItemListController::mousePressEven
          m_selectionManager->beginAnchoredSelection(m_pressedIndex);
          return true;
      }
@@ -258,10 +252,9 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistcontroller.cpp kde
  
      const bool shiftPressed = event->modifiers() & Qt::ShiftModifier;
      const bool controlPressed = event->modifiers() & Qt::ControlModifier;
-diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistcontroller.h kde-baseapps-4.14.1-patched/dolphin/src/kitemviews/kitemlistcontroller.h
---- kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistcontroller.h	2014-09-01 09:06:18.000000000 +1100
-+++ kde-baseapps-4.14.1-patched/dolphin/src/kitemviews/kitemlistcontroller.h	2014-09-30 19:47:10.075393631 +1100
-@@ -239,6 +239,8 @@
+--- kde-baseapps-14.11.97/dolphin/src/kitemviews/kitemlistcontroller.h.0105~	2014-11-26 10:27:41.000000000 +0100
++++ kde-baseapps-14.11.97/dolphin/src/kitemviews/kitemlistcontroller.h	2014-12-15 13:25:38.300153810 +0100
+@@ -239,6 +239,8 @@ signals:
      void modelChanged(KItemModelBase* current, KItemModelBase* previous);
      void viewChanged(KItemListView* current, KItemListView* previous);
  
@@ -270,9 +263,8 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistcontroller.h kde-b
  private slots:
      void slotViewScrollOffsetChanged(qreal current, qreal previous);
  
-diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistklooktoggle.cpp kde-baseapps-4.14.1-patched/dolphin/src/kitemviews/kitemlistklooktoggle.cpp
---- kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistklooktoggle.cpp	1970-01-01 10:00:00.000000000 +1000
-+++ kde-baseapps-4.14.1-patched/dolphin/src/kitemviews/kitemlistklooktoggle.cpp	2014-09-30 19:47:10.075393631 +1100
+--- kde-baseapps-14.11.97/dolphin/src/kitemviews/kitemlistklooktoggle.cpp.0105~	2014-12-15 13:25:38.300153810 +0100
++++ kde-baseapps-14.11.97/dolphin/src/kitemviews/kitemlistklooktoggle.cpp	2014-12-15 13:25:38.300153810 +0100
 @@ -0,0 +1,106 @@
 +/***************************************************************************
 + *   Copyright (C) 2011 by Peter Penz <peter.penz19@gmail.com>             *
@@ -380,9 +372,8 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistklooktoggle.cpp kd
 +}
 +
 +#include "kitemlistklooktoggle_p.moc"
-diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistklooktoggle_p.h kde-baseapps-4.14.1-patched/dolphin/src/kitemviews/kitemlistklooktoggle_p.h
---- kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistklooktoggle_p.h	1970-01-01 10:00:00.000000000 +1000
-+++ kde-baseapps-4.14.1-patched/dolphin/src/kitemviews/kitemlistklooktoggle_p.h	2014-09-30 19:47:10.075393631 +1100
+--- kde-baseapps-14.11.97/dolphin/src/kitemviews/kitemlistklooktoggle_p.h.0105~	2014-12-15 13:25:38.300153810 +0100
++++ kde-baseapps-14.11.97/dolphin/src/kitemviews/kitemlistklooktoggle_p.h	2014-12-15 13:25:38.300153810 +0100
 @@ -0,0 +1,61 @@
 +/***************************************************************************
 + *   Copyright (C) 2011 by Peter Penz <peter.penz19@gmail.com>             *
@@ -445,10 +436,9 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistklooktoggle_p.h kd
 +#endif
 +
 +
-diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistview.cpp kde-baseapps-4.14.1-patched/dolphin/src/kitemviews/kitemlistview.cpp
---- kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistview.cpp	2014-09-01 09:06:18.000000000 +1100
-+++ kde-baseapps-4.14.1-patched/dolphin/src/kitemviews/kitemlistview.cpp	2014-09-30 19:47:10.076393631 +1100
-@@ -75,6 +75,7 @@
+--- kde-baseapps-14.11.97/dolphin/src/kitemviews/kitemlistview.cpp.0105~	2014-11-26 10:27:41.000000000 +0100
++++ kde-baseapps-14.11.97/dolphin/src/kitemviews/kitemlistview.cpp	2014-12-15 13:25:38.300153810 +0100
+@@ -75,6 +75,7 @@ QAccessibleInterface* accessibleInterfac
  KItemListView::KItemListView(QGraphicsWidget* parent) :
      QGraphicsWidget(parent),
      m_enabledSelectionToggles(false),
@@ -456,7 +446,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistview.cpp kde-basea
      m_grouped(false),
      m_supportsItemExpanding(false),
      m_editingRole(false),
-@@ -298,6 +299,25 @@
+@@ -298,6 +299,25 @@ bool KItemListView::enabledSelectionTogg
      return m_enabledSelectionToggles;
  }
  
@@ -482,7 +472,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistview.cpp kde-basea
  KItemListController* KItemListView::controller() const
  {
      return m_controller;
-@@ -449,6 +469,25 @@
+@@ -449,6 +469,25 @@ bool KItemListView::isAboveExpansionTogg
      return false;
  }
  
@@ -508,7 +498,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistview.cpp kde-basea
  int KItemListView::firstVisibleIndex() const
  {
      return m_layouter->firstVisibleIndex();
-@@ -1991,6 +2030,7 @@
+@@ -1991,6 +2030,7 @@ void KItemListView::updateWidgetProperti
      widget->setSelected(selectionManager->isSelected(index));
      widget->setHovered(false);
      widget->setEnabledSelectionToggle(enabledSelectionToggles());
@@ -516,10 +506,9 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistview.cpp kde-basea
      widget->setIndex(index);
      widget->setData(m_model->data(index));
      widget->setSiblingsInformation(QBitArray());
-diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistview.h kde-baseapps-4.14.1-patched/dolphin/src/kitemviews/kitemlistview.h
---- kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistview.h	2014-09-01 09:06:18.000000000 +1100
-+++ kde-baseapps-4.14.1-patched/dolphin/src/kitemviews/kitemlistview.h	2014-09-30 19:47:10.076393631 +1100
-@@ -112,6 +112,9 @@
+--- kde-baseapps-14.11.97/dolphin/src/kitemviews/kitemlistview.h.0105~	2014-11-26 10:27:41.000000000 +0100
++++ kde-baseapps-14.11.97/dolphin/src/kitemviews/kitemlistview.h	2014-12-15 13:25:38.300153810 +0100
+@@ -112,6 +112,9 @@ public:
      void setEnabledSelectionToggles(bool enabled);
      bool enabledSelectionToggles() const;
  
@@ -529,7 +518,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistview.h kde-baseapp
      /**
       * @return Controller of the item-list. The controller gets
       *         initialized by KItemListController::setView() and will
-@@ -181,6 +184,7 @@
+@@ -181,6 +184,7 @@ public:
      bool isAboveSelectionToggle(int index, const QPointF& pos) const;
      bool isAboveExpansionToggle(int index, const QPointF& pos) const;
  
@@ -537,7 +526,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistview.h kde-baseapp
      /**
       * @return Index of the first item that is at least partly visible.
       *         -1 is returned if the model contains no items.
-@@ -705,6 +709,7 @@
+@@ -705,6 +709,7 @@ private:
  
  private:
      bool m_enabledSelectionToggles;
@@ -545,9 +534,8 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistview.h kde-baseapp
      bool m_grouped;
      bool m_supportsItemExpanding;
      bool m_editingRole;
-diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistwidget.cpp kde-baseapps-4.14.1-patched/dolphin/src/kitemviews/kitemlistwidget.cpp
---- kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistwidget.cpp	2014-09-01 09:06:18.000000000 +1100
-+++ kde-baseapps-4.14.1-patched/dolphin/src/kitemviews/kitemlistwidget.cpp	2014-09-30 19:47:10.076393631 +1100
+--- kde-baseapps-14.11.97/dolphin/src/kitemviews/kitemlistwidget.cpp.0105~	2014-11-26 10:27:41.000000000 +0100
++++ kde-baseapps-14.11.97/dolphin/src/kitemviews/kitemlistwidget.cpp	2014-12-15 13:28:40.149880376 +0100
 @@ -22,6 +22,7 @@
  
  #include "kitemlistwidget.h"
@@ -556,7 +544,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistwidget.cpp kde-bas
  #include "kitemlistview.h"
  #include "kitemmodelbase.h"
  
-@@ -52,6 +53,7 @@
+@@ -52,6 +53,7 @@ KItemListWidget::KItemListWidget(KItemLi
      m_hovered(false),
      m_alternateBackground(false),
      m_enabledSelectionToggle(false),
@@ -564,7 +552,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistwidget.cpp kde-bas
      m_data(),
      m_visibleRoles(),
      m_columnWidths(),
-@@ -61,7 +63,8 @@
+@@ -61,7 +63,8 @@ KItemListWidget::KItemListWidget(KItemLi
      m_hoverCache(0),
      m_hoverAnimation(0),
      m_selectionToggle(0),
@@ -574,7 +562,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistwidget.cpp kde-bas
  {
  }
  
-@@ -76,6 +79,9 @@
+@@ -76,6 +79,9 @@ void KItemListWidget::setIndex(int index
          delete m_selectionToggle;
          m_selectionToggle = 0;
  
@@ -584,7 +572,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistwidget.cpp kde-bas
          if (m_hoverAnimation) {
              m_hoverAnimation->stop();
              m_hoverOpacity = 0;
-@@ -263,6 +269,9 @@
+@@ -263,6 +269,9 @@ void KItemListWidget::setHovered(bool ho
          if (m_enabledSelectionToggle && !(QApplication::mouseButtons() & Qt::LeftButton)) {
              initializeSelectionToggle();
          }
@@ -594,7 +582,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistwidget.cpp kde-bas
      } else {
          m_hoverAnimation->setStartValue(hoverOpacity());
          m_hoverAnimation->setEndValue(0.0);
-@@ -313,6 +322,19 @@
+@@ -313,6 +322,19 @@ bool KItemListWidget::enabledSelectionTo
      return m_enabledSelectionToggle;
  }
  
@@ -614,7 +602,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistwidget.cpp kde-bas
  void KItemListWidget::setSiblingsInformation(const QBitArray& siblings)
  {
      const QBitArray previous = m_siblingsInfo;
-@@ -362,6 +384,12 @@
+@@ -362,6 +384,12 @@ QRectF KItemListWidget::selectionToggleR
      return QRectF();
  }
  
@@ -627,16 +615,18 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistwidget.cpp kde-bas
  QRectF KItemListWidget::expansionToggleRect() const
  {
      return QRectF();
-@@ -476,6 +504,8 @@
-     if (!m_hovered) {
-         delete m_selectionToggle;
+@@ -477,6 +505,10 @@ void KItemListWidget::slotHoverAnimation
+         m_selectionToggle->deleteLater();
          m_selectionToggle = 0;
-+        delete m_klookToggle;
-+        m_klookToggle = 0;
      }
++    if (!m_hovered && m_klookToggle) {
++        m_klookToggle->deleteLater();
++        m_klookToggle = 0;
++    }
  }
  
-@@ -494,12 +524,29 @@
+ void KItemListWidget::initializeSelectionToggle()
+@@ -494,12 +526,29 @@ void KItemListWidget::initializeSelectio
      m_selectionToggle->setChecked(isSelected());
  }
  
@@ -666,9 +656,8 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistwidget.cpp kde-bas
  
      if (m_hoverOpacity <= 0.0) {
          delete m_hoverCache;
-diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistwidget.h kde-baseapps-4.14.1-patched/dolphin/src/kitemviews/kitemlistwidget.h
---- kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistwidget.h	2014-09-01 09:06:18.000000000 +1100
-+++ kde-baseapps-4.14.1-patched/dolphin/src/kitemviews/kitemlistwidget.h	2014-09-30 19:47:10.077393631 +1100
+--- kde-baseapps-14.11.97/dolphin/src/kitemviews/kitemlistwidget.h.0105~	2014-11-26 10:27:41.000000000 +0100
++++ kde-baseapps-14.11.97/dolphin/src/kitemviews/kitemlistwidget.h	2014-12-15 13:25:38.301153798 +0100
 @@ -33,6 +33,7 @@
  
  class KItemListSelectionToggle;
@@ -677,7 +666,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistwidget.h kde-basea
  class QPropertyAnimation;
  
  /**
-@@ -116,6 +117,9 @@
+@@ -116,6 +117,9 @@ public:
      void setEnabledSelectionToggle(bool enabled);
      bool enabledSelectionToggle() const;
  
@@ -687,7 +676,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistwidget.h kde-basea
      /**
       * Sets the sibling information for the item and all of its parents.
       * The sibling information of the upper most parent is represented by
-@@ -188,6 +192,12 @@
+@@ -188,6 +192,12 @@ public:
       */
      virtual QPixmap createDragPixmap(const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
  
@@ -700,7 +689,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistwidget.h kde-basea
  signals:
      void roleEditingCanceled(int index, const QByteArray& role, const QVariant& value);
      void roleEditingFinished(int index, const QByteArray& role, const QVariant& value);
-@@ -218,6 +228,7 @@
+@@ -218,6 +228,7 @@ private slots:
  
  private:
      void initializeSelectionToggle();
@@ -708,7 +697,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistwidget.h kde-basea
      void setHoverOpacity(qreal opacity);
      void clearHoverCache();
      void drawItemStyleOption(QPainter* painter, QWidget* widget, QStyle::State styleState);
-@@ -232,6 +243,7 @@
+@@ -232,6 +243,7 @@ private:
      bool m_hovered;
      bool m_alternateBackground;
      bool m_enabledSelectionToggle;
@@ -716,7 +705,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistwidget.h kde-basea
      QHash<QByteArray, QVariant> m_data;
      QList<QByteArray> m_visibleRoles;
      QHash<QByteArray, qreal> m_columnWidths;
-@@ -245,6 +257,8 @@
+@@ -245,6 +257,8 @@ private:
      KItemListSelectionToggle* m_selectionToggle;
  
      QByteArray m_editedRole;
@@ -725,10 +714,9 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kitemlistwidget.h kde-basea
  };
  
  inline const KItemListWidgetInformant* KItemListWidget::informant() const
-diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kstandarditemlistwidget.h kde-baseapps-4.14.1-patched/dolphin/src/kitemviews/kstandarditemlistwidget.h
---- kde-baseapps-4.14.1/dolphin/src/kitemviews/kstandarditemlistwidget.h	2014-09-01 09:06:18.000000000 +1100
-+++ kde-baseapps-4.14.1-patched/dolphin/src/kitemviews/kstandarditemlistwidget.h	2014-09-30 19:47:10.077393631 +1100
-@@ -183,6 +183,7 @@
+--- kde-baseapps-14.11.97/dolphin/src/kitemviews/kstandarditemlistwidget.h.0105~	2014-11-26 10:27:41.000000000 +0100
++++ kde-baseapps-14.11.97/dolphin/src/kitemviews/kstandarditemlistwidget.h	2014-12-15 13:25:38.301153798 +0100
+@@ -183,6 +183,7 @@ protected:
      virtual void resizeEvent(QGraphicsSceneResizeEvent* event);
      virtual void showEvent(QShowEvent* event);
      virtual void hideEvent(QHideEvent* event);
@@ -736,7 +724,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kstandarditemlistwidget.h k
  
  private slots:
      void slotCutItemsChanged();
-@@ -190,7 +191,6 @@
+@@ -190,7 +191,6 @@ private slots:
      void slotRoleEditingFinished(const QByteArray& role, const QVariant& value);
  
  private:
@@ -744,9 +732,8 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/kitemviews/kstandarditemlistwidget.h k
      void updateExpansionArea();
      void updatePixmapCache();
  
-diff -urN kde-baseapps-4.14.1/dolphin/src/settings/dolphin_generalsettings.kcfg kde-baseapps-4.14.1-patched/dolphin/src/settings/dolphin_generalsettings.kcfg
---- kde-baseapps-4.14.1/dolphin/src/settings/dolphin_generalsettings.kcfg	2014-09-01 09:06:18.000000000 +1100
-+++ kde-baseapps-4.14.1-patched/dolphin/src/settings/dolphin_generalsettings.kcfg	2014-09-30 19:47:10.077393631 +1100
+--- kde-baseapps-14.11.97/dolphin/src/settings/dolphin_generalsettings.kcfg.0105~	2014-11-26 10:27:41.000000000 +0100
++++ kde-baseapps-14.11.97/dolphin/src/settings/dolphin_generalsettings.kcfg	2014-12-15 13:25:38.301153798 +0100
 @@ -61,6 +61,10 @@
              <label>Show selection toggle</label>
              <default>true</default>
@@ -758,10 +745,9 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/settings/dolphin_generalsettings.kcfg 
          <entry name="ShowToolTips" type="Bool">
              <label>Show tooltips</label>
              <default>false</default>
-diff -urN kde-baseapps-4.14.1/dolphin/src/settings/general/behaviorsettingspage.cpp kde-baseapps-4.14.1-patched/dolphin/src/settings/general/behaviorsettingspage.cpp
---- kde-baseapps-4.14.1/dolphin/src/settings/general/behaviorsettingspage.cpp	2014-09-01 09:06:18.000000000 +1100
-+++ kde-baseapps-4.14.1-patched/dolphin/src/settings/general/behaviorsettingspage.cpp	2014-09-30 19:47:10.077393631 +1100
-@@ -43,7 +43,8 @@
+--- kde-baseapps-14.11.97/dolphin/src/settings/general/behaviorsettingspage.cpp.0105~	2014-11-26 10:27:41.000000000 +0100
++++ kde-baseapps-14.11.97/dolphin/src/settings/general/behaviorsettingspage.cpp	2014-12-15 13:25:38.301153798 +0100
+@@ -43,7 +43,8 @@ BehaviorSettingsPage::BehaviorSettingsPa
      m_showToolTips(0),
      m_showSelectionToggle(0),
      m_naturalSorting(0),
@@ -771,7 +757,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/settings/general/behaviorsettingspage.
  {
      QVBoxLayout* topLayout = new QVBoxLayout(this);
  
-@@ -64,6 +65,9 @@
+@@ -64,6 +65,9 @@ BehaviorSettingsPage::BehaviorSettingsPa
      // 'Show selection marker'
      m_showSelectionToggle = new QCheckBox(i18nc("@option:check", "Show selection marker"), this);
  
@@ -781,7 +767,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/settings/general/behaviorsettingspage.
      // 'Natural sorting of items'
      m_naturalSorting = new QCheckBox(i18nc("option:check", "Natural sorting of items"), this);
  
-@@ -73,6 +77,7 @@
+@@ -73,6 +77,7 @@ BehaviorSettingsPage::BehaviorSettingsPa
      topLayout->addWidget(viewPropsBox);
      topLayout->addWidget(m_showToolTips);
      topLayout->addWidget(m_showSelectionToggle);
@@ -789,7 +775,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/settings/general/behaviorsettingspage.
      topLayout->addWidget(m_naturalSorting);
      topLayout->addWidget(m_renameInline);
      topLayout->addStretch();
-@@ -83,6 +88,7 @@
+@@ -83,6 +88,7 @@ BehaviorSettingsPage::BehaviorSettingsPa
      connect(m_globalViewProps, SIGNAL(toggled(bool)), this, SIGNAL(changed()));
      connect(m_showToolTips, SIGNAL(toggled(bool)), this, SIGNAL(changed()));
      connect(m_showSelectionToggle, SIGNAL(toggled(bool)), this, SIGNAL(changed()));
@@ -797,7 +783,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/settings/general/behaviorsettingspage.
      connect(m_naturalSorting, SIGNAL(toggled(bool)), this, SIGNAL(changed()));
      connect(m_renameInline, SIGNAL(toggled(bool)), this, SIGNAL(changed()));
  }
-@@ -113,6 +119,7 @@
+@@ -113,6 +119,7 @@ void BehaviorSettingsPage::applySettings
          globalProps.setDirProperties(props);
      }
  
@@ -805,7 +791,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/settings/general/behaviorsettingspage.
      const bool naturalSorting = m_naturalSorting->isChecked();
      if (KGlobalSettings::naturalSorting() != naturalSorting) {
          KConfigGroup group(KGlobal::config(), "KDE");
-@@ -137,6 +144,7 @@
+@@ -137,6 +144,7 @@ void BehaviorSettingsPage::loadSettings(
  
      m_showToolTips->setChecked(GeneralSettings::showToolTips());
      m_showSelectionToggle->setChecked(GeneralSettings::showSelectionToggle());
@@ -813,10 +799,9 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/settings/general/behaviorsettingspage.
      m_naturalSorting->setChecked(KGlobalSettings::naturalSorting());
      m_renameInline->setChecked(GeneralSettings::renameInline());
  }
-diff -urN kde-baseapps-4.14.1/dolphin/src/settings/general/behaviorsettingspage.h kde-baseapps-4.14.1-patched/dolphin/src/settings/general/behaviorsettingspage.h
---- kde-baseapps-4.14.1/dolphin/src/settings/general/behaviorsettingspage.h	2014-09-01 09:06:18.000000000 +1100
-+++ kde-baseapps-4.14.1-patched/dolphin/src/settings/general/behaviorsettingspage.h	2014-09-30 19:47:10.078393631 +1100
-@@ -59,6 +59,7 @@
+--- kde-baseapps-14.11.97/dolphin/src/settings/general/behaviorsettingspage.h.0105~	2014-11-26 10:27:41.000000000 +0100
++++ kde-baseapps-14.11.97/dolphin/src/settings/general/behaviorsettingspage.h	2014-12-15 13:25:38.301153798 +0100
+@@ -59,6 +59,7 @@ private:
      QCheckBox* m_showSelectionToggle;
      QCheckBox* m_naturalSorting;
      QCheckBox* m_renameInline;
@@ -824,10 +809,9 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/settings/general/behaviorsettingspage.
  };
  
  #endif
-diff -urN kde-baseapps-4.14.1/dolphin/src/views/dolphinitemlistview.cpp kde-baseapps-4.14.1-patched/dolphin/src/views/dolphinitemlistview.cpp
---- kde-baseapps-4.14.1/dolphin/src/views/dolphinitemlistview.cpp	2014-09-01 09:06:18.000000000 +1100
-+++ kde-baseapps-4.14.1-patched/dolphin/src/views/dolphinitemlistview.cpp	2014-09-30 19:47:10.078393631 +1100
-@@ -41,6 +41,7 @@
+--- kde-baseapps-14.11.97/dolphin/src/views/dolphinitemlistview.cpp.0105~	2014-11-26 10:27:41.000000000 +0100
++++ kde-baseapps-14.11.97/dolphin/src/views/dolphinitemlistview.cpp	2014-12-15 13:25:38.301153798 +0100
+@@ -41,6 +41,7 @@ DolphinItemListView::DolphinItemListView
      KFileItemListView(parent),
      m_zoomLevel(0)
  {
@@ -835,7 +819,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/views/dolphinitemlistview.cpp kde-base
      updateFont();
      updateGridSize();
  }
-@@ -88,6 +89,7 @@
+@@ -88,6 +89,7 @@ void DolphinItemListView::readSettings()
  
      beginTransaction();
  
@@ -843,10 +827,9 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/views/dolphinitemlistview.cpp kde-base
      setEnabledSelectionToggles(GeneralSettings::showSelectionToggle());
      setSupportsItemExpanding(itemLayoutSupportsItemExpanding(itemLayout()));
  
-diff -urN kde-baseapps-4.14.1/dolphin/src/views/dolphinview.cpp kde-baseapps-4.14.1-patched/dolphin/src/views/dolphinview.cpp
---- kde-baseapps-4.14.1/dolphin/src/views/dolphinview.cpp	2014-09-01 09:06:18.000000000 +1100
-+++ kde-baseapps-4.14.1-patched/dolphin/src/views/dolphinview.cpp	2014-09-30 19:47:10.078393631 +1100
-@@ -156,6 +156,7 @@
+--- kde-baseapps-14.11.97/dolphin/src/views/dolphinview.cpp.0105~	2014-11-26 10:27:41.000000000 +0100
++++ kde-baseapps-14.11.97/dolphin/src/views/dolphinview.cpp	2014-12-15 13:25:38.301153798 +0100
+@@ -156,6 +156,7 @@ DolphinView::DolphinView(const KUrl& url
      connect(controller, SIGNAL(itemDropEvent(int,QGraphicsSceneDragDropEvent*)), this, SLOT(slotItemDropEvent(int,QGraphicsSceneDragDropEvent*)));
      connect(controller, SIGNAL(escapePressed()), this, SLOT(stopLoading()));
      connect(controller, SIGNAL(modelChanged(KItemModelBase*,KItemModelBase*)), this, SLOT(slotModelChanged(KItemModelBase*,KItemModelBase*)));
@@ -854,7 +837,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/views/dolphinview.cpp kde-baseapps-4.1
  
      connect(m_model, SIGNAL(directoryLoadingStarted()),       this, SLOT(slotDirectoryLoadingStarted()));
      connect(m_model, SIGNAL(directoryLoadingCompleted()),     this, SLOT(slotDirectoryLoadingCompleted()));
-@@ -1678,4 +1679,14 @@
+@@ -1688,4 +1689,14 @@ KUrl DolphinView::viewPropertiesUrl() co
      return url;
  }
  
@@ -869,10 +852,9 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/views/dolphinview.cpp kde-baseapps-4.1
 +
 +
  #include "dolphinview.moc"
-diff -urN kde-baseapps-4.14.1/dolphin/src/views/dolphinview.h kde-baseapps-4.14.1-patched/dolphin/src/views/dolphinview.h
---- kde-baseapps-4.14.1/dolphin/src/views/dolphinview.h	2014-09-01 09:06:18.000000000 +1100
-+++ kde-baseapps-4.14.1-patched/dolphin/src/views/dolphinview.h	2014-09-30 19:47:10.079393631 +1100
-@@ -302,6 +302,8 @@
+--- kde-baseapps-14.11.97/dolphin/src/views/dolphinview.h.0105~	2014-11-26 10:27:41.000000000 +0100
++++ kde-baseapps-14.11.97/dolphin/src/views/dolphinview.h	2014-12-15 13:25:38.301153798 +0100
+@@ -302,6 +302,8 @@ public:
       */
      void setViewPropertiesContext(const QString& context);
      QString viewPropertiesContext() const;
@@ -881,7 +863,7 @@ diff -urN kde-baseapps-4.14.1/dolphin/src/views/dolphinview.h kde-baseapps-4.14.
  
      /**
       * Checks if the given \a item can be opened as folder (e.g. archives).
-@@ -535,6 +537,8 @@
+@@ -535,6 +537,8 @@ signals:
       */
      void writeStateChanged(bool isFolderWritable);
  
