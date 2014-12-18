@@ -2,8 +2,8 @@
 
 Summary:	K Desktop Environment
 Name:		kdebase4
-Version:	4.13.3
-Release:	2
+Version:	4.14.3
+Release:	1
 Epoch:		1
 License:	GPLv2+
 Group:		Graphical desktop/KDE
@@ -22,9 +22,6 @@ Patch3:		kdebase-4.10.0-fileplaces.patch
 Patch4:		kdebase-4.10.2-konq-templates-cleanup.patch
 Patch5:		kdebase-4.11.4-folderview-preview.patch
 Patch12:	kdebase-4.8.1-Set-Preview-true.patch
-Patch13:	kdebase-4.8.1-kdepasswd-kcm.patch
-# https://bugs.kde.org/show_bug.cgi?id=294795#c357
-Patch14:	kdebase-4.13.3-folderview-bug294795.patch
 Patch101:	kdebase-4.12.1-dolphinrcui.patch
 Patch104:	kdebase-4.8.2-dolphin-delete-files-on-flash-drives.patch
 Patch105:	kdebase-4.13.2-dolphin-klook.patch
@@ -32,8 +29,6 @@ Patch106:	kdebase-4.12.1-konqueror-settings-kio-proxy.patch
 Patch107:	kdebase-4.10.0-iconoverlay-plugin.patch
 Patch108:	kdebase-4.9.5-iconoverlay-race-fix.patch
 #branch patches
-#trunk patches
-Patch200:	kdebase-4.12.1-dolphin-bookmarks-l10n.patch
 # test patches
 BuildRequires:	baloo-devel
 BuildRequires:	baloo-widgets-devel
@@ -43,7 +38,7 @@ BuildRequires:	tidy-devel
 BuildRequires:	zlib-devel
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(libstreams)
-BuildRequires:	pkgconfig(qimageblitz)
+BuildRequires:	pkgconfig(qimageblitz) < 5.0.0
 BuildRequires:	pkgconfig(shared-desktop-ontologies)
 BuildRequires:	pkgconfig(xt)
 BuildRequires:	pkgconfig(glib-2.0)
@@ -136,6 +131,7 @@ of file management.
 %{_kde_libdir}/kde4/kio_filenamesearch.so
 %{_kde_appsdir}/dolphinpart/dolphinpart.rc
 %{_kde_appsdir}/dolphin/
+%{_kde_datadir}/appdata/dolphin.appdata.xml
 %{_kde_datadir}/templates/
 
 #-----------------------------------------------------------------------------
@@ -144,6 +140,7 @@ of file management.
 Summary:	Kdepasswd
 Group:		Graphical desktop/KDE
 Requires:	kdebase4-runtime
+Requires:	accountsservice
 
 %description -n kdepasswd
 User password management
@@ -525,8 +522,6 @@ based on kdebase.
 %patch4 -p1 -b .konq-templates
 %patch5 -p1 -b .folder-preview
 %patch12 -p1
-%patch13 -p1
-%patch14 -p1
 %patch101 -p1
 #patch104 -p1
 %patch105 -p1 -b .0105~
@@ -535,7 +530,6 @@ based on kdebase.
 %patch107 -p1 -b .icon-plugin
 %patch108 -p1 -b .icon-race
 %endif
-%patch200 -p1
 
 %build
 %cmake_kde4
