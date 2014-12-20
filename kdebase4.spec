@@ -3,7 +3,7 @@
 
 Summary:	K Desktop Environment
 Name:		kdebase4
-Version:	14.11.97
+Version:	14.12.0
 Release:	1
 Epoch:		1
 License:	GPLv2+
