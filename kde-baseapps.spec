@@ -3,7 +3,7 @@
 
 Summary:	K Desktop Environment
 Name:		kde-baseapps
-Version:	14.12.3
+Version:	15.04.0
 Release:	1
 Epoch:		1
 License:	GPLv2+
