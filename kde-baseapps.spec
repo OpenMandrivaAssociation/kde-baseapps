@@ -2,14 +2,14 @@
 %define build_iconoverlay 0
 
 Summary:	K Desktop Environment
-Name:		kdebase4
+Name:		kde-baseapps
 Version:	14.12.3
 Release:	1
 Epoch:		1
 License:	GPLv2+
 Group:		Graphical desktop/KDE
 Url:		http://www.kde.org
-Source0:	ftp://ftp.kde.org/pub/kde/%{stable}/applications/%{version}/src/kde-baseapps-%{version}.tar.xz
+Source0:	ftp://ftp.kde.org/pub/kde/%{stable}/applications/%{version}/src/%{name}-%{version}.tar.xz
 Source1:	%{name}.rpmlintrc
 Patch1:		kdebase-4.2.95-Use-Mandriva-Home-Icon.patch
 Patch2:		kdebase-4.8.97-mdvuserface.patch
@@ -38,7 +38,7 @@ BuildRequires:	pkgconfig(qimageblitz) < 5.0.0
 BuildRequires:	pkgconfig(shared-desktop-ontologies)
 BuildRequires:	pkgconfig(xt)
 BuildRequires:	pkgconfig(zlib)
-Requires:	kdebase4-runtime
+Requires:	kde-runtime
 Suggests:	dolphin
 Suggests:	kdepasswd
 Suggests:	kde4-nsplugins
@@ -49,7 +49,7 @@ Suggests:	keditbookmarks
 Requires:	plasma-applet-folderview
 
 %description
-This meta package requires all base kdebase 4 packages.
+This meta package requires all base %{name} packages.
 
 %files
 %doc README
@@ -74,13 +74,12 @@ KDE 4 core library.
 %package -n dolphin
 Summary:	File manager for KDE focusing on usability
 Group:		Graphical desktop/KDE
-Requires:	kdebase4-runtime
+Requires:	kde-runtime
 Requires:	kfind
-Provides:	dolphin4
 Suggests:	ffmpegthumbs
 Suggests:	kde-odf-thumbnail
 Suggests:	klook
-Provides:	kde4-dolphin = %{EVRD}
+Provides:	kde-dolphin = %{EVRD}
 
 %description -n dolphin
 Dolphin is a file manager for KDE focusing on usability.
@@ -134,7 +133,7 @@ of file management.
 %package -n kdepasswd
 Summary:	User password management for KDE
 Group:		Graphical desktop/KDE
-Requires:	kdebase4-runtime
+Requires:	kde-runtime
 Requires:	accountsservice
 
 %description -n kdepasswd
@@ -154,7 +153,7 @@ User password management.
 %package -n kde4-nsplugins
 Summary:	Netscape plugins wrapper for KDE
 Group:		Graphical desktop/KDE
-Requires:	kdebase4-runtime
+Requires:	kde-runtime
 Conflicts:	kdebase4-devel < 1:4.7.90-2
 
 %description -n kde4-nsplugins
@@ -324,7 +323,7 @@ This module contains plugins that interact with Konqueror.
 %package -n konqueror
 Summary:	KDE file and web browser
 Group:		Graphical desktop/KDE
-Requires:	kdebase4-runtime
+Requires:	kde-runtime
 Requires:	dolphin
 Suggests:	keditbookmarks
 Suggests:	konq-plugins
@@ -422,7 +421,7 @@ KDE file and web browser
 %package -n keditbookmarks
 Summary:	Bookmark editor
 Group:		Graphical desktop/KDE
-Requires:	kdebase4-runtime
+Requires:	kde-runtime
 
 %description -n keditbookmarks
 Bookmark editor.
@@ -442,7 +441,7 @@ Bookmark editor.
 %package -n kfind
 Summary:	Application finder
 Group:		Graphical desktop/KDE
-Requires:	kdebase4-runtime
+Requires:	kde-runtime
 
 %description -n kfind
 Application finder
@@ -460,7 +459,7 @@ Application finder
 %package -n kdialog
 Summary:	Dialog KDE base widgets
 Group:		Graphical desktop/KDE
-Requires:	kdebase4-runtime
+Requires:	kde-runtime
 Conflicts:	kdebase4-devel < 1:4.7.90-2
 
 %description -n kdialog
@@ -475,7 +474,7 @@ Dialog KDE base widgets
 %package -n plasma-applet-folderview
 Summary:	Display the content of folders (Desktop as default)
 Group:		Graphical desktop/KDE
-Requires:	kdebase4-workspace
+Requires:	kde-runtime
 Provides:	plasma-applet
 
 %description -n plasma-applet-folderview
@@ -488,7 +487,7 @@ Display the content of folders (Desktop as default)
 #-----------------------------------------------------------------------------
 
 %package devel
-Summary:	Devel stuff for kdebase 4
+Summary:	Devel stuff for %{name}
 Group:		Development/KDE and Qt
 Requires:	kdelibs4-devel
 Requires:	%{libdolphinprivate} = %{EVRD}
