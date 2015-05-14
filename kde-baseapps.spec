@@ -3,7 +3,7 @@
 
 Summary:	K Desktop Environment
 Name:		kde-baseapps
-Version:	15.04.0
+Version:	15.04.1
 Release:	1
 Epoch:		1
 License:	GPLv2+
@@ -28,7 +28,7 @@ Patch108:	kdebase-4.9.5-iconoverlay-race-fix.patch
 # test patches
 BuildRequires:	baloo-devel
 BuildRequires:	baloo-widgets-devel
-BuildRequires:	kdelibs4-devel
+BuildRequires:	kdelibs4-devel >= 5:4.14.8
 BuildRequires:	kfilemetadata-devel
 BuildRequires:	tidy-devel
 BuildRequires:	pkgconfig(glib-2.0)
