@@ -1,15 +1,15 @@
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 %define build_iconoverlay 0
 
-Summary:	K Desktop Environment
+Summary:	K Desktop Environment 4
 Name:		kde-baseapps
 Version:	15.04.1
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPLv2+
 Group:		Graphical desktop/KDE
 Url:		http://www.kde.org
-Source0:	ftp://ftp.kde.org/pub/kde/%{stable}/applications/%{version}/src/%{name}-%{version}.tar.xz
+Source0:	http://download.kde.org/%{stable}/applications/%{version}/src/%{name}-%{version}.tar.xz
 Source1:	%{name}.rpmlintrc
 Patch1:		kdebase-4.2.95-Use-Mandriva-Home-Icon.patch
 Patch2:		kdebase-4.8.97-mdvuserface.patch
@@ -28,7 +28,7 @@ Patch108:	kdebase-4.9.5-iconoverlay-race-fix.patch
 # test patches
 BuildRequires:	baloo-devel
 BuildRequires:	baloo-widgets-devel
-BuildRequires:	kdelibs4-devel >= 5:4.14.8
+BuildRequires:	kdelibs-devel >= 5:4.14.8
 BuildRequires:	kfilemetadata-devel
 BuildRequires:	tidy-devel
 BuildRequires:	pkgconfig(glib-2.0)
@@ -330,7 +330,7 @@ Suggests:	konq-plugins
 Conflicts:	kdebase4-devel < 1:4.7.90-2
 
 %description -n konqueror
-KDE file and web browser
+KDE file and web browser.
 
 %files -n konqueror
 %{_datadir}/dbus-1/interfaces/org.kde.FavIcon.xml
@@ -444,7 +444,7 @@ Group:		Graphical desktop/KDE
 Requires:	kde-runtime
 
 %description -n kfind
-Application finder
+Application finder.
 
 %files -n kfind
 %doc %{_kde_docdir}/HTML/en/kfind/
@@ -463,7 +463,7 @@ Requires:	kde-runtime
 Conflicts:	kdebase4-devel < 1:4.7.90-2
 
 %description -n kdialog
-Dialog KDE base widgets
+Dialog KDE base widgets.
 
 %files -n kdialog
 %{_datadir}/dbus-1/interfaces/org.kde.kdialog.ProgressDialog.xml
@@ -478,7 +478,7 @@ Requires:	kde-runtime
 Provides:	plasma-applet
 
 %description -n plasma-applet-folderview
-Display the content of folders (Desktop as default)
+Display the content of folders (Desktop as default).
 
 %files -n plasma-applet-folderview
 %{_kde_libdir}/kde4/plasma_applet_folderview.so
@@ -489,11 +489,12 @@ Display the content of folders (Desktop as default)
 %package devel
 Summary:	Devel stuff for %{name}
 Group:		Development/KDE and Qt
-Requires:	kdelibs4-devel
+Requires:	kdelibs-devel
 Requires:	%{libdolphinprivate} = %{EVRD}
 Requires:	%{libkonq} = %{EVRD}
 Requires:	%{libkonqsidebarplugin} = %{EVRD}
 Requires:	%{libkbookmarkmodel_private} = %{EVRD}
+%rename		kdebase4-devel
 
 %description devel
 This package contains header files needed if you wish to build applications
