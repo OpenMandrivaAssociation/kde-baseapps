@@ -3,8 +3,8 @@
 
 Summary:	K Desktop Environment 4
 Name:		kde-baseapps
-Version:	15.04.1
-Release:	2
+Version:	15.04.2
+Release:	1
 Epoch:		1
 License:	GPLv2+
 Group:		Graphical desktop/KDE
