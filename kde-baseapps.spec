@@ -3,7 +3,7 @@
 
 Summary:	K Desktop Environment 4
 Name:		kde-baseapps
-Version:	16.04.0
+Version:	16.04.1
 Release:	1
 Epoch:		1
 License:	GPLv2+
