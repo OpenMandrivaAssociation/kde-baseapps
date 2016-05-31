@@ -1,4 +1,2 @@
-removed_sources:
-  kde-baseapps-15.08.0.tar.xz: 637d91462557487fe2e1a1fc7cf38729658ded81
 sources:
-  kde-baseapps-16.04.1.tar.xz: f2845875e5adf244ee8c61e4a18b0e24a161727e
+  kde-baseapps-20160531.tar.xz: c46c7a0708ee5eca347d4fa15c25c7a49eef8716
