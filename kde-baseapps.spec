@@ -42,6 +42,7 @@ BuildRequires:	cmake(KF5Activities)
 BuildRequires:	cmake(KF5Su)
 BuildRequires:	cmake(KF5KCMUtils)
 BuildRequires:	cmake(KF5KHtml)
+BuildRequires:	cmake(KDED)
 Suggests:	dolphin
 Suggests:	kdepasswd
 Suggests:	kdialog
