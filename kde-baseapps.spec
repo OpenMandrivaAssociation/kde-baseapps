@@ -4,9 +4,9 @@
 
 Summary:	K Desktop Environment 4
 Name:		kde-baseapps
-Version:	16.05
+Version:	16.04.3
 %if 0%{snapshot}
-Release:	0.%{snapshot}.1
+Release:	1.%{snapshot}.1
 Source0:	%{name}-%{snapshot}.tar.xz
 %else
 Release:	1
