@@ -1,4 +1,4 @@
-%define snapshot 20160531
+%define snapshot 20160722
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 %define build_iconoverlay 0
 
