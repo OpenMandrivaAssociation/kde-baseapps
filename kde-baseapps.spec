@@ -4,7 +4,7 @@
 
 Summary:	K Desktop Environment 4
 Name:		kde-baseapps
-Version:	16.04.3
+Version:	16.05
 %if 0%{snapshot}
 Release:	1.%{snapshot}.1
 Source0:	%{name}-%{snapshot}.tar.xz
@@ -24,9 +24,6 @@ Patch108:	kdebase-4.9.5-iconoverlay-race-fix.patch
 #branch patches
 #trunk patches
 # test patches
-BuildRequires:	baloo-devel
-BuildRequires:	baloo-widgets-devel
-BuildRequires:	kfilemetadata-devel
 BuildRequires:	tidy-devel
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(libkactivities)
@@ -35,11 +32,31 @@ BuildRequires:	pkgconfig(qimageblitz) < 5.0.0
 BuildRequires:	pkgconfig(shared-desktop-ontologies)
 BuildRequires:	pkgconfig(xt)
 BuildRequires:	pkgconfig(zlib)
+BuildRequires:	pkgconfig(Qt5Core)
+BuildRequires:	pkgconfig(Qt5DBus)
+BuildRequires:	pkgconfig(Qt5Gui)
+BuildRequires:	pkgconfig(Qt5Widgets)
 BuildRequires:	pkgconfig(Qt5Test)
 BuildRequires:	pkgconfig(Qt5Script)
+BuildRequires:	pkgconfig(Qt5X11Extras)
 BuildRequires:	cmake(ECM)
-BuildRequires:	cmake(KF5KDELibs4Support)
+BuildRequires:	cmake(KF5Archive)
+BuildRequires:	cmake(KF5Bookmarks)
+BuildRequires:	cmake(KF5CoreAddons)
+BuildRequires:	cmake(KF5Config)
+BuildRequires:	cmake(KF5ConfigWidgets)
+BuildRequires:	cmake(KF5Crash)
+BuildRequires:	cmake(KF5DBusAddons)
+BuildRequires:	cmake(KF5DocTools)
+BuildRequires:	cmake(KF5I18n)
+BuildRequires:	cmake(KF5Init)
+BuildRequires:	cmake(KF5JobWidgets)
+BuildRequires:	cmake(KF5KIO) >= 5.24.0
+BuildRequires:	cmake(KF5Parts)
 BuildRequires:	cmake(KF5Activities)
+BuildRequires:	cmake(KF5WidgetsAddons)
+BuildRequires:	cmake(KF5IconThemes)
+BuildRequires:	cmake(KF5KDELibs4Support)
 BuildRequires:	cmake(KF5Su)
 BuildRequires:	cmake(KF5KCMUtils)
 BuildRequires:	cmake(KF5KHtml)
@@ -372,7 +389,7 @@ based on kdebase.
 
 %prep
 %if 0%{snapshot}
-%setup -qn %{name}
+%setup -qn %{name}-%{snapshot}
 %else
 %setup -q -n kde-baseapps-%{version}
 %endif
