@@ -396,8 +396,8 @@ based on kdebase.
 %setup -q -n kde-baseapps-%{version}
 %endif
 
-# Rediff
-%patch1 -p0 -b .mdvicon
+# Rediff ???
+#patch1 -p0 -b .mdvicon
 #patch104 -p1
 %if %{build_iconoverlay}
 %patch107 -p1 -b .icon-plugin
