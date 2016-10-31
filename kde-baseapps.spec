@@ -1,12 +1,13 @@
-%define snapshot %nil
+%define snapshot 20161031
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 %define build_iconoverlay 0
 
-Summary:	K Desktop Environment 4
+Summary:	K Desktop Environment
 Name:		kde-baseapps
 Version:	16.08.2
 %if 0%{snapshot}
 Release:	1.%{snapshot}.1
+# git archive --format=tar --prefix=kde-baseapps-$(date +%Y%m%d)/ HEAD | xz -vf -T0 > kde-baseapps-$(date +%Y%m%d).tar.xz
 Source0:	%{name}-%{snapshot}.tar.xz
 %else
 Release:	1
@@ -403,9 +404,10 @@ based on kdebase.
 %patch108 -p1 -b .icon-race
 %endif
 
-%build
 %cmake_kde5
-%ninja
+
+%build
+%ninja -C build
 
 %install
 %ninja_install -C build
