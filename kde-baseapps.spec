@@ -4,7 +4,7 @@
 
 Summary:	K Desktop Environment
 Name:		kde-baseapps
-Version:	16.08.2
+Version:	16.08.3
 %if 0%{snapshot}
 Release:	1.%{snapshot}.1
 # git archive --format=tar --prefix=kde-baseapps-$(date +%Y%m%d)/ HEAD | xz -vf -T0 > kde-baseapps-$(date +%Y%m%d).tar.xz
