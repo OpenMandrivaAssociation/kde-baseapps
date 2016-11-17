@@ -72,6 +72,7 @@ Suggests:	kfind
 Suggests:	konqueror
 Suggests:	keditbookmarks
 Obsoletes:	plasma-applet-folderview
+Obsoletes:	%{mklibname konqsidebarplugin 5} < 16.08.3
 
 %description
 This meta package requires all base %{name} packages.
@@ -91,7 +92,6 @@ Requires:	accountsservice
 User password management.
 
 %files -n kdepasswd
-%doc %{_docdir}/HTML/en/kdepasswd/
 %{_bindir}/kdepasswd
 %{_datadir}/applications/org.kde.kdepasswd.desktop
 
@@ -113,22 +113,6 @@ Konqueror core library.
 %files -n %{libkonq}
 %{_libdir}/libKF5Konq.so.%{konq_major}*
 %{_libdir}/libKF5Konq.so.5*
-
-#------------------------------------------------
-
-%define konqsidebarplugin_major 5
-%define libkonqsidebarplugin %mklibname konqsidebarplugin %{konqsidebarplugin_major}
-
-%package -n %{libkonqsidebarplugin}
-Summary:	Konqueror core library
-Group:		System/Libraries
-Obsoletes:	%{mklibname konqsidebarplugin 4}
-
-%description -n %{libkonqsidebarplugin}
-Konqueror core library.
-
-%files -n %{libkonqsidebarplugin}
-%{_libdir}/libkonqsidebarplugin.so.%{konqsidebarplugin_major}*
 
 #------------------------------------------------
 
@@ -184,8 +168,6 @@ This module contains plugins that interact with Konqueror.
 %{_libdir}/qt5/plugins/fsviewpart.so
 %{_libdir}/qt5/plugins/khtmlsettingsplugin.so
 %{_libdir}/qt5/plugins/kimgallery.so
-%{_libdir}/qt5/plugins/konqsidebar_history.so
-%{_libdir}/qt5/plugins/konqsidebar_web.so
 %{_libdir}/qt5/plugins/minitoolsplugin.so
 %{_libdir}/qt5/plugins/rellinksplugin.so
 %{_libdir}/qt5/plugins/searchbarplugin.so
@@ -258,60 +240,52 @@ Obsoletes:	kde4-nsplugins < 2:16.06
 KDE file and web browser.
 
 %files -n konqueror
-%{_sysconfdir}/xdg/konqsidebartngrc
 %{_sysconfdir}/xdg/translaterc
 %{_sysconfdir}/xdg/autostart/konqy_preload.desktop
-%{_libdir}/qt5/plugins/kded_konqy_preloader.so
 %{_datadir}/dbus-1/interfaces/org.kde.?onqueror.*.xml
-%doc %{_docdir}/HTML/en/konqueror/
 %{_bindir}/kfmclient
 %{_bindir}/konqueror
 %{_datadir}/kxmlgui5/konqueror
 %{_libdir}/qt5/plugins/kcm_bookmarks.so
-%{_libdir}/qt5/plugins/kcm_history.so
 %{_libdir}/qt5/plugins/kcm_konq.so
 %{_libdir}/qt5/plugins/kcm_konqhtml.so
 %{_libdir}/qt5/plugins/kcm_performance.so
 %{_libdir}/qt5/plugins/konq_aboutpage.so
 %{_libdir}/qt5/plugins/konq_shellcmdplugin.so
-%{_libdir}/qt5/plugins/konq_sidebar.so
-%{_libdir}/qt5/plugins/konqsidebar_places.so
 %{_libdir}/libkdeinit5_kfmclient.so
 %{_libdir}/libkdeinit5_konqueror.so
 %{_datadir}/config.kcfg/konqueror*
-%{_datadir}/applications/Home.desktop
 %{_datadir}/applications/kfmclient.desktop
-%{_datadir}/applications/kfmclient_dir.desktop
 %{_datadir}/applications/kfmclient_html.desktop
 %{_datadir}/applications/kfmclient_war.desktop
 %{_datadir}/kcmcss/template.css
 %{_datadir}/dolphinpart/kpartplugins/kshellcmdplugin.desktop
 %{_datadir}/dolphinpart/kpartplugins/kshellcmdplugin.rc
-%{_datadir}/konqsidebartng
 %{_datadir}/kf5/kbookmark/directory_bookmarkbar.desktop
 %{_datadir}/kservices5/filebehavior.desktop
 %{_datadir}/kservices5/kcmkonqyperformance.desktop
 %{_datadir}/kservices5/kcmperformance.desktop
-%{_datadir}/kservices5/kded/konqy_preloader.desktop
 %{_datadir}/kservices5/khtml_behavior.desktop
 %{_datadir}/kservices5/khtml_filter.desktop
 %{_datadir}/kservices5/khtml_general.desktop
 %{_datadir}/kservices5/khtml_java_js.desktop
 %{_datadir}/kservices5/konq_aboutpage.desktop
-%{_datadir}/kservices5/konq_sidebartng.desktop
-%{_datadir}/kservices5/konqueror.desktop
 %{_datadir}/kservices5/khtml_appearance.desktop
-%{_datadir}/kservices5/kcmhistory.desktop
 %{_datadir}/kservicetypes5/konqaboutpage.desktop
 %{_datadir}/konqueror/
 %{_datadir}/icons/*/*/*/konqueror.*
 %exclude %{_datadir}/konqueror/kpartplugins/searchbar.desktop
 %exclude %{_datadir}/konqueror/kpartplugins/searchbar.rc
-%{_datadir}/appdata/konqueror.appdata.xml
+%{_datadir}/metainfo/org.kde.konqueror.appdata.xml
 %{_datadir}/kcontrol/pics/onlyone.png
 %{_datadir}/kcontrol/pics/overlapping.png
 %{_datadir}/applications/konqbrowser.desktop
-%{_datadir}/applications/konquerorsu.desktop
+# (tpg) move it to separate subpackage ?
+%{_libdir}/qt5/plugins/kf5/parts/webenginepart.so
+%{_datadir}/icons/hicolor/*/*/webengine.png
+%{_datadir}/kservices5/org.kde.konqueror.desktop
+%{_datadir}/kservices5/webenginepart.desktop
+%{_datadir}/kxmlgui5/webenginepart/webenginepart.rc
 
 #-----------------------------------------------------------------------------
 
@@ -326,12 +300,10 @@ Bookmark editor.
 %files -n keditbookmarks
 %{_bindir}/kbookmarkmerger
 %{_bindir}/keditbookmarks
-%{_libdir}/libkdeinit5_keditbookmarks.so
 %{_datadir}/applications/org.kde.keditbookmarks.desktop
 %{_datadir}/kservices5/bookmarks.desktop
 %{_datadir}/config.kcfg/keditbook*
 %{_datadir}/kxmlgui5/keditbookmarks
-%{_mandir}/man1/kbookmarkmerger.1.*
 
 #-----------------------------------------------------------------------------
 
@@ -349,7 +321,7 @@ Application finder.
 %{_datadir}/applications/org.kde.kfind.desktop
 %{_datadir}/icons/*/*/*/kfind.*
 %{_mandir}/man1/kfind.1.*
-%{_datadir}/appdata/kfind.appdata.xml
+%{_datadir}/metainfo/org.kde.kfind.appdata.xml
 
 #-----------------------------------------------------------------------------
 
@@ -373,7 +345,6 @@ Summary:	Devel stuff for %{name}
 Group:		Development/KDE and Qt
 Requires:	kdelibs-devel
 Requires:	%{libkonq} = %{EVRD}
-Requires:	%{libkonqsidebarplugin} = %{EVRD}
 Requires:	%{libkbookmarkmodel_private} = %{EVRD}
 %rename		kdebase4-devel
 
@@ -382,10 +353,9 @@ This package contains header files needed if you wish to build applications
 based on kdebase.
 
 %files devel
+%{_libdir}/libkwebenginepartlib.so
 %{_libdir}/libKF5Konq.so
-%{_libdir}/libkonqsidebarplugin.so
 %{_libdir}/libkbookmarkmodel_private.so
-%{_includedir}/*.h
 %{_includedir}/KF5/*.h
 %{_libdir}/cmake/KF5Konq
 
