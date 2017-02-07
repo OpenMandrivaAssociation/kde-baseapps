@@ -4,7 +4,7 @@
 
 Summary:	K Desktop Environment
 Name:		kde-baseapps
-Version:	16.08.3
+Version:	16.12.2
 %if 0%{snapshot}
 Release:	1.%{snapshot}.1
 # git archive --format=tar --prefix=kde-baseapps-$(date +%Y%m%d)/ HEAD | xz -vf -T0 > kde-baseapps-$(date +%Y%m%d).tar.xz
@@ -174,6 +174,7 @@ This module contains plugins that interact with Konqueror.
 %{_libdir}/qt5/plugins/validatorsplugin.so
 %{_libdir}/qt5/plugins/webarchiverplugin.so
 %{_libdir}/qt5/plugins/webarchivethumbnail.so
+%{_libdir}/qt5/plugins/khtmlttsplugin.so
 %{_datadir}/akregator/pics/feed.png
 %{_datadir}/dolphinpart/kpartplugins/dirfilterplugin.desktop
 %{_datadir}/dolphinpart/kpartplugins/dirfilterplugin.rc
@@ -199,6 +200,8 @@ This module contains plugins that interact with Konqueror.
 %{_datadir}/khtml/kpartplugins/plugin_validators.rc
 %{_datadir}/khtml/kpartplugins/plugin_webarchiver.desktop
 %{_datadir}/khtml/kpartplugins/plugin_webarchiver.rc
+%{_datadir}/khtml/kpartplugins/khtmltts.desktop
+%{_datadir}/khtml/kpartplugins/khtmltts.rc
 %{_datadir}/konqueror/kpartplugins/searchbar.desktop
 %{_datadir}/konqueror/kpartplugins/searchbar.rc
 %{_datadir}/kwebkitpart/kpartplugins/akregator_konqfeedicon.desktop
@@ -211,6 +214,8 @@ This module contains plugins that interact with Konqueror.
 %{_datadir}/kwebkitpart/kpartplugins/plugin_validators.rc
 %{_datadir}/kwebkitpart/kpartplugins/khtmlsettingsplugin.desktop
 %{_datadir}/kwebkitpart/kpartplugins/khtmlsettingsplugin.rc
+%{_datadir}/kwebkitpart/kpartplugins/khtmltts.desktop
+%{_datadir}/kwebkitpart/kpartplugins/khtmltts.rc
 %{_datadir}/config.kcfg/validators.kcfg
 %{_datadir}/icons/*/*/apps/fsview.png
 %{_datadir}/icons/*/*/actions/babelfish.png
