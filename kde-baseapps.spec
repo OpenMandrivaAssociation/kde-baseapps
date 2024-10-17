@@ -16,7 +16,7 @@ Source0:	http://download.kde.org/%{stable}/applications/%{version}/src/%{name}-%
 Epoch:		1
 License:	GPLv2+
 Group:		Graphical desktop/KDE
-Url:		http://www.kde.org
+Url:		https://www.kde.org
 Source1:	%{name}.rpmlintrc
 Patch1:		kdebase-4.2.95-Use-Mandriva-Home-Icon.patch
 Patch104:	kdebase-4.8.2-dolphin-delete-files-on-flash-drives.patch
